@@ -16,7 +16,6 @@
 @endsection
 
 
-
 {{--
 @section('leftbar')
     @include('main.shared.leftbar')

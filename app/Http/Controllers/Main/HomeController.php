@@ -26,6 +26,7 @@ class HomeController extends Controller
         
         $this->perPage = env('PER_PAGE', 20);
         $this->itemPerPage = 15;
+        
     }
     
     /**
@@ -40,7 +41,6 @@ class HomeController extends Controller
                 ])->orderBy('open_date','DESC')->paginate($this->perPage);
         
     	
-        
         
     	return view('main.index', ['atcls'=>$atcls]);
 
