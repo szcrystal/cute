@@ -2,6 +2,7 @@
 <?php
     use App\Admin;
 ?>
+
     @foreach($atcls as $atcl)
     <article class="float-left">
 
