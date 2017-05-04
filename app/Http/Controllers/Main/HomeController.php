@@ -27,6 +27,7 @@ class HomeController extends Controller
         $this->perPage = env('PER_PAGE', 20);
         $this->itemPerPage = 15;
         
+        
     }
     
     /**
