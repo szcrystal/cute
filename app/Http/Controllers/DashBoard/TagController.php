@@ -106,9 +106,12 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    
+    public function show($tagId) //Edit Page ---
     {
-        //
+        $tag = $this->tag->find($tagId);
+        
+    	return view('dashboard.tag.form', ['tag'=>$tag, 'tagId'=>$tagId, 'edit'=>1]);
     }
 
     /**
