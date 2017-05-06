@@ -20,12 +20,11 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>管理者ID</th>
               <th class="col-md-2">カテゴリー</th>
               <th class="col-md-4">タイトル</th>
               <th class="col-md-2">公開状態</th>
               <th class="col-md-2">公開日</th>
-              <th class="col-md-3">オーナー名</th>
+              <th class="col-md-3">モデル（ID）</th>
               <th></th>
               <th></th>
             </tr>
@@ -40,19 +39,14 @@
                 	{{$obj->id}}
                 </td>
 
-                <td>
-                	{{$obj->admin_id}}<br>
-
-                </td>
-
 				<td>
-                	{{--
+
                 	@if($obj->cate_id)
 	        		{{ $cateModel->find($obj->cate_id)->name }}
                     @else
                     --
                     @endif
-                    --}}
+
                 </td>
                                     
                 <td>
@@ -60,16 +54,10 @@
                 </td>
 
                 <td>
-					<?php //$post = $posts->where(['base_id'=>$obj->id])->first(); ?>
-
-                    @if($obj->admin_id)
-                    	@if($obj->open_status)
-                    	<span class="text-success">公開中</span>
-                        @else
-						<span class="text-warning">未公開（保存済）</span>
-                        @endif
+                    @if($obj->open_status)
+                    <span class="text-success">公開中</span>
                     @else
-                    	<span class="text-danger">未公開</span>
+                    <span class="text-warning">未公開（保存済）</span>
                     @endif
 
                 </td>
@@ -82,14 +70,14 @@
                     @endif
                 </td>
                 <td>
-                	@if($obj->owner_id)
-                	{{ $users->find($obj->owner_id)->name }}
-
+                	@if($obj->model_id)
+                    	{{ $users->find($obj->model_id)->name }}
+                        （{{ $obj->model_id }}）
                     @endif
                 </td>
 
                 <td>
-                	<a style="margin:auto;" href="{{url('dashboard/articles/'.$obj->id . '/edit')}}" class="btn btn-primary btn-sm center-block">編集</a>
+                	<a style="margin:auto;" href="{{url('dashboard/articles/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/articles/'.$obj->id) }}">

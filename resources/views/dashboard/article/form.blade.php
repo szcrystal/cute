@@ -34,7 +34,7 @@
     @endif
         
     <div class="well">
-        <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles">
+        <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
             @endif
@@ -64,9 +64,9 @@
             </div>
 
             <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">オーナー</label>
+                <label for="group" class="col-md-3 control-label">モデル</label>
 
-                <div class="col-md-7">
+                <div class="col-md-9">
 
 
                     @if ($errors->has('admin_id'))
@@ -77,13 +77,10 @@
                 </div>
             </div>
 
-            
             <div class="form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">カテゴリー</label>
 
-                <div class="col-md-7">
-
-
+                <div class="col-md-9">
                     @if ($errors->has('cate_id'))
                         <span class="help-block">
                             <strong>{{ $errors->first('cate_id') }}</strong>
@@ -92,11 +89,19 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
+                <label for="post_thumb" class="col-md-3 control-label">サムネイル</label>
+
+                <div class="col-md-9">
+                    <input id="post_thumb" class="thumbpost_thumbfile" type="file" name="post_thumb">
+                </div>
+            </div>
+
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                <label for="title" class="col-md-2 control-label">タイトル</label>
+                <label for="title" class="col-md-3 control-label">タイトル</label>
 
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($article) ? $article->title : '') }}" required>
 
                     @if ($errors->has('title'))
@@ -107,94 +112,90 @@
                 </div>
             </div>
 
-                {{--
-                <div class="form-group{{ $errors->has('sumbnail') ? ' has-error' : '' }}">
-                    <label for="sumbnail" class="col-md-4 control-label">サムネイル</label>
+            
 
-                    <div class="col-md-6">
-                        <input id="sumbnail" type="text" class="form-control" name="sumbnail" value="{{ isset($article) ? $article->sumbnail : old('sumbnail') }}" required autofocus>
+            <div class="form-group{{ $errors->has('sub_title') ? ' has-error' : '' }}">
+                <label for="sub_title" class="col-md-3 control-label">サブタイトル（リンク名）</label>
 
-                        @if ($errors->has('sumbnail'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('sumbnail') }}</strong>
-                            </span>
-                        @endif
+                <div class="col-md-9">
+                    <input id="sub_title" type="text" class="form-control" name="sub_title" value="{{ old('sub_title') }}" required autofocus>
+
+                    @if ($errors->has('sub_title'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('sub_title') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
+                <label for="slug" class="col-md-3 control-label">スラッグ（URL）</label>
+
+                <div class="col-md-9">
+                    <input id="slug" type="text" class="form-control" name="slug" value="{{ Ctm::isOld() ? old('slug') : (isset($article) ? $article->slug : '') }}" required placeholder="半角英数字とハイフンのみ">
+
+                    @if ($errors->has('slug'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('slug') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('post_text') ? ' has-error' : '' }}">
+                <label for="story_text" class="col-md-3 control-label">テキスト</label>
+
+                <div class="col-md-9">
+                    <textarea id="post_text" type="text" class="form-control" name="post_text" value="{{ old('post_text') }}" required></textarea>
+
+                    @if ($errors->has('post_text'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('post_text') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+
+            <div class="clearfix tag-wrap">
+                <?php $allNames = array(); ?>
+
+                @if(isset($tags))
+                    @foreach($tags as $tag)
+                        <?php $allNames[] = $tag->name; ?>
+                    @endforeach
+                @endif
+
+                <div class="tag-group form-group{{ $errors->has('tag-group') ? ' has-error' : '' }}">
+                    <label for="tag-group" class="col-md-3 control-label">タグ</label>
+                    <div class="col-md-9 clearfix">
+                        <input id="tag-group" type="text" class="form-control tag-control" name="input-tag-group" value="" autocomplete="off">
+
+                        <div class="add-btn" tabindex="0">追加</div>
+
+                        <span style="display:none;">{{ implode(',', $allNames) }}</span>
+
+                        <div class="tag-area">
+                            @if(count(old()) > 0)
+                                <?php $names = old($tag->slug); ?>
+                                @if(isset($names))
+                                    @foreach($names as $name)
+                                    <span><em>{{ $name }}</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>
+                                    <input type="hidden" name="{{ $tag->slug }}[]" value="{{ $name }}">
+                                    @endforeach
+                                @endif
+                            @endif
+                        </div>
+
                     </div>
+
                 </div>
 
-                <div class="form-group{{ $errors->has('sumbnail_url') ? ' has-error' : '' }}">
-                    <label for="sumbnail_url" class="col-md-4 control-label">サムネイル引用元URL</label>
-
-                    <div class="col-md-6">
-                        <input id="sumbnail_url" type="text" class="form-control" name="sumbnail_url" value="{{ isset($article) ? $article->sumbnail_url : old('sumbnail_url') }}" required autofocus>
-
-                        @if ($errors->has('sumbnail_url'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('sumbnail_url') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                --}}
-
-                {{--
-                <div class="form-group{{ $errors->has('tag_1') ? ' has-error' : '' }}">
-                    <label for="tag_1" class="col-md-4 control-label">タグ１</label>
-
-                    <div class="checkbox">
-                        @foreach($tags[0] as $tag)
-                        <label>
-                            <input type="checkbox" name="tag_1[]" value="{{$tag->id}}"{{isset($article) && strpos($article->tag_1, (string)$tag->id) !== false ? ' checked' : '' }}> {{$tag->name}}
-                        </label>
-                        @endforeach
-
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('tag_2') ? ' has-error' : '' }}">
-                    <label for="tag_2" class="col-md-4 control-label">タグ２</label>
-
-                    <div class="checkbox">
-                        @foreach($tags[1] as $tag) {
-                        <label>
-                            <input type="checkbox" name="tag_2[]" value="{{$tag->id}}"{{isset($article) && strpos($article->tag_2, (string)$tag->id) !== false ? ' checked' : '' }}> {{$tag->name}}
-                        </label>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('tag_3') ? ' has-error' : '' }}">
-                    <label for="tag_3" class="col-md-4 control-label">タグ３</label>
-
-                    <div class="checkbox">
-                        <div class="checkbox">
-                        @foreach($tags[2] as $tag)
-                        <label>
-                            <input type="checkbox" name="tag_3[]" value="{{$tag->id}}"{{isset($article) && strpos($article->tag_3, (string)$tag->id) !== false ? ' checked' : '' }}> {{$tag->name}}
-                        </label>
-                        @endforeach
-                    </div>
-                    </div>
-                </div>
-                --}}
-
-                <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
-                    <label for="slug" class="col-md-2 control-label">スラッグ（URL）</label>
-
-                    <div class="col-md-10">
-                        <input id="slug" type="text" class="form-control" name="slug" value="{{ Ctm::isOld() ? old('slug') : (isset($article) ? $article->slug : '') }}" required placeholder="半角英数字とハイフンのみ">
-
-                        @if ($errors->has('slug'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('slug') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
+            </div><?php //tagwrap ?>
 
 
 
-        
+{{--
                 <p>記事内容 ----------</p>
 
                 <div class="form-group{{ $errors->has('story_title') ? ' has-error' : '' }}">
@@ -212,7 +213,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('story_sub_title') ? ' has-error' : '' }}">
-                    <label for="story_sub_title" class="col-md-4 control-label">オプション（サブタイトル？）</label>
+                    <label for="story_sub_title" class="col-md-4 control-label">オプション（サブタイトル）</label>
 
                     <div class="col-md-6">
                         <input id="story_sub_title" type="text" class="form-control" name="story_sub_title" value="{{ old('story_sub_title') }}" required autofocus>
@@ -225,19 +226,7 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('story_text') ? ' has-error' : '' }}">
-                    <label for="story_text" class="col-md-4 control-label">テキスト</label>
-
-                    <div class="col-md-6">
-                        <textarea id="story_text" type="text" class="form-control" name="story_text" value="{{ old('story_text') }}" required></textarea>
-
-                        @if ($errors->has('story_text'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('story_text') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
+                
 
                 <p>画像 -----------</p>
                 <div class="form-group{{ $errors->has('image_title') ? ' has-error' : '' }}">
@@ -358,7 +347,7 @@
                             @endif
                         </div>
                 </div>
-
+--}}
     
 
 

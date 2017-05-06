@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\DashBoard;
 
 use App\Admin;
+use App\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ModelController extends Controller
 {
-	public function __construct(Admin $admin)
+	public function __construct(Admin $admin, User $user)
     {
         $this -> middleware('adminauth'/*, ['except' => ['getRegister','postRegister']]*/);
         //$this->middleware('auth:admin', ['except' => 'getLogout']);
         //$this -> middleware('log', ['only' => ['getIndex']]);
         
         $this -> admin = $admin;
+        $this -> user = $user;
         
         $this->perPage = 20;
 
@@ -29,7 +31,13 @@ class ModelController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::orderBy('id', 'desc')->paginate($this->perPage);
+        
+        //$cateModel = $this->category;
+        
+        //$status = $this->articlePost->where(['base_id'=>15])->first()->open_date;
+        
+        return view('dashboard.model.index', ['users'=>$users]);
     }
 
     /**
@@ -93,7 +101,7 @@ class ModelController extends Controller
         
         $id = $mdModel->id;
     	//return view('dashboard.article.form', ['thisClass'=>$this, 'tags'=>$tags, 'status'=>'記事が更新されました。']);
-        return redirect('dashboard/model/'.$id.'/edit')->with('status', $status);
+        return redirect('dashboard/models/'.$id.'/edit')->with('status', $status);
 
     }
 
@@ -116,7 +124,8 @@ class ModelController extends Controller
      */
     public function edit($id)
     {
-    	$model = $this->admin->find($id);
+        
+    	$model = $this->user->find($id);
         return view('dashboard.model.form', ['modelId'=>$id, 'model'=>$model]);
     }
 

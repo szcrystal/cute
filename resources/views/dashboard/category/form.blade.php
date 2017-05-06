@@ -12,7 +12,7 @@
 
     <div class="bs-component clearfix">
         <div class="pull-left">
-            <a href="{{ url('/dashboard/categories') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+            <a href="{{ url('/dashboard/cates') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
         </div>
     </div>
 

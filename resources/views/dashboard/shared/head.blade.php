@@ -11,8 +11,6 @@
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
 
-
-    
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('/bootstrap/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -28,7 +26,8 @@
     <!-- Custom Fonts -->
     <link href="{{ asset('/bootstrap/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-    <link href="{{ asset('/css/dbd.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="{{ asset('/css/dashboard/dbd.css') }}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,6 +35,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ asset('/js/dashboard/script.js') }}"></script>
 
     <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
 

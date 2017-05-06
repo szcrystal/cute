@@ -3,14 +3,21 @@
 namespace App\Http\Controllers\DashBoard;
 
 use App\Admin;
+use App\User;
 use App\Article;
+use App\Tag;
+use App\TagRelation;
+use App\Category;
+
+use Auth;
+
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-	public function __construct(Admin $admin, Article $article/*, Tag $tag, User $user, Category $category, TagRelation $tagRelation*/)
+	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation)
     {
     	
         $this -> middleware('adminauth');
@@ -18,9 +25,11 @@ class ArticleController extends Controller
         
         $this -> admin = $admin;
         $this-> article = $article;
-//        $this->user = $user;
-//        $this->category = $category;
-//        $this->tagRelation = $tagRelation;
+        $this->tag = $tag;
+        
+        $this->user = $user;
+        $this->category = $category;
+        $this->tagRelation = $tagRelation;
         
         $this->perPage = 20;
         
@@ -39,12 +48,12 @@ class ArticleController extends Controller
     public function index()
     {
         $atclObjs = Article::orderBy('id', 'desc')->paginate($this->perPage);
-        
-        //$cateModel = $this->category;
+        $users = $this->user->all();
+        $cateModel = $this->category;
         
         //$status = $this->articlePost->where(['base_id'=>15])->first()->open_date;
         
-        return view('dashboard.article.index', ['atclObjs'=>$atclObjs,/* 'cateModel'=>$cateModel, */]);
+        return view('dashboard.article.index', ['atclObjs'=>$atclObjs, 'users'=>$users, 'cateModel'=>$cateModel]);
     }
 
     /**
@@ -77,8 +86,10 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = $this->article->find($id);
-        $cates = $this->category->all();
-        $users = $this->user->where('active',1)->get();
+        //$cates = $this->category->all();
+        //$users = $this->user->where('active',1)->get();
+        
+        $tags = $this->tag->all();
         
 //        $atclTag = array();
 //        $n = 0;
@@ -98,7 +109,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['article'=>$article, 'cates'=>$cates, 'users'=>$users, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['article'=>$article, 'tags'=>$tags, 'id'=>$id, 'edit'=>1]);
     }
 
     /**
@@ -154,6 +165,17 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = $this->article->find($id)->title;
+        
+        $atcls = $this->article->where('cate_id', $id)->get()->map(function($atcl){
+        	$atcl->cate_id = 0;
+            $atcl->save();
+        });
+        
+        $atclDel = $this->article->destroy($id);
+        
+        $status = $atclDel ? 'カテゴリー「'.$title.'」が削除されました' : '記事「'.$title.'」が削除出来ませんでした';
+        
+        return redirect('dashboard/articles')->with('status', $status);
     }
 }

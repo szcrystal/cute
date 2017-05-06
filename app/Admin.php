@@ -14,12 +14,12 @@ class Admin extends Authenticatable
         'email',
         'password',
     
-    	'model_thumb',
-        'school',
-        'charm_point',
-        'hobby',
-    
-        'authority',
+//    	'model_thumb',
+//        'school',
+//        'charm_point',
+//        'hobby',
+//    
+//        'authority',
     ];
 
     /**

@@ -15,15 +15,16 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('admin_id');
-            $table->boolean('del_status');
+            $table->integer('model_id');
+            //$table->boolean('del_status');
             
             $table->integer('cate_id');
-            $table->string('tag_id')->nullable()->default(NULL);
-            $table->string('title');
+            //$table->string('tag_id')->nullable()->default(NULL);
+            $table->string('title')->nullable()->default(NULL);
+            $table->string('sub_title')->nullable()->default(NULL);
             $table->string('slug')->unique();
             
-            $table->string('thumbnail')->nullable()->default(NULL);
+            $table->string('post_thumb')->nullable()->default(NULL);
             
             $table->boolean('open_status');
             $table->timestamp('open_date')->nullable()->default(NULL);
@@ -36,15 +37,15 @@ class CreateArticlesTable extends Migration
         $n = 0;
         while($n < 3) {
             DB::table('articles')->insert([
-                    'admin_id' => 1,
-                    'del_status' => 0,
+                    'model_id' => 1,
+                    //'del_status' => 0,
                     
                     'cate_id' => 1,
-                    'tag_id' => '1,3',
+                    //'tag_id' => '1,3',
                     'title' => 'みいたけのお気に入り-'. $n,
                     'slug' => 'miitake-favorite-'. $n,
 
-					'thumbnail' => '',
+					'post_thumb' => '',
                    	
                     'open_status' => 1,
                     'open_date' => date('Y-m-d H:i:s', time()),

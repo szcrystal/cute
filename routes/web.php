@@ -22,7 +22,7 @@ Route::get('info', function () {
 });
 
 
-//DashBoard
+//DashBoard =======================
 Route::get('dashboard', 'DashBoard\HomeController@index');
 
 Route::get('dashboard/login', 'DashBoard\LoginController@index');
@@ -31,8 +31,16 @@ Route::post('dashboard/login', 'DashBoard\LoginController@postLogin');
 Route::get('dashboard/register', 'DashBoard\HomeController@getRegister');
 Route::post('dashboard/register', 'DashBoard\HomeController@postRegister');
 
-Route::resource('dashboard/model', 'DashBoard\ModelController');
+//model
+Route::resource('dashboard/models', 'DashBoard\ModelController');
 
+//tag
+Route::resource('dashboard/tags', 'DashBoard\TagController');
+
+//category
+Route::resource('dashboard/cates', 'DashBoard\CategoryController');
+
+//fix
 Route::resource('dashboard/fixes', 'DashBoard\FixController');
 
 Route::get('dashboard/movieup', 'DashBoard\HomeController@getMovieup');

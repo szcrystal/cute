@@ -13,7 +13,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/dashboard">CuteCampus DashBoard</a>
+                <a class="navbar-brand" href="/dashboard">CuteCampus-{{ env('AREA', '') }} DashBoard</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -246,21 +246,23 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> 集計<span class="fa arrow"></span></a>
+                    	<li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 管理者/サイト設定<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<li><a href="{{ url('/dashboard') }}">Daily ランキング</a></li>
-                                <li><a href="{{ url('/dashboard/weekly') }}">Weekly ランキング</a></li>
-                            </ul>
+                                <li>
+                                    <a href="{{ url('dashboard/register') }}">管理者追加／一覧</a>
+                                </li>
 
-                        </li>
 
-						<li>
-                            <a href="#"><i class="fa fa-users"></i> 会員管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                            	<li>
-                                    <a href="{{ url('/dashboard/users') }}">会員一覧</a>
+                                <li>
+                                    <a href="{{ url('dashboard/movieup') }}">Upload</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ url('dashboard/twtup') }}">twt Upload</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('dashboard/fbup') }}">fb Upload</a>
                                 </li>
 
 
@@ -268,15 +270,14 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-tags"></i> タググループ設定<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                            	<li><a href="{{ url('/dashboard/taggroups') }}">タググループ一覧</a></li>
-                                <li><a href="{{ url('/dashboard/taggroups/create') }}">タググループ追加</a></li>
 
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
+                        <li>
+                        	<a href="#"><i class="fa fa-users"></i> モデル設定<span class="fa arrow"></span></a>
+                            	<ul class="nav nav-second-level">
+                                	<li><a href="{{ url('dashboard/models') }}">モデル一覧</a></li>
+                                	<li><a href="{{ url('dashboard/models/create') }}">モデル新規追加</a></li>
+                                </ul>
 
                         <li>
                             <a href="#"><i class="fa fa-tag"></i> タグ設定<span class="fa arrow"></span></a>
@@ -290,14 +291,14 @@
 						<li>
                             <a href="#"><i class="fa fa-newspaper-o"></i> カテゴリー設定<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<li><a href="{{ url('/dashboard/categories') }}">カテゴリー一覧</a></li>
-                            	<li><a href="{{ url('/dashboard/categories/create') }}">カテゴリー追加</a></li>
+                            	<li><a href="{{ url('/dashboard/cates') }}">カテゴリー一覧</a></li>
+                            	<li><a href="{{ url('/dashboard/cates/create') }}">カテゴリー追加</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-video-camera"></i> 記事管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-newspaper-o"></i> 記事管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{url('dashboard/articles')}}">記事一覧</a>
@@ -335,28 +336,22 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+
+
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 管理者/モデル設定<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> 集計<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ url('dashboard/register') }}">管理者追加／一覧</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('dashboard/model/'. Auth::guard('admin')->id() . '/edit') }}">モデル情報編集</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('dashboard/model/create') }}">モデル新規追加</a>
-                                </li>
+                            	<li><a href="{{ url('/dashboard') }}">Daily ランキング</a></li>
+                                <li><a href="{{ url('/dashboard/weekly') }}">Weekly ランキング</a></li>
+                            </ul>
 
-                                <li>
-                                    <a href="{{ url('dashboard/movieup') }}">Upload</a>
-                                </li>
+                        </li>
 
-                                <li>
-                                    <a href="{{ url('dashboard/twtup') }}">twt Upload</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('dashboard/fbup') }}">fb Upload</a>
+						<li>
+                            <a href="#"><i class="fa fa-users"></i> 会員管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            	<li>
+                                    <a href="{{ url('/dashboard/users') }}">会員一覧</a>
                                 </li>
 
 

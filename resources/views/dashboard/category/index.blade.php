@@ -23,9 +23,8 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th class="col-md-3">名前</th>
-              <th class="col-md-4">スラッグ</th>
-              <th class="col-md-3">View数</th>
+              <th class="col-md-5">名前</th>
+              <th class="col-md-5">スラッグ</th>
               <th></th>
               <th></th>
             </tr>
@@ -57,16 +56,14 @@
                     @endif
                 </td>
                 --}}
+
+
                 <td>
-					{{ $cate->view_count }}
+                	<a href="{{ url('dashboard/cates/'.$cate->id) }}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
 
                 <td>
-                	<a href="{{ url('dashboard/categories/'.$cate->id) }}" class="btn btn-primary btn-sm center-block">編集</a>
-                </td>
-
-                <td>
-                	<form role="form" method="POST" action="{{ url('/dashboard/categories/'.$cate->id) }}">
+                	<form role="form" method="POST" action="{{ url('/dashboard/cates/'.$cate->id) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
 

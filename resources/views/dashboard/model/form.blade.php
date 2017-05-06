@@ -3,12 +3,12 @@
 @section('content')
 
 <?php
-	use App\Admin;
+	use App\User;
 ?>
 
     <h3 class="page-header">
 	@if(isset($modelId))
-    {{ Admin::find($modelId)->name }}さんの編集
+    {{ User::find($modelId)->name }}さんの編集
     @else
     管理者登録
     @endif
@@ -46,12 +46,12 @@
                         @if(old('thumbnail_outurl') != '' && old('thumb_choice'))
                         <img src="{{ Storage::url(old('thumbnail_outurl')) }}" class="img-fluid">
                         @elseif(isset($model) && $model->thumbnail)
-                        <img src="{{ Storage::url($atcl->thumbnail) }}" class="img-fluid">
+                        <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
                         @else
                         <span class="no-img">No Image</span>
                         @endif
                     @elseif(isset($model) && $model->thumbnail)
-                    <img src="{{ Storage::url($atcl->thumbnail) }}" class="img-fluid">
+                    <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
                     @else
                     <span class="no-img">No Image</span>
                     @endif
@@ -65,10 +65,10 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-2 control-label">名前</label>
+                    <label for="name" class="col-md-2 control-label">名前<small>（ニックネーム）</small></label>
 
                     <div class="col-md-8">
-                        <input id="name" type="text" class="form-control" name="name" value="{{ isset($model) ? $model->name : old('name') }}" autofocus>
+                        <input id="name" type="text" class="form-control" name="name" value="{{ isset($model) ? $model->name : old('name') }}">
 
                         @if ($errors->has('name'))
                             <span class="help-block">
@@ -78,15 +78,15 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('nick_name') ? ' has-error' : '' }}">
-                    <label for="nick_name" class="col-md-2 control-label">ニックネーム</label>
+                <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
+                    <label for="full_name" class="col-md-2 control-label">フルネーム</label>
 
                     <div class="col-md-8">
-                        <input id="nick_name" type="text" class="form-control" name="nick_name" value="{{ isset($model) ? $model->nick_name : old('nick_name') }}">
+                        <input id="full_name" type="text" class="form-control" name="full_name" value="{{ isset($model) ? $model->full_name : old('full_name') }}" autofocus>
 
-                        @if ($errors->has('nick_name'))
+                        @if ($errors->has('full_name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('nick_name') }}</strong>
+                                <strong>{{ $errors->first('full_name') }}</strong>
                             </span>
                         @endif
                     </div>

@@ -41,29 +41,6 @@
 
             {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">グループ</label>
-                <div class="col-md-6">
-                    <select class="form-control" name="group_id">
-
-                        @foreach($groups as $group)
-                            @if(old('group_id') !== NULL)
-                                <option value="{{ $group->id }}"{{ old('group_id') == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
-                            @else
-                                <option value="{{ $group->id }}"{{ isset($tag) && $tag->group_id == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
-                            @endif
-                        @endforeach
-
-                    </select>
-
-                    @if ($errors->has('group_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('group_id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">タグ名</label>
@@ -84,7 +61,7 @@
                 <label for="slug" class="col-md-3 control-label">スラッグ</label>
 
                 <div class="col-md-6">
-                    <input id="slug" type="text" class="form-control" name="slug" value="{{ old('slug') === NULL && isset($tag) ? $tag->slug : old('slug') }}" required>
+                    <input id="slug" type="text" class="form-control" name="slug" value="{{ old('slug') === NULL && isset($tag) ? $tag->slug : old('slug') }}" placeholder="半角英数字 ハイフンのみ" required>
 
                     @if ($errors->has('slug'))
                         <span class="help-block">

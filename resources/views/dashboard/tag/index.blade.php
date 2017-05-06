@@ -14,13 +14,12 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th class="col-md-3">名前</th>
-              <th class="col-md-2">スラッグ</th>
-              <th class="col-md-3">グループ</th>
-              <th class="col-md-2">グループ有無</th>
-              <th class="col-md-2">View数</th>
+              <th class="col-md-5">名前</th>
+              <th class="col-md-5">スラッグ</th>
+
+              <!-- <th class="col-md-2">View数</th> -->
               <th></th>
-              
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -41,32 +40,19 @@
                 	{{ $tag->slug }}
                 </td>
 
-                <td>
-					{{ $groupModel->find($tag->group_id)->name }}
-                </td>
-                <td>
-                	<?php $groupStatus = $groupModel->find($tag->group_id)->open_status; ?>
-                    @if($groupStatus)
-                    有効
-                    @else
-                    <span class="text-danger">無効</span>
-                    @endif
-                </td>
-                {{--
-                <td>
-                	@if($tag->open_status)
-					有効
-                    @else
-					<span class="text-danger">無効</span>
-                    @endif
-                </td>
-                --}}
-                <td>
-					{{ $tag->view_count }}
-                </td>
+
 
                 <td>
                 	<a style="margin:auto;" href="{{url('dashboard/tags/'.$tag->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
+                </td>
+
+                <td>
+                	<form role="form" method="POST" action="{{ url('/dashboard/tags/'.$tag->id) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+
+                        <input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
+                    </form>
                 </td>
         	</tr>
         @endforeach
