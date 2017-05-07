@@ -37,7 +37,8 @@ class HomeController extends Controller
     public function index()
     {
         $atcls = Article::where([
-                    ['del_status', '=', 0], ['open_status','=',1]
+                    //['del_status', '=', 0],
+                    ['open_status','=',1],
                 ])->orderBy('open_date','DESC')->paginate($this->perPage);
         
     	

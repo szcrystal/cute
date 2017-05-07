@@ -13,17 +13,17 @@
 
     <!-- Styles -->
     <link href="/bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @if(Ctm::isAgent('all'))
-    <link href="/css/style-sp.css" rel="stylesheet">
+    <link href="{{ asset('css/style-sp.css') }}" rel="stylesheet">
 	@endif
 
   <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 
     <!-- Scripts -->
     <script>

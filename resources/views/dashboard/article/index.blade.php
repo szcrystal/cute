@@ -24,7 +24,7 @@
               <th class="col-md-4">タイトル</th>
               <th class="col-md-2">公開状態</th>
               <th class="col-md-2">公開日</th>
-              <th class="col-md-3">モデル（ID）</th>
+              <th class="col-md-3">モデル [ID]</th>
               <th></th>
               <th></th>
             </tr>
@@ -72,7 +72,7 @@
                 <td>
                 	@if($obj->model_id)
                     	{{ $users->find($obj->model_id)->name }}
-                        （{{ $obj->model_id }}）
+                        [{{ $obj->model_id }}]
                     @endif
                 </td>
 

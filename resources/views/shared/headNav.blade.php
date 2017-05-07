@@ -17,8 +17,8 @@
             <ul class="navbar-nav mr-auto">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li class="nav-link"><a href="{{ url('/login') }}">Login</a></li>
-                    <li class="nav-link"><a href="{{ url('/register') }}">Register</a></li>
+                    <li class="nav-link"><a href="/kagawa/login">Login</a></li>
+                    <li class="nav-link"><a href="{{ url('register') }}">Register</a></li>
                 @else
                     <li class="dropdown nav-item">
                         <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" role="button" aria-expanded="false">
