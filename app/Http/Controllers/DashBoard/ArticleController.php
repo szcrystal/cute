@@ -63,7 +63,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $cates = $this->category->all();
+        //$users = $this->user->where('active',1)->get();
+    	return view('dashboard.article.form', ['cates'=>$cates/*, 'users'=>$users*/]);
     }
 
     /**
@@ -86,7 +88,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = $this->article->find($id);
-        //$cates = $this->category->all();
+        $cates = $this->category->all();
         //$users = $this->user->where('active',1)->get();
         
         $tags = $this->tag->all();
@@ -109,7 +111,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['article'=>$article, 'tags'=>$tags, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['article'=>$article, 'tags'=>$tags, 'cates'=>$cates, 'id'=>$id, 'edit'=>1]);
     }
 
     /**

@@ -103,6 +103,7 @@
 			<div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
                 <label for="content" class="col-md-2 control-label">コンテンツ</label>
 
+				
                 <div class="col-md-12">
                     <textarea id="editor1" name="content" rows="10" cols="160">
                         {{ isset($fix) && !count(old()) ? $fix->content : old('content') }}

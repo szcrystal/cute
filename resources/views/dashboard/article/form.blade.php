@@ -77,13 +77,51 @@
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">カテゴリー</label>
+                <div class="col-md-6">
+                    <select class="form-control" name="cate_id">
 
-                <div class="col-md-9">
+                        @foreach($cates as $cate)
+                            @if(old('cate_id') !== NULL)
+                                <option value="{{ $cate->id }}"{{ old('cate_id') == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
+                            @else
+                                <option value="{{ $cate->id }}"{{ isset($article) && $article->cate_id == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
+                            @endif
+                        @endforeach
+
+                    </select>
+
                     @if ($errors->has('cate_id'))
                         <span class="help-block">
                             <strong>{{ $errors->first('cate_id') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-3 control-label">位置情報</label>
+                <div class="col-md-6">
+                    <select class="form-control" name="group_id">
+
+                        {{--
+                        @foreach($groups as $group)
+                            @if(old('group_id') !== NULL)
+                                <option value="{{ $group->id }}"{{ old('group_id') == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
+                            @else
+                                <option value="{{ $group->id }}"{{ isset($tag) && $tag->group_id == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
+                            @endif
+                        @endforeach
+                        --}}
+
+						<option>愛媛</option>
+                        <option>香川</option>
+                    </select>
+
+                    @if ($errors->has('group_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('group_id') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -146,7 +184,7 @@
                 <label for="story_text" class="col-md-3 control-label">テキスト</label>
 
                 <div class="col-md-9">
-                    <textarea id="post_text" type="text" class="form-control" name="post_text" value="{{ old('post_text') }}" required></textarea>
+                    <textarea id="post_text" type="text" class="form-control" name="post_text" rows="15" value="{{ old('post_text') }}" required></textarea>
 
                     @if ($errors->has('post_text'))
                         <span class="help-block">

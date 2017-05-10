@@ -5,7 +5,7 @@
     	
 	{{-- @include('dbd_shared.search') --}}
 
-    <h3 class="page-header">ユーザー一覧</h3>
+    <h3 class="page-header">モデル一覧</h3>
 
     @if (session('status'))
         <div class="alert alert-success">

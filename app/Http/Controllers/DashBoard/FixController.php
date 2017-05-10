@@ -26,7 +26,9 @@ class FixController extends Controller
      */
     public function index()
     {
-        //
+    	$fixes = Fix::orderBy('id', 'desc')->paginate($this->perPage);
+        
+        return view('dashboard.fix.index', ['fixes'=>$fixes]);
     }
 
     /**

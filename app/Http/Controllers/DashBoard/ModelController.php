@@ -34,7 +34,6 @@ class ModelController extends Controller
         $users = User::orderBy('id', 'desc')->paginate($this->perPage);
         
         //$cateModel = $this->category;
-        
         //$status = $this->articlePost->where(['base_id'=>15])->first()->open_date;
         
         return view('dashboard.model.index', ['users'=>$users]);
@@ -113,7 +112,8 @@ class ModelController extends Controller
      */
     public function show($id)
     {
-        //
+        $model = $this->user->find($id);
+        return view('dashboard.model.form', ['modelId'=>$id, 'model'=>$model]);
     }
 
     /**

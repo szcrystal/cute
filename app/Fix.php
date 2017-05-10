@@ -11,5 +11,6 @@ class Fix extends Model
         'sub_title',
         'slug',
         'content',
+        'open_status',
     ];
 }

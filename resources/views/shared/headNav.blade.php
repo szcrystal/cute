@@ -8,7 +8,7 @@
 
         <!-- Branding Image -->
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'MovieReview') }}
+            {{ config('app.name', 'Cute.Campus') }}
         </a>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -43,6 +43,7 @@
                 <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
 
+
             <form class="my-1 my-lg-0" role="form" method="GET" action="{{ url('search') }}">
                 {{-- csrf_field() --}}
                 <div class="row">
@@ -56,12 +57,14 @@
                   </div>
                 </div>
 
-                {{--<input style="width:15em; display:inline;" type="text" class="form-control" name="s" placeholder="Search...">
+
+            </form>
+
+            {{--<input style="width:15em; display:inline;" type="text" class="form-control" name="s" placeholder="Search...">
                 <button style="display:inline;" class="btn btn-default my-2 my-sm-0" type="submit">
                     <i class="fa fa-search"></i>
                 </button>
                 --}}
-            </form>
 
         </div>
 

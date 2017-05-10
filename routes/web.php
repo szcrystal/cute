@@ -40,6 +40,9 @@ Route::resource('dashboard/tags', 'DashBoard\TagController');
 //category
 Route::resource('dashboard/cates', 'DashBoard\CategoryController');
 
+//Article
+Route::resource('dashboard/articles', 'DashBoard\ArticleController');
+
 //fix
 Route::resource('dashboard/fixes', 'DashBoard\FixController');
 
@@ -55,9 +58,11 @@ Route::get('dashboard/fbup', 'DashBoard\HomeController@getFbup');
 
 Route::get('dashboard/logout', 'DashBoard\HomeController@getLogout');
 
-//Article
-Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 
+// ===============
+$this->get('model-post/login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('model-post/login', 'Auth\LoginController@login');
+$this->post('model-post/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 

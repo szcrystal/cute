@@ -2,13 +2,14 @@
 	<div class="container clearfix pt-2">
     	<div class="col-md-2 float-left">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'MovieReview') }}
+                {{ config('app.name', 'Cute.Campus') }}
+                {{ env('AREA', '') }}
             </a>
         </div>
         <div class="col-md-10 float-left">
         	<?php
             	use App\Fix;
-            	$fixes = Fix::where('not_open', 0)->orderBy('id', 'asc')->get();
+            	$fixes = Fix::where('open_status', 0)->orderBy('id', 'asc')->get();
             ?>
         	@if($fixes)
 			<ul>
@@ -27,7 +28,7 @@
         </div>
 
     </div>
-	<p><small><i class="fa fa-copyright" aria-hidden="true"></i> MovieReview</small></p>
+	<p><small><i class="fa fa-copyright" aria-hidden="true"></i> {{ config('app.name', 'Cute.Campus') }}</small></p>
 
 </footer>
 

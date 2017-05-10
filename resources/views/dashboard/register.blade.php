@@ -94,8 +94,9 @@
           <thead>
             <tr>
               <th class="col-md-1">ID</th>
-              <th class="col-md-4">管理者名</th>
-              <th class="col-md-4">メールアドレス</th>
+              <th class="col-md-5">管理者名</th>
+              <th class="col-md-5">メールアドレス</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +113,20 @@
 
                 <td>
                 	{{ $obj->email }}
+                </td>
+
+
+                <td>
+                	@if($obj->id == 1 || Auth::guard('admin')->id() == $obj->id)
+					--
+                    @else
+                	<form role="form" method="POST" action="{{ url('dashboard/register/'.$obj->id) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+
+                	<input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
+                    </form>
+                    @endif
                 </td>
 
                 {{--

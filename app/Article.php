@@ -13,6 +13,7 @@ class Article extends Model
         'title',
         'sub_title',
         'slug',
+        'area_info',
         'post_thumb',
         'open_status',
         'open_date',

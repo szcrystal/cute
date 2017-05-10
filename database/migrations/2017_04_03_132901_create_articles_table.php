@@ -23,6 +23,7 @@ class CreateArticlesTable extends Migration
             $table->string('title')->nullable()->default(NULL);
             $table->string('sub_title')->nullable()->default(NULL);
             $table->string('slug')->unique();
+            $table->string('area_info')->nullable()->default(NULL);
             
             $table->string('post_thumb')->nullable()->default(NULL);
             

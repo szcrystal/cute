@@ -3,11 +3,12 @@
 @section('content')
 
 	<div class="clearfix">
-    	<h3 class="page-header">管理者一覧</h3>
+    	<h3 class="page-header"></h3>
     </div>
 
     {{-- $obj->links() --}}
 
+{{--
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
           <thead>
@@ -19,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-
+--}}
         {{--
             @foreach($obj as $key => $val)
                 <tr>
@@ -40,10 +41,12 @@
                 </tr>
             @endforeach
 		--}}
+        {{--
         </tbody>
     </table>
 
     </div>
+--}}
 
     {{-- $obj->links() --}}
 
