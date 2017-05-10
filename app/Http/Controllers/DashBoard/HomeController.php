@@ -44,9 +44,8 @@ class HomeController extends Controller
         
         Mail::raw('Text to e-mail', function($message)
         {
-            $message->from('info@cutecampus.jp', 'CuteCampus');
-
-            $message->to('szk.create@gmail.com');
+            $message->from('info@cutecampus.jp', 'CuteCampus')
+            		->to('info@cutecampus.jp');
         });
         
         return view('dashboard.index', ['name'=>$adminUser->name,]);
