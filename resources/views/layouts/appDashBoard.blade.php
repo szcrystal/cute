@@ -253,7 +253,7 @@
                                     <a href="{{ url('dashboard/register') }}">管理者追加／一覧</a>
                                 </li>
 
-
+								@if(env('APP_ENV') == 'local')
                                 <li>
                                     <a href="{{ url('dashboard/movieup') }}">Upload</a>
                                 </li>
@@ -264,6 +264,7 @@
                                 <li>
                                     <a href="{{ url('dashboard/fbup') }}">fb Upload</a>
                                 </li>
+                                @endif
 
 
                             </ul>
@@ -278,6 +279,18 @@
                                 	<li><a href="{{ url('dashboard/models') }}">モデル一覧</a></li>
                                 	<li><a href="{{ url('dashboard/models/create') }}">モデル新規追加</a></li>
                                 </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i> カテゴリー設定<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            	<li><a href="{{ url('/dashboard/cates') }}">カテゴリー一覧</a></li>
+                            	<li><a href="{{ url('/dashboard/cates/create') }}">カテゴリー追加</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 
                         <li>
                             <a href="#"><i class="fa fa-tag"></i> タグ設定<span class="fa arrow"></span></a>
@@ -289,10 +302,20 @@
                         </li>
 
 						<li>
-                            <a href="#"><i class="fa fa-newspaper-o"></i> カテゴリー設定<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-video-camera" aria-hidden="true"></i> 動画管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<li><a href="{{ url('/dashboard/cates') }}">カテゴリー一覧</a></li>
-                            	<li><a href="{{ url('/dashboard/cates/create') }}">カテゴリー追加</a></li>
+                                <li>
+                                    <a href="{{ url('/dashboard/movies') }}">動画一覧</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/movies/create') }}">新規動画追加</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/movies/new-filter') }}">フィルター編集／追加</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/movies/music') }}">音楽編集／追加</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -310,18 +333,7 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-question-circle"></i> 問い合わせ管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ url('/dashboard/contacts') }}">問い合わせ一覧</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/dashboard/contacts/create') }}">問合せカテゴリー追加</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
 
                         <li>
                             <a href="#"><i class="fa fa-file"></i> 固定ページ<span class="fa arrow"></span></a>
@@ -336,8 +348,19 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+                        <li>
+                            <a href="#"><i class="fa fa-question-circle"></i> 問い合わせ管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('/dashboard/contacts') }}">問い合わせ一覧</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 
 
+						{{--
                         <li>
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> 集計<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -358,6 +381,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        --}}
 
                         <!--
                         <li>

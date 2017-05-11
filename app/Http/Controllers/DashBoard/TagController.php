@@ -69,16 +69,17 @@ class TagController extends Controller
         $editId = $request->input('edit_id');
         
         $rules = [
-            'name' => 'required|same_tag:'.$editId.','.$groupId.'|max:255', //same_tag-> on AppServiceProvider
+            //'name' => 'required|same_tag:'.$editId.','.$groupId.'|max:255', //same_tag-> on AppServiceProvider
+            'name' => 'required|unique:tags,name,'.$editId.'|max:255',
             'slug' => 'required|unique:tags,slug,'.$editId.'|max:255', /* |unique:admins 注意:unique */
         ];
         
-//        $messages = [
-//            'name.required' => '「タグ名」は必須です。',
-//            'name.same_tag' => '「タグ名」が指定したグループの中で既に存在します。',
-//        ];
+        $messages = [
+            'name.unique' => '「タグ名」が既に存在します。',
+            'slug.unique' => '「スラッグ」が既に存在します。',
+        ];
         
-        $this->validate($request, $rules/*, $messages*/);
+        $this->validate($request, $rules, $messages);
         
         $data = $request->all();
 

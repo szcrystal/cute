@@ -26,7 +26,6 @@
               <th class="col-md-2">登録日</th>
               <th></th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -58,9 +57,13 @@
                 <td>
                 	<a href="{{url('dashboard/models/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
+
+                {{--
                 <td>
                 	<a href="{{url('dashboard/userlogin/'.$obj->id)}}" class="btn btn-warning btn-sm center-block" target="_brank">Login</a>
                 </td>
+                --}}
+                
                 <td>
                 	@if($obj->id == 1)
                     	<span class="btn center-block">--</span>

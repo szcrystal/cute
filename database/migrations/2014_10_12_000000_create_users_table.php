@@ -30,6 +30,16 @@ class CreateUsersTable extends Migration
         });
         
         DB::table('users')->insert([
+                'name' => 'Cute',
+                'full_name' => 'CuteCute',
+				'email' => 'cute@cute.com',
+                'password' => bcrypt('cutecute'),
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
+        
+        DB::table('users')->insert([
                 'name' => 'みいたけ',
                 'full_name' => '武村美空',
 				'email' => 'opal@frank.fam.cx',

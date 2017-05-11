@@ -12,7 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('/bootstrap/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/bootstrap/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="{{ asset('/bootstrap/vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">

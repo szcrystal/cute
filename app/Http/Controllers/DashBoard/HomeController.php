@@ -38,15 +38,14 @@ class HomeController extends Controller
     {
         $adminUser = Auth::guard('admin')->user();
         
-//        $data['user_email']
-//        $data['user_name']
-//        $data['user_']
-        
-        Mail::raw('Text to e-mail', function($message)
-        {
-            $message->from('info@cutecampus.jp', 'CuteCampus')
-            		->to('info@cutecampus.jp');
-        });
+//        Mail::raw('Text to e-mail', function($message)
+//        {
+//            $message->from('info@cutecampus.jp', 'CuteCampus')
+//            		->to('info@cutecampus.jp');
+//        });
+
+
+		
         
         return view('dashboard.index', ['name'=>$adminUser->name,]);
     }

@@ -31,8 +31,17 @@ Route::post('dashboard/login', 'DashBoard\LoginController@postLogin');
 Route::get('dashboard/register', 'DashBoard\HomeController@getRegister');
 Route::post('dashboard/register', 'DashBoard\HomeController@postRegister');
 
-//model
+//Model
 Route::resource('dashboard/models', 'DashBoard\ModelController');
+
+//Movie
+Route::get('dashboard/movies/music', 'DashBoard\MovieController@getMusic');
+Route::post('dashboard/movies/music', 'DashBoard\MovieController@createMusic');
+Route::get('dashboard/movies/music/{musicId}', 'DashBoard\MovieController@getEditMusic');
+Route::post('dashboard/movies/music/{musicId}', 'DashBoard\MovieController@postEditMusic');
+
+Route::resource('dashboard/movies', 'DashBoard\MovieController');
+
 
 //tag
 Route::resource('dashboard/tags', 'DashBoard\TagController');

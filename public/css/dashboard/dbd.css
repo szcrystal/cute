@@ -74,6 +74,32 @@ a.dropdown-toggle {
 	color: #fff;
 }
 
+.no-img {
+	display: block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background: #FCFCFB;
+    border: 1px solid #dfdfdf;
+    color: #aaa;
+}
+.thumb-wrap {
+	margin-top: 4em;
+    margin-bottom: 2em;
+}
+.thumb-prev {
+	
+}
+.thumb-prev .no-img {
+	width: 100%;
+    height: 180px;
+	line-height: 180px;
+}
+.thumb-prev img {
+	width: 100%;
+}
+
 
 /* TOP */
 .placeholder a {

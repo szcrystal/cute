@@ -8,8 +8,10 @@ use App\Article;
 use App\Tag;
 use App\TagRelation;
 use App\Category;
+use App\MovieCombine;
 
 use Auth;
+use Storage;
 
 
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation)
+	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine)
     {
     	
         $this -> middleware('adminauth');
@@ -30,6 +32,8 @@ class ArticleController extends Controller
         $this->user = $user;
         $this->category = $category;
         $this->tagRelation = $tagRelation;
+        
+        $this->mvCombine = $mvCombine;
         
         $this->perPage = 20;
         
@@ -61,11 +65,18 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+    	$mvId = $request->input('mvId');
         $cates = $this->category->all();
-        //$users = $this->user->where('active',1)->get();
-    	return view('dashboard.article.form', ['cates'=>$cates/*, 'users'=>$users*/]);
+        
+        $mv = $this->mvCombine->find($mvId);
+//        $mvPath = Storage::url($mv->movie_path);
+//        $modelId = $mv->model_id;
+        $modelName = $this->user->find($mv->model_id)->name;
+        
+        
+    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'mvId'=>$mvId, 'modelName'=>$modelName/*, 'users'=>$users*/]);
     }
 
     /**
@@ -76,7 +87,83 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	$editId = $request->input('edit_id');
+        
+        $rules = [
+        	'title' => 'required|max:255',
+            'slug' => 'required|unique:articles,slug,'.$editId.'|max:255',
+        ];
+        $this->validate($request, $rules);
+        
+        $data = $request->all(); //requestから配列として$dataにする
+        
+        $rand = mt_rand();
+        
+        if($request->file('post_thumb') != '') {
+            $filename = $request->file('post_thumb')->getClientOriginalName();
+            
+            $aId = $editId ? $editId : $rand;
+            $pre = time() . '-';
+            $filename = 'article/' .$aId . '/thumbnail/' . $pre . $filename;
+            //if (App::environment('local'))
+            $path = $request->file('post_thumb')->storeAs('public', $filename);
+            //else
+            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+        
+            $data['post_thumb'] = $filename;
+        }
+        
+        
+        
+        //タグのsave動作
+        
+        
+        if(! isset($data['open_status'])) {
+        	$data['open_status'] = 1;
+        }
+        else {
+        	$data['open_status'] = 0;
+        }
+        
+        if($editId !== NULL ) { //update（編集）の時
+        	$status = '記事が更新されました！';
+            $atcl = $this->article->find($request->input('edit_id'));
+        }
+        else { //新規追加の時
+            $status = '記事が追加されました！';
+            //$data['model_id'] = 1;
+            $data['view_count'] = 0;
+            $data['yt_up'] = 0;
+            $data['sns_up'] = 0;
+            
+        	$atcl = $this->article;
+        }
+
+        
+        $atcl->fill($data);
+        $atcl->save();
+        $atclId = $atcl->id;
+        
+        if(Storage::exists('public/article/'. $rand)) {
+            Storage::move('public/article/'. $rand, 'public/article/'. $atclId);
+            
+            $data['post_thumb'] = str_replace($rand, $atclId, $data['post_thumb']);
+            
+            $atcl->post_thumb = str_replace($rand, $atclId, $atcl->post_thumb);
+            $atcl->save();
+            
+            //if(isset($itemId)) {
+//                $this->article->find($atclId)->map(function($obj) use($atclId, $rand) {
+//                    $obj->post_thumb = str_replace($rand, $atclId, $obj->post_thumb);
+//                    //$obj->link_imgpath = str_replace($rand, $atclId, $obj->link_imgpath);
+//                    $obj->save();
+//                });
+            //}
+        }
+        
+        
+        return redirect('dashboard/articles/'. $atclId)->with('status', $status);
     }
 
     /**
@@ -87,9 +174,16 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = $this->article->find($id);
+        $atcl = $this->article->find($id);
         $cates = $this->category->all();
-        //$users = $this->user->where('active',1)->get();
+        
+        $mvId = $atcl->movie_id;
+        $mv = $this->mvCombine->find($mvId);
+        //$mvPath = Storage::url($mv->movie_path);
+        //$modelId = $mv->model_id;
+        $modelName = $this->user->find($atcl->model_id)->name;
+        
+        
         
         $tags = $this->tag->all();
         
@@ -111,7 +205,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['article'=>$article, 'tags'=>$tags, 'cates'=>$cates, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tags'=>$tags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
     }
 
     /**

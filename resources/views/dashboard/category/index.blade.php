@@ -7,7 +7,7 @@
 
     <div class="clearfix">
     	<h3 class="page-header">カテゴリー一覧</h3>
-    	<a href="{{ url('/dashboard/categories/create') }}" class="btn btn-success pull-right">新規追加</a>
+    	<a href="{{ url('/dashboard/cates/create') }}" class="btn btn-success pull-right">新規追加</a>
     </div>
 
     @if(session('status'))

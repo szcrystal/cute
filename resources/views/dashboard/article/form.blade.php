@@ -4,9 +4,9 @@
 	
 	<h3 class="page-header">
 	@if(isset($edit))
-    基本情報編集
+    記事編集
 	@else
-	動画新規追加
+	記事新規追加
     @endif
     </h3>
 
@@ -34,12 +34,22 @@
     @endif
         
     <div class="well">
+    	<div class="text-center">
+            <video id="mainMv" width="800" height="500" poster="" controls>
+                <source src="{{ Storage::url($mv->movie_path) }}" type='video/mp4' />
+            </video>
+        </div>
+
+        <hr>
+
         <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
             @endif
 
             {{ csrf_field() }}
+
+            <input type="hidden" name="movie_id" value="{{ $mvId }}">
 
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
@@ -57,36 +67,66 @@
                                     }
                                 }
                             ?>
-                            <input type="checkbox" name="del_status" value="1"{{ $checked }}> 非公開にする
+                            <input type="checkbox" name="open_status" value="1"{{ $checked }}> この記事を非公開にする
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">モデル</label>
+			<div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-3 control-label">モデル名</label>
 
                 <div class="col-md-9">
+					<p style="margin-top: 0.3em;" class="">{{ $modelName }}</p>
+                    <input type="hidden" name="model_id" value="{{ $mv->model_id}}"
 
-
-                    @if ($errors->has('admin_id'))
+                    @if ($errors->has('model_id'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('admin_id') }}</strong>
+                            <strong>{{ $errors->first('model_id') }}</strong>
                         </span>
                     @endif
                 </div>
             </div>
 
+			<div class="clearfix thumb-wrap">
+                <div class="col-md-3 pull-left thumb-prev">
+                    @if(count(old()) > 0)
+                        @if(old('post_thumb') != '' && old('post_thumb'))
+                        <img src="{{ Storage::url(old('post_thumb')) }}" class="img-fluid">
+                        @elseif(isset($atcl) && $atcl->post_thumb)
+                        <img src="{{ Storage::url($atcl->post_thumb) }}" class="img-fluid">
+                        @else
+                        <span class="no-img">No Image</span>
+                        @endif
+                    @elseif(isset($atcl) && $atcl->post_thumb)
+                        <img src="{{ Storage::url($atcl->post_thumb) }}" class="img-fluid">
+                    @else
+                        <span class="no-img">No Image</span>
+                    @endif
+                </div>
+
+                <div class="col-md-9 pull-left text-left form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
+					<label for="post_thumb" class="col-md-12">記事サムネイル</label><br>
+                    <div class="col-md-12">
+                        <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">カテゴリー</label>
                 <div class="col-md-6">
                     <select class="form-control" name="cate_id">
-
+						<option disabled selected>選択</option>
                         @foreach($cates as $cate)
+
                             @if(old('cate_id') !== NULL)
                                 <option value="{{ $cate->id }}"{{ old('cate_id') == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
                             @else
-                                <option value="{{ $cate->id }}"{{ isset($article) && $article->cate_id == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
+                                <option value="{{ $cate->id }}"{{ isset($atcl) && $atcl->cate_id == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
                             @endif
                         @endforeach
 
@@ -104,6 +144,7 @@
                 <label for="group" class="col-md-3 control-label">位置情報</label>
                 <div class="col-md-6">
                     <select class="form-control" name="group_id">
+                    	<option disabled selected>選択</option>
 
                         {{--
                         @foreach($groups as $group)
@@ -127,20 +168,14 @@
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
-                <label for="post_thumb" class="col-md-3 control-label">サムネイル</label>
 
-                <div class="col-md-9">
-                    <input id="post_thumb" class="thumbpost_thumbfile" type="file" name="post_thumb">
-                </div>
-            </div>
 
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label for="title" class="col-md-3 control-label">タイトル</label>
 
                 <div class="col-md-9">
-                    <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($article) ? $article->title : '') }}" required>
+                    <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($atcl) ? $atcl->title : '') }}" required>
 
                     @if ($errors->has('title'))
                         <span class="help-block">
@@ -151,12 +186,12 @@
             </div>
 
             
-
+			{{--
             <div class="form-group{{ $errors->has('sub_title') ? ' has-error' : '' }}">
                 <label for="sub_title" class="col-md-3 control-label">サブタイトル（リンク名）</label>
 
                 <div class="col-md-9">
-                    <input id="sub_title" type="text" class="form-control" name="sub_title" value="{{ old('sub_title') }}" required autofocus>
+                    <input id="sub_title" type="text" class="form-control" name="sub_title" value="{{ old('sub_title') }}">
 
                     @if ($errors->has('sub_title'))
                         <span class="help-block">
@@ -165,12 +200,13 @@
                     @endif
                 </div>
             </div>
+            --}}
 
             <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
                 <label for="slug" class="col-md-3 control-label">スラッグ（URL）</label>
 
                 <div class="col-md-9">
-                    <input id="slug" type="text" class="form-control" name="slug" value="{{ Ctm::isOld() ? old('slug') : (isset($article) ? $article->slug : '') }}" required placeholder="半角英数字とハイフンのみ">
+                    <input id="slug" type="text" class="form-control" name="slug" value="{{ Ctm::isOld() ? old('slug') : (isset($atcl) ? $atcl->slug : '') }}" required placeholder="半角英数字とハイフンのみ">
 
                     @if ($errors->has('slug'))
                         <span class="help-block">
@@ -180,15 +216,15 @@
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('post_text') ? ' has-error' : '' }}">
-                <label for="story_text" class="col-md-3 control-label">テキスト</label>
+            <div class="form-group{{ $errors->has('basic_info') ? ' has-error' : '' }}">
+                <label for="basic_info" class="col-md-3 control-label">基本情報</label>
 
                 <div class="col-md-9">
-                    <textarea id="post_text" type="text" class="form-control" name="post_text" rows="15" value="{{ old('post_text') }}" required></textarea>
+                    <textarea id="basic_info" type="text" class="form-control" name="basic_info" rows="15">{{ isset($atcl) && !count(old()) ? $atcl->basic_info : old('basic_info') }}</textarea>
 
-                    @if ($errors->has('post_text'))
+                    @if ($errors->has('basic_info'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('post_text') }}</strong>
+                            <strong>{{ $errors->first('basic_info') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -386,14 +422,27 @@
                         </div>
                 </div>
 --}}
-    
 
-
-          <div class="form-group">
-            <div class="col-md-4 col-md-offset-3">
-                <button type="submit" class="btn btn-primary center-block w-btn"><span class="octicon octicon-sync"></span>更　新</button>
+		<div class="form-group">
+            <div class=" col-md-9 col-md-offset-3">
+                <button type="submit" class="btn btn-primary w-btn">　更　新　</button>
             </div>
         </div>
+
+
+		<div class="clearfix">
+                <div class="btn-group-md pull-right">
+                    <div class="col-md-6 pull-left">
+                        <button type="submit" class="btn btn-danger center-block w-btn">YouTube UP</button>
+                    </div>
+
+                    <div class="col-md-4 pull-left">
+                        <button type="submit" class="btn btn-success center-block w-btn">SNS UP</button>
+                    </div>
+                </div>
+            </div>
+
+
 
         </form>
 

@@ -34,7 +34,7 @@
     @endif
         
     <div class="well">
-        <form class="form-horizontal" role="form" method="POST" action="/dashboard/categories">
+        <form class="form-horizontal" role="form" method="POST" action="/dashboard/cates">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
             @endif

@@ -59,6 +59,7 @@ class CategoryController extends Controller
         $messages = [
             'name.required' => '「カテゴリー名」は必須です。',
             'name.unique' => '「カテゴリー名」が既に存在します。',
+            'slug.unique' => '「スラッグ」が既に存在します。',
         ];
         
         $this->validate($request, $rules, $messages);

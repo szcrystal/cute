@@ -22,6 +22,7 @@
               <th>ID</th>
               <th class="col-md-2">カテゴリー</th>
               <th class="col-md-4">タイトル</th>
+              <th>サムネイル</th>
               <th class="col-md-2">公開状態</th>
               <th class="col-md-2">公開日</th>
               <th class="col-md-3">モデル [ID]</th>
@@ -40,7 +41,6 @@
                 </td>
 
 				<td>
-
                 	@if($obj->cate_id)
 	        		{{ $cateModel->find($obj->cate_id)->name }}
                     @else
@@ -51,6 +51,14 @@
                                     
                 <td>
                 	{{ $obj->title }}
+                </td>
+
+                <td>
+                	@if($obj->post_thumb)
+					<img src="{{ Storage::url($obj->post_thumb) }}" width=120 height=80>
+                    @else
+                    <span class="no-img">No Image</span>
+                    @endif
                 </td>
 
                 <td>
