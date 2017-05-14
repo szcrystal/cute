@@ -97,73 +97,7 @@ class MovieController extends Controller
         //
     }
     
-    public function getMusic()
-    {
-    	$musics = $this -> music-> all();
-    	return view('dashboard.movie.addMusic', ['musics'=>$musics]);
-    }
     
-    //Music編集
-    public function getEditMusic($musicId)
-    {
-    	$music = $this->music->find($musicId);
-    	return view('dashboard.movie.editMusic', ['music'=>$music, 'musicId'=>$musicId]);
-    }
-    //Music編集(post)
-    public function postEditMusic(Request $request, $musicId)
-    {
-    	$rules = [
-            'name' => 'required|max:255',
-        ];
-        $this->validate($request, $rules);
-        
-        $data = $request->all();
-        
-        if($request->file('music_file') != '') {
-            $filename = $request->file('music_file')->getClientOriginalName();
-            //$pre = time() . '-';
-            $filename = 'music/'/* . $pre*/ . $filename;
-            $path = $request->file('music_file')->storeAs('public', $filename);
-        
-            $data['file'] = $filename;
-        }
-        
-    	$music = $this->music->find($musicId);
-        $music->fill($data);
-        $music->save();
-        
-        
-        return view('dashboard.movie.editMusic', ['music'=>$music, 'musicId'=>$musicId, 'status'=>'Musicが更新されました']);
-    }
-    
-    //Music追加
-    public function createMusic(Request $request)
-    {
-    	$rules = [
-            'name' => 'required|max:255',
-//            'admin_email' => 'required|email|max:255', /* |unique:admins 注意:unique */
-//            'admin_password' => 'required|min:6',
-        ];
-        
-        $this->validate($request, $rules);
-        
-        $data = $request->all(); //requestから配列として$dataにする
-        
-        if($request->file('music_file') != '') {
-            $filename = $request->file('music_file')->getClientOriginalName();
-            //$pre = time() . '-';
-            $filename = 'music/'/* . $pre*/ . $filename;
-            $path = $request->file('music_file')->storeAs('public', $filename);
-        
-            $data['file'] = $filename;
-        }
-
-        
-        $this->music->fill($data);
-        $this->music->save();
-        
-        return redirect('dashboard/movies/music')->with('status', 'Musicが追加されました');
-    }
     
 
     /**

@@ -314,7 +314,7 @@
                                     <a href="{{ url('/dashboard/movies/new-filter') }}">フィルター編集／追加</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('/dashboard/movies/music') }}">音楽編集／追加</a>
+                                    <a href="{{ url('/dashboard/musics') }}">音楽編集／追加</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -326,9 +326,13 @@
                                 <li>
                                     <a href="{{url('dashboard/articles')}}">記事一覧</a>
                                 </li>
+
+                                {{--
                                 <li>
                                     <a href="{{url('dashboard/articles/create')}}">新規追加</a>
                                 </li>
+                                --}}
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

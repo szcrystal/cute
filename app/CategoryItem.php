@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagRelation extends Model
+class CategoryItem extends Model
 {
     protected $fillable = [
-    	'atcl_id',
-        'tag_id',
+    	'cate_id',
+        'item_id',
+    	'title',
+        'second',
     ];
+
 }

@@ -23,6 +23,8 @@
                     @endif
                 </a></li>
 				@endforeach
+
+                <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
             @endif
         </div>

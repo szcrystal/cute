@@ -185,22 +185,6 @@
                 </div>
             </div>
 
-            
-			{{--
-            <div class="form-group{{ $errors->has('sub_title') ? ' has-error' : '' }}">
-                <label for="sub_title" class="col-md-3 control-label">サブタイトル（リンク名）</label>
-
-                <div class="col-md-9">
-                    <input id="sub_title" type="text" class="form-control" name="sub_title" value="{{ old('sub_title') }}">
-
-                    @if ($errors->has('sub_title'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('sub_title') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-            --}}
 
             <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
                 <label for="slug" class="col-md-3 control-label">スラッグ（URL）</label>
@@ -232,13 +216,6 @@
 
 
             <div class="clearfix tag-wrap">
-                <?php $allNames = array(); ?>
-
-                @if(isset($tags))
-                    @foreach($tags as $tag)
-                        <?php $allNames[] = $tag->name; ?>
-                    @endforeach
-                @endif
 
                 <div class="tag-group form-group{{ $errors->has('tag-group') ? ' has-error' : '' }}">
                     <label for="tag-group" class="col-md-3 control-label">タグ</label>
@@ -247,18 +224,23 @@
 
                         <div class="add-btn" tabindex="0">追加</div>
 
-                        <span style="display:none;">{{ implode(',', $allNames) }}</span>
+                        <span style="display:none;">{{ implode(',', $allTags) }}</span>
 
                         <div class="tag-area">
                             @if(count(old()) > 0)
-                                <?php $names = old($tag->slug); ?>
-                                @if(isset($names))
-                                    @foreach($names as $name)
-                                    <span><em>{{ $name }}</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>
-                                    <input type="hidden" name="{{ $tag->slug }}[]" value="{{ $name }}">
-                                    @endforeach
-                                @endif
+                                <?php
+                                	//$tagNames = old($tag->slug);
+                                	$tagNames = old('tags');
+                                ?>
+							@endif
+
+                            @if(isset($tagNames))
+                                @foreach($tagNames as $name)
+                                <span><em>{{ $name }}</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>
+                                <input type="hidden" name="tags[]" value="{{ $name }}">
+                                @endforeach
                             @endif
+
                         </div>
 
                     </div>

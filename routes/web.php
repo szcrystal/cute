@@ -35,13 +35,10 @@ Route::post('dashboard/register', 'DashBoard\HomeController@postRegister');
 Route::resource('dashboard/models', 'DashBoard\ModelController');
 
 //Movie
-Route::get('dashboard/movies/music', 'DashBoard\MovieController@getMusic');
-Route::post('dashboard/movies/music', 'DashBoard\MovieController@createMusic');
-Route::get('dashboard/movies/music/{musicId}', 'DashBoard\MovieController@getEditMusic');
-Route::post('dashboard/movies/music/{musicId}', 'DashBoard\MovieController@postEditMusic');
-
 Route::resource('dashboard/movies', 'DashBoard\MovieController');
 
+//Music
+Route::resource('dashboard/musics', 'DashBoard\MusicController');
 
 //tag
 Route::resource('dashboard/tags', 'DashBoard\TagController');
@@ -68,11 +65,15 @@ Route::get('dashboard/fbup', 'DashBoard\HomeController@getFbup');
 Route::get('dashboard/logout', 'DashBoard\HomeController@getLogout');
 
 
-// ===============
-$this->get('model-post/login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('model-post/login', 'Auth\LoginController@login');
-$this->post('model-post/logout', 'Auth\LoginController@logout')->name('logout');
+// Model Contribute===============
+//login
+$this->get('contribute/login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('contribute/login', 'Auth\LoginController@login');
+$this->get('contribute/logout', 'Auth\LoginController@logout')->name('logout');
 
+//register
+$this->get('contribute/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post('contribute/register', 'Auth\RegisterController@register');
 
 
 Auth::routes();

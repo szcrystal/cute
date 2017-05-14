@@ -41,7 +41,7 @@
         </div>
 
 		<div class="text-center">
-            <video id="mainMv" width="800" height="500" poster="" controls>
+            <video id="mainMv" width="800" height="500" poster="" preload="none" controls>
                 <source src="{{ Storage::url($mvCombine -> movie_path) }}" type='video/mp4' />
             </video>
         </div>

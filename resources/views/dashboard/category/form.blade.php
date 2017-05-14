@@ -70,6 +70,50 @@
                 </div>
             </div>
 
+            <hr>
+            <h4>アイテム</h4>
+
+            <?php $n = 0; ?>
+
+            @while($n < $itemCount)
+
+            	<div class="form-group{{ $errors->has('title.'. $n) ? ' has-error' : '' }}">
+                    <label for="title" class="col-md-3 control-label">タイトル</label>
+
+                    <div class="col-md-6">
+                        <input id="title" type="text" class="form-control" name="title[]" value="{{ old('title')[$n] === NULL && isset($cateItem[$n]) ? $cateItem[$n]->title : old('title')[$n] }}">
+
+                        @if ($errors->has('title.'. $n))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('title.'. $n) }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div style="margin-bottom:4em;" class="clearfix form-group{{ $errors->has('second.'. $n) ? ' has-error' : '' }}">
+                    <label for="second" class="col-md-3 control-label">秒数</label>
+
+                    <div class="col-md-3">
+                        <input id="second" type="text" class="form-control" name="second[]" value="{{ old('second')[$n] === NULL && isset($cateItem[$n]) ? $cateItem[$n]->second : old('second')[$n] }}">
+
+                        @if ($errors->has('second.'. $n))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('second.'. $n) }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <p style="margin-top:0.4em;" class="pull-left text-left">秒</p>
+                </div>
+
+                <input type="hidden" name="item_id[]" value="{{ $n+1 }}">
+
+                <?php $n++; ?>
+
+            @endwhile
+
+
+
           <div class="form-group">
             <div class="col-md-4 col-md-offset-3">
                 <button type="submit" class="btn btn-primary center-block w-btn"><span class="octicon octicon-sync"></span>更　新</button>

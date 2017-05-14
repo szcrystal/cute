@@ -8,18 +8,18 @@
 
         <!-- Branding Image -->
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Cute.Campus') }}
+            {{ config('app.name', 'Cute.Campus') }} {{ env('AREA', '') }}
         </a>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li class="nav-link"><a href="/kagawa/login">Login</a></li>
-                    <li class="nav-link"><a href="{{ url('register') }}">Register</a></li>
-                @else
+
+				@foreach($cates as $cate)
+                    <li class="nav-link"><a href="{{ url('cate/'. $cate->slug) }}">{{ $cate->name }}</a></li>
+
+				{{--
                     <li class="dropdown nav-item">
                         <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -39,8 +39,10 @@
                             </form>
                         </div>
                     </li>
-                @endif
-                <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
+                --}}
+                @endforeach
+
+
             </ul>
 
 

@@ -47,6 +47,12 @@ label > em {
     color: #777;
     font-weight: normal;
 }
+
+hr {
+	border-color: #dadada;
+    margin-top: 3em;
+}
+
 .btn-g {
 	background: #ECF9F5;
     color: #333;

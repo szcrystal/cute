@@ -40,27 +40,36 @@
                 	<input type="hidden" name="model_id" value="{{$modelId}}">
                 @endif
 
-
-                <div class="col-md-4 thumb-prev">
-                    @if(count(old()) > 0)
-                        @if(old('thumbnail_outurl') != '' && old('thumb_choice'))
-                        <img src="{{ Storage::url(old('thumbnail_outurl')) }}" class="img-fluid">
-                        @elseif(isset($model) && $model->thumbnail)
-                        <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
-                        @else
-                        <span class="no-img">No Image</span>
-                        @endif
-                    @elseif(isset($model) && $model->thumbnail)
-                    <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
-                    @else
-                    <span class="no-img">No Image</span>
-                    @endif
+                <div class="form-group">
+                    <div class="col-md-2 col-md-offset-10">
+                        <button type="submit" class="btn btn-primary col-md-12">
+                            更　新
+                        </button>
+                    </div>
                 </div>
 
-                <div class="col-md-12 form-group{{ $errors->has('thumbnail') ? ' has-error' : '' }}">
-                    <label for="thumbnail" class="col-md-2 control-label">サムネイル</label>
-                    <div class="col-md-8">
-                        <input id="thumbnail" class="thumb-file" type="file" name="thumbnail">
+				<div class="clearfix thumb-wrap">
+                    <div class="col-md-4 pull-left thumb-prev">
+                        @if(count(old()) > 0)
+                            @if(old('model_thumb') != '' && old('model_thumb'))
+                            <img src="{{ Storage::url(old('model_thumb')) }}" class="img-fluid">
+                            @elseif(isset($model) && $model->model_thumb)
+                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
+                            @else
+                            <span class="no-img">No Image</span>
+                            @endif
+                        @elseif(isset($model) && $model->model_thumb)
+                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
+                        @else
+                            <span class="no-img">No Image</span>
+                        @endif
+                    </div>
+
+                    <div class="col-md-8 pull-left text-left form-group{{ $errors->has('model_thumb') ? ' has-error' : '' }}">
+                        <label for="model_thumb" class="col-md-12 text-left">サムネイル</label>
+                        <div class="col-md-12">
+                            <input id="model_thumb" class="thumb-file" type="file" name="model_thumb">
+                        </div>
                     </div>
                 </div>
 
@@ -95,7 +104,7 @@
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="col-md-2 control-label">メールアドレス</label>
 
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <input id="email" type="email" class="form-control" name="email" value="{{ isset($model) ? $model->email : old('email') }}">
 
                         @if ($errors->has('email'))
@@ -122,12 +131,26 @@
                     </div>
                 @endif
 
+
+                <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
+                    <label for="school" class="col-md-2 control-label">学校名</label>
+
+                    <div class="col-md-8">
+                        <input id="school" type="text" class="form-control" name="school" value="{{ isset($model) ? $model->school : old('school') }}">
+
+                        @if ($errors->has('school'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('school') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
 				<div class="form-group{{ $errors->has('personal') ? ' has-error' : '' }}">
                     <label for="personal" class="col-md-2 control-label">モデルインフォ</label>
 
                     <div class="col-md-8">
-                        <textarea id="personal" class="form-control" name="contents" rows="15">
-                        {{ isset($fix) && !count(old()) ? $fix->contents : old('personal') }}</textarea>
+                        <textarea id="personal" class="form-control" name="contents" rows="15">{{ isset($fix) && !count(old()) ? $fix->contents : old('personal') }}</textarea>
 
                         @if ($errors->has('personal'))
                             <span class="help-block">
@@ -138,32 +161,36 @@
                 </div>
 
 
+                <hr>
 				<?php //パーソナル ---------------- ?>
 
+				<div style="margin-bottom:3em;">
 
 				<?php $n=0; ?>
-				@while($n < 8)
+				@while($n < 7)
 
-				<div class="col-md-4 thumb-prev">
-                    @if(count(old()) > 0)
-                        @if(old('thumbnail_outurl') != '' && old('thumb_choice'))
-                        <img src="{{ Storage::url(old('snap')) }}" class="img-fluid">
-                        @elseif(isset($model) && $model->thumbnail)
-                        <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
+				<div class="clearfix thumb-wrap">
+                    <div class="col-md-4 pull-left thumb-prev">
+                        @if(count(old()) > 0)
+                            @if(old('model_thumb') != '' && old('model_thumb'))
+                            <img src="{{ Storage::url(old('model_thumb')) }}" class="img-fluid">
+                            @elseif(isset($model) && $model->model_thumb)
+                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
+                            @else
+                            <span class="no-img">No Image</span>
+                            @endif
+                        @elseif(isset($model) && $model->model_thumb)
+                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
                         @else
-                        <span class="no-img">No Image</span>
+                            <span class="no-img">No Image</span>
                         @endif
-                    @elseif(isset($model) && $model->thumbnail)
-                    <img src="{{ Storage::url($model->thumbnail) }}" class="img-fluid">
-                    @else
-                    <span class="no-img col-md-offset-6">No Image</span>
-                    @endif
-                </div>
+                    </div>
 
-                <div class="col-md-12 form-group{{ $errors->has('snap') ? ' has-error' : '' }}">
-                    <label for="snap" class="col-md-2 control-label">スナップ</label>
-                    <div class="col-md-8">
-                        <input class="snap" type="file" name="snap[]">
+                    <div class="col-md-8 pull-left text-left form-group{{ $errors->has('model_thumb') ? ' has-error' : '' }}">
+                        <label for="model_thumb" class="col-md-12 text-left">スナップ</label>
+                        <div class="col-md-12">
+                            <input id="model_thumb" class="thumb-file" type="file" name="model_thumb">
+                        </div>
                     </div>
                 </div>
 
@@ -196,9 +223,13 @@
                     </div>
                 </div>
 
+                <hr>
+
 				<?php $n++; ?>
 				@endwhile
 
+
+			</div>
 
 
 
@@ -236,7 +267,7 @@
                 <div class="form-group">
                     <div class="col-md-2 col-md-offset-2">
                         <button type="submit" class="btn btn-primary col-md-12">
-                            登録
+                            更　新
                         </button>
                     </div>
                 </div>

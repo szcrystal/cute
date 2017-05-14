@@ -22,7 +22,7 @@ class CreateArticlesTable extends Migration
             $table->integer('movie_id');
             //$table->string('tag_id')->nullable()->default(NULL);
             $table->string('title')->nullable()->default(NULL);
-            $table->string('sub_title')->nullable()->default(NULL);
+            //$table->string('sub_title')->nullable()->default(NULL);
             $table->string('slug')->unique();
             $table->string('area_info')->nullable()->default(NULL);
             

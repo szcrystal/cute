@@ -75,8 +75,12 @@ class ArticleController extends Controller
 //        $modelId = $mv->model_id;
         $modelName = $this->user->find($mv->model_id)->name;
         
+        $allTags = $this->tag->get()->map(function($item){
+        	return $item->name;
+        })->all();
         
-    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'mvId'=>$mvId, 'modelName'=>$modelName/*, 'users'=>$users*/]);
+        
+    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
     }
 
     /**
@@ -115,10 +119,7 @@ class ArticleController extends Controller
         }
         
         
-        
-        //タグのsave動作
-        
-        
+        // Total
         if(! isset($data['open_status'])) {
         	$data['open_status'] = 1;
         }
@@ -145,6 +146,7 @@ class ArticleController extends Controller
         $atcl->save();
         $atclId = $atcl->id;
         
+        //Storage 仮フォルダをidにネームし直す
         if(Storage::exists('public/article/'. $rand)) {
             Storage::move('public/article/'. $rand, 'public/article/'. $atclId);
             
@@ -160,6 +162,50 @@ class ArticleController extends Controller
 //                    $obj->save();
 //                });
             //}
+        }
+        
+        
+        //タグのsave動作
+        $tagArr = $data['tags'];
+    
+        foreach($tagArr as $tag) {
+			
+            //Tagセット
+            $setTag = Tag::firstOrCreate(['name'=>$tag]); //既存を取得 or なければ作成
+            
+            if(!$setTag->slug) { //新規作成時slugは一旦NULLでcreateされるので、その後idをセットする
+                $setTag->slug = $setTag->id;
+                $setTag->save();
+            }
+            
+            $tagId = $setTag->id;
+            $tagName = $tag;
+
+
+            //tagIdがRelationになければセット ->firstOrCreate() ->updateOrCreate()
+            $tagRel = $this->tagRelation->where(['tag_id'=>$tagId, 'atcl_id'=>$atclId])->get();
+            
+            if($tagRel->isEmpty()) {
+                $this->tagRelation->create([
+                    'tag_id' => $tagId,
+                    'atcl_id' => $atclId,
+                ]);
+            }
+
+            //tagIdを配列に入れる　削除確認用
+            $tagIds[] = $tagId;
+        }
+    
+    	//編集時のみ削除されたタグを消す
+        if(isset($editId)) {
+            //元々relationにあったtagがなくなった場合：今回取得したtagIdの中にrelationのtagIdがない場合をin_arrayにて確認
+            $tagRels = $this->tagRelation->where('atcl_id', $atclId)->get();
+            
+            foreach($tagRels as $tagRel) {
+                if(! in_array($tagRel->tag_id, $tagIds)) {
+                    $tagRel->delete();
+                }
+            }
         }
         
         
@@ -183,9 +229,13 @@ class ArticleController extends Controller
         //$modelId = $mv->model_id;
         $modelName = $this->user->find($atcl->model_id)->name;
         
+        $tagNames = $this->tagRelation->where(['atcl_id'=>$id])->get()->map(function($item) {
+            return $this->tag->find($item->tag_id)->name;
+        })->all();
         
-        
-        $tags = $this->tag->all();
+        $allTags = $this->tag->get()->map(function($item){
+        	return $item->name;
+        })->all();
         
 //        $atclTag = array();
 //        $n = 0;
@@ -205,7 +255,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tags'=>$tags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
     }
 
     /**
@@ -217,6 +267,11 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = $this->article->find($id);
+        
+        
+        
+        
+        
         //$cates = $this->category->all();
         //$users = $this->user->where('active',1)->get();
         

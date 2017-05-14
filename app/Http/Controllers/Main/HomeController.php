@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Main;
 
 use App\Article;
+use App\Category;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-	public function __construct(Article $article)
+	public function __construct(Article $article, Category $category)
     {
         //$this->middleware('search');
         
         $this->article = $article;
+        $this->category = $category;
 //        $this->user = $user;
 //        $this->tag = $tag;
 //        $this->tagRelation = $tagRelation;
@@ -36,14 +38,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $atcls = Article::where([
-                    //['del_status', '=', 0],
-                    ['open_status','=',1],
-                ])->orderBy('open_date','DESC')->paginate($this->perPage);
+        $atcls = Article::where(['open_status'=>1])->orderBy('open_date','DESC')->paginate($this->perPage);
+        
+		$cates = $this->category->all();
         
     	
         
-    	return view('main.index', ['atcls'=>$atcls]);
+    	return view('main.index', ['atcls'=>$atcls, 'cates'=>$cates]);
 
     }
 

@@ -4,16 +4,20 @@ namespace App\Http\Controllers\DashBoard;
 
 use App\Category;
 use App\Article;
+use App\CategoryItem;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-	public function __construct(Category $category, Article $article)
+	public function __construct(Category $category, Article $article, CategoryItem $categoryItem)
     {
     	$this->category = $category;
         $this->article = $article;
+        $this->categoryItem = $categoryItem;
+        
+        $this->itemCount = 10;
         $this->perPage = 30;
     }
 
@@ -38,7 +42,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.category.form');
+    	$itemCount = $this->itemCount;
+        
+        return view('dashboard.category.form', ['itemCount'=>$itemCount]);
     }
 
     /**
@@ -54,12 +60,18 @@ class CategoryController extends Controller
         $rules = [
             'name' => 'required|unique:categories,name,'.$editId.'|max:255',
             'slug' => 'required|unique:categories,slug,'.$editId.'|max:255', /* 注意:unique */
+        
+            'title.*' => 'required_with:second.*',
+            'second.*' => 'required_with:title.*|integer|nullable',
         ];
         
         $messages = [
             'name.required' => '「カテゴリー名」は必須です。',
             'name.unique' => '「カテゴリー名」が既に存在します。',
             'slug.unique' => '「スラッグ」が既に存在します。',
+            'title.*.required_with' => '「アイテム」のタイトルを入力して下さい。',
+            'second.*.required_with' => '「アイテム」の秒数を入力して下さい。',
+        	'second.*.integer' => '「秒数」は半角数字を入力して下さい。',
         ];
         
         $this->validate($request, $rules, $messages);
@@ -84,9 +96,29 @@ class CategoryController extends Controller
         $cateModel->fill($data); //モデルにセット
         $cateModel->save(); //モデルからsave
         
-        $id = $cateModel->id;
+        $cateId = $cateModel->id;
+        
+        $titles = $data['title'];
+        $seconds = $data['second'];
+        $itemIds = $data['item_id'];
+        
+        //$items = $this->categoryItem->where('cate_id'=>$cateId)->get();
+        
+        foreach($titles as $key => $title) {
+        	if($title != '') {
+                $this->categoryItem->updateOrCreate(
+                    ['item_id'=>$itemIds[$key], 'cate_id'=>$cateId],
+                    [
+                        'item_id'=>$itemIds[$key],
+                        'title'=>$title,
+                        'second'=>$seconds[$key],
+                    ]
+                );
+            }
+        }
+        
 
-        return redirect('dashboard/cates/'.$id)->with('status', $status);
+        return redirect('dashboard/cates/'.$cateId)->with('status', $status);
     }
 
     /**
@@ -99,7 +131,11 @@ class CategoryController extends Controller
     {
         $cate = $this->category->find($id);
         
-    	return view('dashboard.category.form', ['cate'=>$cate, 'id'=>$id, 'edit'=>1]);
+        $cateItem = $this->categoryItem->where(['cate_id'=>$id])->get()->all();
+		
+        $itemCount = $this->itemCount;
+
+    	return view('dashboard.category.form', ['cate'=>$cate, 'cateItem'=>$cateItem, 'itemCount'=>$itemCount, 'id'=>$id, 'edit'=>1]);
     }
 
     /**
