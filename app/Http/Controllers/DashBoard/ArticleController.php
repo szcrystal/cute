@@ -166,44 +166,46 @@ class ArticleController extends Controller
         
         
         //タグのsave動作
-        $tagArr = $data['tags'];
-    
-        foreach($tagArr as $tag) {
-			
-            //Tagセット
-            $setTag = Tag::firstOrCreate(['name'=>$tag]); //既存を取得 or なければ作成
-            
-            if(!$setTag->slug) { //新規作成時slugは一旦NULLでcreateされるので、その後idをセットする
-                $setTag->slug = $setTag->id;
-                $setTag->save();
+        if(isset($data['tags'])) {
+            $tagArr = $data['tags'];
+        
+            foreach($tagArr as $tag) {
+                
+                //Tagセット
+                $setTag = Tag::firstOrCreate(['name'=>$tag]); //既存を取得 or なければ作成
+                
+                if(!$setTag->slug) { //新規作成時slugは一旦NULLでcreateされるので、その後idをセットする
+                    $setTag->slug = $setTag->id;
+                    $setTag->save();
+                }
+                
+                $tagId = $setTag->id;
+                $tagName = $tag;
+
+
+                //tagIdがRelationになければセット ->firstOrCreate() ->updateOrCreate()
+                $tagRel = $this->tagRelation->where(['tag_id'=>$tagId, 'atcl_id'=>$atclId])->get();
+                
+                if($tagRel->isEmpty()) {
+                    $this->tagRelation->create([
+                        'tag_id' => $tagId,
+                        'atcl_id' => $atclId,
+                    ]);
+                }
+
+                //tagIdを配列に入れる　削除確認用
+                $tagIds[] = $tagId;
             }
-            
-            $tagId = $setTag->id;
-            $tagName = $tag;
-
-
-            //tagIdがRelationになければセット ->firstOrCreate() ->updateOrCreate()
-            $tagRel = $this->tagRelation->where(['tag_id'=>$tagId, 'atcl_id'=>$atclId])->get();
-            
-            if($tagRel->isEmpty()) {
-                $this->tagRelation->create([
-                    'tag_id' => $tagId,
-                    'atcl_id' => $atclId,
-                ]);
-            }
-
-            //tagIdを配列に入れる　削除確認用
-            $tagIds[] = $tagId;
-        }
-    
-    	//編集時のみ削除されたタグを消す
-        if(isset($editId)) {
-            //元々relationにあったtagがなくなった場合：今回取得したtagIdの中にrelationのtagIdがない場合をin_arrayにて確認
-            $tagRels = $this->tagRelation->where('atcl_id', $atclId)->get();
-            
-            foreach($tagRels as $tagRel) {
-                if(! in_array($tagRel->tag_id, $tagIds)) {
-                    $tagRel->delete();
+        
+            //編集時のみ削除されたタグを消す
+            if(isset($editId)) {
+                //元々relationにあったtagがなくなった場合：今回取得したtagIdの中にrelationのtagIdがない場合をin_arrayにて確認
+                $tagRels = $this->tagRelation->where('atcl_id', $atclId)->get();
+                
+                foreach($tagRels as $tagRel) {
+                    if(! in_array($tagRel->tag_id, $tagIds)) {
+                        $tagRel->delete();
+                    }
                 }
             }
         }
