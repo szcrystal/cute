@@ -95,7 +95,7 @@ class ArticleController extends Controller
         
         $rules = [
         	'title' => 'required|max:255',
-            'slug' => 'required|unique:articles,slug,'.$editId.'|max:255',
+            //'slug' => 'required|unique:articles,slug,'.$editId.'|max:255',
         ];
         $this->validate($request, $rules);
         

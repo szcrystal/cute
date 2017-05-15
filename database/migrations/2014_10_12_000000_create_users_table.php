@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             
-            $table->string('thumbnail')->nullable()->default(NULL);
+            $table->string('model_thumb')->nullable()->default(NULL);
             $table->string('school')->nullable()->default(NULL);
-            $table->string('charm_point')->nullable()->default(NULL);
-            $table->string('hobby')->nullable()->default(NULL);
+            $table->text('per_info')->nullable()->default(NULL);
+            //$table->string('hobby')->nullable()->default(NULL);
             
             $table->rememberToken();
             $table->timestamps();

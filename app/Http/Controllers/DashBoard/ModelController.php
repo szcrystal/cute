@@ -59,48 +59,69 @@ class ModelController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'cate_id' => 'required',
-            'title' => 'required|max:255', /* |unique:admins 注意:unique */
-            'movie_site' => 'required|max:255',
-            'password' => 'required|min:8',
+            //'cate_id' => 'required',
+            //'title' => 'required|max:255', /* |unique:admins 注意:unique */
+        
+            //'movie_site' => 'required|max:255',
+            //'password' => 'required|min:8',
             //'movie_url' => 'required|max:255|unique:articles,movie_url'.$except,
         ];
         
-        //$this->validate($request, $rules);
+        $this->validate($request, $rules);
         
         $data = $request->all();
         
         
-        
         if($request->input('model_id') !== NULL ) { //update（編集）の時
-            $mdModel = $this->admin->find($request->input('model_id'));
+            $mdModel = $this->user->find($request->input('model_id'));
             
-            if($data['password'] == '') {
+            //if($data['password'] == '') {
+            if(! isset($data['password'])) {
             	$data['password'] = $mdModel->password;
             }
             else {
             	$data['password'] = bcrypt($data['password']);
             }
             
-            
-            $status = '動画情報が更新されました！';
+            $status = 'モデルが更新されました！';
         }
         else { //新規追加の時
             $data['password'] = bcrypt($data['password']);
-            $status = '動画情報が追加されました！';
+            $status = 'モデルが追加されました！';
             
-        	$mdModel = $this->admin;
+        	$mdModel = $this->user;
         }
         
-        $data['authority'] = 0;
+        //$data['authority'] = 0;
         
         $mdModel->fill($data); //モデルにセット
         $mdModel->save(); //モデルからsave
         
         
-        $id = $mdModel->id;
+        $modelId = $mdModel->id;
+        
+        
+        if($request->file('model_thumb') != '') {
+            
+            $filename = $request->file('model_thumb')->getClientOriginalName();
+            
+            //$aId = $editId ? $editId : $rand;
+            //$pre = time() . '-';
+            $filename = 'model/' . $modelId . '/thumbnail/'/* . $pre*/ . $filename;
+            //if (App::environment('local'))
+            $path = $request->file('model_thumb')->storeAs('public', $filename);
+            //else
+            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+        
+            $data['model_thumb'] = $filename;
+            
+            $mdModel->model_thumb = $filename;
+            $mdModel->save();
+        }
+
     	//return view('dashboard.article.form', ['thisClass'=>$this, 'tags'=>$tags, 'status'=>'記事が更新されました。']);
-        return redirect('dashboard/models/'.$id.'/edit')->with('status', $status);
+        return redirect('dashboard/models/'.$modelId.'/edit')->with('status', $status);
 
     }
 

@@ -185,7 +185,7 @@
                 </div>
             </div>
 
-
+			{{--
             <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
                 <label for="slug" class="col-md-3 control-label">スラッグ（URL）</label>
 
@@ -199,6 +199,7 @@
                     @endif
                 </div>
             </div>
+            --}}
 
             <div class="form-group{{ $errors->has('basic_info') ? ' has-error' : '' }}">
                 <label for="basic_info" class="col-md-3 control-label">基本情報</label>
@@ -413,16 +414,16 @@
 
 
 		<div class="clearfix">
-                <div class="btn-group-md pull-right">
-                    <div class="col-md-6 pull-left">
-                        <button type="submit" class="btn btn-danger center-block w-btn">YouTube UP</button>
-                    </div>
+            <div class="btn-group-md pull-right">
+                <div class="col-md-6 pull-left">
+                    <button type="submit" class="btn btn-danger center-block w-btn" disabled>YouTube UP</button>
+                </div>
 
-                    <div class="col-md-4 pull-left">
-                        <button type="submit" class="btn btn-success center-block w-btn">SNS UP</button>
-                    </div>
+                <div class="col-md-4 pull-left">
+                    <button type="submit" class="btn btn-success center-block w-btn" disabled>SNS UP</button>
                 </div>
             </div>
+        </div>
 
 
 

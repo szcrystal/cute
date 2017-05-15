@@ -33,7 +33,7 @@
 
         <div class="well">
 
-            <form class="form-horizontal" role="form" method="POST" action="/dashboard/model" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="POST" action="/dashboard/models" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 @if(isset($modelId))
@@ -146,15 +146,15 @@
                     </div>
                 </div>
 
-				<div class="form-group{{ $errors->has('personal') ? ' has-error' : '' }}">
-                    <label for="personal" class="col-md-2 control-label">モデルインフォ</label>
+				<div class="form-group{{ $errors->has('per_info') ? ' has-error' : '' }}">
+                    <label for="per_info" class="col-md-2 control-label">モデルインフォ</label>
 
                     <div class="col-md-8">
-                        <textarea id="personal" class="form-control" name="contents" rows="15">{{ isset($fix) && !count(old()) ? $fix->contents : old('personal') }}</textarea>
+                        <textarea id="per_info" class="form-control" name="per_info" rows="15">{{ isset($model) && !count(old()) ? $model->per_info : old('per_info') }}</textarea>
 
-                        @if ($errors->has('personal'))
+                        @if ($errors->has('per_info'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('personal') }}</strong>
+                                <strong>{{ $errors->first('per_info') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -172,24 +172,24 @@
 				<div class="clearfix thumb-wrap">
                     <div class="col-md-4 pull-left thumb-prev">
                         @if(count(old()) > 0)
-                            @if(old('model_thumb') != '' && old('model_thumb'))
-                            <img src="{{ Storage::url(old('model_thumb')) }}" class="img-fluid">
-                            @elseif(isset($model) && $model->model_thumb)
-                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
+                            @if(old('snap_thumb') != '' && old('snap_thumb'))
+                            <img src="{{ Storage::url(old('snap_thumb')) }}" class="img-fluid">
+                            @elseif(isset($modelSnap) && $modelSnap->snap_thumb)
+                            <img src="{{ Storage::url($model->snap_thumb) }}" class="img-fluid">
                             @else
                             <span class="no-img">No Image</span>
                             @endif
-                        @elseif(isset($model) && $model->model_thumb)
-                            <img src="{{ Storage::url($model->model_thumb) }}" class="img-fluid">
+                        @elseif(isset($modelSnap) && $modelSnap->snap_thumb)
+                            <img src="{{ Storage::url($model->snap_thumb) }}" class="img-fluid">
                         @else
                             <span class="no-img">No Image</span>
                         @endif
                     </div>
 
-                    <div class="col-md-8 pull-left text-left form-group{{ $errors->has('model_thumb') ? ' has-error' : '' }}">
+                    <div class="col-md-8 pull-left text-left form-group{{ $errors->has('snap_thumb.'.$n) ? ' has-error' : '' }}">
                         <label for="model_thumb" class="col-md-12 text-left">スナップ</label>
                         <div class="col-md-12">
-                            <input id="model_thumb" class="thumb-file" type="file" name="model_thumb">
+                            <input id="model_thumb" class="thumb-file" type="file" name="snap_thumb[]">
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                     <label for="name" class="col-md-2 control-label">質問</label>
 
                     <div class="col-md-8">
-                        <input id="school" type="text" class="form-control" name="ask[]" value="{{ isset($model) ? $model->school : old('school') }}">
+                        <input id="school" type="text" class="form-control" name="snap_ask[]" value="{{ isset($modelSnap) ? $modelSnap->school : old('school') }}">
 
                         @if ($errors->has('ask'))
                             <span class="help-block">
@@ -208,16 +208,16 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
-                    <label for="answer" class="col-md-2 control-label">回答</label>
+                <div class="form-group{{ $errors->has('snap_answer') ? ' has-error' : '' }}">
+                    <label for="snap_answer" class="col-md-2 control-label">回答</label>
 
                     <div class="col-md-8">
-                        <textarea id="answer" class="form-control" name="answer[]" rows="8">
-                        {{ isset($fix) && !count(old()) ? $model->answer : old('answer') }}</textarea>
+                        <textarea id="snap_answer" class="form-control" name="snap_answer[]" rows="8">
+                        {{ isset($modelSnap) && !count(old()) ? $modelSnap->snap_answer : old('snap_answer') }}</textarea>
 
-                        @if ($errors->has('answer'))
+                        @if ($errors->has('snap_answer'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('answer') }}</strong>
+                                <strong>{{ $errors->first('snap_answer') }}</strong>
                             </span>
                         @endif
                     </div>
