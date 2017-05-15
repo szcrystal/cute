@@ -94,7 +94,7 @@
 
 
                             <tr>
-                                <th>コメント</th>
+                                <th style="height:15em;">コメント</th>
                                 <td>{!! nl2br($contact->context) !!}</td>
                             </tr>
 

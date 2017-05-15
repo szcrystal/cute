@@ -20,6 +20,7 @@
           <thead>
             <tr>
               <th>ID</th>
+              <th>サムネイル</th>
               <th class="col-md-2">名前</th>
               <th class="col-md-3">メールアドレス</th>
               <th class="col-md-2">フルネーム</th>
@@ -38,6 +39,14 @@
         	<tr>
             	<td>
                 	{{$obj->id}}
+                </td>
+
+                <td>
+					@if($obj->model_thumb)
+					<img src="{{ Storage::url($obj->model_thumb) }}" width=100 height=65>
+                    @else
+                    <span class="no-img">No Image</span>
+                    @endif
                 </td>
 
 				<td>

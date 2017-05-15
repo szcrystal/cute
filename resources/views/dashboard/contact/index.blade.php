@@ -26,7 +26,6 @@
               <th class="col-md-3">テキスト</th>
               <th class="col-md-2">お問合わせ日</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +81,8 @@
                 <td>
                 	<a style="margin:auto;" href="{{url('dashboard/contacts/'.$obj->id. '/edit')}}" class="btn btn-primary btn-sm center-block">確認</a>
                 </td>
+
+                {{--
                 <td>
 					<form role="form" method="POST" action="{{ url('/dashboard/contacts/'.$obj->id) }}">
                         {{ csrf_field() }}
@@ -90,6 +91,7 @@
                         <input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
                     </form>
                 </td>
+                --}}
         	</tr>
         @endforeach
         
