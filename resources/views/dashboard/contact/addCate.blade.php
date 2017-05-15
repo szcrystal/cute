@@ -31,9 +31,8 @@
           <thead>
             <tr>
               <th class="col-md-1">ID</th>
-            	<th class="col-md-4">カテゴリー</th>
-              <th class="col-md-3">追加日</th>
-
+              <th class="col-md-4">カテゴリー</th>
+              <th class="col-md-1"></th>
               <th class="col-md-1"></th>
               
             </tr>
@@ -49,16 +48,28 @@
                 </td>
 
 				<td>
-	        		{{$cate->category}}
+	        		{{$cate->cate_name}}
                 </td>
-                                    
+
+                {{--
                 <td>
-                	{{ date('Y/m/d H:i', strtotime($cate->created_at)) }}
+                	date('Y/m/d H:i', strtotime($cate->created_at))
                 </td>
+                --}}
 
                 <td>
                 	<a style="margin:auto;" href="{{url('dashboard/contacts/cate/'.$cate->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
+
+                <td>
+                	<form role="form" method="POST" action="{{ url('dashboard/contacts/'.$cate->id) }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+
+                	<input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
+                    </form>
+                </td>
+
         	</tr>
         @endforeach
         
@@ -71,14 +82,14 @@
 
             {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                    <label for="category" class="col-md-10 text-left">問合せカテゴリー追加</label>
+            <div class="form-group{{ $errors->has('cate_name') ? ' has-error' : '' }}">
+                    <label for="cate_name" class="col-md-10 text-left">問合せカテゴリー追加</label>
                     <div class="col-md-10">
-                        <input id="category" type="text" class="form-control" name="category" value="{{ old('category') }}" required>
+                        <input id="cate_name" type="text" class="form-control" name="cate_name" value="{{ old('cate_name') }}" required>
 
-                        @if ($errors->has('category'))
+                        @if ($errors->has('cate_name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('category') }}</strong>
+                                <strong>{{ $errors->first('cate_name') }}</strong>
                             </span>
                         @endif
                     </div>

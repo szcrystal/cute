@@ -67,7 +67,15 @@
 
                         <div class="col-md-12">
                             <input id="music_file" class="" type="file" name="music_file">
+
+                            @if ($errors->has('music_file'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('music_file') }}</strong>
+                                </span>
+                            @endif
                         </div>
+
+
                     </div>
                 </div>
             </div>

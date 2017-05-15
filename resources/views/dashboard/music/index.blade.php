@@ -22,6 +22,7 @@
               <th class="col-md-1">ID</th>
               <th class="col-md-3">Music名</th>
               <th class="col-md-5">ファイル名</th>
+              <th>秒数</th>
               <th class="col-md-1"></th>
               <th class="col-md-1"></th>
             </tr>
@@ -42,6 +43,12 @@
 
                 <td>
 	        		{{ str_replace('music/', '', $music->file) }}
+                </td>
+
+                <td>
+					<?php $s = $ffprobe->format(asset('storage/'. $music->file))->get('duration'); ?>
+                    {{ floor($s) }} s
+
                 </td>
 
                 <td>

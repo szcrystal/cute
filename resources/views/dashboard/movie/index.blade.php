@@ -30,7 +30,9 @@
 
               <th></th>
               <th></th>
+              @if(Ctm::isDev())
               <th></th>
+              @endif
             </tr>
           </thead>
           <tbody>
@@ -105,7 +107,7 @@
 
 
                 <td>
-                	<a style="margin:auto;" href="{{url('dashboard/movies/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">動画編集</a>
+                	<a style="margin:auto;" href="{{url('dashboard/movies/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">動画</a>
                 </td>
                 <td>
                 	@if(!$obj->atcl_status)
@@ -114,6 +116,7 @@
 						<span class="text-primary">記事作成済</span>
                     @endif
                 </td>
+                @if(Ctm::isDev())
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/movies/'.$obj->id) }}">
                     {{ csrf_field() }}
@@ -122,6 +125,7 @@
                 	<input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
                     </form>
                 </td>
+                @endif
         	</tr>
         @endforeach
         

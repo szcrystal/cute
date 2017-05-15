@@ -7,6 +7,9 @@ use App\Music;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use FFMpeg;
+use Storage;
+
 class MusicController extends Controller
 {
 	public function __construct(Music $music)
@@ -28,7 +31,18 @@ class MusicController extends Controller
     public function index()
     {
         $musics = Music::orderBy('id', 'desc')->paginate($this->perPage);
-    	return view('dashboard.music.index', ['musics'=>$musics]);
+        
+        //Storage::url($mvCombine -> movie_path)
+        
+        $ffprobe = FFMpeg\FFProbe::create();
+//        $s = $ffprobe
+//            ->format(asset('storage/music/sound2.m4a'))
+//            ->get('duration');
+//        
+//        echo floor($s);
+//        exit;
+        
+    	return view('dashboard.music.index', ['musics'=>$musics, 'ffprobe'=>$ffprobe]);
     }
 
     /**
@@ -53,6 +67,7 @@ class MusicController extends Controller
         
         $rules = [
             'name' => 'required|unique:musics,name,'.$editId.'|max:255',
+            'music_file' => 'required',
         ];
         $this->validate($request, $rules);
         
@@ -80,7 +95,8 @@ class MusicController extends Controller
         $music->save();
         $musicId = $music->id;
         
-        return view('dashboard.music.form', ['music'=>$music, 'musicId'=>$musicId, 'status'=>$status]);
+        //return view('dashboard.music.form', ['music'=>$music, 'musicId'=>$musicId, 'status'=>$status]);
+        return redirect('dashboard/musics/'.$musicId)->with('status', $status);
     }
 
     /**

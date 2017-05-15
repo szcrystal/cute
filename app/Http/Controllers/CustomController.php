@@ -200,4 +200,9 @@ class CustomController extends Controller
         
         return preg_match('/'. $agent .'/', $_SERVER['HTTP_USER_AGENT']);
     }
+    
+    static function isDev()
+    {
+    	return env('ENVIRONMENT', 'dev') == 'dev';
+    }
 }

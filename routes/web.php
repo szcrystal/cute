@@ -13,6 +13,10 @@
 
 Route::get('/', 'Main\HomeController@index');
 
+Route::get('/m/{id}', function(){
+	abort(404);
+});
+
 Route::get('hello', function () {
     echo "hello2";
 });
@@ -40,7 +44,7 @@ Route::resource('dashboard/movies', 'DashBoard\MovieController');
 //Music
 Route::resource('dashboard/musics', 'DashBoard\MusicController');
 
-//tag
+//Tag
 Route::resource('dashboard/tags', 'DashBoard\TagController');
 
 //category
@@ -49,9 +53,16 @@ Route::resource('dashboard/cates', 'DashBoard\CategoryController');
 //Article
 Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 
-//fix
+//Fix
 Route::resource('dashboard/fixes', 'DashBoard\FixController');
 
+//Contact
+Route::get('dashboard/contacts/cate/{cateId}', 'dashboard\ContactController@getEditCate');
+Route::post('dashboard/contacts/cate/{cateId}', 'dashboard\ContactController@postEditCate');
+Route::resource('dashboard/contacts', 'dashboard\ContactController');
+
+
+//Other
 Route::get('dashboard/movieup', 'DashBoard\HomeController@getMovieup');
 //Route::get('dashboard/movieup', function() {
 //  $client = new Google_Client();

@@ -10,7 +10,7 @@ class Fix extends Model
         'title',
         'sub_title',
         'slug',
-        'content',
+        'contents',
         'open_status',
     ];
 }

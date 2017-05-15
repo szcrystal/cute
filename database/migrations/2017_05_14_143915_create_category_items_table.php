@@ -23,6 +23,61 @@ class CreateCategoryItemsTable extends Migration
             
             $table->timestamps();
         });
+        
+        DB::table('category_items')->insert(
+            [
+                'cate_id' => 1,
+                'item_id' => 1,
+                'title' => '行きの道中',
+                'second' => 5,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
+        
+        DB::table('category_items')->insert(
+            [
+                'cate_id' => 1,
+                'item_id' => 2,
+                'title' => '到着',
+                'second' => 3,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
+        
+        DB::table('category_items')->insert(
+            [
+                'cate_id' => 1,
+                'item_id' => 3,
+                'title' => '体験',
+                'second' => 15,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
+        
+        DB::table('category_items')->insert(
+            [
+                'cate_id' => 1,
+                'item_id' => 4,
+                'title' => '感想',
+                'second' => 10,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
+        
+        DB::table('category_items')->insert(
+            [
+                'cate_id' => 1,
+                'item_id' => 5,
+                'title' => '帰り',
+                'second' => 3,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
     }
 
     /**

@@ -23,10 +23,15 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th class="col-md-5">名前</th>
-              <th class="col-md-5">スラッグ</th>
+              <th class="col-md-4">名前</th>
+              <th class="col-md-3">スラッグ</th>
+              <th class="col-md-1">アイテム数</th>
+              <th class="col-md-1">総秒数</th>
+              <th class="col-md-1">記事数</th>
               <th></th>
+              @if(Ctm::isDev())
               <th></th>
+              @endif
             </tr>
           </thead>
           <tbody>
@@ -47,6 +52,18 @@
                 	{{ $cate->slug }}
                 </td>
 
+                <td>
+					{{ $cateItem->where('cate_id', $cate->id)->count() }}
+                </td>
+
+                <td>
+					{{ $cateItem->where('cate_id', $cate->id)->sum('second') }} s
+                </td>
+
+                <td>
+
+                </td>
+
                 {{--
                 <td>
                 	@if($cate->open_status)
@@ -62,6 +79,7 @@
                 	<a href="{{ url('dashboard/cates/'.$cate->id) }}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
 
+				@if(Ctm::isDev())
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/cates/'.$cate->id) }}">
                         {{ csrf_field() }}
@@ -70,6 +88,7 @@
                         <input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
                     </form>
                 </td>
+                @endif
         	</tr>
         @endforeach
         

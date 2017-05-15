@@ -79,6 +79,8 @@ class MovieController extends Controller
     public function show($id)
     {
         $mvCombine = $this->movieCombine->find($id);
+        
+        //$cateModel = $this->category->find('');
         $cates = $this->category->all();
         
         $modelName = User::find($mvCombine->model_id)->name;

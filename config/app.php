@@ -176,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+    
+        Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
 
     ],
 
@@ -227,6 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     
         'Ctm' => App\Http\Controllers\CustomController::class,
+    
+        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
 
     ],
 

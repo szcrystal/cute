@@ -25,16 +25,15 @@ class CreateCategoriesTable extends Migration
 //        $n = 0;
 //        while($n < 2) {
             DB::table('categories')->insert([
-                    'name' => 'FASHION',
-                    'slug' => 'fashion',
-                    //'view_count' => $n+5,
+                    'name' => 'レジャー',
+                    'slug' => 'leisure',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
                 ]
             );
             
             DB::table('categories')->insert([
-                    'name' => 'BEAUTY',
+                    'name' => 'ビューティー',
                     'slug' => 'beauty',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
@@ -42,7 +41,7 @@ class CreateCategoriesTable extends Migration
             );
             
             DB::table('categories')->insert([
-                    'name' => 'GOURMET',
+                    'name' => 'グルメ',
                     'slug' => 'gourmet',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),

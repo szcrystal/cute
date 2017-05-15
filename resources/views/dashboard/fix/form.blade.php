@@ -100,26 +100,6 @@
                 </div>
             </div>
 
-			<div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-                <label for="content" class="col-md-2 control-label">コンテンツ</label>
-
-				
-                <div class="col-md-12">
-                    <textarea id="editor1" name="content" rows="10" cols="160">
-                        {{ isset($fix) && !count(old()) ? $fix->content : old('content') }}
-                    </textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
-                        CKEDITOR.replace( 'editor1', {
-                        	customConfig: '/ckeditor/configCustom.js'
-                            //uiColor: '#FFB1B2'
-                        } );
-                    </script>
-                </div>
-            </div>
-
-			{{--
             <div class="form-group{{ $errors->has('contents') ? ' has-error' : '' }}">
                 <label for="contents" class="col-md-2 control-label">コンテンツ</label>
 
@@ -133,7 +113,31 @@
                     @endif
                 </div>
             </div>
-            --}}
+
+			@if(Ctm::isDev())
+			<div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                <label for="content" class="col-md-2 control-label">コンテンツ</label>
+
+				
+                <div class="col-md-12">
+                    <textarea id="editor1" name="contents" rows="10" cols="160">
+                        {{ isset($fix) && !count(old()) ? $fix->content : old('content') }}
+                    </textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace( 'editor1', {
+                        	customConfig: '/ckeditor/configCustom.js'
+                            //uiColor: '#FFB1B2'
+                        } );
+                    </script>
+                </div>
+            </div>
+            @endif
+
+
+
+
 
 
               <div class="form-group">

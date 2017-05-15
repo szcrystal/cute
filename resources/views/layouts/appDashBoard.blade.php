@@ -253,7 +253,7 @@
                                     <a href="{{ url('dashboard/register') }}">管理者追加／一覧</a>
                                 </li>
 
-								@if(env('APP_ENV') == 'local')
+								@if(Ctm::isDev())
                                 <li>
                                     <a href="{{ url('dashboard/movieup') }}">Upload</a>
                                 </li>
@@ -310,9 +310,13 @@
                                 <li>
                                     <a href="{{ url('/dashboard/movies/create') }}">新規動画追加</a>
                                 </li>
+
+                                @if(Ctm::isDev())
                                 <li>
                                     <a href="{{ url('/dashboard/movies/new-filter') }}">フィルター編集／追加</a>
                                 </li>
+                                @endif
+
                                 <li>
                                     <a href="{{ url('/dashboard/musics') }}">音楽編集／追加</a>
                                 </li>
@@ -353,10 +357,10 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-question-circle"></i> 問い合わせ管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-question-circle"></i> お問合わせ管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url('/dashboard/contacts') }}">問い合わせ一覧</a>
+                                    <a href="{{ url('/dashboard/contacts') }}">お問合わせ一覧／追加</a>
                                 </li>
 
                             </ul>

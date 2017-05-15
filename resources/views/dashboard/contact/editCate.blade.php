@@ -32,14 +32,14 @@
 
             {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                <label for="category" class="col-md-3 control-label">カテゴリー</label>
+            <div class="form-group{{ $errors->has('cate_name') ? ' has-error' : '' }}">
+                <label for="cate_name" class="col-md-3 control-label">カテゴリー</label>
                 <div class="col-md-7">
-                    <input id="category" type="text" class="form-control" name="category" value="{{ old('category') !== NULL ? old('category') : $cate->category }}" required>
+                    <input id="cate_name" type="text" class="form-control" name="cate_name" value="{{ old('cate_name') !== NULL ? old('cate_name') : $cate->cate_name }}" required>
 
-                    @if ($errors->has('category'))
+                    @if ($errors->has('cate_name'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('category') }}</strong>
+                            <strong>{{ $errors->first('cate_name') }}</strong>
                         </span>
                     @endif
                 </div>

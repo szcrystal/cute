@@ -32,7 +32,9 @@ class CategoryController extends Controller
            //->take(10)
            ->paginate($this->perPage);
         
-        return view('dashboard.category.index', ['cates'=>$cates]);
+        $cateItem = $this->categoryItem;
+        
+        return view('dashboard.category.index', ['cates'=>$cates, 'cateItem'=>$cateItem]);
     }
 
     /**

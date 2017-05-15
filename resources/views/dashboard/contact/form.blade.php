@@ -55,29 +55,50 @@
                                 <td>{{ $contact->ask_category }}</td>
                             </tr>
                             <tr>
-                                <th>削除記事ID</th>
-                                <td>{{ $contact->delete_id }}</td>
+                                <th>名前</th>
+                                <td>{{ $contact->per_name }}</td>
                             </tr>
                             <tr>
-                                <th>削除記事タイトル</th>
-                                <td>
-                                @if($contact->delete_id)
-                                {{ $atcl->find($contact->delete_id)->title }}
-                                @endif
+                                <th>メール</th>
+                                <td><a href="mailto:{{ $contact->per_email }}">{{ $contact->per_email }}</a>
+
                                 </td>
                             </tr>
                             <tr>
-                                <th>名前</th>
-                                <td>{{ $contact->user_name }}</td>
+                                <th>年齢</th>
+                                <td>{{ $contact->age }}</td>
                             </tr>
                             <tr>
-                                <th>メールアドレス</th>
-                                <td><a href="mailto:{{ $contact->user_email }}">{{ $contact->user_email }}</a></td>
+                                <th>学校・所属</th>
+                                <td>{{ $contact->school }}</a></td>
                             </tr>
+
+							<tr>
+                                <th>電話番号</th>
+                                <td>{{ $contact->tel_num }}</td>
+                            </tr>
+                            <tr>
+                                <th>郵便番号</th>
+                                <td>{{ $contact->post_num }}</a></td>
+                            </tr>
+
+                            <tr>
+                                <th>写真１</th>
+                                <td><img src="{{ Storage::url($contact->pic_1) }}" width="60%"></td>
+                            </tr>
+
+                            <tr>
+                                <th>写真２</th>
+                                <td><img src="{{ Storage::url($contact->pic_2) }}" width="60%"></td>
+                            </tr>
+
+
                             <tr>
                                 <th>コメント</th>
                                 <td>{!! nl2br($contact->context) !!}</td>
                             </tr>
+
+                            {{--
                             <tr>
                                 <th>対応状況</th>
                                 <td>
@@ -92,6 +113,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            --}}
 
                             <tr>
 
@@ -102,11 +124,13 @@
                     </table>
                 </div>
 
+                {{--
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-2">
                         <button type="submit" class="btn btn-primary center-block w-btn">更　新</button>
                     </div>
                 </div>
+                --}}
 
         </form>
     </div>

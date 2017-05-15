@@ -20,13 +20,11 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th class="col-md-1">問合わせ日</th>
               <th class="col-md-2">カテゴリー</th>
-              <th class="col-md-2">削除記事<br>ID/タイトル</th>
               <th class="col-md-2">名前</th>
               <th class="col-md-2">メール</th>
-              <th class="col-md-2">テキスト</th>
-              <th class="col-md-1">対応状況</th>
+              <th class="col-md-3">テキスト</th>
+              <th class="col-md-2">お問合わせ日</th>
               <th></th>
               <th></th>
             </tr>
@@ -41,28 +39,27 @@
                 	{{$obj->id}}
                 </td>
 
-                <td>
-                	{{ Ctm::changeDate($obj->created_at) }}
-                </td>
-
 				<td>
-	        		{{$obj->ask_category}}
+	        		{{ $cateModel->find($obj->askcate_id)->cate_name }}
                 </td>
 
+                {{--
                 <td>
                 	@if($obj->delete_id)
                     	<a href="{{ url('dashboard/articles/'.$contact->delete_id) }}">{{ $obj->delete_id }}</a><br>
 						<a href="{{ url('dashboard/articles/'.$contact->delete_id) }}">{{ $atcl->find($obj->delete_id)->title }}</a>
                     @endif
                 </td>
+                --}}
                                     
                 <td>
-                	{{ $obj->user_name }}
+                	{{ $obj->per_name }}
                 </td>
 
                 <td>
-                	{{ $obj->user_email }}
+                	<a href="mailto:{{ $obj->user_email }}">{{ $obj->per_email }}</a>
                 </td>
+
 
                 <td>
                 	@if(strlen($obj->context) > 100)
@@ -72,15 +69,18 @@
                     @endif
                 </td>
                 <td>
+                	<small>{{ Ctm::changeDate($obj->created_at, 1) }}</small>
+                	{{--
                 	@if($obj->done_status)
 					対応済
                     @else
 					<span class="text-danger">未対応</span>
                     @endif
+                    --}}
                 </td>
 
                 <td>
-                	<a style="margin:auto;" href="{{url('dashboard/contacts/'.$obj->id. '/edit')}}" class="btn btn-primary btn-sm center-block">編集</a>
+                	<a style="margin:auto;" href="{{url('dashboard/contacts/'.$obj->id. '/edit')}}" class="btn btn-primary btn-sm center-block">確認</a>
                 </td>
                 <td>
 					<form role="form" method="POST" action="{{ url('/dashboard/contacts/'.$obj->id) }}">

@@ -18,7 +18,7 @@ class CreateFixesTable extends Migration
             $table->string('title');
             $table->string('sub_title')->nullable()->default(NULL);
             $table->string('slug')->unique();
-            $table->text('content')->nullable()->default(NULL);
+            $table->text('contents')->nullable()->default(NULL);
             $table->boolean('open_status');
             $table->timestamps();
         });

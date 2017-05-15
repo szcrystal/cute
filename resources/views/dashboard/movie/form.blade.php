@@ -33,15 +33,13 @@
         </div>
     @endif
         
-    <div class="well">
-    	<div style="margin-top: 1em;" class="clearfix">
-            <div class="col-md-4 pull-right">
-                <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
-            </div>
+    <div class="well clearfix">
+        <div class="col-md-4 pull-right">
+            <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
         </div>
 
 		<div class="text-center">
-            <video id="mainMv" width="800" height="500" poster="" preload="none" controls>
+            <video id="mainMv" width="800" height="500" poster="" controls>
                 <source src="{{ Storage::url($mvCombine -> movie_path) }}" type='video/mp4' />
             </video>
         </div>
@@ -71,6 +69,24 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-3 control-label">カテゴリー</label>
+
+                <div class="col-md-9">
+                	{{ $cates->find($mvCombine->cate_id)->name }}
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-3 control-label">位置情報</label>
+
+                <div class="col-md-9">
+                	{{ $mvCombine->area }}
+                </div>
+            </div>
+
+
+			@if(Ctm::isDev())
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">カテゴリー</label>
                 <div class="col-md-6">
@@ -108,9 +124,11 @@
                     @endif
                 </div>
             </div>
+            @endif
 
 
 
+			@if(Ctm::isDev())
 
 			<div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">フィルター</label>
@@ -160,6 +178,8 @@
                 </div>
             </div>
 
+            @endif
+
 
 
 			<div class="form-group">
@@ -170,6 +190,9 @@
 
         </form>
 
+        <div class="col-md-4 pull-right">
+            <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
+        </div>
 
 
     </div>

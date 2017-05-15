@@ -27,7 +27,9 @@
               <th class="col-md-2">公開日</th>
               <th class="col-md-3">モデル [ID]</th>
               <th></th>
+              @if(Ctm::isDev())
               <th></th>
+              @endif
             </tr>
           </thead>
           <tbody>
@@ -89,6 +91,7 @@
                 <td>
                 	<a style="margin:auto;" href="{{url('dashboard/articles/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
+                @if(Ctm::isDev())
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/articles/'.$obj->id) }}">
                     {{ csrf_field() }}
@@ -97,6 +100,7 @@
                 	<input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
                     </form>
                 </td>
+                @endif
         	</tr>
         @endforeach
         
