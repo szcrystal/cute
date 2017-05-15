@@ -933,9 +933,9 @@ $(function(e){ //ready
   
   	//exe.addClass();
   
-    exe.addItem();
+    //exe.addItem();
     exe.eventItem();
-    exe.mypagePost();
+    //exe.mypagePost();
 
 });
 

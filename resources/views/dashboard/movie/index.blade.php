@@ -7,6 +7,8 @@
 		<a href="{{ url('/dashboard/movies/create') }}" class="btn btn-success pull-right">新規追加</a>
     </div>
 
+    <span>＊動画の読み込みに時間が掛かります</span>
+
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -48,7 +50,7 @@
                 <td>
 					<video id="mainMv" width="180" height="100" poster="" controls>
         			{{-- autoplay loop tabindex="0" --}}
-                    <source src="{{ Storage::url($obj -> movie_path) }}" type='video/mp4' />
+                    <source src="{{ Storage::url($obj -> movie_path) }}">
         			</video>
                 </td>
 

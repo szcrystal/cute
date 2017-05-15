@@ -20,9 +20,10 @@
           <thead>
             <tr>
               <th class="col-md-1">ID</th>
+              <th class="col-md-1"></th>
               <th class="col-md-3">Music名</th>
-              <th class="col-md-5">ファイル名</th>
-              <th>秒数</th>
+              <th class="col-md-4">ファイル名</th>
+              <th class="col-md-1">秒数</th>
               <th class="col-md-1"></th>
               <th class="col-md-1"></th>
             </tr>
@@ -35,6 +36,10 @@
         	<tr>
             	<td>
                 	{{$music->id}}
+                </td>
+
+                <td>
+					<audio style="width:30px;" src="{{ Storage::url($music->file) }}" controls>
                 </td>
 
 				<td>

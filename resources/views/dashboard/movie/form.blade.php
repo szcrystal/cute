@@ -12,9 +12,10 @@
 
     <div class="bs-component clearfix">
         <div class="pull-left">
-            <a href="{{ url('/dashboard/articles') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+            <a href="{{ url('/dashboard/movies') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
         </div>
     </div>
+
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -32,15 +33,17 @@
             {{ session('status') }}
         </div>
     @endif
-        
+
+
     <div class="well clearfix">
         <div class="col-md-4 pull-right">
             <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
         </div>
+        <span>＊動画の読み込みに時間が掛かります</span>
 
 		<div class="text-center">
             <video id="mainMv" width="800" height="500" poster="" controls>
-                <source src="{{ Storage::url($mvCombine -> movie_path) }}" type='video/mp4' />
+                <source src="{{ Storage::url($mvCombine -> movie_path) }}">
             </video>
         </div>
 
@@ -181,12 +184,13 @@
             @endif
 
 
-
+			@if(Ctm::isDev())
 			<div class="form-group">
                 <div class="col-md-4 col-md-offset-3">
                     <button type="submit" class="btn btn-primary center-block w-btn">更　新</button>
                 </div>
         	</div>
+            @endif
 
         </form>
 

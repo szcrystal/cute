@@ -203,6 +203,6 @@ class CustomController extends Controller
     
     static function isDev()
     {
-    	return env('ENVIRONMENT', 'dev') == 'dev';
+    	return env('ENVIRONMENT') == 'dev';
     }
 }

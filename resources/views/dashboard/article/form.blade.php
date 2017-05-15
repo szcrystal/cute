@@ -36,7 +36,7 @@
     <div class="well">
     	<div class="text-center">
             <video id="mainMv" width="800" height="500" poster="" controls>
-                <source src="{{ Storage::url($mv->movie_path) }}" type='video/mp4' />
+                <source src="{{ Storage::url($mv->movie_path) }}">
             </video>
         </div>
 
