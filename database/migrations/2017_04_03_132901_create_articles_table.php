@@ -45,7 +45,7 @@ class CreateArticlesTable extends Migration
         while($n < 3) {
             DB::table('articles')->insert(
             	[
-                    'model_id' => 1,
+                    'model_id' => 2,
                     
                     'cate_id' => 1,
                     'movie_id' => 1,

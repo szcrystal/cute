@@ -38,7 +38,7 @@
                 	{{$music->id}}
                 </td>
 
-                <td>
+                <td class="text-center">
 					<audio style="width:30px;" src="{{ Storage::url($music->file) }}" controls>
                 </td>
 

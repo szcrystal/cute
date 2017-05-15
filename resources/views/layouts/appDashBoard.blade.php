@@ -319,7 +319,10 @@
                                 @endif
 
                                 <li>
-                                    <a href="{{ url('/dashboard/musics') }}">音楽編集／追加</a>
+                                    <a href="{{ url('/dashboard/musics') }}">音楽一覧</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/musics/create') }}">音楽追加</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -358,10 +361,13 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-question-circle"></i> お問合わせ管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-question-circle"></i> お問合せ管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url('/dashboard/contacts') }}">お問合わせ一覧／追加</a>
+                                    <a href="{{ url('/dashboard/contacts') }}">お問合せ一覧</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/contacts/create') }}">カテゴリー追加</a>
                                 </li>
 
                             </ul>
