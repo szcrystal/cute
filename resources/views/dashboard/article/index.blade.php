@@ -4,7 +4,9 @@
 
     <div class="clearfix">
     	<h3 class="page-header">記事一覧</h3>
+        @if(Ctm::isDev())
 		<a href="{{ url('/dashboard/articles/create') }}" class="btn btn-success pull-right">新規追加</a>
+        @endif
     </div>
 
     @if (session('status'))
