@@ -57,9 +57,9 @@ Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 Route::resource('dashboard/fixes', 'DashBoard\FixController');
 
 //Contact
-Route::get('dashboard/contacts/cate/{cateId}', 'dashboard\ContactController@getEditCate');
-Route::post('dashboard/contacts/cate/{cateId}', 'dashboard\ContactController@postEditCate');
-Route::resource('dashboard/contacts', 'dashboard\ContactController');
+Route::get('dashboard/contacts/cate/{cateId}', 'DashBoard\ContactController@getEditCate');
+Route::post('dashboard/contacts/cate/{cateId}', 'DashBoard\ContactController@postEditCate');
+Route::resource('dashboard/contacts', 'DashBoard\ContactController');
 
 
 //Other
