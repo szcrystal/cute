@@ -39,7 +39,7 @@
         <div class="col-md-4 pull-right">
             <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
         </div>
-        <span>＊動画の読み込みに時間が掛かります</span>
+        {{-- <span>＊動画の読み込みに時間が掛かります</span> --}}
 
 		<div class="text-center">
             <video id="mainMv" width="800" height="500" poster="" controls>

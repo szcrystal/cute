@@ -307,11 +307,12 @@
                                 <li>
                                     <a href="{{ url('/dashboard/movies') }}">動画一覧</a>
                                 </li>
+
+                                @if(Ctm::isDev())
                                 <li>
                                     <a href="{{ url('/dashboard/movies/create') }}">新規動画追加</a>
                                 </li>
 
-                                @if(Ctm::isDev())
                                 <li>
                                     <a href="{{ url('/dashboard/movies/new-filter') }}">フィルター編集／追加</a>
                                 </li>
