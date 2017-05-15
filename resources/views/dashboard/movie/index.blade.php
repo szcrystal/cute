@@ -2,12 +2,13 @@
 
 @section('content')
 
-	@if(Ctm::isDev())
+
     <div class="clearfix">
     	<h3 class="page-header">動画一覧</h3>
+        @if(Ctm::isDev())
 		<a href="{{ url('/dashboard/movies/create') }}" class="btn btn-success pull-right">新規追加</a>
+        @endif
     </div>
-    @endif
 
     {{-- <span>＊動画の読み込みに時間が掛かります</span> --}}
 
