@@ -19,7 +19,9 @@
 
               <!-- <th class="col-md-2">View数</th> -->
               <th></th>
+              @if(Ctm::isDev())
               <th></th>
+              @endif
             </tr>
           </thead>
           <tbody>
@@ -46,6 +48,7 @@
                 	<a style="margin:auto;" href="{{url('dashboard/tags/'.$tag->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
 
+				@if(Ctm::isDev())
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/tags/'.$tag->id) }}">
                         {{ csrf_field() }}
@@ -54,6 +57,8 @@
                         <input type="submit" class="btn btn-danger btn-sm center-block" value="削除">
                     </form>
                 </td>
+                @endif
+                
         	</tr>
         @endforeach
         
