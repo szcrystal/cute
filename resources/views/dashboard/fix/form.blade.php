@@ -4,9 +4,9 @@
 	
 	<h3 class="page-header">
 	@if(isset($edit))
-    静的ページ編集
+    固定ページ編集
 	@else
-	静的ページ新規追加
+	固定ページ新規追加
     @endif
     </h3>
 

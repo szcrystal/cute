@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="clearfix mb-2">
-    	<h3 class="page-header">静的ページ一覧</h3>
+    	<h3 class="page-header">固定ページ一覧</h3>
 		<a href="{{ url('/dashboard/fixes/create') }}" class="btn btn-success pull-right">新規追加</a>
     </div>
 
