@@ -44,16 +44,20 @@ class LoginController extends Controller
         
         $remember = isset($data['remember']) ? true : false;
 		
+		
+        if(env('ENVIRONMENT') == 'dev') {
+        	$data['email'] = 'opal@frank.fam.cx';
+        }
         
         if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']], $remember)) {
-        	
             return redirect()->intended('dashboard');
         }
         else {
-        	$error[] = 'メールアドレスとパスワードを確認して下さい。';
+            $error[] = 'メールアドレスとパスワードを確認して下さい。';
             //return redirect('dashboard/login') -> withErrors('メールアドレスとパスワードを確認して下さい。');
             return redirect() -> back() -> withErrors($error);
-	    }
+        }
+        
     }
 
     /**
