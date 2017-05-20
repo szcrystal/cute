@@ -208,7 +208,7 @@ class HomeController extends Controller
             //break;
         }
         
-        exit;
+        //exit;
         
 //        $sum = array_sum($durations);
 //        echo $sum;
