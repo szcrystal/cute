@@ -1,0 +1,18 @@
+[Script Info]
+Title: test ass
+Synch Point: 2
+ScriptType: v4.00+
+Collisions: Normal
+ScaledBorderAndShadow: No
+PlayResX: 1920
+PlayResY: 1080
+Timer: 3.000
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Helvetica,50,&H00ffffff,&H0000ffff,&H00aaaaaa,&H80000000,-1,0,0,0,200,200,0,0.00,1,2,0,2,20,20,50,128
+
+[Events]
+Format: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.50,0:00:10.00,Default,,0000,0000,0000,,

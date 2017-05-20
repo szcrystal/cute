@@ -23,7 +23,7 @@
 
   <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+	<script src="{{ asset('js/model/script.js') }}"></script>
 
     <!-- Scripts -->
     <script>

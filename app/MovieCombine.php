@@ -14,6 +14,7 @@ class MovieCombine extends Model
         'movie_thumb',
         'area',
         'title',
+        'atcl_status',
         
         'open_status',
         'yt_up',

@@ -86,6 +86,11 @@ $this->get('contribute/logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('contribute/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('contribute/register', 'Auth\RegisterController@register');
 
+//Index
+Route::post('contribute/item', 'Model\HomeController@postItem');
+Route::post('contribute/movie', 'Model\HomeController@postMovie');
+Route::resource('contribute', 'Model\HomeController');
+
 
 Auth::routes();
 

@@ -6,10 +6,14 @@
 
         <div class="panel panel-default">
 
+
+
             <div class="panel-body">
                 @include('main.shared.main')
             </div>
         </div>
+
+        <a href="{{ url('contribute') }}">contribute</a>
 
 </div>
 
