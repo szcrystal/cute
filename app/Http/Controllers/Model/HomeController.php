@@ -208,6 +208,8 @@ class HomeController extends Controller
             //break;
         }
         
+        exit;
+        
 //        $sum = array_sum($durations);
 //        echo $sum;
 //        exit;
@@ -295,7 +297,7 @@ class HomeController extends Controller
         
         //Music加工
         
-        //MusicPath ---------
+        //MusicPath ここのパスを後で取得する必要がある---------
         $music = base_path() . '/storage/app/public/music/sound.m4a';
         
         //$sum = $data['sum']; //DBから取得する秒数の合計
