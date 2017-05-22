@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             
             $table->string('model_thumb')->nullable()->default(NULL);
+            $table->string('twitter')->nullable()->default(NULL);
+            $table->string('instagram')->nullable()->default(NULL);
             $table->string('school')->nullable()->default(NULL);
             $table->text('per_info')->nullable()->default(NULL);
             //$table->string('hobby')->nullable()->default(NULL);

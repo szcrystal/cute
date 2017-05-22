@@ -131,6 +131,34 @@
                     </div>
                 @endif
 
+				<div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
+                    <label for="twitter" class="col-md-2 control-label">Twitter</label>
+
+                    <div class="col-md-8">
+                        <input id="twitter" type="text" class="form-control" name="twitter" value="{{ isset($model) ? $model->twitter : old('twitter') }}">
+
+                        @if ($errors->has('twitter'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('twitter') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('instagram') ? ' has-error' : '' }}">
+                    <label for="instagram" class="col-md-2 control-label">インスタグラム</label>
+
+                    <div class="col-md-8">
+                        <input id="instagram" type="text" class="form-control" name="instagram" value="{{ isset($model) ? $model->instagram : old('instagram') }}">
+
+                        @if ($errors->has('instagram'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('instagram') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
 
                 <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
                     <label for="school" class="col-md-2 control-label">学校名</label>

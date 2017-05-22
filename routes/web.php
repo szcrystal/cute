@@ -38,6 +38,9 @@ Route::post('dashboard/register', 'DashBoard\HomeController@postRegister');
 //Model
 Route::resource('dashboard/models', 'DashBoard\ModelController');
 
+//ModelMovie
+Route::resource('dashboard/model-movies', 'DashBoard\ModelMovieController');
+
 //Movie
 Route::resource('dashboard/movies', 'DashBoard\MovieController');
 
@@ -80,15 +83,17 @@ Route::get('dashboard/logout', 'DashBoard\HomeController@getLogout');
 //login
 $this->get('contribute/login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('contribute/login', 'Auth\LoginController@login');
-$this->get('contribute/logout', 'Auth\LoginController@logout')->name('logout');
+$this->post('contribute/logout', 'Auth\LoginController@logout')->name('logout');
+//$this->post('contribute/logout', 'Model\HomeController@logout')->name('logout');
 
 //register
 $this->get('contribute/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('contribute/register', 'Auth\RegisterController@register');
 
 //Index
-Route::post('contribute/item', 'Model\HomeController@postItem');
-Route::post('contribute/movie', 'Model\HomeController@postMovie');
+//Route::post('contribute/item', 'Model\HomeController@postItem');
+//Route::post('contribute/movie', 'Model\HomeController@postMovie');
+Route::get('contribute/finish', 'Model\HomeController@getFinish');
 Route::resource('contribute', 'Model\HomeController');
 
 

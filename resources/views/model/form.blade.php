@@ -1,20 +1,38 @@
 @extends('layouts.appModel')
 
 @section('content')
+
+    <div class="clearfix mb-3">
+        <div class="pull-left">
+            <a href="{{ url('/contribute') }}" class="btn btn-custom"><i class="fa fa-angle-double-left" aria-hidden="true"></i> カテゴリ選択に戻る</a>
+        </div>
+    </div>
+
+    <div class="alert alert-warning mb-5">
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> <br>
+        <ul>
+			<li>動画は横型だよ
+            <li>秒数を守ってね（大体でOK！）
+        </ul>
+    </div>
 	
-	<h3 class="page-header">
+	<h4 class="page-header text-center my-4">
 	@if(isset($edit))
     記事編集
 	@else
-	{{ $cateName }}
+	カテゴリー：{{ $cateName }}
     @endif
-    </h3>
+    </h4>
 
-    <div class="bs-component clearfix">
-        <div class="pull-left">
-            <a href="{{ url('/contribute') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
-        </div>
+	<div class="text-center mb-3">
+    <span class="help-block text-danger">
+        <strong></strong>
+    </span>
     </div>
+
+
+
+
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -33,9 +51,9 @@
         </div>
     @endif
         
-    <div class="well">
+    <div class="mt-3 clearfix">
 
-        <form class="form-horizontal" role="form" method="POST" action="/contribute" enctype="multipart/form-data">
+        <form id="postMv" class="form-horizontal" role="form" method="POST" action="/contribute" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
             @endif
@@ -54,33 +72,36 @@
 
             @foreach($items as $item)
 
-            <h5 class="col-md-12">{{ $item->title }} <b>{{ $item->second }}秒</b></h5>
+            <input type="hidden" name="title[]" value="{{ $item->title }}">
+            <input type="hidden" name="second[]" value="{{ $item->second }}">
 
-            <div class="thumb-wrap clearfix">
-				<div class="col-md-4 pull-left thumb-prev">
-                    <span class="no-img">No Video</span>
-                </div>
+            <h5 class="my-2 clearfix second"><i class="fa fa-play-circle" aria-hidden="true"></i> {{ $item->title }} <span class="pull-right">{{ $item->second }}秒</span></h5>
 
-                <div class="col-md12 form-group{{ $errors->has('movie.'.$n) ? ' has-error' : '' }}">
+            <div class="all-wrap">
 
-                    <div class="col-md-12">
-                        <input id="post_thumb" class="post_thumb video-file" type="file" name="movie[]"{!! $accept !!} data-sec="{{ $item->second }}">
+                <div class="thumb-wrap clearfix">
+                    <div class="thumb-prev">
+                        <span class="no-img">No Video</span>
 
-                        {{-- @if ($errors->has('movie.'. $n)) --}}
-                            <span class="help-block text-danger">
-                                <strong>{{ $errors->first('movie.'. $n) }}</strong>
-                            </span>
-                        {{-- @endif --}}
                     </div>
+
+                    <div class="form-group{{ $errors->has('movie.'.$n) ? ' has-error' : '' }}">
+                        <div>
+                            <input class="form-control-file post_thumb video-file" type="file" name="movie[]"{!! $accept !!} data-sec="{{ $item->second }}">
+
+                                <span class="help-block text-danger">
+                                    <strong>{{ $errors->first('movie.'. $n) }}</strong>
+                                </span>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-                <div style="margin-bottom: 3em;" class="form-group{{ $errors->has('subtext.'.$n) ? ' has-error' : '' }}">
-                    <label for="subtext" class="col-md-12 control-label">字幕テキスト</label>
+                <div class="mb-5 form-group{{ $errors->has('subtext.'.$n) ? ' has-error' : '' }}">
+                    <label for="subtext" class="control-label"></label>
 
-                    <div class="col-md-12">
-                        <input id="subtext" type="text" class="form-control subtext" name="subtext[]" value="{{ old('subtext.'.$n)}}" placeholder="字幕用テキスト 20文字以内">
-
+                    <div>
+                        <input id="subtext" type="text" class="form-control subtext" name="subtext[]" value="{{ old('subtext.'.$n)}}" placeholder="字幕用テキストを入力（20文字以内）">
 
                             <span class="help-block text-danger">
                                 <strong>{{ $errors->first('subtext.'.$n) }}</strong>
@@ -94,19 +115,23 @@
 
                 <hr>
 
-            <?php $n++; ?>
-            
+                <?php $n++; ?>
+
+            </div>
+
             @endforeach
 
 
-		<div style="margin-top: 4em;"class="form-group">
-            <div class=" col-md-9 col-md-offset-3">
-                <button id="mvUp" type="submit" class="btn btn-primary w-btn">　更　新　</button>
+		<div class="form-group text-center mt-5 py-3">
+            <div class="">
+                <button id="mvUp" type="submit" class="btn btn-info btn-block py-3"><i class="fa fa-cloud-upload" aria-hidden="true"></i> UPLOAD</button>
                 <span class="help-block text-danger">
-                    <strong>{{ $errors->first('subtext.'.$n) }}</strong>
+                    <strong></strong>
                 </span>
             </div>
         </div>
+
+
 
 
         </form>

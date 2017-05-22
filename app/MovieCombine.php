@@ -9,6 +9,9 @@ class MovieCombine extends Model
     protected $fillable = [
     	'model_id',
         'cate_id',
+        'rel_id',
+        'music_id',
+        'filter_id',
     
         'movie_path',
         'movie_thumb',

@@ -6,21 +6,23 @@ use App\User;
 use App\Category;
 use App\CategoryItem;
 use App\MovieBranch;
+use App\MovieBranchRel;
 use App\MovieCombine;
+
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Storage;
-
 use FFMpeg;
+use Auth;
 
 class HomeController extends Controller
 {
-	public function __construct(User $user, Category $category, CategoryItem $cateItem, MovieBranch $mvBranch, MovieCombine $mvCombine)
+	public function __construct(User $user, Category $category, CategoryItem $cateItem, MovieBranch $mvBranch, MovieBranchRel $mvBranchRel, MovieCombine $mvCombine)
     {
     	
-        //$this -> middleware('auth');
+        $this -> middleware('auth');
         //$this -> middleware('log', ['only' => ['getIndex']]);
         
         $this-> user = $user;
@@ -29,6 +31,7 @@ class HomeController extends Controller
         $this-> cateItem = $cateItem;
 
         $this -> mvBranch = $mvBranch;
+        $this-> mvBranchRel = $mvBranchRel;
         $this-> mvCombine = $mvCombine;
         
         
@@ -44,6 +47,9 @@ class HomeController extends Controller
     {
     	//cate選択
         $cates = $this->category->all();
+        
+        //Storage::delete('public/movie/2/a_*.*');
+        //Storage::putFileAs('public/movie/2', new File('public/movie/2/a.mp4'), 'b.mp4');
         
         //$file = '/vagrant/cute/sub1.ass';
         //$cont = file_get_contents($file);
@@ -85,16 +91,19 @@ class HomeController extends Controller
         return view('model.index', ['cates'=>$cates,]);
     }
     
-    public function postItem(Request $request) //カテゴリーが渡されて表示
-    {
-        
-        
-    }
     
-    public function postMovie(Request $request)
+    public function getFinish(Request $request)
     {
-    	
+    	$state = $request->input('state');
         
+        if($state) {
+    		$status = 'UPLOADが完了しました！';
+        }
+        else{
+        	$status = 'UPLOAD失敗！';
+        }
+        
+    	return view('model.done', ['status'=>$status]);
     }
 
     /**
@@ -104,6 +113,20 @@ class HomeController extends Controller
      */
     public function create(Request $request)
     {
+    	$rules = [
+            'cate_id' => 'required',
+        ];
+        
+        $messages = [
+            'cate_id.required' => '「カテゴリー」を選択して下さい。',
+//            'movie.*.filled' => '「動画」は必須です。',
+//        	'subtext.*.required' => '「字幕テキスト」は必須です。',
+//        	'subtext.*.max' => '「字幕テキスト」は25文字以内です。',
+        ];
+        
+        $this->validate($request, $rules, $messages);
+        
+    	
         $data = $request->all();
         
         //$cateId = $data['cate_id'];
@@ -138,7 +161,8 @@ class HomeController extends Controller
         //$this->validate($request, $rules, $messages);
         
     	$data = $request->all();
-        
+
+
         //return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
         
         
@@ -146,32 +170,28 @@ class HomeController extends Controller
         $movie = $data['movie'];
         $subtext = $data['subtext'];
         
-        $modelId = 2;
+        $modelId = Auth::id();
         $cateId = $data['cate_id'];
         
         $pre = time();
         $basePath = 'contribute/' .$modelId . '/' . $pre . '/';
         
-        $orgAss = base_path() .'/storage/app/private/org.ass';
-        $whitePath = base_path() . '/storage/app/private/whiteout.mp4';
+//        $orgAss = base_path() .'/storage/app/private/org.ass';
+//        $whitePath = base_path() . '/storage/app/private/whiteout.mp4';
         
         $orgName = array();
-        $mvSubName = array();
-        $durations = array();
+//        $mvSubName = array();
+//        $durations = array();
         
         $cdCmd = 'cd ' . base_path() .'/storage/app/public/' .$basePath .' && ';
-        
-        
-
         
         
         //空入力確認　空File確認 -> jsで
     	//字幕文字数制限？ -> isで
         //縦サイズ禁止制限
         
-        
     	
-        
+        $relId = '';
         
         //MovieUp
         foreach($counts as $count) {
@@ -179,7 +199,6 @@ class HomeController extends Controller
             if(isset($movie[$count])) {
             	
                 //各動画の秒数が足りてるか確認　多ければ切り取る動作
-                
                 
                 
                 //$filename = $request->file($movie[$count])->getClientOriginalName();
@@ -197,25 +216,61 @@ class HomeController extends Controller
 
                 $ffprobe = FFMpeg\FFProbe::create();
                 $duration = $ffprobe->format(base_path().'/storage/app/'. $movie_path)->get('duration'); //asset('storage/'. $music->file)
-                $durations[] = $duration;
+                //$durations[] = $duration;
                 //exit;
+                
+                if($count == 0) { //最初の動画の時にrelationDBにinsert(1record)
+                	$rel = $this-> mvBranchRel->create(
+                    	[
+                    		'model_id'=>$modelId,
+                        	'cate_id'=> $cateId,
+                            'folder_name'=>$pre,
+                            'area_info' => '',
+                            'combine_status' => 0,
+                        ]
+                    );
+                    
+                    $relId = $rel->id;
+                }
+                
+                $this->mvBranch->create(
+                	[
+                		'rel_id' => $relId,
+                        'title'=>$data['title'][$count],
+                        'second'=>$data['second'][$count],
+                        
+                        'org_name' => $orgName[$count],
+                        'duration' => $duration,
+                        'movie_path'=> $movie_path,
+                        'sub_text' => $subtext[$count],
+                        
+                        'number' => $count+1,
+                    ]
+                );
             
             }
             else {
             	$movie_path = '';
+                //return back()->withInput()->withErrors(array('画像の取得ができませんでした。再度やり直して下さい。'));
             }
             
             //break;
         }
-        
+
+        //$status = 'UPLOADが終了しました！';
         //exit;
-        
+        $status = 1;
+        return $status;
+        //return view('model.done', ['status'=>$status]);
+
+
+
 //        $sum = array_sum($durations);
 //        echo $sum;
 //        exit;
         
         
-        
+        /*
         //artisan
         
         foreach($counts as $count) {
@@ -245,8 +300,8 @@ class HomeController extends Controller
             $height = $mvInfo ->get('height');
             $res = ($width/16)*9; //16:9でのheight
             
-            $pad = (720/$height)*$width;
-            $pad = (1280-$pad)/2;
+            $pad = (720/$height)*$width; //規定サイズ：高さ720にした場合の横幅 1280x720 or 960x540
+            $pad = (1280-$pad)/2; //上記の横幅からpad分を算出
             
             if($res != $height) { //16:9でなければpadを入れてアスペクト変更
             	exec($cdCmd . 'ffmpeg -i '. $mf. ' -vf "scale=-1:720,pad=1280:0:'.$pad.':0:black" -strict -2 '. 'temp'. $mf .' -y', $out, $status);
@@ -329,7 +384,9 @@ class HomeController extends Controller
         
         exit;
         return view('model.form', ['items'=>$items, 'cateName'=>$cateName]);
+        */
     }
+    
 
     /**
      * Display the specified resource.
@@ -337,8 +394,14 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId)
     {
+    	$user = Auth::user($userId);
+        return view('model.mypage');
+        
+//    	$status = 0;
+//    	return view('model.done', ['status'=>$status]);
+        
 //    	$modelId = 2;
 //        $cateId = 1;
 //        $pre = 1495159506;

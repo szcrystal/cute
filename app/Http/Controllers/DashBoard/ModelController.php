@@ -58,10 +58,12 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
+    	$valueId = $request->input('model_id') ? ','. $request->input('model_id') : '';
+        
         $rules = [
             //'cate_id' => 'required',
-            //'title' => 'required|max:255', /* |unique:admins 注意:unique */
-        
+            'name' => 'required|max:255', /* |unique:admins 注意:unique */
+        	'email' => 'required|email|max:255|unique:users,email'.$valueId,
             //'movie_site' => 'required|max:255',
             //'password' => 'required|min:8',
             //'movie_url' => 'required|max:255|unique:articles,movie_url'.$except,

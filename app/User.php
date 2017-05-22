@@ -20,6 +20,8 @@ class User extends Authenticatable
         'email',
         'password',
         'model_thumb',
+        'twitter',
+        'instagram',
         'school',
         'per_info',
     ];

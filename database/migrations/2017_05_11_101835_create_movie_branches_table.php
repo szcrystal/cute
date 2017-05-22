@@ -15,6 +15,19 @@ class CreateMovieBranchesTable extends Migration
     {
         Schema::create('movie_branches', function (Blueprint $table) {
             $table->increments('id');
+            
+            $table->integer('rel_id');
+            
+            $table->string('title')->nullable()->default(NULL);
+            $table->string('second')->nullable()->default(NULL);
+            
+            $table->string('org_name')->nullable()->default(NULL);
+            $table->float('duration')->nullable()->default(NULL);
+            $table->string('movie_path')->nullable()->default(NULL);
+            $table->string('sub_text')->nullable()->default(NULL);
+            
+            $table->integer('number')->nullable()->default(NULL);
+            
             $table->timestamps();
         });
     }

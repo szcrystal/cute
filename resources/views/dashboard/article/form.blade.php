@@ -140,13 +140,14 @@
                 </div>
             </div>
 
+			{{--
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">位置情報</label>
                 <div class="col-md-6">
                     <select class="form-control" name="group_id">
                     	<option disabled selected>選択</option>
 
-                        {{--
+                    
                         @foreach($groups as $group)
                             @if(old('group_id') !== NULL)
                                 <option value="{{ $group->id }}"{{ old('group_id') == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
@@ -154,7 +155,7 @@
                                 <option value="{{ $group->id }}"{{ isset($tag) && $tag->group_id == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
                             @endif
                         @endforeach
-                        --}}
+                        
 
 						<option>愛媛</option>
                         <option>香川</option>
@@ -167,7 +168,23 @@
                     @endif
                 </div>
             </div>
+            --}}
 
+
+
+			<div class="form-group{{ $errors->has('area_info') ? ' has-error' : '' }}">
+                <label for="area_info" class="col-md-3 control-label">住所</label>
+
+                <div class="col-md-9">
+                    <input id="area_info" type="text" class="form-control" name="area_info" value="{{ Ctm::isOld() ? old('area_info') : (isset($atcl) ? $atcl->area_info : '') }}">
+
+                    @if ($errors->has('area_info'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('area_info') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
 
 
