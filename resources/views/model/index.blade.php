@@ -21,14 +21,20 @@
             </ul>
         </div>
     @endif
-    --}}
-
-
+    
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
     @endif
+    --}}
+
+    @if(isset($status))
+    	<div class="alert alert-success my-4">
+            {{ $status }}
+        </div>
+    @endif
+    
 
 	@if(count($rels) > 0)
         <h5 class="clearfix second"><i class="fa fa-play-circle" aria-hidden="true"></i> 投稿中の動画があります</h5>
@@ -68,7 +74,7 @@
         <div class="mt-5 form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
             <label for="group" class="control-label">カテゴリーは？</label>
             <div class="">
-                <select class="form-control" name="cate_id">
+                <select class="form-control cate_id" name="cate_id">
                     <option disabled selected>選択</option>
                     @foreach($cates as $cate)
 
@@ -81,11 +87,11 @@
 
                 </select>
 
-                @if ($errors->has('cate_id'))
+                {{-- @if ($errors->has('cate_id')) --}}
                     <span class="help-block text-danger">
-                        <strong><i class="fa fa-exclamation" aria-hidden="true"></i> {{ $errors->first('cate_id') }}</strong>
+                        <strong>{{ $errors->first('cate_id') }}</strong>
                     </span>
-                @endif
+                {{-- @endif --}}
             </div>
         </div>
 
@@ -93,13 +99,13 @@
             <label for="memo" class="control-label">メモ</label>
 
             <div>
-                <input id="memo" type="text" class="form-control" name="memo" value="{{ old('memo')}}" placeholder="店名や行き先、場所など">
+                <input id="memo" type="text" class="form-control memo" name="memo" value="{{ old('memo')}}" placeholder="店名や行き先、場所など">
 
-				@if ($errors->has('memo'))
+				{{-- @if ($errors->has('memo')) --}}
                     <span class="help-block text-danger">
-                        <strong><i class="fa fa-exclamation" aria-hidden="true"></i> {{ $errors->first('memo') }}</strong>
+                        <strong>{{ $errors->first('memo') }}</strong>
                     </span>
-                @endif
+                {{-- @endif --}}
 
             </div>
         </div>
@@ -108,7 +114,10 @@
 
 		<div class="form-group text-center mt-5 py-3">
         	<div class="">
-            	<button type="submit" class="btn btn-info btn-block py-3">　次 へ　>></button>
+            	<button id="modelNext" type="submit" class="btn btn-info btn-block py-3">　次 へ　>></button>
+                <span class="help-block text-danger">
+                    <strong></strong>
+                </span>
             </div>
         </div>
 

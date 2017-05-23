@@ -277,6 +277,9 @@ a.dropdown-toggle {
     border-radius: 5px;
     margin-left: 0;
 }
+.noup-list li a:hover {
+	text-decoration: none;
+}
 .noup-list li a span {
 	display: block;
     width; 100%;
@@ -322,8 +325,8 @@ a.dropdown-toggle {
 .waiting span .fa {
 	color: #222;
 	font-size: 0.9em;
-	-webkit-animation: rt-r 0.7s infinite linear alternate;
-    animation: rt-r 0.7s infinite linear alternate;
+	-webkit-animation: rt-r 1.2s infinite linear alternate;
+    animation: rt-r 1.2s infinite linear alternate;
 }
 @keyframes rt {
 	100% {
@@ -333,8 +336,8 @@ a.dropdown-toggle {
 }
 @keyframes rt-r {
 	100% {
-    	-webkit-transform: rotateZ(360deg);
-    	transform: rotateZ(360deg);
+    	-webkit-transform: rotateZ(300deg);
+    	transform: rotateZ(300deg);
     }
 }
 

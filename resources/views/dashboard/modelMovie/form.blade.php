@@ -62,6 +62,14 @@
             </div>
         </div>
 
+        <div class="form-group clearfix">
+            <label for="group" class="col-md-3 control-label text-right">撮影日</label>
+
+            <div class="col-md-9">
+                {{ $rel-> created_at }}
+            </div>
+        </div>
+
 		<div class="form-group clearfix">
             <label for="group" class="col-md-3 control-label text-right">エリア</label>
 

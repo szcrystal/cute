@@ -303,7 +303,7 @@ var exe = (function() {
                     reader.onload = (function(file) {
                       return function(e) {
                       
-                      	console.log(e.target);
+                      	//console.log(e.target);
                       
                         //既存のプレビューを削除
                         $preview.empty();
@@ -374,8 +374,9 @@ var exe = (function() {
                     var hisu = atc + '動画をUPして下さい';
                     var hisuT = atc + '入力して下さい';
                     var leng = atc + '20文字以内で入力して下さい';
-                    var mvsmall = atc + '撮影動画の秒数が少なすぎます。';
-                    var mvlarge = atc + '撮影動画の秒数が長すぎます。';
+                    var mvsmall = atc + '撮影秒数が少なすぎます';
+                    var mvlarge = atc + '撮影秒数が長すぎます';
+                    var mvheight = atc + '動画が縦型です';
                     
                     
                     function outputError (id, str, num) {
@@ -415,7 +416,12 @@ var exe = (function() {
                         if($('input.video-file').eq(n).val() != '') {
                             var $mv = $('.thumb-wrap').eq(n).find('video.mv');
                             var duration = $mv[0].duration;
-                            //console.log(duration);
+                            var w = $mv[0].clientWidth;
+                            var h = $mv[0].clientHeight;
+                            
+                            //console.log($mv[0].clientHeight);
+                            //return;
+                            
                             var second = $('input.video-file').eq(n).data('sec');
                             
                             if(duration < second-1) { //少ない場合　誤差-1
@@ -424,6 +430,11 @@ var exe = (function() {
                             }
                             else if(duration > second+2) { //少ない場合 誤差+2
                                 errors.push(outputError('input.video-file', mvlarge, n));
+                                temps++;
+                            }
+                            
+                            if(h > w) {
+                            	errors.push(outputError('input.video-file', mvheight, n));
                                 temps++;
                             }
                         }
@@ -494,7 +505,8 @@ var exe = (function() {
                                 //$('body').html(resData).slideDown(100);
                                 //history.pushState(resData, null, '/contribute/2');
                                
-                                location.href="/contribute/finish?state=" + resData;
+                                //location.href="/contribute/finish?state=" + resData;
+                                location.href="/contribute?state=" + resData;
                             },
                             error: function(xhr, ts, err){
                                 //resp(['']);
@@ -513,11 +525,76 @@ var exe = (function() {
                         	$(this).html(at + '入力内容にエラーがあります。').fadeIn(150);
                         });
                         
-                        $('h4').next('div').find('strong').fadeOut(150, function(){
+                        $('h4').prev('div').find('strong').fadeOut(150, function(){
                         	$(this).html(at + '入力内容にエラーがあります。').fadeIn(150);
                         });
                         
                         $('html,body').animate({ scrollTop:0 }, 300, 'linear');
+                        
+                    }
+                }
+                
+            });
+        
+        },
+        
+        modelNext: function() {
+        	var preventEvent = true;
+           
+        	//カテゴリーからmv upページへ
+            $('button#modelNext').on('click', function(e){
+            	$('.help-block').find('strong').text('');
+                $th = $(this);
+                
+            	if(preventEvent) {
+                    e.preventDefault();
+                    var action = $(this).parents('form').attr('action');
+                    //console.log(action);
+                    
+                    
+                    var errors = [];
+                    
+                    var atc = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ';
+                    var at = '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ';
+                    var hisu = atc + '選択して下さい';
+                    var hisuT = atc + '入力して下さい';
+                    var leng = atc + '50文字以内で入力して下さい';
+                    
+                    
+                    function outputError (id, str) {
+                        $(id).next('.help-block').find('strong').html(str);
+                        //$('.all-wrap').slideDown(300);
+//                        $th.next('.help-block').find('strong').fadeOut(150, function(){
+//                        	$(this).html(at + '入力内容にエラーがあります。').fadeIn(150);
+//                            $('.all-wrap').eq(num).slideDown(300);
+//                        });
+                        return str;
+                    }
+                    
+
+                    if($('select.cate_id').val() === null) {
+                        errors.push(outputError('select.cate_id', hisu));
+                    }
+                    
+                    if($('input.memo').val() == '') {
+                        errors.push(outputError('input.memo', hisuT));
+                    }
+                    else if($('input.memo').val().length > 50) {
+                        errors.push(outputError('input.memo', leng));
+                        //temps++;
+                    }
+                    
+                    
+                    if(!errors.length) { //Errorがなければ
+                    	preventEvent = false;
+                		$(this).trigger('click');
+                    }
+                    else {
+                        $th.next('.help-block').find('strong').fadeOut(150, function(){
+                        	$(this).html(at + '入力内容にエラーがあります。').fadeIn(100);
+                        });
+                        
+                        //$('html,body').animate({ scrollTop:0 }, 300, 'linear');
                         
                     }
                 }
@@ -559,6 +636,7 @@ $(function(e){ //ready
   
     if(set) {
     	exe.mypagePost();
+        exe.modelNext();
     }
   
     exe.animFunc();

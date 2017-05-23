@@ -13,22 +13,19 @@
         <ul>
 			<li>動画は横型で撮影して下さい
             <li>秒数を守ってね（大体でOK！）
+            <li>撮影したものから１つずつUPLOADするのがオススメです
         </ul>
     </div>
-	
-	<h4 class="page-header text-center my-4">
-	@if(isset($edit))
-    記事編集
-	@else
-	カテゴリー：{{ $cateName }}<br>{{ $memo }}
-    @endif
-    </h4>
 
-	<div class="text-center mb-3">
-    <span class="help-block text-danger">
-        <strong></strong>
-    </span>
+    <div class="text-center mb-3">
+        <span class="help-block text-danger">
+            <strong></strong>
+        </span>
     </div>
+	<h4 style="font-size: 1.2em;" class="page-header text-left mt-2 mb-1">カテゴリー：{{ $cateName }}</h4>
+    <p class="text-right pr-1 mb-3">{{ $memo }}</p>
+
+
 
 
     @if (count($errors) > 0)
@@ -88,7 +85,7 @@
                     @if($path != '')
                     <small class="text-success">OK</small>
                     @else
-                    <small class="text-danger">動画未UP</small>
+                    <small class="text-danger">未UP</small>
                     @endif
 
                     <span class="pull-right">{{ $item->second }}秒</span>

@@ -43,8 +43,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+    	
     	$userId = Auth::id();
     	//cate選択
         $cates = $this->category->all();
@@ -93,8 +94,16 @@ class HomeController extends Controller
 //            echo $width .'/'.$height;
 //            exit;
         
+        $status = $request->input('state') !== null ? $request->input('state') : null;
         
-        return view('model.index', ['cates'=>$cates, 'rels'=>$rels, 'items'=>$items, 'branches'=>$branches]);
+        if($status == 1) {
+        	$status = '動画がUPLOADされました！';
+        }
+//        else {
+//        	$status = 'Error！ Upload-500';
+//        }
+        
+        return view('model.index', ['cates'=>$cates, 'rels'=>$rels, 'items'=>$items, 'branches'=>$branches, 'status'=>$status]);
     }
     
     
