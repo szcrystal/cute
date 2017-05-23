@@ -35,9 +35,14 @@
         
     <div class="well">
     	<div class="text-center">
+        	@if(isset($mv) && $mv->movie_path != '')
             <video id="mainMv" width="800" height="500" poster="" controls>
                 <source src="{{ Storage::url($mv->movie_path) }}">
             </video>
+            @else
+            <span>No Video</span>
+            @endif
+
         </div>
 
         <hr>
