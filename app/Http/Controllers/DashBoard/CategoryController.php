@@ -102,16 +102,16 @@ class CategoryController extends Controller
         
         $titles = $data['title'];
         $seconds = $data['second'];
-        $itemIds = $data['item_id'];
+        $itemNums = $data['item_num'];
         
         //$items = $this->categoryItem->where('cate_id'=>$cateId)->get();
         
         foreach($titles as $key => $title) {
         	if($title != '') {
                 $this->categoryItem->updateOrCreate(
-                    ['item_id'=>$itemIds[$key], 'cate_id'=>$cateId],
+                    ['item_num'=>$itemNums[$key], 'cate_id'=>$cateId],
                     [
-                        'item_id'=>$itemIds[$key],
+                        'item_num'=>$itemNums[$key],
                         'title'=>$title,
                         'second'=>$seconds[$key],
                     ]

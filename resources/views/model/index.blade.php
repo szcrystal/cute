@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div class="well">
+<div class="well">
 
 	{{--
     <div class="clearfix">
@@ -30,7 +30,35 @@
         </div>
     @endif
 
+	@if(count($rels) > 0)
+        <h5 class="clearfix second"><i class="fa fa-play-circle" aria-hidden="true"></i> 投稿中の動画があります</h5>
+        <div class="all-wrap">
+            <ul class="noup-list">
+                @foreach($rels as $rel)
+                	<?php
+                    	$branch = $branches->where('rel_id', $rel->id)->get();
+                        //$total = count($branch);
+                        $num = 0;
+                        foreach($branch as $obj) {
+                            if($obj->movie_path == '') $num++;
+                        }
+                    ?>
 
+                    <li class="clearfix">
+                        <a href="{{ url('/contribute/'.$rel->id.'/edit')}}">
+                            <span>{{ $cates->find($rel->cate_id)->name }}：{{ mb_substr($rel->memo, 0, 10) }} <i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                            <small>動画残数：{{ $num }}本</small>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+
+        </div>
+    @endif
+
+
+    <h5 class="my-2 clearfix second"><i class="fa fa-play-circle" aria-hidden="true"></i> 新しく動画を投稿する</h5>
+    <div class="all-wrap">
 
     <form class="form-horizontal" role="form" method="GET" action="/contribute/create">
 
@@ -61,8 +89,20 @@
             </div>
         </div>
 
+        <div class="mb-5 form-group{{ $errors->has('memo') ? ' has-error' : '' }}">
+            <label for="memo" class="control-label">メモ</label>
 
+            <div>
+                <input id="memo" type="text" class="form-control" name="memo" value="{{ old('memo')}}" placeholder="店名や行き先、場所など">
 
+				@if ($errors->has('memo'))
+                    <span class="help-block text-danger">
+                        <strong><i class="fa fa-exclamation" aria-hidden="true"></i> {{ $errors->first('memo') }}</strong>
+                    </span>
+                @endif
+
+            </div>
+        </div>
 
 
 
@@ -76,6 +116,8 @@
         </form>
 
         </div>
+
+</div>
         
 @endsection
 

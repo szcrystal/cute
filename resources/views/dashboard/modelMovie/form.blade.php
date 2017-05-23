@@ -54,6 +54,14 @@
             </div>
         </div>
 
+        <div class="form-group clearfix">
+            <label for="group" class="col-md-3 control-label text-right">メモ</label>
+
+            <div class="col-md-9">
+                {{ $rel->memo }}
+            </div>
+        </div>
+
 		<div class="form-group clearfix">
             <label for="group" class="col-md-3 control-label text-right">エリア</label>
 

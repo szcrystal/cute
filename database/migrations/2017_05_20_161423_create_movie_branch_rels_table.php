@@ -20,9 +20,11 @@ class CreateMovieBranchRelsTable extends Migration
             $table->integer('cate_id');
             //$table->integer('music_id');
             //$table->integer('filter_id');
+            $table->string('memo')->nullable()->default(NULL);
             $table->string('folder_name')->nullable()->default(NULL);
             $table->string('area_info')->nullable()->default(NULL);
             $table->boolean('combine_status');
+            $table->boolean('complete');
         
             $table->timestamps();
         });

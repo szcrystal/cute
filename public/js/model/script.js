@@ -407,12 +407,12 @@ var exe = (function() {
                             temps++;
                         }
                         
-                        if($('input.video-file').eq(n).val() == '') {
-                            errors.push(outputError('input.video-file', hisu, n));
-                            temps++;
-                        }
-                        else { //撮影動画の秒数を確認
-                        
+//                        if($('input.video-file').eq(n).val() == '') {
+//                            errors.push(outputError('input.video-file', hisu, n));
+//                            temps++;
+//                        }
+//                        else { //撮影動画の秒数を確認
+                        if($('input.video-file').eq(n).val() != '') {
                             var $mv = $('.thumb-wrap').eq(n).find('video.mv');
                             var duration = $mv[0].duration;
                             //console.log(duration);
@@ -475,8 +475,9 @@ var exe = (function() {
                     if(!errors.length) { //Errorがなければ
 						
                         var h = $(window).height();
-                        $('.waiting').css({height:(h+100), paddingTop:h/2}).fadeIn(300);
+                        $('.waiting').css({height:(h+100)/*, paddingTop:h/2*/}).fadeIn(300);
 
+                        
 						var form = $('#postMv').get()[0];
                         var formData = new FormData( form ); // FormData オブジェクトを作成
                         
@@ -492,19 +493,8 @@ var exe = (function() {
                                 //console.log(resData.image[0]);
                                 //$('body').html(resData).slideDown(100);
                                 //history.pushState(resData, null, '/contribute/2');
-                            	var q;
-                               	if(resData == 1) {
-                                    q=1;
-                                }
-                                else if(resData == 303) {
-                                    q=300;
-                                }
-                                else {
-                                    q=500;
-                                }
                                
-                                location.href="/contribute/finish?state=" + q;
-                               
+                                location.href="/contribute/finish?state=" + resData;
                             },
                             error: function(xhr, ts, err){
                                 //resp(['']);
@@ -513,8 +503,10 @@ var exe = (function() {
                         
                         return false;
                         
-//                    	preventEvent = false;
-//                		$(this).trigger('click');
+                        /*
+                    	preventEvent = false;
+                		$(this).trigger('click');
+                        */
                     }
                     else {
                         $th.next('.help-block').find('strong').fadeOut(150, function(){

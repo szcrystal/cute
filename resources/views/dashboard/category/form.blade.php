@@ -106,7 +106,7 @@
                     <p style="margin-top:0.4em;" class="pull-left text-left">秒</p>
                 </div>
 
-                <input type="hidden" name="item_id[]" value="{{ $n+1 }}">
+                <input type="hidden" name="item_num[]" value="{{ $n+1 }}">
 
                 <?php $n++; ?>
 

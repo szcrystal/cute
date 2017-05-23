@@ -11,9 +11,11 @@ class MovieBranchRel extends Model
         'cate_id',
         //'music_id',
         //'filter_id',
+        'memo',
         'folder_name',
         'area_info',
         'combine_status',
+        'complete',
     ];
 
 }

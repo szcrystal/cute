@@ -45,7 +45,7 @@ class ModelMovieController extends Controller
     public function index()
     {
         //$relObjs = $this-> mvBranchRel->where('combine_status',0)->paginate($this->perPage);
-        $relObjs = $this-> mvBranchRel->orderBy('id', 'desc')->paginate($this->perPage);
+        $relObjs = $this-> mvBranchRel->where('complete', 1)->orderBy('id', 'desc')->paginate($this->perPage);
         
         $cateModel = $this->category;
         $users = $this->user;
@@ -226,7 +226,7 @@ class ModelMovieController extends Controller
         $filter = [
         	1=> '',
         	2=> ' -vf hue=s=0', //モノクロ
-            3=> ' -vf hue=h=5:s=1.5:b=1', //古ぼけ ORG h=10s=1.5b=3
+            3=> ' -vf hue=h=5:s=1.7:b=1', //古ぼけ ORG h=10s=1.5b=3
             4=> ' -vf hue=b=2', //明るく
             5=> ' -vf hue=b=-1', //暗く
             6=> ' -vf hue=s=1.5', //濃く

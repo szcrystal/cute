@@ -204,9 +204,10 @@ a.dropdown-toggle {
 	border: 1px solid #4FBFC1;
     line-height: 2em;
     background: #E3F8F9; /* #E3F8F9 */
-    padding: 0.2em 0.3em;
+    padding: 0.2em 0.4em;
     border-radius: 7px;
     cursor: pointer;
+    margin-bottom: 0.6em;
 }
 .second .fa {
 	color: #4FBFC1;
@@ -227,9 +228,9 @@ a.dropdown-toggle {
 	border: 1px solid #ccc;
     background: #fefcfb;
     color: #888;
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin: 0 0 1em;
-    padding: 7px 5px !important;
+    padding: 7px 0.7em !important;
 }
 .regi-nav .btn-custom {
     background: #F1FAF6;
@@ -247,7 +248,7 @@ a.dropdown-toggle {
 .btn-info .fa {
 	font-size: 1.5em;
     margin-right: 0.3em;
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 .form-control-file {
 	width: 95%;
@@ -256,6 +257,38 @@ a.dropdown-toggle {
 	font-size: 0.9em;
 }
 
+.noup-list {
+	list-style: none;
+    //list-style-position: outside;
+    margin-bottom: 3em;
+    margin-left: 0;
+    padding-left: 0;
+}
+.noup-list li a {
+	display: block;
+    color: #4FBFC1;
+    width: 100%;
+    height: auto;
+	list-style :none;
+    background: #fefcfb;
+    border: 1px solid #ddd;
+    padding: 0.3em 0.4em;
+    margin-bottom: 0.6em;
+    border-radius: 5px;
+    margin-left: 0;
+}
+.noup-list li a span {
+	display: block;
+    width; 100%;
+}
+.noup-list li a small {
+	display: block;
+    text-align: right;
+	color: #4a4a4a;
+}
+.noup-list li a small .fa {
+	margin-left: 1em;
+}
 
 .waiting {
 	display: none;
@@ -281,6 +314,7 @@ a.dropdown-toggle {
     height: 2.6em;
     background: #fff;
     border-radius: 50%;
+    margin-top: 45%;
     //margin-top: 300px;
     -webkit-animation: rt 2.5s infinite linear;
     animation: rt 2.5s infinite linear;

@@ -45,8 +45,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+    	$userId = Auth::id();
     	//cate選択
         $cates = $this->category->all();
+        
+        $rels = $this-> mvBranchRel->where(['model_id'=>$userId, 'complete'=>0])->get();
+        
+        $items = $this-> cateItem;
+        $branches = $this -> mvBranch;
         
         //Storage::delete('public/movie/2/a_*.*');
         //Storage::putFileAs('public/movie/2', new File('public/movie/2/a.mp4'), 'b.mp4');
@@ -88,7 +94,7 @@ class HomeController extends Controller
 //            exit;
         
         
-        return view('model.index', ['cates'=>$cates,]);
+        return view('model.index', ['cates'=>$cates, 'rels'=>$rels, 'items'=>$items, 'branches'=>$branches]);
     }
     
     
@@ -115,11 +121,12 @@ class HomeController extends Controller
     {
     	$rules = [
             'cate_id' => 'required',
+            'memo' => 'required',
         ];
         
         $messages = [
-            'cate_id.required' => '「カテゴリー」を選択して下さい。',
-//            'movie.*.filled' => '「動画」は必須です。',
+            'cate_id.required' => '選択して下さい。',
+            'memo.required' => '入力して下さい。',
 //        	'subtext.*.required' => '「字幕テキスト」は必須です。',
 //        	'subtext.*.max' => '「字幕テキスト」は25文字以内です。',
         ];
@@ -132,10 +139,27 @@ class HomeController extends Controller
         //$cateId = $data['cate_id'];
         $cateId = $request->input('cate_id');
         $cateName = $this->category->find($cateId)->name;
-        $items = $this->cateItem->where('cate_id',$cateId)->get();
+        $items = $this->cateItem->where('cate_id', $cateId)->get();
         
+        $memo = $request->input('memo');
         
-        return view('model.form', ['items'=>$items, 'cateId'=>$cateId, 'cateName'=>$cateName]);
+        return view('model.form', ['items'=>$items, 'cateId'=>$cateId, 'cateName'=>$cateName, 'memo'=>$memo]);
+    }
+    
+    
+    public function edit($relId)
+    {
+    	$editRelId = $relId;
+        
+        $rel = $this-> mvBranchRel->find($relId);
+        $branches = $this-> mvBranch->where('rel_id', $relId)->get();
+        
+        $cateId = $rel->cate_id;
+        $cateName = $this->category->find($cateId)->name;
+        
+        $items = $this->cateItem->where('cate_id', $cateId)->get();
+    	
+        return view('model.form', ['items'=>$items, 'branches'=>$branches, 'cateId'=>$cateId, 'cateName'=>$cateName, 'editRelId'=>$editRelId, 'memo'=>$rel->memo]);
     }
 
     /**
@@ -165,9 +189,11 @@ class HomeController extends Controller
 
         //return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
         
+        $edit = isset($data['edit']) ? $data['edit'] : 0;
+        $relId = $edit;
         
         $counts = $data['count'];
-        $movie = $data['movie'];
+        $movie = isset($data['movie']) ? $data['movie'] : NULL;
         $subtext = $data['subtext'];
         
         $modelId = Auth::id();
@@ -179,22 +205,25 @@ class HomeController extends Controller
 //        $orgAss = base_path() .'/storage/app/private/org.ass';
 //        $whitePath = base_path() . '/storage/app/private/whiteout.mp4';
         
-        $orgName = array();
+        
 //        $mvSubName = array();
 //        $durations = array();
         
-        $cdCmd = 'cd ' . base_path() .'/storage/app/public/' .$basePath .' && ';
+        //$cdCmd = 'cd ' . base_path() .'/storage/app/public/' .$basePath .' && ';
         
         
         //空入力確認　空File確認 -> jsで
     	//字幕文字数制限？ -> isで
         //縦サイズ禁止制限
-        
-    	
-        $relId = '';
+
         
         //MovieUp
-        foreach($counts as $count) {
+        foreach($counts as $count) { //countは0から　必ずあるもの
+            
+            $orgName = '';
+            $duration = 0;
+            $movie_path = '';
+            
             //if($request->file($movie[$count]) !== NULL) {
             if(isset($movie[$count])) {
             	
@@ -202,9 +231,9 @@ class HomeController extends Controller
                 
                 
                 //$filename = $request->file($movie[$count])->getClientOriginalName();
-                $orgName[$count] = 'upmv_' . $movie[$count]->getClientOriginalName();
+                $orgName = 'upmv_' . $movie[$count]->getClientOriginalName();
                 
-                $filename = $basePath . $orgName[$count];
+                $filename = $basePath . $orgName;
 
                 //if (App::environment('local'))
                 //$movie_path = $request->file($movie[$count])->storeAs('public', $filename);
@@ -218,44 +247,80 @@ class HomeController extends Controller
                 $duration = $ffprobe->format(base_path().'/storage/app/'. $movie_path)->get('duration'); //asset('storage/'. $music->file)
                 //$durations[] = $duration;
                 //exit;
-                
-                if($count == 0) { //最初の動画の時にrelationDBにinsert(1record)
-                	$rel = $this-> mvBranchRel->create(
-                    	[
-                    		'model_id'=>$modelId,
-                        	'cate_id'=> $cateId,
-                            'folder_name'=>$pre,
-                            'area_info' => '',
-                            'combine_status' => 0,
-                        ]
-                    );
-                    
-                    $relId = $rel->id;
-                }
-                
-                $this->mvBranch->create(
-                	[
-                		'rel_id' => $relId,
-                        'title'=>$data['title'][$count],
-                        'second'=>$data['second'][$count],
-                        
-                        'org_name' => $orgName[$count],
-                        'duration' => $duration,
-                        'movie_path'=> $movie_path,
-                        'sub_text' => $subtext[$count],
-                        
-                        'number' => $count+1,
-                    ]
-                );
             
             }
             else {
-            	$movie_path = '';
+            	if($edit) {
+                	$branch = $this->mvBranch->where(['rel_id'=>$relId, 'number'=>$count+1])->first();
+                    
+                    $orgName = $branch->org_name;
+                    $duration = $branch->duration;
+                    $movie_path = $branch->movie_path;
+                    
+                }
+
                 //return back()->withInput()->withErrors(array('画像の取得ができませんでした。再度やり直して下さい。'));
             }
             
+            
+            if(! $edit && ! $relId) { //新規時で、なおかつrelIdが0状態の時
+                $rel = $this-> mvBranchRel->create(
+                    [
+                        'model_id'=>$modelId,
+                        'cate_id'=> $cateId,
+                        'memo' => $data['memo'],
+                        'folder_name'=>$pre,
+                        'area_info' => '',
+                        'combine_status' => 0,
+                        'complete'=>0,
+                    ]
+                );
+                
+                $relId = $rel->id;
+            }
+            
+            
+            $this->mvBranch->updateOrCreate(
+                ['rel_id'=>$relId, 'number'=>$count+1],
+                [
+                    'rel_id' => $relId,
+                    'title'=>$data['title'][$count],
+                    'second'=>$data['second'][$count],
+                    
+                    'org_name' => $orgName,
+                    'duration' => $duration,
+                    'movie_path'=> $movie_path,
+                    'sub_text' => $subtext[$count],
+                    
+                    'number' => $count+1,
+                ]
+            );
+            
+            
             //break;
+            
+        } //foreach
+
+		//complete確認Set
+        //$judge = 1;
+		$judge = $this->mvBranch->where('rel_id', $relId)->get()->map(function($obj){
+        	return $obj->movie_path == '' ? 0 : 1;
+            
+        })->all();
+        
+//        print_r($judge);
+//        exit;
+        
+//        echo $moviePath . $judge;
+//        exit;
+		
+        if(array_search(0, $judge) === FALSE) {
+        	$relObj = $this-> mvBranchRel->find($relId);
+            $relObj->complete = 1;
+            $relObj->save();
         }
+        
+        
 
         //$status = 'UPLOADが終了しました！';
         //exit;
@@ -422,16 +487,8 @@ class HomeController extends Controller
 //        );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
+    
 
     /**
      * Update the specified resource in storage.
