@@ -39,26 +39,26 @@ class CreateMovieCombinesTable extends Migration
             $table->timestamps();
         });
         
-//        DB::table('movie_combines')->insert([
-//                'model_id' => 2,
-//                'cate_id' => 1,
-//                'rel_id' => 1,
-//                'music_id' => 1,
-//                ''
-//                
-//                'movie_path' => 'public/movie/1/20170101.mp4',
-//                //'movie_thumb' => '',
-//                'area' => '愛媛',
-//                'title' => 'みいたけのお気に入り',
-//                
-//                'atcl_status' => 0,
-////                'yt_up' => 0,
-////                'sns_up' => 0,
-//                
-//                'created_at' => date('Y-m-d H:i:s', time()),
-//                'updated_at' => date('Y-m-d H:i:s', time()),
-//            ]
-//        );
+        DB::table('movie_combines')->insert([
+                'model_id' => 2,
+                'cate_id' => 1,
+                'rel_id' => 1,
+                'music_id' => 1,
+                'filter_id' => 1,
+                
+                'movie_path' => 'public/movie/1/20170101.mp4',
+                //'movie_thumb' => '',
+                'area' => '愛媛',
+                'title' => 'みいたけのお気に入り',
+                
+                'atcl_status' => 0,
+//                'yt_up' => 0,
+//                'sns_up' => 0,
+                
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
     }
 
     /**
