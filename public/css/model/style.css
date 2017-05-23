@@ -256,6 +256,9 @@ a.dropdown-toggle {
 .alert-warning {
 	font-size: 0.9em;
 }
+.alert-warning ul {
+	padding-left: 1.2em;
+}
 
 .noup-list {
 	list-style: none;

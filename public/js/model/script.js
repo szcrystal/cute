@@ -309,21 +309,27 @@ var exe = (function() {
                         $preview.empty();
                         // .prevewの領域の中にロードした画像を表示するimageタグを追加
                         $preview.append($('<video>').attr({
-                                //id:'mv',
-                                src: e.target.result,
-                                width: "100%",
-                                controls: "1",
-                                class: "mv",
-                                preload: "auto",
-                                //title: file.name
+                            //id:'mv',
+                            src: e.target.result,
+                            width: "100%",
+                            controls: "1",
+                            class: "mv",
+                            preload: "metadata",
+                            //autoplay: 1,
+                            //title: file.name
                         }));
                         
 //                        var $mv = $preview.find('video');
+//                        $mv[0].currentTime = 1;
+//                        $mv[0].play();
+                        
 //                        
-////                        $mv[0].addEventListener('durationchange', function(){
-////                            console.log(this.duration);
-////                        });
-//                        
+//                        $mv[0].addEventListener('durationchange', function(){
+//                            //console.log(this.duration);
+//                            this.currentTime = 1;
+//                            this.play();
+//                        });
+//
 //                        $mv.on('durationchange', function(){
 //                        	//console.log($(this)[0].duration);
 //                            var duration = $(this)[0].duration;
@@ -416,10 +422,10 @@ var exe = (function() {
                         if($('input.video-file').eq(n).val() != '') {
                             var $mv = $('.thumb-wrap').eq(n).find('video.mv');
                             var duration = $mv[0].duration;
-                            var w = $mv[0].clientWidth;
-                            var h = $mv[0].clientHeight;
+                            var w = $mv[0].videoWidth;
+                            var h = $mv[0].videoHeight;
                             
-                            //console.log($mv[0].clientHeight);
+                            //console.log($mv[0].videoWidth);
                             //return;
                             
                             var second = $('input.video-file').eq(n).data('sec');
@@ -432,8 +438,7 @@ var exe = (function() {
                                 errors.push(outputError('input.video-file', mvlarge, n));
                                 temps++;
                             }
-                            
-                            if(h > w) {
+                            else if(h > w) {
                             	errors.push(outputError('input.video-file', mvheight, n));
                                 temps++;
                             }

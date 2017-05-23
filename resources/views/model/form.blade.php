@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="alert alert-warning mb-5 pb-0">
+    <div class="alert alert-warning mb-4 pb-0">
         {{-- <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> <br> --}}
         <ul>
 			<li>動画は横型で撮影して下さい
@@ -26,11 +26,9 @@
     <p class="text-right pr-1 mb-3">{{ $memo }}</p>
 
 
-
-
     @if (count($errors) > 0)
         <div class="alert alert-danger">
-            <strong>Error!!</strong> 追加できません<br><br>
+            <strong>Error!!</strong> 追加できません<br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

@@ -34,7 +34,7 @@
             {{ $status }}
         </div>
     @endif
-    
+
 
 	@if(count($rels) > 0)
         <h5 class="clearfix second"><i class="fa fa-play-circle" aria-hidden="true"></i> 投稿中の動画があります</h5>
@@ -53,7 +53,7 @@
                     <li class="clearfix">
                         <a href="{{ url('/contribute/'.$rel->id.'/edit')}}">
                             <span>{{ $cates->find($rel->cate_id)->name }}：{{ mb_substr($rel->memo, 0, 10) }} <i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                            <small>動画残数：{{ $num }}本</small>
+                            <small>動画残数：{{ $num }}</small>
                         </a>
                     </li>
                 @endforeach
