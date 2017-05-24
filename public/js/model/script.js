@@ -314,7 +314,7 @@ var exe = (function() {
                             width: "100%",
                             controls: "1",
                             class: "mv",
-                            preload: "metadata",
+                            preload: "auto",
                             //autoplay: 1,
                             //title: file.name
                         }));

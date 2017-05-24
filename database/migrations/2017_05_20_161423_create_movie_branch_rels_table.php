@@ -28,6 +28,29 @@ class CreateMovieBranchRelsTable extends Migration
         
             $table->timestamps();
         });
+        
+//        DB::table('movie_branch_rels')->insert([
+//                'model_id' => 2,
+//                'cate_id' => 1,
+//
+//                'memo' => 'abcde',
+//                'floder_name' => '11111',
+//                'area_info' => '',
+//                
+//                'combine_status' => 0,
+//                //'movie_thumb' => '',
+//                'complete' => 0,
+//                'title' => 'みいたけのお気に入り',
+//                
+//                'atcl_status' => 0,
+////                'yt_up' => 0,
+////                'sns_up' => 0,
+//                
+//                'created_at' => date('Y-m-d H:i:s', time()),
+//                'updated_at' => date('Y-m-d H:i:s', time()),
+//            ]
+//        );
+
     }
 
     /**

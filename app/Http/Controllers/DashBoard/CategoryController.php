@@ -100,6 +100,8 @@ class CategoryController extends Controller
         
         $cateId = $cateModel->id;
         
+        
+        //Item Save
         $titles = $data['title'];
         $seconds = $data['second'];
         $itemNums = $data['item_num'];
@@ -107,7 +109,20 @@ class CategoryController extends Controller
         //$items = $this->categoryItem->where('cate_id'=>$cateId)->get();
         
         foreach($titles as $key => $title) {
-        	if($title != '') {
+        	
+            if(isset($data['del_item'][$key]) && $data['del_item'][$key]) {
+                
+            	$itemModel = $this->categoryItem->where(['item_num'=>$itemNums[$key], 'cate_id'=>$cateId])->first();
+                $itemModel ->delete();
+                
+//                $snapModel = $this->modelSnap->create(
+//                    [
+//                        'model_id'=>$modelId,
+//                        'number'=> $count+1,
+//                    ]
+//                );
+            }
+        	else if($title != '') {
                 $this->categoryItem->updateOrCreate(
                     ['item_num'=>$itemNums[$key], 'cate_id'=>$cateId],
                     [
@@ -117,7 +132,20 @@ class CategoryController extends Controller
                     ]
                 );
             }
+            
         }
+        
+        //Item numberを振り直す
+        $num = 1;
+        $items = $this->categoryItem->where(['cate_id'=>$cateId])->get();
+        
+        foreach($items as $item) {
+            $item->item_num = $num;
+            $item->save();
+            $num++;
+        }
+        
+        
         
 
         return redirect('dashboard/cates/'.$cateId)->with('status', $status);

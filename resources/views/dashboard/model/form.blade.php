@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-2 control-label">名前<small>（ニックネーム）</small></label>
+                    <label for="name" class="col-md-2 control-label">ニックネーム</small></label>
 
                     <div class="col-md-8">
                         <input id="name" type="text" class="form-control" name="name" value="{{ isset($model) ? $model->name : old('name') }}">
@@ -91,7 +91,7 @@
                     <label for="full_name" class="col-md-2 control-label">フルネーム</label>
 
                     <div class="col-md-8">
-                        <input id="full_name" type="text" class="form-control" name="full_name" value="{{ isset($model) ? $model->full_name : old('full_name') }}" autofocus>
+                        <input id="full_name" type="text" class="form-control" name="full_name" value="{{ isset($model) ? $model->full_name : old('full_name') }}">
 
                         @if ($errors->has('full_name'))
                             <span class="help-block">
@@ -192,23 +192,46 @@
                 <hr>
 				<?php //パーソナル ---------------- ?>
 
-				<div style="margin-bottom:3em;">
+				<div style="margin-bottom:3em;" class="clearfix">
 
 				<?php $n=0; ?>
 				@while($n < 7)
 
+                <div class="form-group text-right">
+                	<div class="col-md-12 checkbox">
+                        <label>
+                        	<?php
+                            	$checked = '';
+                                if(Ctm::isOld()) {
+                                    if(old('del_snap.'.$n))
+                                        $checked = ' checked';
+                                }
+                                else {
+                                    if(isset($article) && $article->del_snap) {
+                                        $checked = ' checked';
+                                    }
+                                }
+                            ?>
+
+                            <input type="hidden" name="del_snap[{{$n}}]" value="0">
+                            <input type="checkbox" name="del_snap[{{$n}}]" value="1"{{ $checked }}> この項目を削除
+                        </label>
+                    </div>
+            	</div>
+
+
 				<div class="clearfix thumb-wrap">
                     <div class="col-md-4 pull-left thumb-prev">
                         @if(count(old()) > 0)
-                            @if(old('snap_thumb') != '' && old('snap_thumb'))
-                            <img src="{{ Storage::url(old('snap_thumb')) }}" class="img-fluid">
-                            @elseif(isset($modelSnap) && $modelSnap->snap_thumb)
-                            <img src="{{ Storage::url($model->snap_thumb) }}" class="img-fluid">
+                            @if(old('snap_thumb.'.$n) != '' && old('snap_thumb.'.$n))
+                            <img src="{{ Storage::url(old('snap_thumb.'.$n)) }}" class="img-fluid">
+                            @elseif(isset($snaps[$n]) && $snaps[$n]->snap_path)
+                            <img src="{{ Storage::url($snaps[$n]->snap_path) }}" class="img-fluid">
                             @else
                             <span class="no-img">No Image</span>
                             @endif
-                        @elseif(isset($modelSnap) && $modelSnap->snap_thumb)
-                            <img src="{{ Storage::url($model->snap_thumb) }}" class="img-fluid">
+                        @elseif(isset($snaps[$n]) && $snaps[$n]->snap_path)
+                            <img src="{{ Storage::url($snaps[$n]->snap_path) }}" class="img-fluid">
                         @else
                             <span class="no-img">No Image</span>
                         @endif
@@ -218,40 +241,47 @@
                         <label for="model_thumb" class="col-md-12 text-left">スナップ</label>
                         <div class="col-md-12">
                             <input id="model_thumb" class="thumb-file" type="file" name="snap_thumb[]">
+
+                            @if ($errors->has('snap_thumb.'.$n))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('snap_thumb.'.$n) }}</strong>
+                            </span>
+                        @endif
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('pers_ask') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('ask.'.$n) ? ' has-error' : '' }}">
                     <label for="name" class="col-md-2 control-label">質問</label>
 
                     <div class="col-md-8">
-                        <input id="school" type="text" class="form-control" name="snap_ask[]" value="{{ isset($modelSnap) ? $modelSnap->school : old('school') }}">
+                        <input id="school" type="text" class="form-control" name="ask[]" value="{{ isset($snaps[$n]) ? $snaps[$n]->ask : old('ask.'.$n) }}">
 
-                        @if ($errors->has('ask'))
+                        @if ($errors->has('ask.'.$n))
                             <span class="help-block">
-                                <strong>{{ $errors->first('ask') }}</strong>
+                                <strong>{{ $errors->first('ask.'.$n) }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('snap_answer') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('answer.'.$n) ? ' has-error' : '' }}">
                     <label for="snap_answer" class="col-md-2 control-label">回答</label>
 
                     <div class="col-md-8">
-                        <textarea id="snap_answer" class="form-control" name="snap_answer[]" rows="8">
-                        {{ isset($modelSnap) && !count(old()) ? $modelSnap->snap_answer : old('snap_answer') }}</textarea>
+                        <textarea id="snap_answer" class="form-control" name="answer[]" rows="8">{{ isset($snaps[$n]) && !count(old()) ? $snaps[$n]->answer : old('answer.'.$n) }}</textarea>
 
-                        @if ($errors->has('snap_answer'))
+                        @if ($errors->has('answer.'.$n))
                             <span class="help-block">
-                                <strong>{{ $errors->first('snap_answer') }}</strong>
+                                <strong>{{ $errors->first('answer.'.$n) }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
                 <hr>
+
+                <input type="hidden" name="snap_count[]" value="{{ $n }}">
 
 				<?php $n++; ?>
 				@endwhile
@@ -262,35 +292,6 @@
 
 
 
-{{--
-                <div class="form-group{{ $errors->has('charm_point') ? ' has-error' : '' }}">
-                    <label for="charm_point" class="col-md-2 control-label">チャームポイント</label>
-
-                    <div class="col-md-6">
-                        <input id="charm_point" type="text" class="form-control" name="charm_point" value="{{ isset($model) ? $model->charm_point : old('charm_point') }}">
-
-                        @if ($errors->has('charm_point'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('charm_point') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('hobby') ? ' has-error' : '' }}">
-                    <label for="hobby" class="col-md-2 control-label">趣味</label>
-
-                    <div class="col-md-6">
-                        <input id="hobby" type="text" class="form-control" name="hobby" value="{{ isset($model) ? $model->hobby : old('hobby') }}">
-
-                        @if ($errors->has('hobby'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('hobby') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
---}}
 
                 <div class="form-group">
                     <div class="col-md-2 col-md-offset-2">

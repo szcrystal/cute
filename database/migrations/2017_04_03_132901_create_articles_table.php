@@ -42,7 +42,7 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
         });
         
-        $n = 0;
+        $n = 2;
         while($n < 3) {
             DB::table('articles')->insert(
             	[

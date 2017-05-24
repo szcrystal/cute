@@ -77,6 +77,28 @@
 
             @while($n < $itemCount)
 
+                <div class="form-group text-right">
+                	<div class="col-md-12 checkbox">
+                        <label>
+                        	<?php
+                            	$checked = '';
+                                if(Ctm::isOld()) {
+                                    if(old('del_item.'.$n))
+                                        $checked = ' checked';
+                                }
+                                else {
+                                    if(isset($article) && $article->del_item) {
+                                        $checked = ' checked';
+                                    }
+                                }
+                            ?>
+
+                            <input type="hidden" name="del_item[{{$n}}]" value="0">
+                            <input type="checkbox" name="del_item[{{$n}}]" value="1"{{ $checked }}> この項目を削除
+                        </label>
+                    </div>
+            	</div>
+
             	<div class="form-group{{ $errors->has('title.'. $n) ? ' has-error' : '' }}">
                     <label for="title" class="col-md-3 control-label">タイトル</label>
 
@@ -105,6 +127,8 @@
                     </div>
                     <p style="margin-top:0.4em;" class="pull-left text-left">秒</p>
                 </div>
+
+                <hr>
 
                 <input type="hidden" name="item_num[]" value="{{ $n+1 }}">
 

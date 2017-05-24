@@ -96,7 +96,7 @@
 
 
                     	@if($path != '')
-							<video src="{{ Storage::url($path) }}" class="mv" width="100%" preload="auto" controls>
+							<video src="{{ Storage::url($path) }}" class="mv" width="100%" controls>
                         @else
                         	<span class="no-img">No Video</span>
 						@endif

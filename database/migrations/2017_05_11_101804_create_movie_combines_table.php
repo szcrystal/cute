@@ -42,7 +42,7 @@ class CreateMovieCombinesTable extends Migration
         DB::table('movie_combines')->insert([
                 'model_id' => 2,
                 'cate_id' => 1,
-                'rel_id' => 1,
+                'rel_id' => 99999,
                 'music_id' => 1,
                 'filter_id' => 1,
                 
