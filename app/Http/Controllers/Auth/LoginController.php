@@ -39,6 +39,11 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
     
+//    public function showLoginForm()
+//    {
+//    	return redirect()->guest('/contribute/login');
+//    }
+    
     
     public function logout()
     {
