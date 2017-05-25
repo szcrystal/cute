@@ -425,16 +425,24 @@ var exe = (function() {
                             var w = $mv[0].videoWidth;
                             var h = $mv[0].videoHeight;
                             
-                            //console.log($mv[0].videoWidth);
-                            //return;
-                            
                             var second = $('input.video-file').eq(n).data('sec');
+                            var preAlloe = 0;
+                            var nextAllow = 0;
                             
-                            if(duration < second-1) { //少ない場合　誤差-1
+                            if(second < 6) {
+                            	preAllow = 1.5;
+                                nextAllow = 2.5;
+                            }
+                            else {
+                            	preAllow = 2;
+                                nextAllow = 6;
+                            }
+                            
+                            if(duration < second - preAllow) { //少ない場合　誤差-1
                                 errors.push(outputError('input.video-file', mvsmall, n));
                                 temps++;
                             }
-                            else if(duration > second+2) { //少ない場合 誤差+2
+                            else if(duration > second + nextAllow) { //少ない場合 誤差+2
                                 errors.push(outputError('input.video-file', mvlarge, n));
                                 temps++;
                             }

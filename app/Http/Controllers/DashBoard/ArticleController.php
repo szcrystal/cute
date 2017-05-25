@@ -338,17 +338,33 @@ class ArticleController extends Controller
 
 		//define(‘UPDRAFTPLUS_IPV4_ONLY’, true);
         
-        set_time_limit(0);
+        //set_time_limit(0);
+        $connection->setTimeouts(10,500);
+        
+        
+        
         
         $postMsg = "aaaaabbbbb";
-        $videoPath = base_path() . "/storage/app/public/movie/2/3s.mp4";
+        $fileName = '3s.mp4';
+        $videoPath = base_path() . "/storage/app/public/movie/2/".$fileName;
         $imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
     	$fileSize = filesize($videoPath);
+        
+        $cdCmd = 'cd ' . base_path() .'/storage/app/public/' .$basePath .' && ';
+        
+        //if(Storage::exist)
+        exec($cdCmd . 'ffmpeg -i '. $videoPath . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+        echo 'twitter: '.$status;
+        
+//        $file = file_get_contents($videoPath);
+//        var_dump($file['media_type']);
+//        exit;
+        
  
 		//投稿
-        $media_id = $connection->upload("media/upload", array("media" => $videoPath/*, "media_data"=>'video/mp4'*/));
-        //var_dump($media_id);
-        //exit;
+        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true);
+//        var_dump($media_id);
+//        exit;
         
         $parameters = array(
             'status' => '画像投稿aaa',
@@ -360,7 +376,7 @@ class ArticleController extends Controller
         //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
  
 		// レスポンス表示
-		//var_dump($result);
+		var_dump($result);
         exit;
         
         /*

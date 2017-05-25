@@ -179,17 +179,17 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'movie.*' => 'required|file|filled',
-            'subtext.*' => 'required|max:25',
-        ];
-        
-        $messages = [
-            'movie.*.required' => '「動画」は必須です。',
-            'movie.*.filled' => '「動画」は必須です。',
-        	'subtext.*.required' => '「字幕テキスト」は必須です。',
-        	'subtext.*.max' => '「字幕テキスト」は25文字以内です。',
-        ];
+//        $rules = [
+//            'movie.*' => 'required|file|filled',
+//            'subtext.*' => 'required|max:25',
+//        ];
+//        
+//        $messages = [
+//            'movie.*.required' => '「動画」は必須です。',
+//            'movie.*.filled' => '「動画」は必須です。',
+//        	'subtext.*.required' => '「字幕テキスト」は必須です。',
+//        	'subtext.*.max' => '「字幕テキスト」は25文字以内です。',
+//        ];
         
         //$this->validate($request, $rules, $messages);
         
@@ -208,7 +208,14 @@ class HomeController extends Controller
         $modelId = Auth::id();
         $cateId = $data['cate_id'];
         
-        $pre = time();
+        if($edit) { //編集時
+        	$relObj = $this->mvBranchRel->find($relId);
+            $pre = $relObj->folder_name;
+        }
+        else {
+        	$pre = time();
+        }
+        
         $basePath = 'contribute/' .$modelId . '/' . $pre . '/';
         
 //        $orgAss = base_path() .'/storage/app/private/org.ass';
@@ -288,7 +295,7 @@ class HomeController extends Controller
                 $relId = $rel->id;
             }
             
-            
+            //新規 or 更新
             $this->mvBranch->updateOrCreate(
                 ['rel_id'=>$relId, 'number'=>$count+1],
                 [
