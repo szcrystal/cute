@@ -346,7 +346,7 @@ class ArticleController extends Controller
     	$fileSize = filesize($videoPath);
  
 		//投稿
-        $media_id = $connection->upload("media/upload", array("media" => $imgPath/*, "media_data"=>'video/mp4'*/));
+        $media_id = $connection->upload("media/upload", array("media" => $videoPath/*, "media_data"=>'video/mp4'*/));
         //var_dump($media_id);
         //exit;
         
