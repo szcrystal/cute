@@ -10,8 +10,11 @@ use App\TagRelation;
 use App\Category;
 use App\MovieCombine;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 use Auth;
 use Storage;
+use Mail;
 
 
 use Illuminate\Http\Request;
@@ -298,6 +301,91 @@ class ArticleController extends Controller
 //        exit();
         
     	return view('dashboard.article.form', ['article'=>$article,/* 'cates'=>$cates, 'users'=>$users,*/ 'id'=>$id, 'edit'=>1]);
+    }
+    
+    
+    public function postTwitter(Request $request)
+    {
+//    	echo base_path();
+//        exit;
+        
+    	
+        
+//        $name = 'opal@frank.fam.cx';
+//        $pass = 'ccorenge33';
+
+		$name = 'cute_campus'; //y.yamasaki@crepus.jp
+        $pass = '14092ugaAC';
+        
+    	$url = 'https://upload.twitter.com/1.1/media/upload.json';
+    	
+        $consumer_key = 'a50OiN3f4hoxXFSS2zK2j6mTK';
+        $consumer_secret = 'DKKhv9U1755hu0zzxbklyPA3GpuAsTTqedoNCFTUKyACshPuOE';
+        $access_token = '2515940671-scGnBAVUnURLykOpp0C9uxsmOz6zg1iTkILVqZa';
+        $access_token_secret = '7LMe9izK6Cu514gNnn3Kfl2f9QCtoFr5PLBg8oj0A9XTy';
+        
+
+		//use Abraham\TwitterOAuth\TwitterOAuth; を先頭につけると以下でクラス取得可能
+        //$toa = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+        //self::$CONSUMER_KEYという書き方もあり ->static変数
+        
+        //composer show abraham/twitteroauth にてautoload psr-4の名前空間が確認できる　そこから以下でクラス取得可能
+        //先頭の逆スラッシュはヘッドで記載のnamespace(名前空間)を解除する
+        $connection = new \Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+        
+//        var_dump($toa);
+//        exit;
+
+		//define(‘UPDRAFTPLUS_IPV4_ONLY’, true);
+        
+        set_time_limit(0);
+        
+        $postMsg = "aaaaabbbbb";
+        $videoPath = base_path() . "/storage/app/public/movie/2/3s.mp4";
+        $imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
+    	$fileSize = filesize($videoPath);
+ 
+		//投稿
+        $media_id = $connection->upload("media/upload", array("media" => $imgPath/*, "media_data"=>'video/mp4'*/));
+        //var_dump($media_id);
+        //exit;
+        
+        $parameters = array(
+            'status' => '画像投稿aaa',
+            'media_ids' => $media_id->media_id_string,
+        );
+		
+        $result = $connection->post("statuses/update", $parameters);
+        
+        //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
+ 
+		// レスポンス表示
+		//var_dump($result);
+        exit;
+        
+        /*
+        $post_data = array(
+          'command'=>'INIT',
+          'media_type' => 'video/mp4', 動画の場合video/mp4固定（mp4のみ対応の為）
+          'total_bytes' => $fileSize, 動画のファイルサイズ
+        );
+        
+        $context = stream_context_create(array(
+            'http' => array(
+              'method'  => 'POST',
+              'header' => "Content-type: application/x-www-form-urlencoded",
+              'header'  => sprintf("Authorization: Basic %s", base64_encode($name.':'.$pass)). " Content-type: application/x-www-form-urlencoded",
+              'content' => http_build_query($post_data, "", "&"),
+              'timeout' => 10,
+            ),
+        ));
+        
+        $ret = file_get_contents($url, false, $context);
+        $htmlBody = $rel;
+        */
+        
+    	return view('dashboard.sns.twtup', ['htmlBody'=>$htmlBody]);
+
     }
 
     /**

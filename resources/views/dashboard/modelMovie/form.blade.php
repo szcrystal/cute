@@ -89,7 +89,7 @@
 
             <input type="hidden" name="rel_id" value="{{ $relId }}">
 
-            @if(Ctm::isDev())
+
             <div class="form-group{{ $errors->has('music_id') ? ' has-error' : '' }}">
                 <label for="music_id" class="col-md-3 control-label">Music</label>
                 <div class="col-md-6">
@@ -152,7 +152,7 @@
                     @endif
                 </div>
             </div>
-            @endif
+
 
 
 			<?php $n = 0; ?>
@@ -185,24 +185,12 @@
 
             </div>
 
-            
 
-
-
-
-
-
-
-
-
-
-			@if(Ctm::isDev())
 			<div class="form-group">
                 <div class="col-md-4 col-md-offset-3">
                     <button type="submit" class="btn btn-primary center-block w-btn">更　新</button>
                 </div>
         	</div>
-            @endif
 
         </form>
 

@@ -328,8 +328,8 @@ a.dropdown-toggle {
 .waiting span .fa {
 	color: #222;
 	font-size: 0.9em;
-	-webkit-animation: rt-r 1.2s infinite linear alternate;
-    animation: rt-r 1.2s infinite linear alternate;
+	-webkit-animation: rt-r 0.8s infinite linear alternate;
+    animation: rt-r 0.8s infinite linear alternate;
 }
 @keyframes rt {
 	100% {

@@ -47,6 +47,38 @@
 
         <hr>
 
+        <div class="clearfix">
+            <div class="btn-group-md pull-right">
+
+                @if(Ctm::isDev())
+
+                <div class="pull-left">
+                    <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles/twitter" enctype="multipart/form-data">
+                    <div class="col-md-6 pull-left">
+                        <button type="submit" class="btn btn-danger center-block w-btn" disabled>YouTube UP</button>
+                    </div>
+                    </form>
+                </div>
+
+				<div class="pull-left">
+                    <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles/twitter" enctype="multipart/form-data">
+						{{ csrf_field() }}
+
+                        <div class="col-md-4 pull-left">
+
+                            <button type="submit" class="btn btn-success center-block w-btn">SNS UP</button>
+
+                        </div>
+                    </form>
+                </div>
+
+                @endif
+
+            </div>
+        </div>
+
+        <hr>
+
         <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
@@ -435,17 +467,7 @@
         </div>
 
 
-		<div class="clearfix">
-            <div class="btn-group-md pull-right">
-                <div class="col-md-6 pull-left">
-                    <button type="submit" class="btn btn-danger center-block w-btn" disabled>YouTube UP</button>
-                </div>
 
-                <div class="col-md-4 pull-left">
-                    <button type="submit" class="btn btn-success center-block w-btn" disabled>SNS UP</button>
-                </div>
-            </div>
-        </div>
 
 
 

@@ -54,6 +54,7 @@ Route::resource('dashboard/tags', 'DashBoard\TagController');
 Route::resource('dashboard/cates', 'DashBoard\CategoryController');
 
 //Article
+Route::post('dashboard/articles/twitter', 'DashBoard\ArticleController@postTwitter');
 Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 
 //Fix
