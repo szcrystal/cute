@@ -19,8 +19,13 @@ class Article extends Model
         'basic_info',
         'open_status',
         'open_date',
+    
+    	'yt_id',
+        'yt_description',
+    
         'yt_up',
-        'sns_up',
+        'tw_up',
+        'fb_up',
         'view_count',
     
     ];

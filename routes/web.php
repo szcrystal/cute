@@ -54,6 +54,11 @@ Route::resource('dashboard/tags', 'DashBoard\TagController');
 Route::resource('dashboard/cates', 'DashBoard\CategoryController');
 
 //Article
+Route::get('dashboard/articles/snsup/{atclId}', 'DashBoard\ArticleController@getSnsUp');
+Route::post('dashboard/articles/snsup/{atclId}', 'DashBoard\ArticleController@postSnsUp');
+Route::get('dashboard/articles/ytup', 'DashBoard\ArticleController@getYtUp');
+Route::get('dashboard/articles/twfbup', 'DashBoard\ArticleController@getTwFbUp');
+//Route::post('dashboard/articles/ytup', 'DashBoard\ArticleController@postYtUp');
 Route::post('dashboard/articles/twitter', 'DashBoard\ArticleController@postTwitter');
 Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 

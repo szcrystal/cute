@@ -62,6 +62,49 @@ class ArticleController extends Controller
         
         return view('dashboard.article.index', ['atclObjs'=>$atclObjs, 'users'=>$users, 'cateModel'=>$cateModel]);
     }
+    
+    public function show($id)
+    {
+        $atcl = $this->article->find($id);
+        $cates = $this->category->all();
+        
+        $mvId = $atcl->movie_id;
+        $mv = $this->mvCombine->find($mvId);
+        
+        
+        //$mvPath = Storage::url($mv->movie_path);
+        //$modelId = $mv->model_id;
+        $modelName = $this->user->find($atcl->model_id)->name;
+        
+        $tagNames = $this->tagRelation->where(['atcl_id'=>$id])->get()->map(function($item) {
+            return $this->tag->find($item->tag_id)->name;
+        })->all();
+        
+        $allTags = $this->tag->get()->map(function($item){
+        	return $item->name;
+        })->all();
+        
+//        $atclTag = array();
+//        $n = 0;
+//        while($n < 3) {
+//        	$name = 'tag_'.$n+1;
+//            $atclTag[] = explode(',', $article->tag_{$n+1});
+//            $n++;
+//        }
+//        
+//        print_r($atclTag);
+//        exit();
+        
+        //$tags = $this->getTags();
+        
+//        echo $article->tag_1. "aaaaa";
+//        foreach($tags[0] as $tag)
+//        	echo $tag-> id."<br>";
+//        exit();
+        
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -103,6 +146,15 @@ class ArticleController extends Controller
         $this->validate($request, $rules);
         
         $data = $request->all(); //requestから配列として$dataにする
+        
+        if(isset($data['ytUp'])) {
+        	//$this->postYtUp($data);
+            $data['atclId'] = $editId;
+            return redirect('dashboard/articles/ytup')->with('data', $data);
+//            return redirect('dashboard/articles/ytup')->action(
+//                'DashBoard\ArticleController@postYtUp', ['data' => $data]
+//            );
+        }
         
         $rand = mt_rand();
         
@@ -187,14 +239,18 @@ class ArticleController extends Controller
 
 
                 //tagIdがRelationになければセット ->firstOrCreate() ->updateOrCreate()
+                $tagRel = $this->tagRelation->firstOrCreate(
+                	['tag_id'=>$tagId, 'atcl_id'=>$atclId]
+                );
+                /*
                 $tagRel = $this->tagRelation->where(['tag_id'=>$tagId, 'atcl_id'=>$atclId])->get();
-                
                 if($tagRel->isEmpty()) {
                     $this->tagRelation->create([
                         'tag_id' => $tagId,
                         'atcl_id' => $atclId,
                     ]);
                 }
+                */
 
                 //tagIdを配列に入れる　削除確認用
                 $tagIds[] = $tagId;
@@ -216,69 +272,286 @@ class ArticleController extends Controller
         
         return redirect('dashboard/articles/'. $atclId)->with('status', $status);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    
+    public function getSnsUp($atclId)
     {
-        $atcl = $this->article->find($id);
-        $cates = $this->category->all();
+    	$atcl = $this->article->find($atclId);
         
         $mvId = $atcl->movie_id;
         $mv = $this->mvCombine->find($mvId);
+        
+        $users = $this->user->get();
         
         
         //$mvPath = Storage::url($mv->movie_path);
         //$modelId = $mv->model_id;
         $modelName = $this->user->find($atcl->model_id)->name;
         
-        $tagNames = $this->tagRelation->where(['atcl_id'=>$id])->get()->map(function($item) {
+        $tagNames = $this->tagRelation->where(['atcl_id'=>$atclId])->get()->map(function($item) {
             return $this->tag->find($item->tag_id)->name;
         })->all();
         
-        $allTags = $this->tag->get()->map(function($item){
-        	return $item->name;
-        })->all();
+//        $allTags = $this->tag->get()->map(function($item){
+//        	return $item->name;
+//        })->all();
         
-//        $atclTag = array();
-//        $n = 0;
-//        while($n < 3) {
-//        	$name = 'tag_'.$n+1;
-//            $atclTag[] = explode(',', $article->tag_{$n+1});
-//            $n++;
-//        }
-//        
-//        print_r($atclTag);
-//        exit();
         
-        //$tags = $this->getTags();
+    	return view('dashboard.article.snsForm', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'users'=>$users, 'mvId'=>$mvId, 'atclId'=>$atclId, 'edit'=>1]);
+    }
+    
+    public function postSnsUp(Request $request, $atclId)
+    {
+    	$data = $request->all();
         
-//        echo $article->tag_1. "aaaaa";
-//        foreach($tags[0] as $tag)
-//        	echo $tag-> id."<br>";
-//        exit();
+//        print_r($data);
+//        exit;
         
-    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+        $mv = $this->mvCombine->find($data['movie_id']);
+        $data['mvPath'] = $mv->movie_path;
+        $data['modelId'] = $mv->model_id;
+        
+        
+    	if(isset($data['ytUp'])) {
+            return redirect('dashboard/articles/ytup')->with('data', $data);
+        }
+        else if(isset($data['twFbUp'])) {
+        	return redirect('dashboard/articles/twfbup')->with('data', $data);
+            //$this->getTwFbUp($data);
+        }
+    }
+    
+    
+    public function getYtUp(Request $request)
+    {
+    	//API Key: AIzaSyBYJdFgn76FsGpxNSSY2G4qPYESVygzzMo
+        
+        //$path = '/vagrant/cute/vendor/google';
+//        $path = '/vagrant/cute/google-api/src';
+//		set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+//        //require_once 'apiclient/src/Google/autoload.php';
+//        require_once 'Google/Client.php';
+//        require_once 'Google/Service/Resource.php';
+
+		//$editId = $request->input('edit_id');
+        
+        $data = session('data');
+        
+        $atclId = $data['atcl_id'];
+        
+        $tagArr = array('cute.campus');
+        
+        if(isset($data['tags'])) {
+        	$tagArr = array_merge($tagArr, $data['tags']);
+        }
+        //array_unshift($tagArr, 'cute.campus');
+
+		session_start(); //必要
+
+		// --- Google側のOAuth設定でリダイレクトURLと下記のリダイレクトを一致させる必要がある ---
+        //認証情報作成->OAuthクライアントID->Webアプリケーション
+        //ORG
+//        $key = 'AIzaSyBYJdFgn76FsGpxNSSY2G4qPYESVygzzMo'; //不要
+//        $client_id = '362243100375-n8beqqfeu29qfcac18rjdvnv8thblogk.apps.googleusercontent.com';
+//        $client_secret = 'bQZyhPR9f8O0UwjWauoFKSri';
+
+		if(env('ENVIRONMENT') == 'dev') {
+            //szc.dip.jp
+            $client_id = '938943463544-ks3dacrb1a150v73i7j3m9t2f3h5dod4.apps.googleusercontent.com';
+            $client_secret = 'VoCuh8cDVTxa_RV8aw6W78ww';
+        }
+        else {
+            //Cute
+            $client_id = '938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com';
+            $client_secret = 'oDvb4iImNWnP1PzByc6MBFDi';
+        }
+
+        $client = new \Google_Client();
+        
+        //$client->setDeveloperKey($key);
+        $client->setClientId($client_id);
+		$client->setClientSecret($client_secret);
+        
+        $client->setScopes('https://www.googleapis.com/auth/youtube');
+        //$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'], FILTER_SANITIZE_URL);
+        $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . '/dashboard/articles/ytup', FILTER_SANITIZE_URL);
+        
+        $client->setRedirectUri($redirect);
+        
+//        echo $client->getAccessToken();
+//        echo $client->createAuthUrl();
+//		exit;
+
+        $youtube = new \Google_Service_YouTube($client);
+        
+//        $videoResponse = $youtube->videos->listVideos('snippet', array(
+//            'id' => 'video_id' 
+//        ));
+//
+//        print_r($videoResponse);
+//        exit;
+        
+        
+        if (isset($_GET['code'])) {
+            if (strval($_SESSION['state']) !== strval($_GET['state'])) {
+            	die('The session state did not match.');
+            }
+
+            $client->authenticate($_GET['code']);
+            $_SESSION['token'] = $client->getAccessToken();
+            header('Location: ' . $redirect);
+        }
+
+        if (isset($_SESSION['token'])) {
+            $client->setAccessToken($_SESSION['token']);
+        }
+
+        // Check to ensure that the access token was successfully acquired.
+        if ($client->getAccessToken()) {
+          try{
+            // REPLACE this value with the path to the file you are uploading.
+            //$videoPath = base_path() . "/storage/app/public/movie/2/main.mp4";
+            $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            
+
+            // Create a snippet with title, description, tags and category ID
+            // Create an asset resource and set its snippet metadata and type.
+            // This example sets the video's title, description, keyword tags, and
+            // video category.
+            $snippet = new \Google_Service_YouTube_VideoSnippet();
+            //$snippet->setTitle("Test title");
+            //$snippet->setDescription("Test description");
+            //$snippet->setTags(array("海", "湖", "山"));
+            $snippet->setTitle($data['title']);
+            $snippet->setDescription($data['description']);
+            $snippet->setTags($tagArr);
+
+
+            // Numeric video category. See
+            // https://developers.google.com/youtube/v3/docs/videoCategories/list 
+            $snippet->setCategoryId("22");
+            
+            
+
+            // Set the video's status to "public". Valid statuses are "public",
+            // "private" and "unlisted".
+            $status = new \Google_Service_YouTube_VideoStatus();
+            $status->privacyStatus = "public";
+            
+            
+
+            // Associate the snippet and status objects with a new video resource.
+            $video = new \Google_Service_YouTube_Video();
+            $video->setSnippet($snippet);
+            $video->setStatus($status);
+            
+
+            // Specify the size of each chunk of data, in bytes. Set a higher value for
+            // reliable connection as fewer chunks lead to faster uploads. Set a lower
+            // value for better recovery on less reliable connections.
+            $chunkSizeBytes = 1 * 1024 * 1024;
+
+            // Setting the defer flag to true tells the client to return a request which can be called
+            // with ->execute(); instead of making the API call immediately.
+            $client->setDefer(true);
+            
+            
+
+            // Create a request for the API's videos.insert method to create and upload the video.
+            $insertRequest = $youtube->videos->insert("status,snippet", $video);
+            
+            
+
+            // Create a MediaFileUpload object for resumable uploads.
+            $media = new \Google_Http_MediaFileUpload(
+                $client,
+                $insertRequest,
+                'video/*',
+                null,
+                true,
+                $chunkSizeBytes
+            );
+            $media->setFileSize(filesize($videoPath));
+            
+            //exit;
+			
+			//--------------------------------------------
+            // Read the media file and upload it chunk by chunk.
+            $status = false;
+            $handle = fopen($videoPath, "rb");
+            while (!$status && !feof($handle)) {
+              $chunk = fread($handle, $chunkSizeBytes);
+              $status = $media->nextChunk($chunk);
+            }
+
+            fclose($handle);
+            //-------------------------------------------
+            
+
+
+            // If you want to make other calls after the file upload, set setDefer back to false
+            $client->setDefer(false);
+
+
+            $htmlBody = "<h3>Video Uploaded</h3><ul>";
+            $htmlBody .= sprintf('<li>%s (%s)</li>',
+                $status['snippet']['title'],
+                $status['id']);
+
+            $htmlBody .= '</ul>';
+
+          }
+          catch (Google_Service_Exception $e) {
+            $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
+                htmlspecialchars($e->getMessage()));
+          }
+          catch (Google_Exception $e) {
+            $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
+                htmlspecialchars($e->getMessage()));
+          }
+
+          $_SESSION['token'] = $client->getAccessToken();
+        
+        	//atcl save
+        	$atclModel = $this->article->find($atclId);
+            $atclModel->yt_up = 1;
+            $atclModel->yt_id = $status['id'];
+            $atclModel->save();
+            
+        }
+        else { //Up前のAuhorized確認
+            // If the user hasn't authorized the app, initiate the OAuth flow
+            $state = mt_rand();
+            $client->setState($state);
+            $_SESSION['state'] = $state;
+
+            $authUrl = $client->createAuthUrl();
+            $htmlBody = "<h3>Authorization Required</h3>";
+            $htmlBody .= "<p>You need to <a href=\"" . $authUrl . "\">authorize access</a> before proceeding.<p>";
+        }
+    
+
+		/*
+        $videoResponse = $youtube->videos->listVideos('snippet', array(
+            'id' => 'video_id' 
+        ));
+
+        var_dump($videoResponse);
+        exit;
+        */
+        
+        //...../ytup?state=1069782776&code=4/Rg7JxgphKaKYlGo89WHuWOT2HumKAQGYdC1DGP2Q2Yg#
+    	//return view('dashboard.sns.movieup', ['htmlBody'=>$htmlBody]);
+
+        
+        $status = $htmlBody;
+        return redirect('dashboard/articles/snsup/'. $atclId)->with('ytStatus', $status);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $article = $this->article->find($id);
-        
-        
-        
-        
-        
         //$cates = $this->category->all();
         //$users = $this->user->where('active',1)->get();
         
@@ -304,13 +577,17 @@ class ArticleController extends Controller
     }
     
     
-    public function postTwitter(Request $request)
+    
+    
+    
+    
+    public function getTwFbUp(Request $request)
     {
-//    	echo base_path();
-//        exit;
+
+		$data = session('data');
         
-    	
-        
+        $atclId = $data['atcl_id'];
+        $modelId = $data['modelId'];
 //        $name = 'opal@frank.fam.cx';
 //        $pass = 'ccorenge33';
 
@@ -332,42 +609,45 @@ class ArticleController extends Controller
         //composer show abraham/twitteroauth にてautoload psr-4の名前空間が確認できる　そこから以下でクラス取得可能
         //先頭の逆スラッシュはヘッドで記載のnamespace(名前空間)を解除する
         $connection = new \Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
-        
-//        var_dump($toa);
+        $connection->setTimeouts(10,800);
+
+//        var_dump($connection);
 //        exit;
 
 		//define(‘UPDRAFTPLUS_IPV4_ONLY’, true);
         
         //set_time_limit(0);
-        $connection->setTimeouts(10,500);
         
         
+        $postMsg = $data['title']."\n".$data['tw_comment'];
+        $fileName = last(explode('/', $data['mvPath']));
+        //$fileName = '3s.mp4';
+        //exit;
         
-        
-        $postMsg = "aaaaabbbbb";
-        $fileName = '3s.mp4';
-        $videoPath = base_path() . "/storage/app/public/movie/2/".$fileName;
-        $imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
-    	$fileSize = filesize($videoPath);
-        
-        $cdCmd = 'cd ' . base_path() .'/storage/app/public/' .$basePath .' && ';
+        $path = base_path() . "/storage/app/". $data['mvPath'];
+        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
         
         //if(Storage::exist)
-        exec($cdCmd . 'ffmpeg -i '. $videoPath . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 320x180 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
         echo 'twitter: '.$status;
         
+        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
+        $fileSize = filesize($videoPath);
+        
+        //$imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
+    	
 //        $file = file_get_contents($videoPath);
 //        var_dump($file['media_type']);
 //        exit;
         
  
 		//投稿
-        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true);
+        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4', "media_category"=>'tweet_video'), true);
 //        var_dump($media_id);
 //        exit;
         
         $parameters = array(
-            'status' => '画像投稿aaa',
+            'status' => $postMsg,
             'media_ids' => $media_id->media_id_string,
         );
 		
@@ -376,8 +656,22 @@ class ArticleController extends Controller
         //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
  
 		// レスポンス表示
-		var_dump($result);
-        exit;
+		//var_dump($result->errors[0]->message);
+        //exit;
+        
+        if(isset($result->errors)) {
+        	$status = 'Twitter Error !';
+        }
+        else {
+        	$atclModel = $this->article->fine($atclId);
+            $atclModel->tw_up = 1;
+            $atclModel->save();
+            
+        	$status = 'TwitterにUPされました !';
+        }
+        
+        
+        return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);
         
         /*
         $post_data = array(
@@ -400,7 +694,7 @@ class ArticleController extends Controller
         $htmlBody = $rel;
         */
         
-    	return view('dashboard.sns.twtup', ['htmlBody'=>$htmlBody]);
+    	//return view('dashboard.sns.twtup', ['htmlBody'=>$htmlBody]);
 
     }
 

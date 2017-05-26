@@ -34,8 +34,12 @@ class CreateArticlesTable extends Migration
             $table->boolean('open_status');
             $table->timestamp('open_date')->nullable()->default(NULL);
             
+            $table->string('yt_id')->nullable()->default(NULL);
+            $table->text('yt_description')->nullable()->default(NULL);
+
             $table->boolean('yt_up');
-            $table->boolean('sns_up');
+            $table->boolean('tw_up');
+            $table->boolean('fb_up');
             
             $table->integer('view_count');
             
@@ -61,8 +65,10 @@ class CreateArticlesTable extends Migration
                     'open_date' => date('Y-m-d H:i:s', time()),
                     'view_count' => $n+3,
                     
+                    //'yt_id' =>,
                     'yt_up' => 0,
-                	'sns_up' => 0,
+                	'tw_up' => 0,
+                    'fb_up' =>0,
                     
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),

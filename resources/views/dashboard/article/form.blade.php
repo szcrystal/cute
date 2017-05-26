@@ -1,7 +1,9 @@
 @extends('layouts.appDashBoard')
 
 @section('content')
-	
+
+
+
 	<h3 class="page-header">
 	@if(isset($edit))
     記事編集
@@ -33,8 +35,9 @@
         </div>
     @endif
         
-    <div class="well">
-    	<div class="text-center">
+	<div class="well">
+
+        <div class="text-center">
         	@if(isset($mv) && $mv->movie_path != '')
             <video id="mainMv" width="800" height="500" poster="" controls>
                 <source src="{{ Storage::url($mv->movie_path) }}">
@@ -48,17 +51,53 @@
         <hr>
 
         <div class="clearfix">
-            <div class="btn-group-md pull-right">
+            <div class="col-md-6 btn-group-md pull-right">
 
                 @if(Ctm::isDev())
+                	@if(isset($id) && $id)
+                	<div class="col-md-7 pull-left">
+                        <div class="pull-left">
+                            <ul>
+                            	@if(!$atcl->yt_up)
+								<li>YouTube：未UP
+                                @else
+                                <li>YouTube：UP済み
+                                @endif
 
-                <div class="pull-left">
-                    <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles/twitter" enctype="multipart/form-data">
-                    <div class="col-md-6 pull-left">
-                        <button type="submit" class="btn btn-danger center-block w-btn" disabled>YouTube UP</button>
+                                @if(!$atcl->tw_up)
+								<li>Twitter：未UP
+                                @else
+                                <li>Twitter：UP済み
+                                @endif
+
+                                @if(!$atcl->fb_up)
+								<li>FaceBook：未UP
+                                @else
+                                <li>FaceBook：UP済み
+                                @endif
+
+                            </ul>
+                        </div>
                     </div>
+
+
+					<div class="col-md-4 pull-left">
+                        <div class="pull-left">
+                            <a href="{{ url('dashboard/articles/snsup/'. $id) }}" class="btn btn-success">Social UP Page >></a>
+                        </div>
+                    </div>
+                    @endif
+
+				{{--
+                <div class="pull-left">
+                    <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles/ytup" enctype="multipart/form-data">
+                    	{{ csrf_field() }}
+                        <div class="col-md-6 pull-left">
+                            <input id="ytUp" type="button" class="btn btn-danger center-block w-btn" value="YouTubeUP">
+                        </div>
                     </form>
                 </div>
+                
 
 				<div class="pull-left">
                     <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles/twitter" enctype="multipart/form-data">
@@ -71,6 +110,7 @@
                         </div>
                     </form>
                 </div>
+                --}}
 
                 @endif
 
@@ -78,6 +118,7 @@
         </div>
 
         <hr>
+
 
         <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles" enctype="multipart/form-data">
 			@if(isset($edit))
@@ -87,6 +128,18 @@
             {{ csrf_field() }}
 
             <input type="hidden" name="movie_id" value="{{ $mvId }}">
+
+            <div class="clearfix">
+                <div class="btn-group-md pull-right">
+                    @if(Ctm::isDev())
+                        <div class="pull-left">
+                                <div class="col-md-6 pull-left">
+                                    <input type="submit" id="ytUp" class="btn btn-danger center-block w-btn" name="ytUp" value="YouTubeUP">
+                                </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
@@ -212,7 +265,7 @@
 			<div class="form-group{{ $errors->has('area_info') ? ' has-error' : '' }}">
                 <label for="area_info" class="col-md-3 control-label">住所</label>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <input id="area_info" type="text" class="form-control" name="area_info" value="{{ Ctm::isOld() ? old('area_info') : (isset($atcl) ? $atcl->area_info : '') }}">
 
                     @if ($errors->has('area_info'))
@@ -228,7 +281,7 @@
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label for="title" class="col-md-3 control-label">タイトル</label>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($atcl) ? $atcl->title : '') }}" required>
 
                     @if ($errors->has('title'))
@@ -243,7 +296,7 @@
             <div class="form-group{{ $errors->has('slug') ? ' has-error' : '' }}">
                 <label for="slug" class="col-md-3 control-label">スラッグ（URL）</label>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <input id="slug" type="text" class="form-control" name="slug" value="{{ Ctm::isOld() ? old('slug') : (isset($atcl) ? $atcl->slug : '') }}" required placeholder="半角英数字とハイフンのみ">
 
                     @if ($errors->has('slug'))
@@ -258,12 +311,27 @@
             <div class="form-group{{ $errors->has('basic_info') ? ' has-error' : '' }}">
                 <label for="basic_info" class="col-md-3 control-label">基本情報</label>
 
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <textarea id="basic_info" type="text" class="form-control" name="basic_info" rows="15">{{ isset($atcl) && !count(old()) ? $atcl->basic_info : old('basic_info') }}</textarea>
 
                     @if ($errors->has('basic_info'))
                         <span class="help-block">
                             <strong>{{ $errors->first('basic_info') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+
+            <div class="form-group{{ $errors->has('yt_description') ? ' has-error' : '' }}">
+                <label for="yt_description" class="col-md-3 control-label">YouTube用コメント</label>
+
+                <div class="col-md-8">
+                    <textarea id="yt_description" type="text" class="form-control" name="yt_description" rows="10">{{ isset($atcl) && !count(old()) ? $atcl->yt_description : old('yt_description') }}</textarea>
+
+                    @if ($errors->has('yt_description'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('yt_description') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -305,164 +373,9 @@
             </div><?php //tagwrap ?>
 
 
-
-{{--
-                <p>記事内容 ----------</p>
-
-                <div class="form-group{{ $errors->has('story_title') ? ' has-error' : '' }}">
-                    <label for="title" class="col-md-4 control-label">タイトル</label>
-
-                    <div class="col-md-6">
-                        <input id="story_title" type="text" class="form-control" name="story_title" value="{{ old('story_title') }}" required autofocus>
-
-                        @if ($errors->has('story_title'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('story_title') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('story_sub_title') ? ' has-error' : '' }}">
-                    <label for="story_sub_title" class="col-md-4 control-label">オプション（サブタイトル）</label>
-
-                    <div class="col-md-6">
-                        <input id="story_sub_title" type="text" class="form-control" name="story_sub_title" value="{{ old('story_sub_title') }}" required autofocus>
-
-                        @if ($errors->has('story_sub_title'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('story_sub_title') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                
-
-                <p>画像 -----------</p>
-                <div class="form-group{{ $errors->has('image_title') ? ' has-error' : '' }}">
-                    <label for="image_title" class="col-md-4 control-label">画像タイトル</label>
-
-                    <div class="col-md-6">
-                        <input id="image_title" type="text" class="form-control" name="image_title" value="{{ old('image_title') }}" required autofocus>
-
-                        @if ($errors->has('image_title'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('image_title') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('image_path') ? ' has-error' : '' }}">
-                    <label for="image_path" class="col-md-4 control-label">画像パス</label>
-
-                    <div class="col-md-6">
-                        <input id="image_path" type="text" class="form-control" name="image_path" value="{{ old('image_path') }}" required autofocus>
-
-                        @if ($errors->has('image_path'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('image_path') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('image_url') ? ' has-error' : '' }}">
-                    <label for="image_url" class="col-md-4 control-label">引用元URL</label>
-
-                    <div class="col-md-6">
-                        <input id="image_url" type="text" class="form-control" name="image_url" value="{{ old('image_url') }}" required autofocus>
-
-                        @if ($errors->has('image_url'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('image_url') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('image_comment') ? ' has-error' : '' }}">
-                    <label for="image_comment" class="col-md-4 control-label">コメント</label>
-
-                    <div class="col-md-6">
-                        <textarea id="image_comment" type="text" class="form-control" name="image_comment" value="{{ old('image_comment') }}" required></textarea>
-
-                        @if ($errors->has('image_comment'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('image_comment') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-
-                <p>リンク -----------</p>
-                <div class="form-group{{ $errors->has('link_title') ? ' has-error' : '' }}">
-                    <label for="link_title" class="col-md-4 control-label">リンクタイトル</label>
-
-                    <div class="col-md-6">
-                        <input id="link_title" type="text" class="form-control" name="link_title" value="{{ old('link_title') }}" required autofocus>
-
-                        @if ($errors->has('link_title'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('link_title') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('link_url') ? ' has-error' : '' }}">
-                    <label for="link_url" class="col-md-4 control-label">リンクURL</label>
-
-                    <div class="col-md-6">
-                        <input id="link_url" type="text" class="form-control" name="link_url" value="{{ old('link_url') }}" required autofocus>
-
-                        @if ($errors->has('link_url'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('link_url') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('link_image_url') ? ' has-error' : '' }}">
-                    <label for="link_image_url" class="col-md-4 control-label">画像URL</label>
-
-                    <div class="col-md-6">
-                        <input id="link_image_url" type="text" class="form-control" name="link_image_url" value="{{ old('link_image_url') }}" required autofocus>
-
-                        @if ($errors->has('link_image_url'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('link_image_url') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-
-                <div class="form-group{{ $errors->has('link_option') ? ' has-error' : '' }}">
-                        <label for="link_option" class="col-md-4 control-label">オプション</label>
-
-                        <div class="col-md-6">
-                            <select class="form-control" name="link_option">
-                                <option value="通常リンク">通常リンク</option>
-                                <option value="タイプA">ボタンタイプA</option>
-                                <option value="タイプB">ボタンタイプB</option>
-                            </select>
-
-                            @if ($errors->has('link_option'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('link_option') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                </div>
---}}
-
 		<div class="form-group">
             <div class=" col-md-9 col-md-offset-3">
-                <button type="submit" class="btn btn-primary w-btn">　更　新　</button>
+                <button type="submit" class="btn btn-primary col-md-6 w-btn">　更　新　</button>
             </div>
         </div>
 
@@ -472,7 +385,6 @@
 
 
         </form>
-
     </div>
 
     
