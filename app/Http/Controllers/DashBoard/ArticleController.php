@@ -191,7 +191,8 @@ class ArticleController extends Controller
             //$data['model_id'] = 1;
             $data['view_count'] = 0;
             $data['yt_up'] = 0;
-            $data['sns_up'] = 0;
+            $data['tw_up'] = 0;
+            $data['fb_up'] = 0;
             
         	$atcl = $this->article;
         }
@@ -689,7 +690,7 @@ class ArticleController extends Controller
               'default_graph_version' => 'v2.9',
             ]);
             
-            $token = '';
+            $token = 'EAADAAlsDH7kBAH7kMYHZCYodY334V5VZAaDBRhiyLVxutyzUC2kvpyt4sqZBuGOSzpx1AJXOzZCAQRUJXTeAKxquZAOJVWEAkhk4dM8xaF5Xlz5gotu6ikj5csIhPceRzZAeDHeRZAU99Bj6rWwEe0AZApZAS43aJRHZAcj8WPvO8vWwZDZD';
         }
         
         
