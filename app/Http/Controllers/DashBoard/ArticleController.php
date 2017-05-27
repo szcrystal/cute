@@ -639,7 +639,7 @@ class ArticleController extends Controller
         
  
 		//投稿
-        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4', "media_category"=>'tweet_video'), true);
+        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true); //, "media_category"=>'tweet_video'
 //        var_dump($media_id);
 //        exit;
         
@@ -656,11 +656,13 @@ class ArticleController extends Controller
 		//var_dump($result->errors[0]->message);
         //exit;
         
+        $status = array();
+        
         if(isset($result->errors)) {
         	$status[] = 'Twitter Error !';
         }
         else {
-        	$atclModel = $this->article->fine($atclId);
+        	$atclModel = $this->article->find($atclId);
             $atclModel->tw_up = 1;
             $atclModel->save();
             
