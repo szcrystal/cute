@@ -78,7 +78,7 @@
                         <div class="pull-right">
                             <div class="col-md-8 pull-left">
                             	@if($atcl->yt_id)
-								<p class="col-md-12 text-warning text-small">YouTubeにUP済みです</p>
+								<p class="col-md-8 text-warning text-small text-right">YouTubeにUP済みです</p>
                                 @endif
                                 <input type="submit" id="ytUp" class="btn btn-danger center-block w-btn" name="ytUp" value="YouTubeUP">
                             </div>
@@ -133,9 +133,11 @@
 
 	@if (session('twStatus'))
         <div class="alert alert-success">
+        	<ul>
         	@foreach(session('twStatus') as $s)
-            {!! $s !!}
+            	<li>{!! $s !!}
             @endforeach
+            </ul>
         </div>
     @endif
 
