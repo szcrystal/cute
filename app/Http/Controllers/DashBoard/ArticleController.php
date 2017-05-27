@@ -591,10 +591,11 @@ class ArticleController extends Controller
 //        $name = 'opal@frank.fam.cx';
 //        $pass = 'ccorenge33';
 
+/*
 		$name = 'cute_campus'; //y.yamasaki@crepus.jp
         $pass = '14092ugaAC';
         
-    	$url = 'https://upload.twitter.com/1.1/media/upload.json';
+    	//$url = 'https://upload.twitter.com/1.1/media/upload.json';
     	
         $consumer_key = 'a50OiN3f4hoxXFSS2zK2j6mTK';
         $consumer_secret = 'DKKhv9U1755hu0zzxbklyPA3GpuAsTTqedoNCFTUKyACshPuOE';
@@ -615,9 +616,7 @@ class ArticleController extends Controller
 //        exit;
 
 		//define(‘UPDRAFTPLUS_IPV4_ONLY’, true);
-        
         //set_time_limit(0);
-        
         
         $postMsg = $data['title']."\n".$data['tw_comment'];
         $fileName = last(explode('/', $data['mvPath']));
@@ -660,15 +659,94 @@ class ArticleController extends Controller
         //exit;
         
         if(isset($result->errors)) {
-        	$status = 'Twitter Error !';
+        	$status[] = 'Twitter Error !';
         }
         else {
         	$atclModel = $this->article->fine($atclId);
             $atclModel->tw_up = 1;
             $atclModel->save();
             
-        	$status = 'TwitterにUPされました !';
+        	$status[] = 'TwitterにUPされました !';
         }
+*/
+        
+        
+        // FB ========================================================
+        
+        //https://developers.facebook.com/docs/php/howto/example_upload_video
+        
+        if(env('ENVIRONMENT') == 'dev') {
+        	$fb = new \Facebook\Facebook([
+              'app_id' => '466002250405349',
+              'app_secret' => '05836f0f3849cb3a8a4ede1aaf4d44d6',
+              'default_graph_version' => 'v2.9',
+            ]);
+            
+            $token = 'EAAGn05qZAleUBAJGsWXEHEQ91UoBcYY3pm9WRzY8QbcKMVwWZAVvIJJRFywlhOvLnDFUa5SZBPjG82mdV8AFR0eAHohnTVzjQ2GbAkaSKStt53JsZCXzsGVICV82kPaGU8AjMakBowFAIMHe5f3ae94UDWO888PZCJ0XXRo8CZBAZDZD';
+        }
+        else {
+            $fb = new \Facebook\Facebook([
+              'app_id' => '211116349398969',
+              'app_secret' => '7c8d105958970dc64642ef463f1ec874',
+              'default_graph_version' => 'v2.9',
+            ]);
+            
+            $token = '';
+        }
+        
+        
+        
+        //var_dump($fb);
+        //exit;
+        
+        $fileName = 'main.mp4';
+        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
+        
+        $data = [
+          'title' => $data['title'],
+          'description' => $data['tw_comment'],
+          'source' => $fb->videoToUpload($videoPath),
+        ];
+        
+        $errorFb = '';
+        
+        try {
+          $response = $fb->post('/me/videos', $data, $token); //'user-access-token'
+        }
+        catch(\Facebook\Exceptions\FacebookResponseException $e) {
+          // When Graph returns an error
+          //echo 'Graph returned an error: ' . $e->getMessage();
+          //exit;
+          $errorFb = 'Graph returned an error: ' . $e->getMessage();
+        }
+        catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        	// When validation fails or other local issues
+          //echo 'Facebook SDK returned an error: ' . $e->getMessage();
+          //exit;
+          $errorFb = 'Facebook SDK returned an error: ' . $e->getMessage();
+        }
+
+        $graphNode = $response->getGraphNode();
+        var_dump($graphNode);
+        
+        //echo 'Video ID: ' . $graphNode['id'];
+        if($errorFb == '') {
+        	$status[] = $errorFb;
+        }
+        else {
+            $status[] = 'FaceBook OK :[Video ID] ' . $graphNode['id'];
+            
+            $atclModel = $this->article->fine($atclId);
+            $atclModel->fb_up = 1;
+            $atclModel->save();
+        }
+
+        
+        //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
+        
+        
+        
+        
         
         
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);

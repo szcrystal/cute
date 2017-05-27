@@ -30,14 +30,14 @@
     @endif
         
 	@if (session('status'))
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             {!! session('status') !!}
         </div>
     @endif
         
 	<div class="well clearfix">
 
-        <div class="text-center">
+        <div class="text-left">
         	@if(isset($mv) && $mv->movie_path != '')
             <video id="mainMv" width="480" height="270" poster="" controls>
                 <source src="{{ Storage::url($mv->movie_path) }}">
@@ -77,7 +77,10 @@
                 <div class="btn-group-md pull-right col-md-7">
                     @if(Ctm::isDev())
                         <div class="pull-right">
-                            <div class="col-md-6 pull-left">
+                            <div class="col-md-8 pull-right">
+                            	@if($atcl->yt_id)
+								<p class="col-md-12 text-warning text-small">YouTubeにUP済みです</p>
+                                @endif
                                 <input type="submit" id="ytUp" class="btn btn-danger center-block w-btn" name="ytUp" value="YouTubeUP">
                             </div>
                         </div>
@@ -132,7 +135,9 @@
 
 	@if (session('twStatus'))
         <div class="alert alert-success">
-            {!! session('twStatus') !!}
+        	@foreach(session('twStatus') as $s)
+            {!! $s !!}
+            @endforeach
         </div>
     @endif
 
@@ -188,6 +193,9 @@
                 @if(Ctm::isDev())
                     <div class="pull-left">
                         <div class="col-md-6 pull-left">
+                        	@if($atcl->tw_id)
+								<p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
+                            @endif
                             <input type="submit" id="twFbUp" class="btn btn-info center-block w-btn" name="twFbUp" value="TW FB UP">
                         </div>
                     </div>
