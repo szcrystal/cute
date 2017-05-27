@@ -732,7 +732,7 @@ class ArticleController extends Controller
         var_dump($graphNode);
         
         //echo 'Video ID: ' . $graphNode['id'];
-        if($errorFb == '') {
+        if($errorFb != '') {
         	$status[] = $errorFb;
         }
         else {
