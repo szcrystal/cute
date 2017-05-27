@@ -53,15 +53,15 @@
         <div class="clearfix">
             <div class="col-md-6 btn-group-md pull-right">
 
-                @if(Ctm::isDev())
-                	@if(isset($id) && $id)
+                @if(Auth::guard('admin')->id() == 2)
+                	@if(isset($edit))
                 	<div class="col-md-7 pull-left">
                         <div class="pull-left">
                             <ul>
                             	@if(!$atcl->yt_up)
 								<li>YouTube：<span class="text-danger">未UP</span>
                                 @else
-                                <li>YouTube：<span class="text-success">UP済み
+                                <li>YouTube：<span class="text-success">UP済み</span>
                                 @endif
 
                                 @if(!$atcl->tw_up)
