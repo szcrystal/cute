@@ -59,21 +59,21 @@
                         <div class="pull-left">
                             <ul>
                             	@if(!$atcl->yt_up)
-								<li>YouTube：未UP
+								<li>YouTube：<span class="text-danger">未UP</span>
                                 @else
-                                <li>YouTube：UP済み
+                                <li>YouTube：<span class="text-success">UP済み
                                 @endif
 
                                 @if(!$atcl->tw_up)
-								<li>Twitter：未UP
+								<li>Twitter：<span class="text-danger">未UP</span>
                                 @else
-                                <li>Twitter：UP済み
+                                <li>Twitter：<span class="text-success">UP済み</span>
                                 @endif
 
                                 @if(!$atcl->fb_up)
-								<li>FaceBook：未UP
+								<li>FaceBook：<span class="text-danger">未UP</span>
                                 @else
-                                <li>FaceBook：UP済み
+                                <li>FaceBook：<span class="text-success">UP済み</span>
                                 @endif
 
                             </ul>
@@ -129,6 +129,7 @@
 
             <input type="hidden" name="movie_id" value="{{ $mvId }}">
 
+			{{--
             <div class="clearfix">
                 <div class="btn-group-md pull-right">
                     @if(Ctm::isDev())
@@ -140,6 +141,7 @@
                     @endif
                 </div>
             </div>
+            --}}
 
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
@@ -324,7 +326,7 @@
 
 
             <div class="form-group{{ $errors->has('yt_description') ? ' has-error' : '' }}">
-                <label for="yt_description" class="col-md-3 control-label">YouTube用コメント</label>
+                <label for="yt_description" class="col-md-3 control-label">YouTube用 説明</label>
 
                 <div class="col-md-8">
                     <textarea id="yt_description" type="text" class="form-control" name="yt_description" rows="10">{{ isset($atcl) && !count(old()) ? $atcl->yt_description : old('yt_description') }}</textarea>

@@ -72,12 +72,12 @@
 
             <input type="hidden" name="movie_id" value="{{ $mvId }}">
 
-            <div class="clearfix">
-            	<p class="pull-left col-md-5">YouTubeには以下の情報が送信されます。<br>訂正する場合は戻って更新し直して下さい。</p>
+            <div style="margin-bottom:2em;" class="clearfix">
+            	<p class="pull-left col-md-5"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
                 <div class="btn-group-md pull-right col-md-7">
                     @if(Ctm::isDev())
                         <div class="pull-right">
-                            <div class="col-md-8 pull-right">
+                            <div class="col-md-8 pull-left">
                             	@if($atcl->yt_id)
 								<p class="col-md-12 text-warning text-small">YouTubeにUP済みです</p>
                                 @endif
@@ -101,7 +101,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('yt_description') ? ' has-error' : '' }}">
-                <label for="yt_description" class="col-md-3 control-label">コメント</label>
+                <label for="yt_description" class="col-md-3 control-label">YouTube用 説明</label>
 
                 <div class="col-md-9">
 					<p style="margin-top: 0.3em;" class="">{{ $atcl->yt_description }}</p>
@@ -141,7 +141,9 @@
         </div>
     @endif
 
-
+		<div style="margin-bottom: 2em;" class="clearfix">
+            <p class="pull-left col-md-5"><b>Twitter/FBへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+        </div>
 
 		<div class="clearfix">
         	<div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
