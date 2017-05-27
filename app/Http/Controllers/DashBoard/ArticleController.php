@@ -738,7 +738,7 @@ class ArticleController extends Controller
         else {
             $status[] = 'FaceBook OK :[Video ID] ' . $graphNode['id'];
             
-            $atclModel = $this->article->fine($atclId);
+            $atclModel = $this->article->find($atclId);
             $atclModel->fb_up = 1;
             $atclModel->save();
         }
