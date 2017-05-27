@@ -625,7 +625,7 @@ class ArticleController extends Controller
         $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
         
         //if(Storage::exist)
-        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 320x180 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
         echo 'twitter: '.$status;
         
         $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
@@ -671,7 +671,7 @@ class ArticleController extends Controller
 
 
         
-/*
+
         // FB ========================================================
         
         //https://developers.facebook.com/docs/php/howto/example_upload_video
@@ -700,14 +700,15 @@ class ArticleController extends Controller
         //var_dump($fb);
         //exit;
         
-        $fileName = 'main.mp4';
-        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
+        //$fileName = 'main.mp4';
+        //$videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
         
         $data = [
           'title' => $data['title'],
           'description' => $data['tw_comment'],
           'source' => $fb->videoToUpload($videoPath),
         ];
+        
         
         $errorFb = '';
         
@@ -744,7 +745,6 @@ class ArticleController extends Controller
 
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
-*/
         
         
         
