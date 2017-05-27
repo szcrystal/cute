@@ -75,7 +75,6 @@
             <div style="margin-bottom:2em;" class="clearfix">
             	<p class="pull-left col-md-5"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
                 <div class="btn-group-md pull-right col-md-7">
-                    @if(Ctm::isDev())
                         <div class="pull-right">
                             <div class="col-md-8 pull-left">
                             	@if($atcl->yt_id)
@@ -84,7 +83,6 @@
                                 <input type="submit" id="ytUp" class="btn btn-danger center-block w-btn" name="ytUp" value="YouTubeUP">
                             </div>
                         </div>
-                    @endif
             	</div>
 
             </div>
@@ -192,16 +190,14 @@
             </div>
 
             <div class="btn-group-md pull-right">
-                @if(Ctm::isDev())
-                    <div class="pull-left">
-                        <div class="col-md-6 pull-left">
-                        	@if($atcl->tw_id)
-								<p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
-                            @endif
-                            <input type="submit" id="twFbUp" class="btn btn-info center-block w-btn" name="twFbUp" value="TW FB UP">
-                        </div>
+                <div class="pull-left">
+                    <div class="col-md-6 pull-left">
+                        @if($atcl->tw_id)
+                            <p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
+                        @endif
+                        <input type="submit" id="twFbUp" class="btn btn-info center-block w-btn" name="twFbUp" value="TW FB UP">
                     </div>
-                @endif
+                </div>
             </div>
 
         </div>
