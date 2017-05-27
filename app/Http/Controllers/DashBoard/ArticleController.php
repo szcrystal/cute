@@ -304,9 +304,6 @@ class ArticleController extends Controller
     {
     	$data = $request->all();
         
-//        print_r($data);
-//        exit;
-        
         $mv = $this->mvCombine->find($data['movie_id']);
         $data['mvPath'] = $mv->movie_path;
         $data['modelId'] = $mv->model_id;
@@ -355,7 +352,7 @@ class ArticleController extends Controller
 //        $client_id = '362243100375-n8beqqfeu29qfcac18rjdvnv8thblogk.apps.googleusercontent.com';
 //        $client_secret = 'bQZyhPR9f8O0UwjWauoFKSri';
 
-		if(env('ENVIRONMENT') == 'dev') {
+		if(env('ENVIRONMENT') == 'dev') { //ログインを促されるので環境によって分ける
             //szc.dip.jp
             $client_id = '938943463544-ks3dacrb1a150v73i7j3m9t2f3h5dod4.apps.googleusercontent.com';
             $client_secret = 'VoCuh8cDVTxa_RV8aw6W78ww';
@@ -591,7 +588,7 @@ class ArticleController extends Controller
 //        $name = 'opal@frank.fam.cx';
 //        $pass = 'ccorenge33';
 
-/*
+
 		$name = 'cute_campus'; //y.yamasaki@crepus.jp
         $pass = '14092ugaAC';
         
@@ -668,9 +665,10 @@ class ArticleController extends Controller
             
         	$status[] = 'TwitterにUPされました !';
         }
-*/
+
+
         
-        
+/*
         // FB ========================================================
         
         //https://developers.facebook.com/docs/php/howto/example_upload_video
@@ -743,7 +741,7 @@ class ArticleController extends Controller
 
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
-        
+*/
         
         
         
@@ -751,28 +749,6 @@ class ArticleController extends Controller
         
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);
         
-        /*
-        $post_data = array(
-          'command'=>'INIT',
-          'media_type' => 'video/mp4', 動画の場合video/mp4固定（mp4のみ対応の為）
-          'total_bytes' => $fileSize, 動画のファイルサイズ
-        );
-        
-        $context = stream_context_create(array(
-            'http' => array(
-              'method'  => 'POST',
-              'header' => "Content-type: application/x-www-form-urlencoded",
-              'header'  => sprintf("Authorization: Basic %s", base64_encode($name.':'.$pass)). " Content-type: application/x-www-form-urlencoded",
-              'content' => http_build_query($post_data, "", "&"),
-              'timeout' => 10,
-            ),
-        ));
-        
-        $ret = file_get_contents($url, false, $context);
-        $htmlBody = $rel;
-        */
-        
-    	//return view('dashboard.sns.twtup', ['htmlBody'=>$htmlBody]);
 
     }
 
