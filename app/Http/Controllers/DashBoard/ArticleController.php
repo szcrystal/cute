@@ -593,8 +593,6 @@ class ArticleController extends Controller
 		$name = 'cute_campus'; //y.yamasaki@crepus.jp
         $pass = '14092ugaAC';
         
-    	//$url = 'https://upload.twitter.com/1.1/media/upload.json';
-    	
         $consumer_key = 'a50OiN3f4hoxXFSS2zK2j6mTK';
         $consumer_secret = 'DKKhv9U1755hu0zzxbklyPA3GpuAsTTqedoNCFTUKyACshPuOE';
         $access_token = '2515940671-scGnBAVUnURLykOpp0C9uxsmOz6zg1iTkILVqZa';
@@ -609,43 +607,84 @@ class ArticleController extends Controller
         //先頭の逆スラッシュはヘッドで記載のnamespace(名前空間)を解除する
         $connection = new \Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
         $connection->setTimeouts(10,800);
-
 //        var_dump($connection);
 //        exit;
 
-		//define(‘UPDRAFTPLUS_IPV4_ONLY’, true);
-        //set_time_limit(0);
-        
-        $postMsg = $data['title']."\n".$data['tw_comment'];
-        $fileName = last(explode('/', $data['mvPath']));
-        //$fileName = '3s.mp4';
-        //exit;
-        
-        $path = base_path() . "/storage/app/". $data['mvPath'];
-        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
-        
-        //if(Storage::exist)
-        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
-        echo 'twitter: '.$status;
-        
-        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
-        $fileSize = filesize($videoPath);
         
         //$imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
     	
 //        $file = file_get_contents($videoPath);
 //        var_dump($file['media_type']);
 //        exit;
+
+        
+        $postMsg = $data['title']."\n".$data['tw_comment']; //$fileName = '3s.mp4';
+        //$fileName = last(explode('/', $data['mvPath']));
+        $fileName = '3s.mp4';
+        $path = base_path() . "/storage/app/". $data['mvPath'];
+        
+        //Video edit ======
+        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
+        
+        //if(Storage::exist)
+        //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+        echo 'twitter: '.$status;
+        // END ============
+        
+        
+        
+        $url = 'https://upload.twitter.com/1.1/statuses/update.json';
+        $uri = 'https://upload.twitter.com/1.1/media/upload.json';
+
+        $segment_index = 0;
+        $chank = 5 * 1024 * 1024;
+        
+        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
+        $fileSize = filesize($videoPath);
+
+        //動画のデータファイルをバイナリに変換する。
+        $file_data = file_get_contents($videoPath);
+        $file_data = base64_encode($file_data);
+        $file_size = mb_strlen($file_data);
+        
+        $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'INIT', 'media_type'=>'video/mp4', 'total_bytes'=>$fileSize, 'media_category' => 'tweet_video'));
+		$obj = json_decode($info);
+
+        
+        //メディアのＩＤを取得
+        $sba = $obj->media_id_string;
+
+        //何回アップロードが必要か
+        $maxRound = ceil($file_size / $chank);
+
+        //APPENDをファイルサイズ分割分だけアップロード
+        for($i=0; $i<$maxRound; $i++){
+        	$file_size_x[$i] = substr($file_data, $chank*$i, $chank);
+            $connection->OAuthRequest($uri, 'POST', array('command'=>'APPEND', 'media_id' =>$sba, 'segment_index'=>$i, 'media'=>$file_size_x[$i],));
+        }
+        $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'FINALIZE','media_id' => $sba));
+        $obj = json_decode($info);
+
+        //アップロードしたデータ情報をファイルサイズ分割分だけ最新化
+        for($i=0; $i<$maxRound; $i++){
+        	sleep($obj->processing_info->check_after_secs);
+        	$res = $connection->get('media/upload', array('command'=>'STATUS', 'media_id'=>$sba));
+        }
+
+        //動画とテキストを投稿
+        //$res = $to->post(“statuses/update”, array(“status” => $fileText,’media_ids’ => $sba));
+        
         
  
-		//投稿
-        $media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true); //, "media_category"=>'tweet_video'
+		//投稿 Simple
+        //$media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true); //, "media_category"=>'tweet_video'
 //        var_dump($media_id);
 //        exit;
         
         $parameters = array(
             'status' => $postMsg,
-            'media_ids' => $media_id->media_id_string,
+            'media_ids' => $sba/*$media_id->media_id_string*/,
         );
 		
         $result = $connection->post("statuses/update", $parameters);
@@ -748,10 +787,7 @@ class ArticleController extends Controller
         
         
         
-        
-        
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);
-        
 
     }
 
