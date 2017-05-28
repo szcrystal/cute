@@ -153,7 +153,7 @@
                     <div class="col-md-8">
                     	<?php
                         	$pass = '';
-                            if($twa !== null && old('tw_pass')===null) {
+                            if(isset($twa) && old('tw_pass')===null) {
                             	$pass = decrypt($twa->pass);
                             }
                             else if(old('tw_pass')!==null) {

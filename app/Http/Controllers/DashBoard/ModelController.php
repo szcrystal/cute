@@ -95,10 +95,6 @@ class ModelController extends Controller
         
         $data = $request->all();
         
-        
-        
-        
-        
         if($modelId ) { //update（編集）の時
             $mdModel = $this->user->find($modelId);
             

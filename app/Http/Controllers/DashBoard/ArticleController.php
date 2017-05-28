@@ -624,9 +624,12 @@ class ArticleController extends Controller
         }
         // END ============
         
-        
+        $modelIdArr = [1, $modelId, ];
+        if($modelId == 1) {
+        	$modelIdArr = [1, ];
+        }
 
-		$accounts = $this->twAccount->whereIn('model_id', [ 1, $modelId, ])->get();
+		$accounts = $this->twAccount->whereIn('model_id', $modelIdArr)->get();
         //foreach($accounts as $account) {
         //	echo decrypt($account->pass);
         //}
