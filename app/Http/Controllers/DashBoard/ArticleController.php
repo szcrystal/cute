@@ -719,14 +719,14 @@ class ArticleController extends Controller
             
             
             if(isset($result->errors[0]->message)) {
-                $status[] = 'Twitter Error! '. $name;
+                $status[] = 'Twitter Error!'.$name;
             }
             else {
                 $atclModel = $this->article->find($atclId);
                 $atclModel->tw_up = 1;
                 $atclModel->save();
                 
-                $status[] = 'TwitterにUPされました! ' . $name;
+                $status[] = 'TwitterにUPされました!'.$name;
             }
             
         
