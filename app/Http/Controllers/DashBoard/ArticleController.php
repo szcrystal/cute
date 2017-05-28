@@ -619,8 +619,8 @@ class ArticleController extends Controller
 
         
         $postMsg = $data['title']."\n".$data['tw_comment']; //$fileName = '3s.mp4';
-        //$fileName = last(explode('/', $data['mvPath']));
-        $fileName = '3s.mp4';
+        $fileName = last(explode('/', $data['mvPath']));
+        //$fileName = '3s.mp4';
         $path = base_path() . "/storage/app/". $data['mvPath'];
         
         //Video edit ======
