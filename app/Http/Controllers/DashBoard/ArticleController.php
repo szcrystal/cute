@@ -593,7 +593,7 @@ class ArticleController extends Controller
         $modelId = $data['modelId'];
 
 
-		$status = array();
+		$resultArr = array();
 		
         $postMsg = $data['title']."\n".$data['tw_comment']; //$fileName = '3s.mp4';
         $fileName = last(explode('/', $data['mvPath']));
@@ -719,14 +719,14 @@ class ArticleController extends Controller
             
             
             if(isset($result->errors[0]->message)) {
-                $status[] = 'Twitter Error!'.$name;
+                $resultArr[] = 'Twitter Error ! '.$name;
             }
             else {
                 $atclModel = $this->article->find($atclId);
                 $atclModel->tw_up = 1;
                 $atclModel->save();
                 
-                $status[] = 'TwitterにUPされました!'.$name;
+                $resultArr[] = 'TwitterにUPされました ! '.$name;
             }
             
         
@@ -735,7 +735,7 @@ class ArticleController extends Controller
 		//var_dump($status);
         //exit;
         
-/*
+
         // FB ========================================================
         
         //https://developers.facebook.com/docs/php/howto/example_upload_video
@@ -797,22 +797,22 @@ class ArticleController extends Controller
         
         //echo 'Video ID: ' . $graphNode['id'];
         if($errorFb != '') {
-        	$status[] = $errorFb;
+        	$resultArr[] = $errorFb;
         }
         else {
-            $status[] = 'FaceBook OK :[Video ID] ' . $graphNode['id'];
-            
             $atclModel = $this->article->find($atclId);
             $atclModel->fb_up = 1;
             $atclModel->save();
+            
+            $resultArr[] = 'FaceBookにUPされました: ID ' . $graphNode['id'];
         }
 
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
-*/
+
         
         
-        return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);
+        return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $resultArr);
 
     }
 
