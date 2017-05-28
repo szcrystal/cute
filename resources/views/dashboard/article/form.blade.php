@@ -53,7 +53,7 @@
         <div class="clearfix">
             <div class="col-md-6 btn-group-md pull-right">
 
-                @if(Auth::guard('admin')->id() == 2)
+                {{-- @if(Auth::guard('admin')->id() == 2) --}}
                 	@if(isset($edit))
                 	<div class="col-md-7 pull-left">
                         <div class="pull-left">
@@ -86,7 +86,7 @@
                             <a href="{{ url('dashboard/articles/snsup/'. $id) }}" class="btn btn-success">Social UP Page >></a>
                         </div>
                     </div>
-                    @endif
+                {{-- @endif --}}
 
 				{{--
                 <div class="pull-left">

@@ -527,7 +527,7 @@ class ArticleController extends Controller
             $_SESSION['state'] = $state;
 
             $authUrl = $client->createAuthUrl();
-            $htmlBody = "<h3>Authorization Required</h3>";
+            $htmlBody = "<p>Authorization Required</p>";
             $htmlBody .= "<p>You need to <a href=\"" . $authUrl . "\">authorize access</a> before proceeding.<p>";
         }
     
