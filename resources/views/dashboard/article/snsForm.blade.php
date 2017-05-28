@@ -74,13 +74,16 @@
 
             <div style="margin-bottom:2em;" class="clearfix">
             	<p class="pull-left col-md-5"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+
                 <div class="btn-group-md pull-right col-md-7">
-                        <div class="pull-right">
-                            <div class="col-md-8 pull-left">
-                            	@if($atcl->yt_id)
-								<p class="col-md-8 text-warning text-small text-right">YouTubeにUP済みです</p>
-                                @endif
-                                <input type="submit" id="ytUp" class="btn btn-danger center-block w-btn" name="ytUp" value="YouTubeUP">
+                        <div class="pull-right text-right">
+                        	{{--
+                            @if(!$atcl->yt_id)
+								<p class="text-warning text-small">YouTubeにUP済みです</p>
+                            @endif
+                            --}}
+                            <div class="col-md-10 pull-right">
+                                <input type="submit" id="ytUp" class="btn btn-danger" name="ytUp" value="YouTubeUP">
                             </div>
                         </div>
             	</div>
@@ -194,9 +197,11 @@
             <div class="btn-group-md pull-right">
                 <div class="pull-left">
                     <div class="col-md-6 pull-left">
-                        @if($atcl->tw_id)
+                    	{{--
+                        @if($atcl->tw_up)
                             <p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
                         @endif
+                        --}}
                         <input type="submit" id="twFbUp" class="btn btn-info center-block w-btn" name="twFbUp" value="TW FB UP">
                     </div>
                 </div>

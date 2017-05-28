@@ -132,7 +132,7 @@
                 @endif
 
 				<hr>
-				<p>Twitter</p>
+				<p>Twitter <a href="https://apps.twitter.com" target="_brank">https://apps.twitter.com</a></p>
 				<div class="form-group{{ $errors->has('tw_name') ? ' has-error' : '' }}">
                     <label for="tw_name" class="col-md-3 control-label">アカウント　@</label>
 

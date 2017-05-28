@@ -24,9 +24,10 @@
               <th>ID</th>
               <th>サムネイル</th>
               <th class="col-md-2">カテゴリー</th>
-              <th class="col-md-4">タイトル</th>
+              <th class="col-md-3">タイトル</th>
               <th class="col-md-2">公開状態</th>
-              <th class="col-md-2">公開日</th>
+              <th class="col-md-2">SNS</th>
+              <th class="col-md-1">公開日</th>
               <th class="col-md-3">モデル [ID]</th>
               <th></th>
               @if(Ctm::isDev())
@@ -74,6 +75,29 @@
                     <span class="text-warning">未公開（保存済）</span>
                     @endif
 
+                </td>
+
+                <td>
+					<ul style="list-style:none; padding-left:0;">
+                        @if(!$obj->yt_up)
+                        <li>YT:<span class="text-danger">未UP</span>
+                        @else
+                        <li>YT:<span class="text-success">UP済み</span>
+                        @endif
+
+                        @if(!$obj->tw_up)
+                        <li>TW:<span class="text-danger">未UP</span>
+                        @else
+                        <li>TW:<span class="text-success">UP済み</span>
+                        @endif
+
+                        @if(!$obj->fb_up)
+                        <li>FB:<span class="text-danger">未UP</span>
+                        @else
+                        <li>FB:<span class="text-success">UP済み</span>
+                        @endif
+
+                    </ul>
                 </td>
 
                 <td>
