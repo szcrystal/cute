@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-2 control-label">ニックネーム</small></label>
+                    <label for="name" class="col-md-3 control-label">ニックネーム</small></label>
 
                     <div class="col-md-8">
                         <input id="name" type="text" class="form-control" name="name" value="{{ isset($model) ? $model->name : old('name') }}">
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                    <label for="full_name" class="col-md-2 control-label">フルネーム</label>
+                    <label for="full_name" class="col-md-3 control-label">フルネーム</label>
 
                     <div class="col-md-8">
                         <input id="full_name" type="text" class="form-control" name="full_name" value="{{ isset($model) ? $model->full_name : old('full_name') }}">
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-2 control-label">メールアドレス</label>
+                    <label for="email" class="col-md-3 control-label">メールアドレス</label>
 
                     <div class="col-md-8">
                         <input id="email" type="email" class="form-control" name="email" value="{{ isset($model) ? $model->email : old('email') }}">
@@ -117,7 +117,7 @@
 
 				@if(!isset($modelId))
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="col-md-2 control-label">パスワード</label>
+                        <label for="password" class="col-md-3 control-label">パスワード</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password" placeholder="8文字以上">
@@ -131,22 +131,106 @@
                     </div>
                 @endif
 
-				<div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
-                    <label for="twitter" class="col-md-2 control-label">Twitter</label>
+				<hr>
+				<p>Twitter</p>
+				<div class="form-group{{ $errors->has('tw_name') ? ' has-error' : '' }}">
+                    <label for="tw_name" class="col-md-3 control-label">アカウント　@</label>
 
                     <div class="col-md-8">
-                        <input id="twitter" type="text" class="form-control" name="twitter" value="{{ isset($model) ? $model->twitter : old('twitter') }}">
+                        <input id="tw_name" type="text" class="form-control" name="tw_name" value="{{ isset($twa) ? $twa->name : old('tw_name') }}">
 
-                        @if ($errors->has('twitter'))
+                        @if ($errors->has('tw_name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('twitter') }}</strong>
+                                <strong>{{ $errors->first('tw_name') }}</strong>
                             </span>
                         @endif
                     </div>
                 </div>
 
+                <div class="form-group{{ $errors->has('tw_pass') ? ' has-error' : '' }}">
+                    <label for="tw_pass" class="col-md-3 control-label">パスワード</label>
+
+                    <div class="col-md-8">
+                    	<?php
+                        	$pass = '';
+                            if($twa !== null && old('tw_pass')===null) {
+                            	$pass = decrypt($twa->pass);
+                            }
+                            else if(old('tw_pass')!==null) {
+                                $pass = decrypt(old('tw_pass'));
+                            }
+                        ?>
+                        <input id="tw_pass" type="password" class="form-control" name="tw_pass" value="{{ $pass }}">
+
+                        @if ($errors->has('tw_pass'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('tw_pass') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('consumer_key') ? ' has-error' : '' }}">
+                    <label for="consumer_key" class="col-md-3 control-label">consumer_key</label>
+
+                    <div class="col-md-8">
+                        <input id="twitter" type="text" class="form-control" name="consumer_key" value="{{ isset($twa) ? $twa->consumer_key : old('consumer_key') }}">
+
+                        @if ($errors->has('consumer_key'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('consumer_key') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('consumer_secret') ? ' has-error' : '' }}">
+                    <label for="consumer_secret" class="col-md-3 control-label">consumer_secret</label>
+
+                    <div class="col-md-8">
+                        <input id="consumer_secret" type="text" class="form-control" name="consumer_secret" value="{{ isset($twa) ? $twa->consumer_secret : old('consumer_secret') }}">
+
+                        @if ($errors->has('consumer_secret'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('consumer_secret') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('access_token') ? ' has-error' : '' }}">
+                    <label for="access_token" class="col-md-3 control-label">access_token</label>
+
+                    <div class="col-md-8">
+                        <input id="access_token" type="text" class="form-control" name="access_token" value="{{ isset($twa) ? $twa->access_token : old('access_token') }}">
+
+                        @if ($errors->has('access_token'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('access_token') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('access_token_secret') ? ' has-error' : '' }}">
+                    <label for="access_token_secret" class="col-md-3 control-label">access_token_secret</label>
+
+                    <div class="col-md-8">
+                        <input id="access_token_secret" type="text" class="form-control" name="access_token_secret" value="{{ isset($twa) ? $twa->access_token_secret : old('access_token_secret') }}">
+
+                        @if ($errors->has('access_token_secret'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('access_token_secret') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+				<hr>
+
+
                 <div class="form-group{{ $errors->has('instagram') ? ' has-error' : '' }}">
-                    <label for="instagram" class="col-md-2 control-label">インスタグラム</label>
+                    <label for="instagram" class="col-md-3 control-label">インスタグラム</label>
 
                     <div class="col-md-8">
                         <input id="instagram" type="text" class="form-control" name="instagram" value="{{ isset($model) ? $model->instagram : old('instagram') }}">
@@ -161,7 +245,7 @@
 
 
                 <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
-                    <label for="school" class="col-md-2 control-label">学校名</label>
+                    <label for="school" class="col-md-3 control-label">学校名</label>
 
                     <div class="col-md-8">
                         <input id="school" type="text" class="form-control" name="school" value="{{ isset($model) ? $model->school : old('school') }}">
@@ -175,7 +259,7 @@
                 </div>
 
 				<div class="form-group{{ $errors->has('per_info') ? ' has-error' : '' }}">
-                    <label for="per_info" class="col-md-2 control-label">モデルインフォ</label>
+                    <label for="per_info" class="col-md-3 control-label">モデルインフォ</label>
 
                     <div class="col-md-8">
                         <textarea id="per_info" class="form-control" name="per_info" rows="15">{{ isset($model) && !count(old()) ? $model->per_info : old('per_info') }}</textarea>
@@ -252,7 +336,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('ask.'.$n) ? ' has-error' : '' }}">
-                    <label for="name" class="col-md-2 control-label">質問</label>
+                    <label for="name" class="col-md-3 control-label">質問</label>
 
                     <div class="col-md-8">
                         <input id="school" type="text" class="form-control" name="ask[]" value="{{ isset($snaps[$n]) ? $snaps[$n]->ask : old('ask.'.$n) }}">
@@ -266,7 +350,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('answer.'.$n) ? ' has-error' : '' }}">
-                    <label for="snap_answer" class="col-md-2 control-label">回答</label>
+                    <label for="snap_answer" class="col-md-3 control-label">回答</label>
 
                     <div class="col-md-8">
                         <textarea id="snap_answer" class="form-control" name="answer[]" rows="8">{{ isset($snaps[$n]) && !count(old()) ? $snaps[$n]->answer : old('answer.'.$n) }}</textarea>
@@ -294,7 +378,7 @@
 
 
                 <div class="form-group">
-                    <div class="col-md-2 col-md-offset-2">
+                    <div class="col-md-3 col-md-offset-2">
                         <button type="submit" class="btn btn-primary col-md-12">
                             更　新
                         </button>

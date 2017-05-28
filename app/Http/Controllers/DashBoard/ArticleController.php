@@ -9,12 +9,14 @@ use App\Tag;
 use App\TagRelation;
 use App\Category;
 use App\MovieCombine;
+use App\TwAccount;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 use Auth;
 use Storage;
 use Mail;
+use Crypt;
 
 
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine)
+	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine, TwAccount $twAccount)
     {
     	
         $this -> middleware('adminauth');
@@ -37,6 +39,7 @@ class ArticleController extends Controller
         $this->tagRelation = $tagRelation;
         
         $this->mvCombine = $mvCombine;
+        $this->twAccount = $twAccount;
         
         $this->perPage = 20;
         
@@ -581,64 +584,27 @@ class ArticleController extends Controller
     
     public function getTwFbUp(Request $request)
     {
+//        $name = 'opal@frank.fam.cx';
+//        $pass = 'ccorenge33';
 
 		$data = session('data');
         
         $atclId = $data['atcl_id'];
         $modelId = $data['modelId'];
-//        $name = 'opal@frank.fam.cx';
-//        $pass = 'ccorenge33';
 
 
-		$name = 'cute_campus'; //y.yamasaki@crepus.jp
-        $pass = '14092ugaAC';
-        
-        $consumer_key = 'a50OiN3f4hoxXFSS2zK2j6mTK';
-        $consumer_secret = 'DKKhv9U1755hu0zzxbklyPA3GpuAsTTqedoNCFTUKyACshPuOE';
-        $access_token = '2515940671-scGnBAVUnURLykOpp0C9uxsmOz6zg1iTkILVqZa';
-        $access_token_secret = '7LMe9izK6Cu514gNnn3Kfl2f9QCtoFr5PLBg8oj0A9XTy';
-        
-
-		//use Abraham\TwitterOAuth\TwitterOAuth; を先頭につけると以下でクラス取得可能
-        //$toa = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
-        //self::$CONSUMER_KEYという書き方もあり ->static変数
-        
-        //composer show abraham/twitteroauth にてautoload psr-4の名前空間が確認できる　そこから以下でクラス取得可能
-        //先頭の逆スラッシュはヘッドで記載のnamespace(名前空間)を解除する
-        $connection = new \Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
-        $connection->setTimeouts(10,800);
-//        var_dump($connection);
-//        exit;
-
-        
-        //$imgPath = base_path() . "/storage/app/public/movie/2/items_1.jpg";
-    	
-//        $file = file_get_contents($videoPath);
-//        var_dump($file['media_type']);
-//        exit;
-
-        
+		$status = array();
+		
         $postMsg = $data['title']."\n".$data['tw_comment']; //$fileName = '3s.mp4';
         $fileName = last(explode('/', $data['mvPath']));
         //$fileName = '3s.mp4';
-        $path = base_path() . "/storage/app/". $data['mvPath'];
-        
-        //Video edit ======
-        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
-        
-        //if(Storage::exist)
-        //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '. $fileName . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
-        echo 'twitter: '.$status;
-        // END ============
-        
-        
+        //$path = base_path() . "/storage/app/". $data['mvPath'];
         
         $url = 'https://upload.twitter.com/1.1/statuses/update.json';
         $uri = 'https://upload.twitter.com/1.1/media/upload.json';
 
         $segment_index = 0;
-        $chank = 5 * 1024 * 1024;
+        $chunk = 5 * 1024 * 1024;
         
         $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
         $fileSize = filesize($videoPath);
@@ -648,69 +614,128 @@ class ArticleController extends Controller
         $file_data = base64_encode($file_data);
         $file_size = mb_strlen($file_data);
         
-        $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'INIT', 'media_type'=>'video/mp4', 'total_bytes'=>$fileSize, 'media_category' => 'tweet_video'));
-		$obj = json_decode($info);
-
+        //Video edit ======
+        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
         
-        //メディアのＩＤを取得
-        $sba = $obj->media_id_string;
-
-        //何回アップロードが必要か
-        $maxRound = ceil($file_size / $chank);
-
-        //APPENDをファイルサイズ分割分だけアップロード
-        for($i=0; $i<$maxRound; $i++){
-        	$file_size_x[$i] = substr($file_data, $chank*$i, $chank);
-            $connection->OAuthRequest($uri, 'POST', array('command'=>'APPEND', 'media_id' =>$sba, 'segment_index'=>$i, 'media'=>$file_size_x[$i],));
+        if(! Storage::exists($videoPath)) {
+            //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+            exec($cdCmd . 'ffmpeg -i '. $fileName . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+            echo 'twitter: '.$status;
         }
-        $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'FINALIZE','media_id' => $sba));
-        $obj = json_decode($info);
+        // END ============
+        
+        
 
-        //アップロードしたデータ情報をファイルサイズ分割分だけ最新化
-        for($i=0; $i<$maxRound; $i++){
-        	sleep($obj->processing_info->check_after_secs);
-        	$res = $connection->get('media/upload', array('command'=>'STATUS', 'media_id'=>$sba));
-        }
-
-        //動画とテキストを投稿
-        //$res = $to->post(“statuses/update”, array(“status” => $fileText,’media_ids’ => $sba));
-        
-        
- 
-		//投稿 Simple
-        //$media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true); //, "media_category"=>'tweet_video'
-//        var_dump($media_id);
-//        exit;
-        
-        $parameters = array(
-            'status' => $postMsg,
-            'media_ids' => $sba/*$media_id->media_id_string*/,
-        );
-		
-        $result = $connection->post("statuses/update", $parameters);
-        
-        //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
- 
-		// レスポンス表示
-		//var_dump($result->errors[0]->message);
+		$accounts = $this->twAccount->whereIn('model_id', [ 1, $modelId, ])->get();
+        //foreach($accounts as $account) {
+        //	echo decrypt($account->pass);
+        //}
         //exit;
         
-        $status = array();
+        foreach($accounts as $account) {
         
-        if(isset($result->errors)) {
-        	$status[] = 'Twitter Error !';
-        }
-        else {
-        	$atclModel = $this->article->find($atclId);
-            $atclModel->tw_up = 1;
-            $atclModel->save();
+			/*
+            $name = 'cute_campus'; //y.yamasaki@crepus.jp
+            //$pass = '14092ugaAC';
+            $v = Crypt::encrypt('14092ugaAC');
+            $pass = Crypt::decrypt($v);
             
-        	$status[] = 'TwitterにUPされました !';
-        }
+            $consumer_key = 'a50OiN3f4hoxXFSS2zK2j6mTK';
+            $consumer_secret = 'DKKhv9U1755hu0zzxbklyPA3GpuAsTTqedoNCFTUKyACshPuOE';
+            $access_token = '2515940671-scGnBAVUnURLykOpp0C9uxsmOz6zg1iTkILVqZa';
+            $access_token_secret = '7LMe9izK6Cu514gNnn3Kfl2f9QCtoFr5PLBg8oj0A9XTy';
+            */
+            
+            $name = $account->name;
+            $pass = decrypt($account->pass);
+            
+            $consumer_key = $account->consumer_key;
+            $consumer_secret = $account->consumer_secret;
+            $access_token = $account->access_token;
+            $access_token_secret = $account->access_token_secret;
+            
+
+            //use Abraham\TwitterOAuth\TwitterOAuth; を先頭につけると以下でクラス取得可能
+            //$toa = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+            //self::$CONSUMER_KEYという書き方もあり ->static変数
+            
+            //composer show abraham/twitteroauth にてautoload psr-4の名前空間が確認できる　そこから以下でクラス取得可能
+            //先頭の逆スラッシュはヘッドで記載のnamespace(名前空間)を解除する
+            $connection = new \Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+            $connection->setTimeouts(10,500);
+    //        var_dump($connection);
+    //        exit;
+
+    //        $file = file_get_contents($videoPath);
+    //        var_dump($file['media_type']);
+    //        exit;
 
 
+            $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'INIT', 'media_type'=>'video/mp4', 'total_bytes'=>$fileSize, 'media_category' => 'tweet_video'));
+            $obj = json_decode($info);
+
+            
+            //メディアのIDを取得
+            $sba = $obj->media_id_string;
+
+            //何回アップロードが必要か
+            $maxRound = ceil($file_size / $chunk);
+
+            //APPENDをファイルサイズ分割分だけアップロード
+            for($i=0; $i<$maxRound; $i++){
+                $file_size_x[$i] = substr($file_data, $chunk*$i, $chunk);
+                $connection->OAuthRequest($uri, 'POST', array('command'=>'APPEND', 'media_id' =>$sba, 'segment_index'=>$i, 'media'=>$file_size_x[$i],));
+            }
+            $info = $connection->OAuthRequest($uri, 'POST', array('command' => 'FINALIZE','media_id' => $sba));
+            $obj = json_decode($info);
+
+            
+            //アップロードしたデータ情報をファイルサイズ分割分だけ最新化
+            for($i=0; $i<$maxRound; $i++){
+                sleep($obj->processing_info->check_after_secs);
+                $res = $connection->get('media/upload', array('command'=>'STATUS', 'media_id'=>$sba));
+            }
+            
+            
+            //投稿 Simple 分割なし
+            //$media_id = $connection->upload("media/upload", array("media" => $videoPath, "total_bytes"=>$fileSize, "media_type"=>'video/mp4'), true); //, "media_category"=>'tweet_video'
+    //        var_dump($media_id);
+    //        exit;
+            
+            $parameters = array(
+                'status' => $postMsg,
+                'media_ids' => $sba/*$media_id->media_id_string*/,
+            );
+            
+            $result = $connection->post("statuses/update", $parameters);
+            
+            //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
+     
+            // レスポンス表示
+            //var_dump($result->errors[0]->message);
+            //exit;
+            
+            //$status[] = $result;
+            
+            
+            if(isset($result->errors[0]->message)) {
+                $status[] = 'Twitter Error! '. $name;
+            }
+            else {
+                $atclModel = $this->article->find($atclId);
+                $atclModel->tw_up = 1;
+                $atclModel->save();
+                
+                $status[] = 'TwitterにUPされました! ' . $name;
+            }
+            
         
+        } //account foreach
 
+		//var_dump($status);
+        //exit;
+        
+/*
         // FB ========================================================
         
         //https://developers.facebook.com/docs/php/howto/example_upload_video
@@ -784,7 +809,7 @@ class ArticleController extends Controller
 
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
-        
+*/
         
         
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $status);

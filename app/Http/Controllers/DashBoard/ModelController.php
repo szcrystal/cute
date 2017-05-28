@@ -5,13 +5,16 @@ namespace App\Http\Controllers\DashBoard;
 use App\Admin;
 use App\User;
 use App\ModelSnap;
+use App\TwAccount;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Crypt;
+
 class ModelController extends Controller
 {
-	public function __construct(Admin $admin, User $user, ModelSnap $modelSnap)
+	public function __construct(Admin $admin, User $user, ModelSnap $modelSnap, TwAccount $twAccount)
     {
         $this -> middleware('adminauth'/*, ['except' => ['getRegister','postRegister']]*/);
         //$this->middleware('auth:admin', ['except' => 'getLogout']);
@@ -20,6 +23,7 @@ class ModelController extends Controller
         $this -> admin = $admin;
         $this -> user = $user;
         $this -> modelSnap = $modelSnap;
+        $this -> twAccount = $twAccount;
         
         $this->perPage = 20;
 
@@ -48,10 +52,12 @@ class ModelController extends Controller
         
         $snaps = $this->modelSnap->where('model_id', $modelId)->get();
         
+        $twa = $this->twAccount->where('model_id', $modelId)->first();
+        
 //        print_r($snaps[0]->ask);
 //        exit;
         
-        return view('dashboard.model.form', ['modelId'=>$modelId, 'model'=>$model, 'snaps'=>$snaps]);
+        return view('dashboard.model.form', ['modelId'=>$modelId, 'model'=>$model, 'twa'=>$twa, 'snaps'=>$snaps]);
     }
 
     /**
@@ -120,6 +126,21 @@ class ModelController extends Controller
         
         $modelId = $mdModel->id;
         
+        //Twitter Account Save
+        $this->twAccount->updateOrCreate(
+        	['model_id'=>$modelId],
+            [
+        		'name' => $data['tw_name'],
+                'pass' => Crypt::encrypt($data['tw_pass']),
+                
+                'consumer_key' => $data['consumer_key'],
+                'consumer_secret' => $data['consumer_secret'],
+                'access_token' => $data['access_token'],
+                'access_token_secret' => $data['access_token_secret'],
+                
+            ]
+        );
+        
         
         if($request->file('model_thumb') != '') {
             
@@ -150,7 +171,7 @@ class ModelController extends Controller
 //            exit;
             
         	
-            if(isset($data['del_snap'][$count]) && $data['del_snap'][$count]) {
+            if(isset($data['del_snap'][$count]) && $data['del_snap'][$count]) { //削除チェックの時
             	//echo $count . '/' .$data['del_snap'][$count];
             	//exit;
                 
@@ -208,6 +229,7 @@ class ModelController extends Controller
 //                return true;
 //            });
         
+        //Snapのナンバーを振り直す
         foreach($snaps as $snap) {
             $snap->number = $num;
             $snap->save();
