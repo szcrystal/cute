@@ -719,6 +719,12 @@ class ArticleController extends Controller
             $access_token = $account->access_token;
             $access_token_secret = $account->access_token_secret;
             
+            
+            if($consumer_key == '' || $consumer_secret == '' || $access_token == '' || $access_token_secret == '') {
+            	$resultArr[] = 'Twitter Error ! '.$name. 'の入力情報が不足です。';
+            	continue;
+            }
+            
 
             //use Abraham\TwitterOAuth\TwitterOAuth; を先頭につけると以下でクラス取得可能
             //$toa = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
