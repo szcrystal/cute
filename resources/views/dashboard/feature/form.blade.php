@@ -71,7 +71,7 @@
 
                 <div class="col-md-4 pull-left">
                     <div class="pull-left">
-                        <a href="{{ url('dashboard/articles/snsup/'. $ftId. '?feature=1') }}" class="btn btn-warning">Social UP Page >></a>
+                        <a href="{{ url('dashboard/articles/snsup/'. $ftId) }}" class="btn btn-warning">Social UP Page >></a>
                     </div>
                 </div>
             @endif
@@ -81,12 +81,14 @@
 
         <hr>
 
-        <form class="form-horizontal" role="form" method="POST" action="/dashboard/features" enctype="multipart/form-data">
+        <form class="form-horizontal" role="form" method="POST" action="/dashboard/articles" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$ftId}}">
             @endif
 
             {{ csrf_field() }}
+
+            <input type="hidden" name="feature" value="1">
 
 
             <div class="form-group">
@@ -222,10 +224,54 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('yt_description') ? ' has-error' : '' }}">
+                <label for="yt_description" class="col-md-2 control-label">YouTube用 説明</label>
+
+                <div class="col-md-9">
+                    <textarea id="yt_description" type="text" class="form-control" name="yt_description" rows="10">{{ isset($feature) && !count(old()) ? $feature->yt_description : old('yt_description') }}</textarea>
+
+                    @if ($errors->has('yt_description'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('yt_description') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
 
+            <div class="clearfix tag-wrap">
 
+                <div class="tag-group form-group{{ $errors->has('tag-group') ? ' has-error' : '' }}">
+                    <label for="tag-group" class="col-md-2 control-label">タグ</label>
+                    <div class="col-md-9 clearfix">
+                        <input id="tag-group" type="text" class="form-control tag-control" name="input-tag-group" value="" autocomplete="off">
 
+                        <div class="add-btn" tabindex="0">追加</div>
+
+                        <span style="display:none;">{{ implode(',', $allTags) }}</span>
+
+                        <div class="tag-area">
+                            @if(count(old()) > 0)
+                                <?php
+                                	//$tagNames = old($tag->slug);
+                                	$tagNames = old('tags');
+                                ?>
+							@endif
+
+                            @if(isset($tagNames))
+                                @foreach($tagNames as $name)
+                                <span><em>{{ $name }}</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>
+                                <input type="hidden" name="tags[]" value="{{ $name }}">
+                                @endforeach
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div><?php //tagwrap ?>
 
 
 

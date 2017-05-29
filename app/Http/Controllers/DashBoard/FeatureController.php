@@ -4,8 +4,9 @@ namespace App\Http\Controllers\DashBoard;
 
 use App\Admin;
 use App\User;
-use App\Feature;
-use App\MovieCombine;
+use App\Article;
+use App\Tag;
+use App\TagRelation;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Controller;
 class FeatureController extends Controller
 {
 
-    public function __construct(Feature $feature, Admin $admin, User $user, MovieCombine $mvCombine)
+    public function __construct(Article $article, Admin $admin, User $user, Tag $tag, TagRelation $tagRelation)
     {
     	
         $this -> middleware('adminauth');
@@ -21,8 +22,9 @@ class FeatureController extends Controller
         
         $this -> admin = $admin;
         $this->user = $user;
-        $this->feature = $feature;
-        $this->mvCombine = $mvCombine;
+        $this->article = $article;
+        $this->tag = $tag;
+        $this->tagRelation = $tagRelation;
         
         $this->perPage = 20;
         
@@ -30,7 +32,7 @@ class FeatureController extends Controller
     
     public function index()
     {
-        $features = Feature::orderBy('id', 'desc')->paginate($this->perPage);
+        $features = Article::where('feature',1)->orderBy('id', 'desc')->paginate($this->perPage);
 //        $users = $this->user->all();
 //        $cateModel = $this->category;
         
@@ -41,80 +43,39 @@ class FeatureController extends Controller
     
     public function show($ftId) //Edit Page
     {
-        $feature = $this->feature->find($ftId);
-//        $cates = $this->category->all();
-//        
-//        $mvId = $atcl->movie_id;
-//        $mv = $this->mvCombine->find($mvId);
-//        
-//        
-//        //$mvPath = Storage::url($mv->movie_path);
-//        //$modelId = $mv->model_id;
-//        $modelName = $this->user->find($atcl->model_id)->name;
-//        
-//        $tagNames = $this->tagRelation->where(['atcl_id'=>$id])->get()->map(function($item) {
-//            return $this->tag->find($item->tag_id)->name;
-//        })->all();
-//        
-//        $allTags = $this->tag->get()->map(function($item){
-//        	return $item->name;
-//        })->all();
+        $feature = $this->article->find($ftId);
         
-//        $atclTag = array();
-//        $n = 0;
-//        while($n < 3) {
-//        	$name = 'tag_'.$n+1;
-//            $atclTag[] = explode(',', $article->tag_{$n+1});
-//            $n++;
-//        }
-//        
-//        print_r($atclTag);
-//        exit();
+        $tagNames = $this->tagRelation->where(['atcl_id'=>$ftId])->get()->map(function($item) {
+            return $this->tag->find($item->tag_id)->name;
+        })->all();
         
-        //$tags = $this->getTags();
+        $allTags = $this->tag->get()->map(function($item){
+        	return $item->name;
+        })->all();
         
-//        echo $article->tag_1. "aaaaa";
-//        foreach($tags[0] as $tag)
-//        	echo $tag-> id."<br>";
-//        exit();
         
-    	return view('dashboard.feature.form', ['feature'=>$feature, 'ftId'=>$ftId, 'edit'=>1]);
+    	return view('dashboard.feature.form', ['feature'=>$feature, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'ftId'=>$ftId, 'edit'=>1]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function create(Request $request) //New Add
-//    {
-//    	$mvId = $request->input('ftId');
-////        $cates = $this->category->all();
-////        
-////        $mv = $this->mvCombine->find($mvId);
-//////        $mvPath = Storage::url($mv->movie_path);
-//////        $modelId = $mv->model_id;
-////        $modelName = $this->user->find($mv->model_id)->name;
-////        
-////        $allTags = $this->tag->get()->map(function($item){
-////        	return $item->name;
-////        })->all();
-//        
-//        
-//    	
-//    }
 
 
     public function create()
     {
-        return view('dashboard.feature.form', []);
+    	$allTags = $this->tag->get()->map(function($item){
+        	return $item->name;
+        })->all();
+        
+        return view('dashboard.feature.form', ['allTags'=>$allTags, ]);
     }
 
 
     public function store(Request $request)
     {
         $editId = $request->input('edit_id') !== null ? $request->input('edit_id') : 0;
+        
+        return redirect()->action(
+    		'DashBoard\ArticleController@store'
+		);
         
         $rules = [
         	'title' => 'required|max:255',
@@ -153,15 +114,21 @@ class FeatureController extends Controller
         
         if($editId) { //update（編集）の時
         	$status = '特集記事が更新されました！';
-            $ft = $this->feature->find($editId);
+            $ft = $this->article->find($editId);
         }
         else { //新規追加の時
             $status = '特集記事が追加されました！';
-            //$data['model_id'] = 1;
+            $data['yt_up'] = 0;
+            $data['tw_up'] = 0;
+            $data['fb_up'] = 0;
+            
             $data['view_count'] = 0;
             
-        	$ft = $this->feature;
+        	$ft = $this->article;
         }
+        
+        $data['cate_id'] = 99999;
+        $data['feature'] = 1;
 
         
         $ft->fill($data);

@@ -24,12 +24,14 @@ class CreateArticlesTable extends Migration
             $table->string('title')->nullable()->default(NULL);
             //$table->string('sub_title')->nullable()->default(NULL);
             $table->string('slug')->unique()->nullable()->default(NULL);
-            $table->string('area_info')->nullable()->default(NULL);
-            //$table->string('area_info')->nullable()->default(NULL);
+            $table->string('address')->nullable()->default(NULL);
             
-            $table->string('post_thumb')->nullable()->default(NULL);
+            $table->string('thumb_path')->nullable()->default(NULL);
+            $table->string('movie_path')->nullable()->default(NULL);
             
-            $table->text('basic_info')->nullable()->default(NULL);
+            $table->text('contents')->nullable()->default(NULL);
+            
+            $table->integer('feature')->nullable()->default(0);
             
             $table->boolean('open_status')->default(1);
             $table->timestamp('open_date')->nullable()->default(NULL);
@@ -59,7 +61,7 @@ class CreateArticlesTable extends Migration
 
 					//'post_thumb' => '',
                     
-                    'basic_info' =>'',
+                    'contents' =>'',
                    	
                     'open_status' => 1,
                     'open_date' => date('Y-m-d H:i:s', time()),

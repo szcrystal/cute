@@ -142,7 +142,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-    	$editId = $request->input('edit_id');
+    	$editId = $request->has('edit_id') ? $request->input('edit_id') : 0;
+        $feature = $request->has('feature') ? 1 : 0;
+        
+        
+
         
         $rules = [
         	'title' => 'required|max:255',
@@ -151,6 +155,7 @@ class ArticleController extends Controller
         $this->validate($request, $rules);
         
         $data = $request->all(); //requestから配列として$dataにする
+
         
 //        if(isset($data['ytUp'])) {
 //        	//$this->postYtUp($data);
@@ -161,25 +166,15 @@ class ArticleController extends Controller
 ////            );
 //        }
         
-        $rand = mt_rand();
-        
-        if($request->file('post_thumb') != '') {
-            $filename = $request->file('post_thumb')->getClientOriginalName();
-            
-            $aId = $editId ? $editId : $rand;
-            $pre = time() . '-';
-            $filename = 'article/' .$aId . '/thumbnail/' . $pre . $filename;
-            //if (App::environment('local'))
-            $path = $request->file('post_thumb')->storeAs('public', $filename);
-            //else
-            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
-            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
-        
-            $data['post_thumb'] = $filename;
-        }
-        
         
         // Total
+        if($feature) {
+            $data['feature'] = 1;
+            $data['model_id'] = 1;
+            $data['cate_id'] = 0;
+            $data['movie_id'] = 0;
+        }
+        
         if(isset($data['open_status'])) {
         	$data['open_status'] = 0;
         }
@@ -187,9 +182,9 @@ class ArticleController extends Controller
         	$data['open_status'] = 1;
         }
         
-        if($editId !== NULL ) { //update（編集）の時
+        if($editId) { //update（編集）の時
         	$status = '記事が更新されました！';
-            $atcl = $this->article->find($request->input('edit_id'));
+            $atcl = $this->article->find($editId);
         }
         else { //新規追加の時
             $status = '記事が追加されました！';
@@ -201,29 +196,63 @@ class ArticleController extends Controller
             
         	$atcl = $this->article;
         }
-
         
         $atcl->fill($data);
         $atcl->save();
         $atclId = $atcl->id;
         
-        //mv combineにcateとatcl statusをセット
-        $mv = $this->mvCombine->find($data['movie_id']);
-        $mv->cate_id = $atcl->cate_id;
-        $mv->atcl_status = 1;
-        $mv->save();
         
+        if($feature) { //Featureの時にmovie_pathをセット
+            if(isset($data['post_movie'])) {
+                
+                //$filename = $request->file('post_thumb')->getClientOriginalName();
+                $filename = $data['post_movie']->getClientOriginalName();
+                
+                //$aId = $editId ? $editId : $rand;
+                //$pre = time() . '-';
+                $filename = 'feature/' . $atclId . '/movie/'/* . $pre*/ . $filename;
+                //if (App::environment('local'))
+                $path = $data['post_movie']->storeAs('public', $filename);
+                //else
+                //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+                //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+                
+                $atcl->movie_path = $path;
+                $atcl->save();
+            }
         
-        //Storage 仮フォルダをidにネームし直す
-        if(Storage::exists('public/article/'. $rand)) {
-            Storage::move('public/article/'. $rand, 'public/article/'. $atclId);
-            
-            $data['post_thumb'] = str_replace($rand, $atclId, $data['post_thumb']);
-            
-            $atcl->post_thumb = str_replace($rand, $atclId, $atcl->post_thumb);
-            $atcl->save();
-            
         }
+        else {
+        	//mv combineにcateとatcl statusをセット
+            $mv = $this->mvCombine->find($data['movie_id']);
+            $mv->cate_id = $atcl->cate_id;
+            $mv->atcl_status = 1;
+            $mv->save();
+        }
+        
+        
+        if(isset($data['post_thumb'])) {
+            
+            $filename = $data['post_thumb']->getClientOriginalName();
+            
+            //$pre = time() . '-';
+            if($feature) {
+            	$filename = 'feature/' . $atclId . '/thumbnail/'/* . $pre*/ . $filename;
+            }
+            else {
+            	$filename = 'article/' .$atclId . '/thumbnail/' . $filename;
+            }
+            //if (App::environment('local'))
+            $path =  $data['post_thumb']->storeAs('public', $filename);
+            //else
+            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+        
+            
+            $atcl->thumb_path = $path;
+            $atcl->save();
+        }
+        
         
         
         //タグのsave動作
@@ -276,7 +305,41 @@ class ArticleController extends Controller
         }
         
         
-        return redirect('dashboard/articles/'. $atclId)->with('status', $status);
+        if($feature) {
+        	return redirect('dashboard/features/'. $atclId)->with('status', $status);
+        }
+        else {
+        	return redirect('dashboard/articles/'. $atclId)->with('status', $status);
+        }
+        
+        
+//        $rand = mt_rand();
+//        if($request->file('post_thumb') != '') {
+//            $filename = $request->file('post_thumb')->getClientOriginalName();
+//            
+//            $aId = $editId ? $editId : $rand;
+//            $pre = time() . '-';
+//            $filename = 'article/' .$aId . '/thumbnail/' . $pre . $filename;
+//            //if (App::environment('local'))
+//            $path = $request->file('post_thumb')->storeAs('public', $filename);
+//            //else
+//            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+//            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+//        
+//            $data['post_thumb'] = $filename;
+//        }
+
+        
+        //Storage 仮フォルダをidにネームし直す
+//        if(Storage::exists('public/article/'. $rand)) {
+//            Storage::move('public/article/'. $rand, 'public/article/'. $atclId);
+//            
+//            $data['post_thumb'] = str_replace($rand, $atclId, $data['post_thumb']);
+//            
+//            $atcl->post_thumb = str_replace($rand, $atclId, $atcl->post_thumb);
+//            $atcl->save();
+//            
+//        }
     }
     
     
@@ -285,7 +348,13 @@ class ArticleController extends Controller
     	$atcl = $this->article->find($atclId);
         
         $mvId = $atcl->movie_id;
-        $mv = $this->mvCombine->find($mvId);
+        
+        if($mvId) {
+	        $mv = $this->mvCombine->find($mvId);
+    	}
+        else { //featureの時はmvId:0
+            $mv = $this->article->find($atclId);
+        }
         
         $users = $this->user->get();
         
@@ -310,9 +379,19 @@ class ArticleController extends Controller
     {
     	$data = $request->all();
         
-        $mv = $this->mvCombine->find($data['movie_id']);
-        $data['mvPath'] = $mv->movie_path;
-        $data['modelId'] = $mv->model_id;
+        if($data['movie_id']) {
+        	$mv = $this->mvCombine->find($data['movie_id']);
+            $data['mvPath'] = $mv->movie_path;
+            $data['modelId'] = $mv->model_id;
+        }
+        else { //featureの時はmovie_id = 0
+            $atcl = $this->article->find($atclId);
+            $data['mvPath'] = $atcl->movie_path;
+            $data['modelId'] = $atcl->model_id;
+        }
+        
+        //$data['mvPath']はhiddenにてある
+        //$data['modelId'] = $mv->model_id;
         
         
     	if(isset($data['ytUp'])) {
@@ -551,38 +630,6 @@ class ArticleController extends Controller
         return redirect('dashboard/articles/snsup/'. $atclId)->with('ytStatus', $status);
     }
 
-
-    public function edit($id)
-    {
-        $article = $this->article->find($id);
-        //$cates = $this->category->all();
-        //$users = $this->user->where('active',1)->get();
-        
-//        $atclTag = array();
-//        $n = 0;
-//        while($n < 3) {
-//        	$name = 'tag_'.$n+1;
-//            $atclTag[] = explode(',', $article->tag_{$n+1});
-//            $n++;
-//        }
-//        
-//        print_r($atclTag);
-//        exit();
-        
-        //$tags = $this->getTags();
-        
-//        echo $article->tag_1. "aaaaa";
-//        foreach($tags[0] as $tag)
-//        	echo $tag-> id."<br>";
-//        exit();
-        
-    	return view('dashboard.article.form', ['article'=>$article,/* 'cates'=>$cates, 'users'=>$users,*/ 'id'=>$id, 'edit'=>1]);
-    }
-    
-    
-    
-    
-    
     
     public function getTwFbUp(Request $request)
     {
@@ -719,7 +766,6 @@ class ArticleController extends Controller
             // レスポンス表示
             //var_dump($result->errors[0]->message);
             //exit;
-            
             //$status[] = $result;
             
             
@@ -820,25 +866,47 @@ class ArticleController extends Controller
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $resultArr);
 
     }
+    
+    
+    
+    
+    
+    
+    public function edit($id)
+    {
+        $article = $this->article->find($id);
+        //$cates = $this->category->all();
+        //$users = $this->user->where('active',1)->get();
+        
+//        $atclTag = array();
+//        $n = 0;
+//        while($n < 3) {
+//        	$name = 'tag_'.$n+1;
+//            $atclTag[] = explode(',', $article->tag_{$n+1});
+//            $n++;
+//        }
+//        
+//        print_r($atclTag);
+//        exit();
+        
+        //$tags = $this->getTags();
+        
+//        echo $article->tag_1. "aaaaa";
+//        foreach($tags[0] as $tag)
+//        	echo $tag-> id."<br>";
+//        exit();
+        
+    	return view('dashboard.article.form', ['article'=>$article,/* 'cates'=>$cates, 'users'=>$users,*/ 'id'=>$id, 'edit'=>1]);
+    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $title = $this->article->find($id)->title;

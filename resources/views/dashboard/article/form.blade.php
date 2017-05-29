@@ -193,13 +193,13 @@
                     @if(count(old()) > 0)
                         @if(old('post_thumb') != '' && old('post_thumb'))
                         <img src="{{ Storage::url(old('post_thumb')) }}" class="img-fluid">
-                        @elseif(isset($atcl) && $atcl->post_thumb)
-                        <img src="{{ Storage::url($atcl->post_thumb) }}" class="img-fluid">
+                        @elseif(isset($atcl) && $atcl->thumb_path)
+                        <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
                         @else
                         <span class="no-img">No Image</span>
                         @endif
-                    @elseif(isset($atcl) && $atcl->post_thumb)
-                        <img src="{{ Storage::url($atcl->post_thumb) }}" class="img-fluid">
+                    @elseif(isset($atcl) && $atcl->thumb_path)
+                        <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
                     @else
                         <span class="no-img">No Image</span>
                     @endif
@@ -286,15 +286,15 @@
 
 
 
-			<div class="form-group{{ $errors->has('area_info') ? ' has-error' : '' }}">
+			<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                 <label for="area_info" class="col-md-2 control-label">住所</label>
 
                 <div class="col-md-9">
-                    <input id="area_info" type="text" class="form-control" name="area_info" value="{{ Ctm::isOld() ? old('area_info') : (isset($atcl) ? $atcl->area_info : '') }}">
+                    <input id="address" type="text" class="form-control" name="address" value="{{ Ctm::isOld() ? old('address') : (isset($atcl) ? $atcl->address : '') }}">
 
-                    @if ($errors->has('area_info'))
+                    @if ($errors->has('address'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('area_info') }}</strong>
+                            <strong>{{ $errors->first('address') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -332,15 +332,15 @@
             </div>
             --}}
 
-            <div class="form-group{{ $errors->has('basic_info') ? ' has-error' : '' }}">
-                <label for="basic_info" class="col-md-2 control-label">基本情報</label>
+            <div class="form-group{{ $errors->has('contents') ? ' has-error' : '' }}">
+                <label for="contents" class="col-md-2 control-label">コンテンツ</label>
 
                 <div class="col-md-9">
-                    <textarea id="basic_info" type="text" class="form-control" name="basic_info" rows="15">{{ isset($atcl) && !count(old()) ? $atcl->basic_info : old('basic_info') }}</textarea>
+                    <textarea id="contents" type="text" class="form-control" name="contents" rows="15">{{ isset($atcl) && !count(old()) ? $atcl->contents : old('contents') }}</textarea>
 
-                    @if ($errors->has('basic_info'))
+                    @if ($errors->has('contents'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('basic_info') }}</strong>
+                            <strong>{{ $errors->first('contents') }}</strong>
                         </span>
                     @endif
                 </div>
