@@ -668,10 +668,7 @@ class ArticleController extends Controller
         $videoPath = $path . $modelId. '/tw_'.$fileName;
         
 
-        //動画のデータファイルをバイナリに変換する。
-        $file_data = file_get_contents($videoPath);
-        $file_data = base64_encode($file_data);
-        $file_size = mb_strlen($file_data);
+        
         
         //Video edit ======
         $cdCmd = 'cd ' . $path . $modelId .' && ';
@@ -683,8 +680,14 @@ class ArticleController extends Controller
         }
         // END ============
         
+        //動画ファイルサイズ
         $fileSize = filesize($videoPath);
+        //動画のデータファイルをバイナリに変換する。
+        $file_data = file_get_contents($videoPath);
+        $file_data = base64_encode($file_data);
+        $file_size = mb_strlen($file_data);
         
+        //modelIdの配列
         $modelIdArr = [1, $modelId, ];
         if($modelId == 1) {
         	$modelIdArr = [1, ];
