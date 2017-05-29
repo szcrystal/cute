@@ -721,7 +721,7 @@ class ArticleController extends Controller
             
             
             if($consumer_key == '' || $consumer_secret == '' || $access_token == '' || $access_token_secret == '') {
-            	$resultArr[] = 'Twitter Error ! '.$name. 'の入力情報が不足です。';
+            	$resultArr[] = 'Twitter Error ! '. $this->user->find($account->model_id)->name . 'の入力情報が不足です。';
             	continue;
             }
             
