@@ -88,7 +88,7 @@
                 <label for="group" class="col-md-3 control-label">メモ</label>
 
                 <div style="margin-top:0.4em;" class="col-md-9">
-                	{{ $mvCombine->title }}
+                	{{ $memo }}
                 </div>
             </div>
 

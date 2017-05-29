@@ -7,6 +7,7 @@ use App\Category;
 use App\Article;
 use App\User;
 use App\Music;
+use App\MovieBranchRel;
 
 
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use App\Http\Controllers\Controller;
 
 class MovieController extends Controller
 {
-	public function __construct(MovieCombine $movieCombine, Article $article, User $user, Category $category, Music $music)
+	public function __construct(MovieCombine $movieCombine, Article $article, User $user, Category $category, Music $music, MovieBranchRel $mvRel)
     {
     	
         $this -> middleware('adminauth');
@@ -25,6 +26,7 @@ class MovieController extends Controller
         $this->user = $user;
         $this->category = $category;
         $this->music = $music;
+        $this->mvRel = $mvRel;
         
         
         $this->perPage = 20;
@@ -80,12 +82,14 @@ class MovieController extends Controller
     {
         $mvCombine = $this->movieCombine->find($id);
         
+        $memo = $this->mvRel->find($mvCombine->rel_id)->memo;
+        
         //$cateModel = $this->category->find('');
         $cates = $this->category->all();
         
         $modelName = User::find($mvCombine->model_id)->name;
         
-    	return view('dashboard.movie.form', ['mvCombine'=>$mvCombine, 'cates'=>$cates, 'modelName'=>$modelName, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.movie.form', ['mvCombine'=>$mvCombine, 'cates'=>$cates, 'modelName'=>$modelName, 'memo'=>$memo, 'id'=>$id, 'edit'=>1]);
     }
 
     /**
