@@ -388,6 +388,7 @@ class ArticleController extends Controller
             $atcl = $this->article->find($atclId);
             $data['mvPath'] = $atcl->movie_path;
             $data['modelId'] = $atcl->model_id;
+            $data['feature'] = 1;
         }
         
         //$data['mvPath']はhiddenにてある
@@ -575,7 +576,7 @@ class ArticleController extends Controller
             $client->setDefer(false);
 
 
-            $htmlBody = "<h3>Video Uploaded</h3><ul>";
+            $htmlBody = "<h5>YouTubeにUpされました！</h5><ul>";
             $htmlBody .= sprintf('<li>%s (%s)</li>',
                 $status['snippet']['title'],
                 $status['id']);
@@ -608,8 +609,8 @@ class ArticleController extends Controller
             $_SESSION['state'] = $state;
 
             $authUrl = $client->createAuthUrl();
-            $htmlBody = "<p>Authorization Required</p>";
-            $htmlBody .= "<p>You need to <a href=\"" . $authUrl . "\">authorize access</a> before proceeding.<p>";
+            $htmlBody = "<p class=\"text-primary\">Authorization Required</p>";
+            $htmlBody .= "<p class=\"text-primary\">このリンクをクリックして下さい。<a href=\"" . $authUrl . "\">authorize access</a> <p>";
         }
     
 
@@ -640,6 +641,7 @@ class ArticleController extends Controller
         
         $atclId = $data['atcl_id'];
         $modelId = $data['modelId'];
+        $feature = isset($data['feature']) ? 1 : 0;
 
 
 		$resultArr = array();
@@ -655,8 +657,16 @@ class ArticleController extends Controller
         $segment_index = 0;
         $chunk = 5 * 1024 * 1024;
         
-        $videoPath = base_path() . "/storage/app/public/movie/". $modelId. '/tw_'.$fileName;
-        $fileSize = filesize($videoPath);
+        $path = '';
+        if($feature) {
+        	$path = base_path() . "/storage/app/public/feature/";
+        }
+        else {
+        	$path = base_path() . "/storage/app/public/movie/";
+        }
+        
+        $videoPath = $path . $modelId. '/tw_'.$fileName;
+        
 
         //動画のデータファイルをバイナリに変換する。
         $file_data = file_get_contents($videoPath);
@@ -664,7 +674,7 @@ class ArticleController extends Controller
         $file_size = mb_strlen($file_data);
         
         //Video edit ======
-        $cdCmd = 'cd ' . base_path() .'/storage/app/public/movie/'. $modelId .' && ';
+        $cdCmd = 'cd ' . $path . $modelId .' && ';
         
         if(! Storage::exists($videoPath)) {
             //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
@@ -672,6 +682,8 @@ class ArticleController extends Controller
             echo 'twitter: '.$status;
         }
         // END ============
+        
+        $fileSize = filesize($videoPath);
         
         $modelIdArr = [1, $modelId, ];
         if($modelId == 1) {
