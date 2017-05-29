@@ -659,7 +659,7 @@ class ArticleController extends Controller
         
         $path = '';
         if($feature) {
-        	$path = base_path() . "/storage/app/public/feature/". $atclId .'/';
+        	$path = base_path() . "/storage/app/public/feature/". $atclId .'/movie/';
         }
         else {
         	$path = base_path() . "/storage/app/public/movie/" . $modelId .'/';
