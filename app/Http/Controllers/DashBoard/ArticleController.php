@@ -659,19 +659,17 @@ class ArticleController extends Controller
         
         $path = '';
         if($feature) {
-        	$path = base_path() . "/storage/app/public/feature/";
+        	$path = base_path() . "/storage/app/public/feature/". $atclId .'/';
         }
         else {
-        	$path = base_path() . "/storage/app/public/movie/";
+        	$path = base_path() . "/storage/app/public/movie/" . $modelId .'/';
         }
         
-        $videoPath = $path . $modelId. '/tw_'.$fileName;
-        
-
+        $videoPath = $path . 'tw_'.$fileName;
         
         
         //Video edit ======
-        $cdCmd = 'cd ' . $path . $modelId .' && ';
+        $cdCmd = 'cd ' . $path .' && ';
         
         if(! Storage::exists($videoPath)) {
             //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
