@@ -124,12 +124,14 @@ class ArticleController extends Controller
 //        $modelId = $mv->model_id;
         $modelName = $this->user->find($mv->model_id)->name;
         
+        $preCate = $this->category->find($mv->cate_id);
+        
         $allTags = $this->tag->get()->map(function($item){
         	return $item->name;
         })->all();
         
         
-    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
+    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
     }
 
     /**
@@ -150,14 +152,14 @@ class ArticleController extends Controller
         
         $data = $request->all(); //requestから配列として$dataにする
         
-        if(isset($data['ytUp'])) {
-        	//$this->postYtUp($data);
-            $data['atclId'] = $editId;
-            return redirect('dashboard/articles/ytup')->with('data', $data);
-//            return redirect('dashboard/articles/ytup')->action(
-//                'DashBoard\ArticleController@postYtUp', ['data' => $data]
-//            );
-        }
+//        if(isset($data['ytUp'])) {
+//        	//$this->postYtUp($data);
+//            $data['atclId'] = $editId;
+//            return redirect('dashboard/articles/ytup')->with('data', $data);
+////            return redirect('dashboard/articles/ytup')->action(
+////                'DashBoard\ArticleController@postYtUp', ['data' => $data]
+////            );
+//        }
         
         $rand = mt_rand();
         
@@ -178,11 +180,11 @@ class ArticleController extends Controller
         
         
         // Total
-        if(! isset($data['open_status'])) {
-        	$data['open_status'] = 1;
+        if(isset($data['open_status'])) {
+        	$data['open_status'] = 0;
         }
         else {
-        	$data['open_status'] = 0;
+        	$data['open_status'] = 1;
         }
         
         if($editId !== NULL ) { //update（編集）の時
@@ -205,6 +207,13 @@ class ArticleController extends Controller
         $atcl->save();
         $atclId = $atcl->id;
         
+        //mv combineにcateとatcl statusをセット
+        $mv = $this->mvCombine->find($data['movie_id']);
+        $mv->cate_id = $atcl->cate_id;
+        $mv->atcl_status = 1;
+        $mv->save();
+        
+        
         //Storage 仮フォルダをidにネームし直す
         if(Storage::exists('public/article/'. $rand)) {
             Storage::move('public/article/'. $rand, 'public/article/'. $atclId);
@@ -214,13 +223,6 @@ class ArticleController extends Controller
             $atcl->post_thumb = str_replace($rand, $atclId, $atcl->post_thumb);
             $atcl->save();
             
-            //if(isset($itemId)) {
-//                $this->article->find($atclId)->map(function($obj) use($atclId, $rand) {
-//                    $obj->post_thumb = str_replace($rand, $atclId, $obj->post_thumb);
-//                    //$obj->link_imgpath = str_replace($rand, $atclId, $obj->link_imgpath);
-//                    $obj->save();
-//                });
-            //}
         }
         
         

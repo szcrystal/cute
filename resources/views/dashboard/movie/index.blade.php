@@ -29,11 +29,10 @@
               <th class="col-md-2">カテゴリー</th>
               <th class="col-md-3">モデル [ID]</th>
               {{-- <th class="col-md-4">タイトル</th> --}}
-              <th class="col-md-2">公開状態</th>
-              <th class="col-md-2">位置情報</th>
+              <th class="col-md-2">記事状態</th>
+              {{-- <th class="col-md-2">位置情報</th> --}}
               <th class="col-md-2">撮影日</th>
 
-              <th></th>
               <th></th>
               @if(Ctm::isDev())
               <th></th>
@@ -83,11 +82,19 @@
                     @endif
                 </td>
 
+                <td>
+                	@if(!$obj->atcl_status)
+                	<a style="margin:auto;" href="{{url('dashboard/articles/create?mvId='.$obj->id)}}" class="btn btn-info btn-sm center-block">記事作成</a>
+                    @else
+						<span class="text-primary">記事作成済</span>
+                    @endif
+                </td>
+
                 {{--
                 <td>
                 	{{ $obj->title }}
                 </td>
-                --}}
+                
 
                 <td>
                     @if($obj->open_status)
@@ -97,10 +104,12 @@
                     @endif
 
                 </td>
+                
 
                 <td>
 					{{ $obj->area }}
                 </td>
+                --}}
 
                 <td>
 					@if($obj->created_at)
@@ -114,13 +123,7 @@
                 <td>
                 	<a style="margin:auto;" href="{{url('dashboard/movies/'.$obj->id)}}" class="btn btn-primary btn-sm center-block">動画</a>
                 </td>
-                <td>
-                	@if(!$obj->atcl_status)
-                	<a style="margin:auto;" href="{{url('dashboard/articles/create?mvId='.$obj->id)}}" class="btn btn-info btn-sm center-block">記事作成</a>
-                    @else
-						<span class="text-primary">記事作成済</span>
-                    @endif
-                </td>
+
                 @if(Ctm::isDev())
                 <td>
                 	<form role="form" method="POST" action="{{ url('/dashboard/movies/'.$obj->id) }}">

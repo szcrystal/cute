@@ -83,7 +83,7 @@
 
 					<div class="col-md-4 pull-left">
                         <div class="pull-left">
-                            <a href="{{ url('dashboard/articles/snsup/'. $id) }}" class="btn btn-success">Social UP Page >></a>
+                            <a href="{{ url('dashboard/articles/snsup/'. $id) }}" class="btn btn-warning">Social UP Page >></a>
                         </div>
                     </div>
                 {{-- @endif --}}
@@ -144,17 +144,17 @@
             --}}
 
             <div class="form-group">
-                <div class="col-md-7 col-md-offset-3">
+                <div class="col-md-12 text-right">
                     <div class="checkbox">
                         <label>
                         	<?php
                             	$checked = '';
                                 if(Ctm::isOld()) {
-                                    if(old('del_status'))
+                                    if(old('open_status'))
                                         $checked = ' checked';
                                 }
                                 else {
-                                    if(isset($article) && $article->del_status) {
+                                    if(isset($article) && $article->open_status) {
                                         $checked = ' checked';
                                     }
                                 }
@@ -165,11 +165,11 @@
                 </div>
             </div>
 
-			<div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">モデル名</label>
+			<div class="form-group">
+                <label for="group" class="col-md-4 control-label">モデル名</label>
 
-                <div class="col-md-9">
-					<p style="margin-top: 0.3em;" class="">{{ $modelName }}</p>
+                <div class="col-md-7">
+					<p style="margin-top: 0.4em;" class="">{{ $modelName }}</p>
                     <input type="hidden" name="model_id" value="{{ $mv->model_id}}"
 
                     @if ($errors->has('model_id'))
@@ -180,8 +180,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="group" class="col-md-4 control-label">動画メモ</label>
+
+                <div class="col-md-7">
+					<p style="margin-top: 0.4em;" class="">{{ $mv->title }}</p>
+                </div>
+            </div>
+
 			<div class="clearfix thumb-wrap">
-                <div class="col-md-3 pull-left thumb-prev">
+                <div class="col-md-4 pull-left thumb-prev">
                     @if(count(old()) > 0)
                         @if(old('post_thumb') != '' && old('post_thumb'))
                         <img src="{{ Storage::url(old('post_thumb')) }}" class="img-fluid">
@@ -197,7 +205,7 @@
                     @endif
                 </div>
 
-                <div class="col-md-9 pull-left text-left form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
+                <div class="col-md-8 pull-left text-left form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
 					<label for="post_thumb" class="col-md-12">記事サムネイル</label><br>
                     <div class="col-md-12">
                         <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
@@ -209,16 +217,30 @@
 
 
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">カテゴリー</label>
-                <div class="col-md-6">
+                <label for="group" class="col-md-2 control-label">カテゴリー</label>
+                <div class="col-md-7">
                     <select class="form-control" name="cate_id">
 						<option disabled selected>選択</option>
                         @foreach($cates as $cate)
 
+                            <?php
+                            	$selected = '';
+                            	if(isset($atcl)) {
+                                	if($atcl->cate_id == $cate->id) {
+                                    	$selected = ' selected';
+                                    }
+                                }
+                                elseif(isset($mv)) {
+                                	if($mv->cate_id == $cate->id) {
+                                    	$selected = ' selected';
+                                    }
+                                }
+                            ?>
+
                             @if(old('cate_id') !== NULL)
                                 <option value="{{ $cate->id }}"{{ old('cate_id') == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
                             @else
-                                <option value="{{ $cate->id }}"{{ isset($atcl) && $atcl->cate_id == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
+                                <option value="{{ $cate->id }}"{{ $selected }}>{{ $cate->name }}</option>
                             @endif
                         @endforeach
 
@@ -265,9 +287,9 @@
 
 
 			<div class="form-group{{ $errors->has('area_info') ? ' has-error' : '' }}">
-                <label for="area_info" class="col-md-3 control-label">住所</label>
+                <label for="area_info" class="col-md-2 control-label">住所</label>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <input id="area_info" type="text" class="form-control" name="area_info" value="{{ Ctm::isOld() ? old('area_info') : (isset($atcl) ? $atcl->area_info : '') }}">
 
                     @if ($errors->has('area_info'))
@@ -281,9 +303,9 @@
 
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                <label for="title" class="col-md-3 control-label">タイトル</label>
+                <label for="title" class="col-md-2 control-label">タイトル</label>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($atcl) ? $atcl->title : '') }}" required>
 
                     @if ($errors->has('title'))
@@ -311,9 +333,9 @@
             --}}
 
             <div class="form-group{{ $errors->has('basic_info') ? ' has-error' : '' }}">
-                <label for="basic_info" class="col-md-3 control-label">基本情報</label>
+                <label for="basic_info" class="col-md-2 control-label">基本情報</label>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <textarea id="basic_info" type="text" class="form-control" name="basic_info" rows="15">{{ isset($atcl) && !count(old()) ? $atcl->basic_info : old('basic_info') }}</textarea>
 
                     @if ($errors->has('basic_info'))
@@ -326,9 +348,9 @@
 
 
             <div class="form-group{{ $errors->has('yt_description') ? ' has-error' : '' }}">
-                <label for="yt_description" class="col-md-3 control-label">YouTube用 説明</label>
+                <label for="yt_description" class="col-md-2 control-label">YouTube用 説明</label>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <textarea id="yt_description" type="text" class="form-control" name="yt_description" rows="10">{{ isset($atcl) && !count(old()) ? $atcl->yt_description : old('yt_description') }}</textarea>
 
                     @if ($errors->has('yt_description'))
@@ -343,7 +365,7 @@
             <div class="clearfix tag-wrap">
 
                 <div class="tag-group form-group{{ $errors->has('tag-group') ? ' has-error' : '' }}">
-                    <label for="tag-group" class="col-md-3 control-label">タグ</label>
+                    <label for="tag-group" class="col-md-2 control-label">タグ</label>
                     <div class="col-md-9 clearfix">
                         <input id="tag-group" type="text" class="form-control tag-control" name="input-tag-group" value="" autocomplete="off">
 

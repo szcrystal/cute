@@ -62,6 +62,9 @@ Route::get('dashboard/articles/twfbup', 'DashBoard\ArticleController@getTwFbUp')
 Route::post('dashboard/articles/twitter', 'DashBoard\ArticleController@postTwitter');
 Route::resource('dashboard/articles', 'DashBoard\ArticleController');
 
+//Feature
+Route::resource('dashboard/features', 'DashBoard\FeatureController');
+
 //Fix
 Route::resource('dashboard/fixes', 'DashBoard\FixController');
 

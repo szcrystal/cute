@@ -346,11 +346,14 @@
                                     <a href="{{url('dashboard/articles')}}">記事一覧</a>
                                 </li>
 
-                                {{--
                                 <li>
-                                    <a href="{{url('dashboard/articles/create')}}">新規追加</a>
+                                    <a href="{{url('dashboard/features/')}}">特集一覧</a>
                                 </li>
-                                --}}
+
+                                <li>
+                                    <a href="{{url('dashboard/features/create')}}">特集新規追加</a>
+                                </li>
+
                                 
                             </ul>
                             <!-- /.nav-second-level -->

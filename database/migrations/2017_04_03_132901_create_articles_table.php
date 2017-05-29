@@ -31,7 +31,7 @@ class CreateArticlesTable extends Migration
             
             $table->text('basic_info')->nullable()->default(NULL);
             
-            $table->boolean('open_status');
+            $table->boolean('open_status')->default(1);
             $table->timestamp('open_date')->nullable()->default(NULL);
             
             $table->string('yt_id')->nullable()->default(NULL);

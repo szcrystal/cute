@@ -36,10 +36,14 @@
 
 
     <div class="well clearfix">
-        <div class="col-md-4 pull-right">
-            <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
+        <div class="col-md-4 pull-right text-right">
+			@if($mvCombine->atcl_status)
+            	<small class="text-warning">記事作成済みです</small>
+				<a href="{{ url('dashboard/articles/'. $mvCombine->id) }}" class="btn btn-success center-block">この動画の記事を編集 >></a>
+            @else
+            <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画の記事を作成 >></a>
+            @endif
         </div>
-        {{-- <span>＊動画の読み込みに時間が掛かります</span> --}}
 
 		<div class="text-center">
             <video id="mainMv" width="800" height="500" poster="" controls>
@@ -59,7 +63,7 @@
 			<div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">撮影日</label>
 
-                <div class="col-md-9">
+                <div style="margin-top:0.4em;" class="col-md-9">
                 	{{ $mvCombine->created_at }}
                 </div>
             </div>
@@ -67,7 +71,7 @@
             <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">モデル</label>
 
-                <div class="col-md-9">
+                <div style="margin-top:0.4em;" class="col-md-9">
                 	{{ $modelName }}
                 </div>
             </div>
@@ -75,16 +79,16 @@
             <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">カテゴリー</label>
 
-                <div class="col-md-9">
+                <div style="margin-top:0.4em;" class="col-md-9">
                 	{{ $cates->find($mvCombine->cate_id)->name }}
                 </div>
             </div>
 
             <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">位置情報</label>
+                <label for="group" class="col-md-3 control-label">メモ</label>
 
-                <div class="col-md-9">
-                	{{ $mvCombine->area }}
+                <div style="margin-top:0.4em;" class="col-md-9">
+                	{{ $mvCombine->title }}
                 </div>
             </div>
 
@@ -194,9 +198,7 @@
 
         </form>
 
-        <div class="col-md-4 pull-right">
-            <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画で記事を作成する >></a>
-        </div>
+
 
 
     </div>
