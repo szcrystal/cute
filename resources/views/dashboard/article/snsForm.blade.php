@@ -14,7 +14,11 @@
 
     <div class="bs-component clearfix">
         <div class="pull-left">
+        	@if($mvId)
             <a href="{{ url('/dashboard/articles') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+            @else
+            <a href="{{ url('/dashboard/features') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+            @endif
         </div>
     </div>
 
@@ -52,7 +56,11 @@
 
 		<div class="bs-component clearfix">
             <div class="pull-left">
-                <a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+            	@if($mvId)
+                	<a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @else
+					<a href="{{ url('/dashboard/features/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @endif
             </div>
         </div>
 

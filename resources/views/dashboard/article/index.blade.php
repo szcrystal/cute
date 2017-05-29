@@ -46,8 +46,8 @@
                 </td>
 
                 <td>
-                	@if($obj->post_thumb)
-					<img src="{{ Storage::url($obj->post_thumb) }}" width=120 height=80>
+                	@if($obj->thumb_path)
+					<img src="{{ Storage::url($obj->thumb_path) }}" width=120 height=80>
                     @else
                     <span class="no-img">No Image</span>
                     @endif

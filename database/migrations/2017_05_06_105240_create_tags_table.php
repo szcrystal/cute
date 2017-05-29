@@ -22,35 +22,38 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
         
-        $n = 0;
-        while($n < 2) {
-            DB::table('tags')->insert([
-                    'name' => '古着_'.$n,
-                    'slug' => 'old-fas-'.$n,
+//        $n = 0;
+//        while($n < 2) {
+            DB::table('tags')->insert(
+            	[
+                    'name' => '古着',
+                    'slug' => 'old-fas',
                     //'view_count' => $n+5,
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
                 ]
             );
             
-            DB::table('tags')->insert([
-                    'name' => '松山_'.$n,
-                    'slug' => 'matsuyama-'.$n,
+            DB::table('tags')->insert(
+            	[
+                    'name' => '松山',
+                    'slug' => 'matsuyama',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
                 ]
             );
             
-            DB::table('tags')->insert([
-                    'name' => 'パン_'.$n,
-                    'slug' => 'bread-'.$n,
+            DB::table('tags')->insert(
+            	[
+                    'name' => 'パン',
+                    'slug' => 'bread',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
                 ]
             );
             
-            $n++;
-        }
+//            $n++;
+//        }
     }
 
     /**

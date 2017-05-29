@@ -57,7 +57,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $atclObjs = Article::orderBy('id', 'desc')->paginate($this->perPage);
+        $atclObjs = Article::where('feature', 0)->orderBy('id', 'desc')->paginate($this->perPage);
         $users = $this->user->all();
         $cateModel = $this->category;
         
