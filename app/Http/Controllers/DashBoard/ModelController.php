@@ -127,7 +127,7 @@ class ModelController extends Controller
         	['model_id'=>$modelId],
             [
         		'name' => $data['tw_name'],
-                'pass' => Crypt::encrypt($data['tw_pass']),
+                'pass' => encrypt($data['tw_pass']),
                 
                 'consumer_key' => $data['consumer_key'],
                 'consumer_secret' => $data['consumer_secret'],

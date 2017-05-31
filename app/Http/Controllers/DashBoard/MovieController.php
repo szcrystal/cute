@@ -87,9 +87,11 @@ class MovieController extends Controller
         //$cateModel = $this->category->find('');
         $cates = $this->category->all();
         
+        $atcls = $this->article;
+        
         $modelName = User::find($mvCombine->model_id)->name;
         
-    	return view('dashboard.movie.form', ['mvCombine'=>$mvCombine, 'cates'=>$cates, 'modelName'=>$modelName, 'memo'=>$memo, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.movie.form', ['mvCombine'=>$mvCombine, 'cates'=>$cates, 'atcls'=>$atcls, 'modelName'=>$modelName, 'memo'=>$memo, 'id'=>$id, 'edit'=>1]);
     }
 
     /**

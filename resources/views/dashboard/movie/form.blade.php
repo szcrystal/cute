@@ -39,7 +39,8 @@
         <div class="col-md-4 pull-right text-right">
 			@if($mvCombine->atcl_status)
             	<small class="text-warning">記事作成済みです</small>
-				<a href="{{ url('dashboard/articles/'. $mvCombine->id) }}" class="btn btn-success center-block">この動画の記事を編集 >></a>
+                <?php $atcl = $atcls->where('movie_id', $mvCombine->id)->first(); ?>
+				<a href="{{ url('dashboard/articles/'. $atcl->id) }}" class="btn btn-success center-block">この動画の記事を編集 >></a>
             @else
             <a href="{{ url('dashboard/articles/create/?mvId='. $mvCombine->id) }}" class="btn btn-info center-block">この動画の記事を作成 >></a>
             @endif

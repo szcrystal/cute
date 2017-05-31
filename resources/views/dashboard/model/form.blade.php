@@ -160,7 +160,7 @@
                                 $pass = decrypt(old('tw_pass'));
                             }
                         ?>
-                        <input id="tw_pass" type="password" class="form-control" name="tw_pass" value="{{ $pass }}">
+                        <input id="tw_pass" type="text" class="form-control" name="tw_pass" value="{{ $pass }}">
 
                         @if ($errors->has('tw_pass'))
                             <span class="help-block">

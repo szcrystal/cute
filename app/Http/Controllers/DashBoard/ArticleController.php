@@ -75,6 +75,7 @@ class ArticleController extends Controller
         $mv = $this->mvCombine->find($mvId);
         
         
+        
         //$mvPath = Storage::url($mv->movie_path);
         //$modelId = $mv->model_id;
         $modelName = $this->user->find($atcl->model_id)->name;

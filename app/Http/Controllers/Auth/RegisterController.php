@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\TwAccount;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,10 +64,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+    	$user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        
+        
+    	//Twitter Account Save
+        TwAccount::create(
+            [
+            	'model_id'=>$user->id,
+        		'name' => null,
+                'pass' => encrypt(''),
+                
+                'consumer_key' => null,
+                'consumer_secret' => null,
+                'access_token' => null,
+                'access_token_secret' => null,
+                
+            ]
+        );
+        
+        return $user;
+
+//        return User::create([
+//            'name' => $data['name'],
+//            'email' => $data['email'],
+//            'password' => bcrypt($data['password']),
+//        ]);
     }
 }
