@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             
             $table->integer('cate_id');
             $table->integer('movie_id');
+            $table->integer('state_id');
             //$table->string('tag_id')->nullable()->default(NULL);
             $table->string('title')->nullable()->default(NULL);
             //$table->string('sub_title')->nullable()->default(NULL);
@@ -56,6 +57,7 @@ class CreateArticlesTable extends Migration
                     
                     'cate_id' => 1,
                     'movie_id' => 1,
+                    'state_id' => 1,
                     'title' => 'みいたけのお気に入り-'. $n,
                     'slug' => 'miitake-favorite-'. $n,
 

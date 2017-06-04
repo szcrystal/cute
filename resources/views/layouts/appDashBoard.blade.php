@@ -252,6 +252,15 @@
                                 <li>
                                     <a href="{{ url('dashboard/register') }}">管理者追加／一覧</a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('dashboard/settings') }}">サイト詳細設定</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('dashboard/states') }}">都道府県一覧</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('dashboard/states/create') }}">都道府県追加</a>
+                                </li>
 
 								@if(Ctm::isDev())
                                 <li>

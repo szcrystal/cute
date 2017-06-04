@@ -11,6 +11,7 @@ class Article extends Model
         //'del_status',
         'cate_id',
         'movie_id',
+        'state_id',
         'title',
         //'sub_title',
         'slug',

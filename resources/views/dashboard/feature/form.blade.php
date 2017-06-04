@@ -165,6 +165,39 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('state_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-2 control-label">都道府県</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="state_id">
+						<option disabled selected>選択</option>
+                        @foreach($states as $state)
+
+                            <?php
+                            	$selected = '';
+                            	if(isset($feature)) {
+                                	if($feature->state_id == $state->id) {
+                                    	$selected = ' selected';
+                                    }
+                                }
+                            ?>
+
+                            @if(old('state_id') !== NULL)
+                                <option value="{{ $state->id }}"{{ old('state_id') == $state->id ? ' selected' : '' }}>{{ $state->name }}</option>
+                            @else
+                                <option value="{{ $state->id }}"{{ $selected }}>{{ $state->name }}</option>
+                            @endif
+                        @endforeach
+
+                    </select>
+
+                    @if ($errors->has('state_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('state_id') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label for="title" class="col-md-2 control-label">タイトル</label>

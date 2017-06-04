@@ -278,8 +278,12 @@
 
 				<div style="margin-bottom:3em;" class="clearfix">
 
-				<?php $n=0; ?>
-				@while($n < 7)
+				<?php
+                	$n=0;
+                	use App\Setting;
+                    $setCount = Setting::get()->first()->snap_count;
+                ?>
+				@while($n < $setCount)
 
                 <div class="form-group text-right">
                 	<div class="col-md-12 checkbox">

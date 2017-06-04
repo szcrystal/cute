@@ -35,6 +35,12 @@ Route::post('dashboard/login', 'DashBoard\LoginController@postLogin');
 Route::get('dashboard/register', 'DashBoard\HomeController@getRegister');
 Route::post('dashboard/register', 'DashBoard\HomeController@postRegister');
 
+//Setting
+Route::resource('dashboard/settings', 'DashBoard\SettingController');
+
+//State
+Route::resource('dashboard/states', 'DashBoard\StateController');
+
 //Model
 Route::resource('dashboard/models', 'DashBoard\ModelController');
 

@@ -10,6 +10,7 @@ use App\TagRelation;
 use App\Category;
 use App\MovieCombine;
 use App\TwAccount;
+use App\State;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -24,7 +25,7 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine, TwAccount $twAccount)
+	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine, TwAccount $twAccount, State $state)
     {
     	
         $this -> middleware('adminauth');
@@ -40,6 +41,7 @@ class ArticleController extends Controller
         
         $this->mvCombine = $mvCombine;
         $this->twAccount = $twAccount;
+        $this->state = $state;
         
         $this->perPage = 20;
         
@@ -74,7 +76,7 @@ class ArticleController extends Controller
         $mvId = $atcl->movie_id;
         $mv = $this->mvCombine->find($mvId);
         
-        
+        $states = $this->state->all();
         
         //$mvPath = Storage::url($mv->movie_path);
         //$modelId = $mv->model_id;
@@ -106,7 +108,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'states'=>$states, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
     }
 
 
@@ -119,6 +121,7 @@ class ArticleController extends Controller
     {
     	$mvId = $request->input('mvId');
         $cates = $this->category->all();
+        $states = $this->state->all();
         
         $mv = $this->mvCombine->find($mvId);
 //        $mvPath = Storage::url($mv->movie_path);
@@ -132,7 +135,7 @@ class ArticleController extends Controller
         })->all();
         
         
-    	return view('dashboard.article.form', ['cates'=>$cates, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
+    	return view('dashboard.article.form', ['cates'=>$cates, 'states'=>$states, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
     }
 
     /**
@@ -146,14 +149,17 @@ class ArticleController extends Controller
     	$editId = $request->has('edit_id') ? $request->input('edit_id') : 0;
         $feature = $request->has('feature') ? 1 : 0;
         
-        
-
-        
         $rules = [
         	'title' => 'required|max:255',
-            //'slug' => 'required|unique:articles,slug,'.$editId.'|max:255',
+            'state_id' => 'required',
         ];
-        $this->validate($request, $rules);
+        
+        $messages = [
+            'state_id.required' => '「都道府県名」を選択して下さい。',
+            //'slug.unique' => '「スラッグ」が既に存在します。',
+        ];
+        
+        $this->validate($request, $rules, $messages);
         
         $data = $request->all(); //requestから配列として$dataにする
 

@@ -73,9 +73,13 @@
             <hr>
             <h4>アイテム</h4>
 
-            <?php $n = 0; ?>
+            <?php
+                $n=0;
+                use App\Setting;
+                $setCount = Setting::get()->first()->item_count;
+            ?>
 
-            @while($n < $itemCount)
+            @while($n < $setCount)
 
                 <div class="form-group text-right">
                 	<div class="col-md-12 checkbox">

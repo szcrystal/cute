@@ -7,6 +7,7 @@ use App\User;
 use App\Article;
 use App\Tag;
 use App\TagRelation;
+use App\State;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ use App\Http\Controllers\Controller;
 class FeatureController extends Controller
 {
 
-    public function __construct(Article $article, Admin $admin, User $user, Tag $tag, TagRelation $tagRelation)
+    public function __construct(Article $article, Admin $admin, User $user, Tag $tag, TagRelation $tagRelation, State $state)
     {
     	
         $this -> middleware('adminauth');
@@ -25,6 +26,7 @@ class FeatureController extends Controller
         $this->article = $article;
         $this->tag = $tag;
         $this->tagRelation = $tagRelation;
+        $this->state = $state;
         
         $this->perPage = 20;
         
@@ -45,6 +47,8 @@ class FeatureController extends Controller
     {
         $feature = $this->article->find($ftId);
         
+        $states = $this->state->all();
+        
         $tagNames = $this->tagRelation->where(['atcl_id'=>$ftId])->get()->map(function($item) {
             return $this->tag->find($item->tag_id)->name;
         })->all();
@@ -54,18 +58,20 @@ class FeatureController extends Controller
         })->all();
         
         
-    	return view('dashboard.feature.form', ['feature'=>$feature, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'ftId'=>$ftId, 'edit'=>1]);
+    	return view('dashboard.feature.form', ['feature'=>$feature, 'states'=>$states, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'ftId'=>$ftId, 'edit'=>1]);
     }
 
 
 
     public function create()
     {
+    	$states = $this->state->all();
+        
     	$allTags = $this->tag->get()->map(function($item){
         	return $item->name;
         })->all();
         
-        return view('dashboard.feature.form', ['allTags'=>$allTags, ]);
+        return view('dashboard.feature.form', ['allTags'=>$allTags, 'states'=>$states, ]);
     }
 
 
