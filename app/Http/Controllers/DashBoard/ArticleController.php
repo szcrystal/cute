@@ -62,10 +62,11 @@ class ArticleController extends Controller
         $atclObjs = Article::where('feature', 0)->orderBy('id', 'desc')->paginate($this->perPage);
         $users = $this->user->all();
         $cateModel = $this->category;
+        $states = $this->state;
         
         //$status = $this->articlePost->where(['base_id'=>15])->first()->open_date;
         
-        return view('dashboard.article.index', ['atclObjs'=>$atclObjs, 'users'=>$users, 'cateModel'=>$cateModel]);
+        return view('dashboard.article.index', ['atclObjs'=>$atclObjs, 'users'=>$users, 'cateModel'=>$cateModel, 'states'=>$states]);
     }
     
     public function show($id)

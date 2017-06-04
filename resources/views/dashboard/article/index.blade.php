@@ -24,6 +24,7 @@
               <th>ID</th>
               <th>サムネイル</th>
               <th class="col-md-2">カテゴリー</th>
+              <th class="col-md-1">県名</th>
               <th class="col-md-3">タイトル</th>
               <th class="col-md-2">公開状態</th>
               <th class="col-md-2">SNS</th>
@@ -60,6 +61,10 @@
                     --
                     @endif
 
+                </td>
+
+                <td>
+                	{{ $states->find($obj->state_id)->name }}
                 </td>
                                     
                 <td>
