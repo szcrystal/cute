@@ -178,10 +178,10 @@
             </div>
 
 
-            <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
-                <label for="user_id" class="col-md-3 control-label">追加モデル for Twitter</label>
+            <div class="form-group{{ $errors->has('addModel_id') ? ' has-error' : '' }}">
+                <label for="addModel_id" class="col-md-3 control-label">追加モデル for Twitter</label>
                 <div class="col-md-6">
-                    <select class="form-control" name="user_id">
+                    <select class="form-control" name="addModel_id">
 						<option disabled selected>選択</option>
                         @foreach($users as $user)
 							@if($user->id > 1 && $atcl->model_id != $user->id)
@@ -195,9 +195,9 @@
 
                     </select>
 
-                    @if ($errors->has('user_id'))
+                    @if ($errors->has('addModel_id'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('user_id') }}</strong>
+                            <strong>{{ $errors->first('addModel_id') }}</strong>
                         </span>
                     @endif
                 </div>

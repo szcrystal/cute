@@ -693,9 +693,13 @@ class ArticleController extends Controller
         $file_size = mb_strlen($file_data);
         
         //modelIdの配列
-        $modelIdArr = [1, $modelId, ];
-        if($modelId == 1) {
-        	$modelIdArr = [1, ];
+        $modelIdArr = array(1); //編集部
+        if($modelId > 1) { //atclにセットされているmodelId
+        	$modelIdArr[] = $modelId;
+        }
+        
+        if(isset($data['addModel_id'])) { //選択した追加モデルid
+        	$modelIdArr[] = $data['addModel_id'];
         }
 
 		$accounts = $this->twAccount->whereIn('model_id', $modelIdArr)->get();
