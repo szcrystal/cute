@@ -48,7 +48,7 @@
                 <label for="name" class="col-md-3 control-label">管理者名</label>
 
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') === NULL && isset($setting) ? $setting->name : old('name') }}" required>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') === NULL && isset($setting) ? $setting->name : old('name') }}">
 
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -62,7 +62,7 @@
                 <label for="email" class="col-md-3 control-label">管理者メール</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') === NULL && isset($setting) ? $setting->email : old('email') }}" required>
+                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') === NULL && isset($setting) ? $setting->email : old('email') }}">
 
                     @if ($errors->has('email'))
                         <span class="help-block">

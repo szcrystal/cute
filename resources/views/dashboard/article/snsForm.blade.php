@@ -178,25 +178,26 @@
             </div>
 
 
-            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">Twitter モデル</label>
+            <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
+                <label for="user_id" class="col-md-3 control-label">追加モデル for Twitter</label>
                 <div class="col-md-6">
                     <select class="form-control" name="user_id">
 						<option disabled selected>選択</option>
                         @foreach($users as $user)
-
-                            @if(old('user_id') !== NULL)
-                                <option value="{{ $user->id }}"{{ old('user_id') == $user->id ? ' selected' : '' }}>新田あやか</option>
-                            @else
-                                <option value="{{ $user->id }}"{{ isset($atcl) && $atcl->model_id == $user->id ? ' selected' : '' }}>新田あやか</option>
+							@if($user->id > 1 && $atcl->model_id != $user->id)
+                                @if(old('user_id') !== NULL)
+                                    <option value="{{ $user->id }}"{{ old('user_id') == $user->id ? ' selected' : '' }}>{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endif
                         @endforeach
 
                     </select>
 
-                    @if ($errors->has('cate_id'))
+                    @if ($errors->has('user_id'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('cate_id') }}</strong>
+                            <strong>{{ $errors->first('user_id') }}</strong>
                         </span>
                     @endif
                 </div>

@@ -53,6 +53,14 @@ hr {
     margin-top: 3em;
 }
 
+#side-menu > li > a {
+    font-weight: bold;
+}
+.nav-second-level {
+	margin-left: 1em;
+}
+
+
 .btn-g {
 	background: #ECF9F5;
     color: #333;

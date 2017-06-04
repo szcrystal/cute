@@ -66,13 +66,16 @@ class SettingController extends Controller
         
         $rules = [
             //'name' => 'required|same_tag:'.$editId.','.$groupId.'|max:255', //same_tag-> on AppServiceProvider
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
+            'snap_count' => 'required|numeric',
+            'item_count' => 'required|numeric',
             //'slug' => 'required|unique:states,slug,'.$editId.'|max:255', /* |unique:admins 注意:unique */
         ];
         
         $messages = [
-            'name.required' => '「管理者名」は必須です。',
+            'snap_count.required' => '「モデルスナップ数」は必須です。',
+            'item_count.required' => '「カテゴリーアイテム数」は必須です。',
+            'snap_count.numeric' => '「モデルスナップ数」は半角数字を入力して下さい。',
+            'item_count.numeric' => '「カテゴリーアイテム数」は半角数字を入力して下さい。',
             //'emailrequired' => '「管理者メール」は必須です。',
         ];
         

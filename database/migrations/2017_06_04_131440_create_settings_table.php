@@ -18,12 +18,21 @@ class CreateSettingsTable extends Migration
             
             $table->string('name')->nullable()->default(NULL);
             $table->string('email')->nullable()->default(NULL);
-            $table->integer('snap_count')->nullable()->default(NULL);
-            $table->integer('item_count')->nullable()->default(NULL);
+            $table->integer('snap_count');
+            $table->integer('item_count');
             
             
             $table->timestamps();
         });
+        
+        DB::table('settings')->insert(
+            [
+                'snap_count' => 7,
+                'item_count' => 7,
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time()),
+            ]
+        );
     }
 
     /**
