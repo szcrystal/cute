@@ -45,11 +45,7 @@ class ArticleController extends Controller
         
         $this->perPage = 20;
         
-        // URLの生成
-		//$url = route('dashboard');
-        
-        /* ************************************** */
-        //env()ヘルパー：環境変数（$_SERVER）の値を取得 .env内の値も$_SERVERに入る
+
 	}
     
     /**
@@ -238,7 +234,7 @@ class ArticleController extends Controller
             $mv->save();
         }
         
-        
+        //Thumbnail upload
         if(isset($data['post_thumb'])) {
             
             $filename = $data['post_thumb']->getClientOriginalName();
@@ -350,7 +346,7 @@ class ArticleController extends Controller
 //        }
     }
     
-    
+    //SNS Upページ Get
     public function getSnsUp($atclId)
     {
     	$atcl = $this->article->find($atclId);
@@ -383,6 +379,7 @@ class ArticleController extends Controller
     	return view('dashboard.article.snsForm', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'users'=>$users, 'mvId'=>$mvId, 'atclId'=>$atclId, 'edit'=>1]);
     }
     
+    //SNS Upページ Post
     public function postSnsUp(Request $request, $atclId)
     {
     	$data = $request->all();
@@ -502,7 +499,9 @@ class ArticleController extends Controller
           try{
             // REPLACE this value with the path to the file you are uploading.
             //$videoPath = base_path() . "/storage/app/public/movie/2/main.mp4";
-            $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            
+            //$videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            $videoPath = $_SERVER['DOCUMENT_ROOT'] . "/storage". str_replace('public', '', $data['mvPath']);
             
 
             // Create a snippet with title, description, tags and category ID
@@ -593,11 +592,11 @@ class ArticleController extends Controller
 
           }
           catch (Google_Service_Exception $e) {
-            $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
+            $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
                 htmlspecialchars($e->getMessage()));
           }
           catch (Google_Exception $e) {
-            $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
+            $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
                 htmlspecialchars($e->getMessage()));
           }
 
@@ -617,8 +616,8 @@ class ArticleController extends Controller
             $_SESSION['state'] = $state;
 
             $authUrl = $client->createAuthUrl();
-            $htmlBody = "<p class=\"text-primary\">Authorization Required</p>";
-            $htmlBody .= "<p class=\"text-primary\">このリンクをクリックして下さい。<a href=\"" . $authUrl . "\">authorize access</a> <p>";
+            $htmlBody = "<p class=\"text-warning\">Authorization Required</p>";
+            $htmlBody .= "<p class=\"text-warning\">下記のリンクをクリックしてログインを進めて下さい。<p><a href=\"" . $authUrl . "\">authorize access >></a> ";
         }
     
 

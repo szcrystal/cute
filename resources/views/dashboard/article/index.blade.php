@@ -85,21 +85,21 @@
                 <td>
 					<ul style="list-style:none; padding-left:0;">
                         @if(!$obj->yt_up)
-                        <li>YT:<span class="text-danger">未UP</span>
+                        <li>YT: <span class="text-danger">未UP</span>
                         @else
-                        <li>YT:<span class="text-success">UP済み</span>
+                        <li>YT: <span class="text-success">UP済み</span>
                         @endif
 
                         @if(!$obj->tw_up)
-                        <li>TW:<span class="text-danger">未UP</span>
+                        <li>TW: <span class="text-danger">未UP</span>
                         @else
-                        <li>TW:<span class="text-success">UP済み</span>
+                        <li>TW: <span class="text-success">UP済み</span>
                         @endif
 
                         @if(!$obj->fb_up)
-                        <li>FB:<span class="text-danger">未UP</span>
+                        <li>FB: <span class="text-danger">未UP</span>
                         @else
-                        <li>FB:<span class="text-success">UP済み</span>
+                        <li>FB: <span class="text-success">UP済み</span>
                         @endif
 
                     </ul>
@@ -107,7 +107,7 @@
 
                 <td>
 					@if($obj->open_date)
-						{{ $obj->open_date }}
+						<small>{{ $obj->created_at }}</small>
                     @else
 						--
                     @endif
