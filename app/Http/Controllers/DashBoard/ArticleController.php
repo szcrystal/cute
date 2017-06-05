@@ -500,8 +500,8 @@ class ArticleController extends Controller
             // REPLACE this value with the path to the file you are uploading.
             //$videoPath = base_path() . "/storage/app/public/movie/2/main.mp4";
             
-            //$videoPath = base_path() . "/storage/app/". $data['mvPath'];
-            $videoPath = $_SERVER['DOCUMENT_ROOT'] . "/storage". str_replace('public', '', $data['mvPath']);
+            $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            //$videoPath = $_SERVER['DOCUMENT_ROOT'] . "/storage". str_replace('public', '', $data['mvPath']);
             
 
             // Create a snippet with title, description, tags and category ID
@@ -539,7 +539,7 @@ class ArticleController extends Controller
             // Specify the size of each chunk of data, in bytes. Set a higher value for
             // reliable connection as fewer chunks lead to faster uploads. Set a lower
             // value for better recovery on less reliable connections.
-            $chunkSizeBytes = 1 * 1024 * 1024;
+            $chunkSizeBytes = 3 * 1024 * 1024;
 
             // Setting the defer flag to true tells the client to return a request which can be called
             // with ->execute(); instead of making the API call immediately.
