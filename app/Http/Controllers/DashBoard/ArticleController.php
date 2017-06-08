@@ -211,6 +211,7 @@ class ArticleController extends Controller
                 
                 //$filename = $request->file('post_thumb')->getClientOriginalName();
                 $filename = $data['post_movie']->getClientOriginalName();
+                $filename = str_replace(' ', '_', $filename);
                 
                 //$aId = $editId ? $editId : $rand;
                 //$pre = time() . '-';
@@ -238,6 +239,7 @@ class ArticleController extends Controller
         if(isset($data['post_thumb'])) {
             
             $filename = $data['post_thumb']->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
             
             //$pre = time() . '-';
             if($feature) {
