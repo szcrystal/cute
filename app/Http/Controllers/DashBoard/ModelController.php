@@ -141,6 +141,7 @@ class ModelController extends Controller
         if($request->file('model_thumb') != '') {
             
             $filename = $request->file('model_thumb')->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
             
             //$aId = $editId ? $editId : $rand;
             //$pre = time() . '-';
