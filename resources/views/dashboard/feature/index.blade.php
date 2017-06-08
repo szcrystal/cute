@@ -61,7 +61,10 @@
 
                 <td>
                 	@if($obj->cate_id)
-	        		{{ $cateModel->find($obj->cate_id)->name }}
+	        			{{ $cateModel->find($obj->cate_id)->name }}
+                        @if(!$cateModel->find($obj->cate_id)->status)
+							<small class="text-danger">非公開</small>
+                        @endif
                     @else
                     --
                     @endif

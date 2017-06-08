@@ -53,9 +53,9 @@
 
                 <td>
                 	@if($cate->status)
-						公開中
+						<span class="text-success">公開中</span>
                     @else
-						非公開
+						<span class="text-danger">非公開</span>
                     @endif
                 </td>
 
