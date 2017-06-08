@@ -15,9 +15,13 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+            	<?php
+                	use App\Category;
+                    $cates = Category::all();
+                ?>
 
 				@foreach($cates as $cate)
-                    <li class="nav-link"><a href="{{ url('cate/'. $cate->slug) }}">{{ $cate->name }}</a></li>
+                    <li class="nav-link"><a href="{{ url($cate->slug) }}">{{ $cate->name }}</a></li>
 
 				{{--
                     <li class="dropdown nav-item">

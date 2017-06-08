@@ -175,7 +175,7 @@ class ArticleController extends Controller
         if($feature) {
             $data['feature'] = 1;
             $data['model_id'] = 1;
-            $data['cate_id'] = 0;
+            //$data['cate_id'] = 0;
             $data['movie_id'] = 0;
         }
         

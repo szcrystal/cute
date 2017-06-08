@@ -295,8 +295,11 @@
                         <li>
                             <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i> カテゴリー設定<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                            	<li><a href="{{ url('/dashboard/cates') }}">カテゴリー一覧</a></li>
-                            	<li><a href="{{ url('/dashboard/cates/create') }}">カテゴリー追加</a></li>
+                            	<li><a href="{{ url('/dashboard/cates') }}">メインカテゴリー一覧</a></li>
+                            	<li><a href="{{ url('/dashboard/cates/create') }}">メインカテゴリー追加</a></li>
+
+                                <li><a href="{{ url('/dashboard/featurecates') }}">特集カテゴリー一覧</a></li>
+                            	<li><a href="{{ url('/dashboard/featurecates/create') }}">特集カテゴリー追加</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

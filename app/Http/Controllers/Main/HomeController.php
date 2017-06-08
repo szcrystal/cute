@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Main;
 
 use App\Article;
 use App\Category;
+use App\FeatureCategory;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-	public function __construct(Article $article, Category $category)
+	public function __construct(Article $article, Category $category, FeatureCategory $featureCate)
     {
         //$this->middleware('search');
         
         $this->article = $article;
         $this->category = $category;
-//        $this->user = $user;
+        $this->featureCate = $featureCate;
 //        $this->tag = $tag;
 //        $this->tagRelation = $tagRelation;
 //        $this->tagGroup = $tagGroup;
@@ -38,13 +39,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $atcls = Article::where(['open_status'=>1])->orderBy('open_date','DESC')->paginate($this->perPage);
+        $atcls = Article::where(['open_status'=>1, 'feature'=>0])->orderBy('open_date','DESC')->paginate($this->perPage);
         
 		$cates = $this->category->all();
         
-    	
+        $fCates = $this->featureCate->where('status', 1)->get()->map(function($obj){
+        	return $obj->id;
+        })->all();
         
-    	return view('main.index', ['atcls'=>$atcls, 'cates'=>$cates]);
+        $features = $this->article->where('feature', 1)->whereIn('cate_id', $fCates)->orderBy('open_date','DESC')->get();
+        
+    	
+    	return view('main.index', ['atcls'=>$atcls, 'cates'=>$cates, 'features'=>$features]);
 
     }
 

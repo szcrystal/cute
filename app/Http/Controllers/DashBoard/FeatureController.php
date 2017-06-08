@@ -8,6 +8,7 @@ use App\Article;
 use App\Tag;
 use App\TagRelation;
 use App\State;
+use App\FeatureCategory;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,7 @@ use App\Http\Controllers\Controller;
 class FeatureController extends Controller
 {
 
-    public function __construct(Article $article, Admin $admin, User $user, Tag $tag, TagRelation $tagRelation, State $state)
+    public function __construct(Article $article, Admin $admin, User $user, Tag $tag, TagRelation $tagRelation, State $state, FeatureCategory $featureCate)
     {
     	
         $this -> middleware('adminauth');
@@ -27,6 +28,7 @@ class FeatureController extends Controller
         $this->tag = $tag;
         $this->tagRelation = $tagRelation;
         $this->state = $state;
+        $this->featureCate = $featureCate;
         
         $this->perPage = 20;
         
@@ -36,11 +38,11 @@ class FeatureController extends Controller
     {
         $features = Article::where('feature',1)->orderBy('id', 'desc')->paginate($this->perPage);
 //        $users = $this->user->all();
-//        $cateModel = $this->category;
+        $cateModel = $this->featureCate;
         
         //$status = $this->articlePost->where(['base_id'=>15])->first()->open_date;
         
-        return view('dashboard.feature.index', ['features'=>$features]);
+        return view('dashboard.feature.index', ['features'=>$features, 'cateModel'=>$cateModel]);
     }
     
     public function show($ftId) //Edit Page
@@ -48,6 +50,8 @@ class FeatureController extends Controller
         $feature = $this->article->find($ftId);
         
         $states = $this->state->all();
+        
+        $cates = $this->featureCate->where('status',1)->get();
         
         $tagNames = $this->tagRelation->where(['atcl_id'=>$ftId])->get()->map(function($item) {
             return $this->tag->find($item->tag_id)->name;
@@ -58,7 +62,7 @@ class FeatureController extends Controller
         })->all();
         
         
-    	return view('dashboard.feature.form', ['feature'=>$feature, 'states'=>$states, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'ftId'=>$ftId, 'edit'=>1]);
+    	return view('dashboard.feature.form', ['feature'=>$feature, 'states'=>$states, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'ftId'=>$ftId, 'cates'=>$cates, 'edit'=>1]);
     }
 
 
@@ -67,11 +71,13 @@ class FeatureController extends Controller
     {
     	$states = $this->state->all();
         
+        $cates = $this->featureCate->where('status',1)->get();
+        
     	$allTags = $this->tag->get()->map(function($item){
         	return $item->name;
         })->all();
         
-        return view('dashboard.feature.form', ['allTags'=>$allTags, 'states'=>$states, ]);
+        return view('dashboard.feature.form', ['allTags'=>$allTags, 'states'=>$states, 'cates'=>$cates]);
     }
 
 

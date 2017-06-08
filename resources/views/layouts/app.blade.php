@@ -11,10 +11,9 @@
 		<div class="container wrap-all">
 			<div class="row">
                 <?php $className = isset($className) ? $className : ''; ?>
-                <div class="flex col-md-12 py-4 {{ $className }}"><!-- offset-md-1-->
+                <div class="col-md-12 py-4 {{ $className }}"><!-- offset-md-1-->
                     @yield('content')
-                    @yield('leftbar')
-                    @yield('rightbar')
+                    {{-- @yield('leftbar') --}}
                 </div>
             </div>
 

@@ -17,13 +17,18 @@ Route::get('/m/{id}', function(){
 	abort(404);
 });
 
-Route::get('hello', function () {
-    echo "hello2";
-});
-
 Route::get('info', function () {
     phpinfo();
 });
+
+//Main ============================
+
+//Model
+Route::resource('model', 'Main\ModelController');
+
+//Contact
+Route::resource('contact', 'Main\ContactController');
+
 
 
 //DashBoard =======================
@@ -56,8 +61,11 @@ Route::resource('dashboard/musics', 'DashBoard\MusicController');
 //Tag
 Route::resource('dashboard/tags', 'DashBoard\TagController');
 
-//category
+//Category
 Route::resource('dashboard/cates', 'DashBoard\CategoryController');
+
+//FeatureCategory
+Route::resource('dashboard/featurecates', 'DashBoard\FeatureCateController');
 
 //Article
 Route::get('dashboard/articles/snsup/{atclId}', 'DashBoard\ArticleController@getSnsUp');

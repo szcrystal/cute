@@ -165,6 +165,40 @@
                 </div>
             </div>
 
+
+            <div class="form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-2 control-label">特集カテゴリー</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="cate_id">
+						<option disabled selected>選択</option>
+                        @foreach($cates as $cate)
+
+                            <?php
+                            	$selected = '';
+                            	if(isset($feature)) {
+                                	if($feature->cate_id == $cate->id) {
+                                    	$selected = ' selected';
+                                    }
+                                }
+                            ?>
+
+                            @if(old('cate_id') !== NULL)
+                                <option value="{{ $cate->id }}"{{ old('cate_id') == $cate->id ? ' selected' : '' }}>{{ $cate->name }}</option>
+                            @else
+                                <option value="{{ $cate->id }}"{{ $selected }}>{{ $cate->name }}</option>
+                            @endif
+                        @endforeach
+
+                    </select>
+
+                    @if ($errors->has('cate_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('cate_id') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
             <div class="form-group{{ $errors->has('state_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">都道府県</label>
                 <div class="col-md-7">
@@ -197,6 +231,8 @@
                     @endif
                 </div>
             </div>
+
+
 
 
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

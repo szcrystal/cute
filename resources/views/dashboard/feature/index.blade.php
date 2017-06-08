@@ -23,6 +23,7 @@
 
               <th class="col-md-2">動画</th>
               <th class="col-md-2">サムネイル</th>
+              <th class="col-md-2">カテゴリー</th>
               <th class="col-md-3">タイトル</th>
               <th class="col-md-1">公開状態</th>
               <th class="col-md-2">公開日</th>
@@ -56,6 +57,15 @@
                     @else
                     <span class="no-img">No Image</span>
                     @endif
+                </td>
+
+                <td>
+                	@if($obj->cate_id)
+	        		{{ $cateModel->find($obj->cate_id)->name }}
+                    @else
+                    --
+                    @endif
+
                 </td>
 
 				<td>
