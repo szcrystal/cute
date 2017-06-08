@@ -6,6 +6,8 @@
     	<h3 class="page-header"></h3>
     </div>
 
+    <a href="{{ url('contribute') }}" target="_brank">contribute >></a>
+
     {{-- $obj->links() --}}
 
 {{--

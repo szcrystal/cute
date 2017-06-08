@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <a href="{{ url('contribute') }}">contribute</a>
+        
 
 </div>
 
