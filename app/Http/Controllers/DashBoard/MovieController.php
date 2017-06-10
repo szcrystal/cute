@@ -82,7 +82,9 @@ class MovieController extends Controller
     {
         $mvCombine = $this->movieCombine->find($id);
         
-        $memo = $this->mvRel->find($mvCombine->rel_id)->memo;
+        if($mvCombine->rel_id != 99999) {
+        	$memo = $this->mvRel->find($mvCombine->rel_id)->memo;
+        }
         
         //$cateModel = $this->category->find('');
         $cates = $this->category->all();
