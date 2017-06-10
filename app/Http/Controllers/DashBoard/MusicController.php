@@ -218,6 +218,13 @@ class MusicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = $this->music->find($id)->name;
+        
+        
+        $del = $this->music->destroy($id);
+        
+        $status = $del ? '「'.$title.'」が削除されました' : '「'.$title.'」が削除出来ませんでした';
+        
+        return redirect('dashboard/musics')->with('status', $status);
     }
 }
