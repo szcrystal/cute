@@ -64,7 +64,7 @@ class HomeController extends Controller
         	return $obj->id;
         })->all();
         
-        $features = $this->article->where('feature', 1)->whereIn('cate_id', $fCates)->orderBy('open_date','DESC')->get();
+        $features = $this->article->where('feature', 1)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->take(3)->get();
         
     	
     	return view('main.index', ['atcls'=>$atcls, 'cates'=>$cates, 'features'=>$features]);
