@@ -39,9 +39,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $atcls = Article::where(['open_status'=>1, 'feature'=>0])->orderBy('open_date','DESC')->paginate($this->perPage);
+        //$atcls = Article::where(['open_status'=>1, 'feature'=>0])->orderBy('open_date','DESC')->get();
+        //->paginate($this->perPage);
+        
+        $atcls = array();
         
 		$cates = $this->category->all();
+        
+        foreach($cates as $cate) {
+        	$as = $this->article->where(['open_status'=>1, 'feature'=>0, 'cate_id'=>$cate->id])->orderBy('created_at','DESC')->get()->all();
+            
+            if(count($as) > 0) {
+            	$atcls[$cate->name] = $as;
+            }
+        }
+//        $atcls = $this->article->where(['open_status'=>1, 'feature'=>0])->orderBy('created_at','DESC')->get();
+//        $atcls = $atcls->groupBy('cate_id')->toArray();
+        
+//        print_r($atcls);
+//        exit;
+        
         
         $fCates = $this->featureCate->where('status', 1)->get()->map(function($obj){
         	return $obj->id;

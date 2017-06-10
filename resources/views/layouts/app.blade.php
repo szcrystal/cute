@@ -9,9 +9,9 @@
         @endif
 
 		<div class="container wrap-all">
-			<div class="row">
+			<div class="">
                 <?php $className = isset($className) ? $className : ''; ?>
-                <div class="col-md-12 py-4 {{ $className }}"><!-- offset-md-1-->
+                <div class="py-4 {{ $className }}"><!-- offset-md-1-->
                     @yield('content')
                     {{-- @yield('leftbar') --}}
                 </div>

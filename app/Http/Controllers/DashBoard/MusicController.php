@@ -63,26 +63,33 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-    	$editId = $request->input('edit_id');
+    	$editId = $request->has('edit_id') ? $request->input('edit_id') : 0;
         
         $rules = [
             'name' => 'required|unique:musics,name,'.$editId.'|max:255',
-            'music_file' => 'required',
+            'music_file' => 'required|mimetypes:audio/mpeg,audio/x-m4a', //mimetypes:audio/mpeg,audio/quicktime  audio/mpeg,audio/x-m4a
         ];
-        $this->validate($request, $rules);
+        $messages = [
+            'music_file.mimetypes' => '「ファイル」は .mp3 か .m4a をUPして下さい。',
+            //'slug.unique' => '「スラッグ」が既に存在します。',
+        ];
+        
+        $this->validate($request, $rules, $messages);
         
         $data = $request->all();
         
-        if($request->file('music_file') != '') {
-            $filename = $request->file('music_file')->getClientOriginalName();
+        if(isset($data['music_file'])) {
+            $filename = $data['music_file']->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
+           
             //$pre = time() . '-';
             $filename = 'music/'/* . $pre*/ . $filename;
-            $path = $request->file('music_file')->storeAs('public', $filename);
+            $path = $data['music_file']->storeAs('public', $filename);
         
             $data['file'] = $filename;
         }
         
-        if($editId !== NULL ) { //update（編集）の時
+        if($editId) { //update（編集）の時
         	$status = 'Musicが更新されました！';
             $music = $this->music->find($editId);
         }
