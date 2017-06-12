@@ -84,7 +84,7 @@
                                 <?php
                                     $selected = '';
                                     if(isset($model)) {
-                                        if($model->state_id == $model->id) {
+                                        if($model->state_id == $state->id) {
                                             $selected = ' selected';
                                         }
                                     }
