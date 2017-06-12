@@ -101,7 +101,7 @@ use App\User;
                         	@if($atcl->address != '')
                         	<div id="map" style="width: 100%; height: 500px;" data-address="{{ $atcl->address }}"></div>
 
-                            <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+                            <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 
                             <script>
                                 function drawMap(address) {
