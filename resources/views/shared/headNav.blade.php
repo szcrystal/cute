@@ -21,8 +21,6 @@
         </div>
     </form>
     -->
-    
-
 
         <button style="display:inline;" class="btn btn-default my-2 my-sm-0 col-md-1 float-right" type="submit">
             <i class="fa fa-search"></i>
@@ -30,78 +28,96 @@
 </header>
 
 
-<nav class="navbar navbar-toggleable-md navbar-inverse">
-	<div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="main-navigation">
 
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
             <?php
                 use App\Category;
                 use App\State;
+                use App\FeatureCategory;
                 
                 $states = State::all();
                 $cates = Category::all();
+                $fCates = FeatureCategory::where('status', 1)->get();
             ?>
 
-            <ul class="navbar-nav mr-auto">
+            <ul class="state-nav clear">
+            	<li class="dropdown nav-item" data-toggle="dropdown" role="button">
+                    ALL <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </li>
 
 				@foreach($states as $state)
-                    <li class="dropdown nav-item">
-                    	<a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" role="button" aria-expanded="false">{{ $state->name }}</a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdown01" role="menu">
-							<a href="{{ url($state->slug) }}" class="dropdown-item">{{ $state->name }} TOP</a>
-
-                        	@foreach($cates as $cate)
-                            	<a href="{{ url($state->slug .'/' .$cate->slug) }}" class="dropdown-item">{{ $cate->name }}</a>
-                            @endforeach
-
-                        </div>
+                    <li class="dropdown nav-item" data-toggle="dropdown" role="button">
+                    	{{ $state->name }} <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </li>
                 @endforeach
 
             </ul>
 
+			<div class="menu-dropdown-wrap">
+				<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
+                	<div class="float-left col-md-2">
+                    	<ul class="clear">
+                    		<li><a href="{{ url('/') }}" class="dropdown-item">四国 TOP</a>
+                    		<li><a href="{{ url('all/model') }}" class="dropdown-item">モデル</a>
+                        </ul>
+                    </div>
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+					<div class="float-left col-md-5">
+                        <h2>カテゴリー</h2>
+                        <ul class="clear">
+                        @foreach($cates as $cate)
+                            <li><a href="{{ url('all/' . $cate->slug) }}">{{ $cate->name }}</a></li>
+                        @endforeach
+                        </ul>
+                    </div>
 
-				{{--
-				@foreach($cates as $cate)
-                    <li class="nav-link"><a href="{{ url($cate->slug) }}">{{ $cate->name }}</a></li>
+					<div class="float-left col-md-5">
+                    	<h2>特集</h2>
+						<ul class="clear">
+                        	<li><a href="{{ url('all/feature') }}">特集</a></li>
+                        	@foreach($fCates as $fCate)
+								<li><a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
+							@endforeach
+                        </ul>
+                    </div>
 
+                </div>
 
-                    <li class="dropdown nav-item">
-                        <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdown01" role="menu">
-                            <a href="{{ url('/mypage') }}" class="dropdown-item">マイページ</a>
-
-                            <a href="{{ url('/logout') }}" class="dropdown-item"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                ログアウト
-                            </a>
-
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+				@foreach($states as $state)
+                	<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
+						<div class="float-left col-md-2">
+                        	<ul class="clear">
+                        		<li><a href="{{ url($state->slug) }}" class="dropdown-item">{{ $state->name }} TOP</a>
+                        		<li><a href="{{ url($state->slug .'/model') }}" class="dropdown-item">モデル</a>
+                            </ul>
                         </div>
-                    </li>
-                
+
+						<div class="float-left col-md-5">
+                            <h2>カテゴリー</h2>
+                            <ul class="clear">
+                                @foreach($cates as $cate)
+                                    <li><a href="{{ url($state->slug .'/' .$cate->slug) }}">{{ $cate->name }}</a>
+                                @endforeach
+                            </ul>
+                    	</div>
+
+                        <div class="float-left col-md-5">
+                            <h2>特集</h2>
+                            <ul class="clear">
+                                <li><a href="{{ url($state->slug .'/feature') }}">特集</a>
+                                @foreach($fCates as $fCate)
+                                    <li><a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 @endforeach
-                --}}
 
-            </ul>
+            </div>
 
-        </div>
 
-    </div>
+
 </nav>
 
 </div>

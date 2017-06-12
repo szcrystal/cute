@@ -1,4 +1,4 @@
-@if($atcl -> movie_url != '')
+@if(isset($atcl->yt_id))
 	<?php
         $url = explode('/', $atcl->movie_url); //$url = 'http://www.nicovideo.jp/watch/sm19026423';
         $embed = end($url);

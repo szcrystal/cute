@@ -6,6 +6,7 @@ use App\Admin;
 use App\User;
 use App\ModelSnap;
 use App\TwAccount;
+use App\State;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ use Crypt;
 
 class ModelController extends Controller
 {
-	public function __construct(Admin $admin, User $user, ModelSnap $modelSnap, TwAccount $twAccount)
+	public function __construct(Admin $admin, User $user, ModelSnap $modelSnap, TwAccount $twAccount, State $state)
     {
         $this -> middleware('adminauth'/*, ['except' => ['getRegister','postRegister']]*/);
         //$this->middleware('auth:admin', ['except' => 'getLogout']);
@@ -24,6 +25,7 @@ class ModelController extends Controller
         $this -> user = $user;
         $this -> modelSnap = $modelSnap;
         $this -> twAccount = $twAccount;
+        $this->state = $state;
         
         $this->perPage = 20;
 
@@ -50,6 +52,8 @@ class ModelController extends Controller
     {
         $model = $this->user->find($modelId);
         
+        $states = $this->state->all();
+        
         $snaps = $this->modelSnap->where('model_id', $modelId)->get();
         
         $twa = $this->twAccount->where('model_id', $modelId)->first();
@@ -57,7 +61,7 @@ class ModelController extends Controller
 //        print_r($snaps[0]->ask);
 //        exit;
         
-        return view('dashboard.model.form', ['modelId'=>$modelId, 'model'=>$model, 'twa'=>$twa, 'snaps'=>$snaps]);
+        return view('dashboard.model.form', ['modelId'=>$modelId, 'model'=>$model, 'states'=>$states, 'twa'=>$twa, 'snaps'=>$snaps]);
     }
 
     /**
@@ -67,8 +71,9 @@ class ModelController extends Controller
      */
     public function create()
     {
-        return view('dashboard.model.form');
-
+    	$states = $this->state->all();
+        
+        return view('dashboard.model.form', ['states'=>$states]);
     }
 
     /**
@@ -86,12 +91,18 @@ class ModelController extends Controller
             //'cate_id' => 'required',
             'name' => 'required|max:255', /* |unique:admins 注意:unique */
         	'email' => 'required|email|max:255|unique:users,email'.$valueId,
+            'state_id' => 'required',
+        
             //'movie_site' => 'required|max:255',
             //'password' => 'required|min:8',
             //'movie_url' => 'required|max:255|unique:articles,movie_url'.$except,
         ];
         
-        $this->validate($request, $rules);
+        $messages = [
+            'state_id.required' => '「都道府県名」を選択して下さい。',
+        ];
+        
+        $this->validate($request, $rules, $messages);
         
         $data = $request->all();
         

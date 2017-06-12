@@ -73,6 +73,42 @@
                     </div>
                 </div>
 
+
+				<div class="form-group{{ $errors->has('state_id') ? ' has-error' : '' }}">
+                    <label for="group" class="col-md-3 control-label">都道府県</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="state_id">
+                            <option disabled selected>選択</option>
+                            @foreach($states as $state)
+
+                                <?php
+                                    $selected = '';
+                                    if(isset($model)) {
+                                        if($model->state_id == $model->id) {
+                                            $selected = ' selected';
+                                        }
+                                    }
+                                ?>
+
+                                @if(old('state_id') !== NULL)
+                                    <option value="{{ $state->id }}"{{ old('state_id') == $state->id ? ' selected' : '' }}>{{ $state->name }}</option>
+                                @else
+                                    <option value="{{ $state->id }}"{{ $selected }}>{{ $state->name }}</option>
+                                @endif
+                            @endforeach
+
+                        </select>
+
+                        @if ($errors->has('state_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('state_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+
+
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-3 control-label">ニックネーム</small></label>
 
@@ -132,7 +168,7 @@
                 @endif
 
 				<hr>
-				<p>Twitter <a href="https://apps.twitter.com" target="_brank">https://apps.twitter.com</a></p>
+				<p><span style="font-weight:bold;">Twitter</span> <a href="https://apps.twitter.com" target="_brank">https://apps.twitter.com</a></p>
 				<div class="form-group{{ $errors->has('tw_name') ? ' has-error' : '' }}">
                     <label for="tw_name" class="col-md-3 control-label">アカウント　@</label>
 

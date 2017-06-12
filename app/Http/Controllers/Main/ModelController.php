@@ -2,46 +2,61 @@
 
 namespace App\Http\Controllers\Main;
 
-use App\Model;
+use App\User;
+use App\State;
+use App\ModelSnap;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ModelController extends Controller
 {
-    public function __construct(Model $model)
+    public function __construct(User $user, State $state, ModelSnap $modelSnap)
     {
         //$this->middleware('auth');
         
-        $this-> model = $model;
+        $this-> user = $user;
+        $this->state = $state;
+        $this->modelSnap = $modelSnap;
         //$this->contactCate = $contactCate;
         //$this->article = $article;
         
-        //$this->user = Auth::user();
+        $this->perPage = env('PER_PAGE', 20);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($state = 'all')
     {
-    	$models = $this-> model->all();
+		$whereArr = [];
         
-//        $cate_option = $objs->map(function ($obj) {
-//    		return $obj->cate_name;
-//		});
+        if($state != 'all') {
+        	$stateObj = $this->state->where('slug', $state)->get()->first();
+            
+            //404
+            if(!isset($stateObj)) abort(404);
+            
+            $whereArr['state_id'] = $stateObj->id;
+        }
+        
+        $newModel = $this->user->where($whereArr)->whereNotIn('id',[1, 2])->orderBy('created_at','DESC')->take(3)->get();
+        
+        $models = $this->user->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
 
-        return view('main.model.index', ['models'=>$models]);
+		return view('main.model.index', ['models'=>$models, 'newModel'=>$newModel, 'modelSlide'=>1]);
     }
     
     
-    public function show($modelId)
+    public function showSingle($state, $id)
     {
-        $modelObj = $this->model->find($modelId);
+        $model = $this->user->find($id);
+        
+        $snaps = $this->modelSnap->where('model_id', $id)->orderBy('number', 'ASC')->get();
         
         
-        return view('main.model.single', ['modelObj'=>$modelObj]);
+        return view('main.model.single', ['model'=>$model, 'state'=>$state, 'snaps'=>$snaps]);
     }
     
 

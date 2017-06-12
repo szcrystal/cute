@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', 'Main\HomeController@index');
+//if(Schema::hasTable('states')) {
+//    $states = DB::table('states')->get();
+//    foreach($states as $state) {
+//        Route::group(['prefix' => $state->slug], function(){
+//        	Route::get('/', 'Main\HomeController@index');
+//            //Route::get('{tagSlug}', 'Main\TagController@show');
+//        });
+//    }
+//}
+
 
 Route::get('/m/{id}', function(){
 	abort(404);
@@ -21,13 +30,8 @@ Route::get('info', function () {
     phpinfo();
 });
 
-//Main ============================
 
-//Model
-Route::resource('model', 'Main\ModelController');
 
-//Contact
-Route::resource('contact', 'Main\ContactController');
 
 
 
@@ -102,7 +106,7 @@ Route::get('dashboard/fbup', 'DashBoard\HomeController@getFbup');
 Route::get('dashboard/logout', 'DashBoard\HomeController@getLogout');
 
 
-// Model Contribute===============
+// Model Contribute ===============
 //login
 $this->get('contribute/login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('contribute/login', 'Auth\LoginController@login');
@@ -118,6 +122,34 @@ $this->post('contribute/register', 'Auth\RegisterController@register');
 //Route::post('contribute/movie', 'Model\HomeController@postMovie');
 Route::get('contribute/finish', 'Model\HomeController@getFinish');
 Route::resource('contribute', 'Model\HomeController');
+
+
+
+
+//Main All ==================================
+
+Route::get('/{state?}', 'Main\HomeController@index');
+
+
+//Feature
+Route::get('{state}/feature', 'Main\FeatureController@index');
+Route::get('{state}/feature/{cate}', 'Main\FeatureController@showCate');
+Route::get('{state}/feature/{cate}/{id}', 'Main\FeatureController@showSingle');
+
+//Model
+Route::get('{state}/model', 'Main\ModelController@index');
+Route::get('{state}/model/{id}', 'Main\ModelController@showSingle');
+
+
+//Category
+Route::get('{state}/{cate}', 'Main\HomeController@showCate');
+Route::get('{state}/{cate}/{id}', 'Main\HomeController@showSingle');
+
+
+
+
+//Contact
+Route::resource('contact', 'Main\ContactController');
 
 
 Auth::routes();

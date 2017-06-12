@@ -10,11 +10,7 @@
     @foreach($features as $feature)
     <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
-            <?php
-                $fCateSlug = FeatureCategory::find($feature->cate_id)->slug;
-            ?>
-
-            <a href="{{ url('feature/' . $fCateSlug . '/'.$feature->id) }}">
+            <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
 
             @if($feature->thumb_path == '')
                 <span class="no-img">No Image</span>
@@ -51,11 +47,8 @@
     	@foreach($obj as $atcl)
             <article style="background-image:url({{Storage::url($atcl->thumb_path)}})">
 
-                <?php
-                    $cateSlug = Category::find($atcl->cate_id)->slug;
-                ?>
+                <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
 
-                <a href="{{url($cateSlug . '/'.$atcl->id)}}">
                 @if($atcl->thumb_path == '')
                     <span class="no-img">No Image</span>
                 @else

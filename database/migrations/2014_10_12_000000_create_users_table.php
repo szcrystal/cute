@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('state_id');
             $table->string('name');
             $table->string('full_name')->nullable()->default(NULL);
             $table->string('email')->unique();
@@ -32,6 +33,7 @@ class CreateUsersTable extends Migration
         });
         
         DB::table('users')->insert([
+        		'state_id' => 1,
                 'name' => '編集部',
                 'full_name' => 'CuteCampus編集部',
 				'email' => 'cute@cute.com',
@@ -42,6 +44,7 @@ class CreateUsersTable extends Migration
         );
         
         DB::table('users')->insert([
+        		'state_id' => 1,
                 'name' => 'みいたけ',
                 'full_name' => '武村美空',
 				'email' => 'opal@frank.fam.cx',

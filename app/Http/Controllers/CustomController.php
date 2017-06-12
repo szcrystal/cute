@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\State;
+use App\Category;
+use App\FeatureCategory;
 
 
 use Illuminate\Http\Request;
 
 class CustomController extends Controller
 {
-    public function __construct(Article $article/*, Category $category, Tag $tag, TotalizeAll $totalizeAll*/)
+    public function __construct(Article $article, State $state/*, Category $category, Tag $tag, TotalizeAll $totalizeAll*/)
     {
     	
     	$this->article = $article;
+        $this->state = $state;
 //        $this->category = $category;
 //        $this->tag = $tag;
 //        $this->totalizeAll = $totalizeAll;
@@ -27,6 +31,26 @@ class CustomController extends Controller
         else
         	return date('Y/m/d', strtotime($arg));
     }
+    
+    static function getAtclUrl($atclId)
+    {
+    	$atcl = Article::find($atclId);
+        $stateSlug = State::find($atcl->state_id)->slug;
+        
+        
+        if($atcl->feature) {
+        	$cateSlug = FeatureCategory::find($atcl->cate_id)->slug;
+        	$url = $stateSlug . '/feature/'. $cateSlug . '/' .$atclId;
+        }
+        else {
+        	$cateSlug = Category::find($atcl->cate_id)->slug;
+        	$url = $stateSlug . '/'. $cateSlug . '/' .$atclId;
+        }
+        
+        return $url;
+    }
+    
+    
     
     
     static function getArgForView($slug, $type)
