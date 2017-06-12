@@ -5,8 +5,8 @@
 <div id="main">
 
         <div class="panel panel-default">
-        	@if(isset($cateName))
-			<h2>特集 {{ $cateName }} 一覧</h2>
+        	@if(isset($cateObj))
+			<h2>特集 : {{ $cateObj->name }}</h2>
             @else
         	<h2>特集一覧</h2>
 			@endif
