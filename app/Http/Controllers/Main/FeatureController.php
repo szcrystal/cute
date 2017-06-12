@@ -73,7 +73,7 @@ class FeatureController extends Controller
         $features = $this->article->where(['open_status'=>1,'feature'=>1, 'cate_id'=>$fCate->id])->orderBy('created_at','DESC')->paginate($this->perPage);
         
         
-        $whereArr = ['open_status'=>1, 'feature'=>1];
+        $whereArr = ['open_status'=>1, 'feature'=>1, 'cate_id'=>$fCate->id];
         
         if($state != 'all') {
         	$stateObj = $this->state->where('slug', $state)->get()->first();
@@ -92,7 +92,7 @@ class FeatureController extends Controller
         	abort(404);
         }
         
-        $atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
+        $features = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
         
         return view('main.feature.index', ['features'=>$features, 'cateObj'=>$cateObj]);
     }
