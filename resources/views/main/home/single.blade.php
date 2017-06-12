@@ -99,7 +99,7 @@ use App\User;
 
                         <div class="rv-content mt-5 pb-5">
                         	@if($atcl->address != '')
-                        	<div id="map" style="width: 100%; height: 500px;" data-address="{{ $atcl->address }}"></div>
+                        	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
 
                             <script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
                             <!-- ?sensor=false -->
