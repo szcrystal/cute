@@ -70,7 +70,7 @@ class FeatureController extends Controller
         	abort(404);
         }
         
-        $features = $this->article->where(['open_status'=>1,'feature'=>1, 'cate_id'=>$fCate->id])->orderBy('created_at','DESC')->paginate($this->perPage);
+        //$features = $this->article->where(['open_status'=>1,'feature'=>1, 'cate_id'=>$fCate->id])->orderBy('created_at','DESC')->paginate($this->perPage);
         
         
         $whereArr = ['open_status'=>1, 'feature'=>1, 'cate_id'=>$fCate->id];
