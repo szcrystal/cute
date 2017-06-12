@@ -30,7 +30,6 @@
 
 <nav class="main-navigation">
 
-
             <?php
                 use App\Category;
                 use App\State;
@@ -107,7 +106,7 @@
                             <ul class="clear">
                                 <li><a href="{{ url($state->slug .'/feature') }}">特集</a>
                                 @foreach($fCates as $fCate)
-                                    <li><a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
+                                    <li><a href="{{ url($state->slug .'/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
