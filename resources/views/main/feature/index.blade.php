@@ -51,7 +51,7 @@
         </article>
         @endforeach
     @else
-		<p>まだ記事がありません。</p>
+		<p class="mt-3">まだ記事がありません。</p>
     @endif
     </div>
 

@@ -43,7 +43,7 @@
 
                                 <tr>
                                     <th>Twitter</th>
-                                    <td><a href="https://twitter.com/{{ $model->twitter}}">{{ $model->twitter}}</a></td>
+                                    <td><a href="https://twitter.com/{{ $twa->name }}">https://twitter.com/{{ $twa->name }}</a></td>
                                 </tr>
 
                                 <tr>
@@ -71,13 +71,15 @@
 
 
                         <div class="rv-content mt-5 pb-5">
-                        	@foreach($snaps as $snap)
-								<div class="snap-wrap">
-									<img src="{{ Storage::url($snap->snap_path)}}">
-                                    <h4>{{ $snap->ask }}</h4>
-                                    <p>{{ $snap->answer}}</p>
-                                </div>
-                            @endforeach
+                        	@if(count($snaps) > 0)
+                                @foreach($snaps as $snap)
+                                    <div class="snap-wrap">
+                                        <img src="{{ Storage::url($snap->snap_path)}}">
+                                        <h4>{{ $snap->ask }}</h4>
+                                        <p>{{ $snap->answer}}</p>
+                                    </div>
+                                @endforeach
+                            @endif
 
                         </div>
 

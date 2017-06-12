@@ -5,19 +5,21 @@ namespace App\Http\Controllers\Main;
 use App\User;
 use App\State;
 use App\ModelSnap;
+use App\TwAccount;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ModelController extends Controller
 {
-    public function __construct(User $user, State $state, ModelSnap $modelSnap)
+    public function __construct(User $user, State $state, ModelSnap $modelSnap, TwAccount $twAccount)
     {
         //$this->middleware('auth');
         
         $this-> user = $user;
         $this->state = $state;
         $this->modelSnap = $modelSnap;
+        $this->twAccount = $twAccount;
         //$this->contactCate = $contactCate;
         //$this->article = $article;
         
@@ -53,10 +55,12 @@ class ModelController extends Controller
     {
         $model = $this->user->find($id);
         
+        $twa = $this->twAccount->where('model_id', $id)->get()->first();
+        
         $snaps = $this->modelSnap->where('model_id', $id)->orderBy('number', 'ASC')->get();
         
         
-        return view('main.model.single', ['model'=>$model, 'state'=>$state, 'snaps'=>$snaps]);
+        return view('main.model.single', ['model'=>$model, 'state'=>$state, 'snaps'=>$snaps, 'twa'=>$twa]);
     }
     
 
