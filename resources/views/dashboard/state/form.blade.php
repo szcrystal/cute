@@ -4,9 +4,9 @@
 	
 	<h3 class="page-header">
 	@if(isset($edit))
-    タグ情報編集
+    都道府県 編集
 	@else
-	タグ新規追加
+	都道府県 新規追加
     @endif
     </h3>
 
