@@ -74,7 +74,7 @@
 					<div class="float-left col-md-5">
                     	<h2>特集</h2>
 						<ul class="clear">
-                        	<li><a href="{{ url('all/feature') }}">特集</a></li>
+                        	<li><a href="{{ url('all/feature') }}">特集All</a></li>
                         	@foreach($fCates as $fCate)
 								<li><a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
 							@endforeach
