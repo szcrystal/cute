@@ -42,7 +42,7 @@
             ?>
 
             <div class="meta">
-            	<h2>{{ $atcl->title }}</h2>
+            	<h3>{{ $atcl->title }}</h3>
                 <p>{{ User::find($atcl->model_id)->name }}</p>
             </div>
         </a>

@@ -196,7 +196,20 @@ body {
 /* TOP 特集 */
 .top-cont {
 	height: 800px;
+    position: relative;
     //border: 1px solid red;
+}
+.top-cont h2 {
+	position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    font-size: 1.8em;
+    background: #50BFC2;
+    color: #fff;
+    padding: 0.3em 1.5em;
+    -webkit-transform: rotateZ(-8deg);
+    transform: rotateZ(-8deg);
 }
 .top-cont article {
 	padding: 0;
@@ -222,9 +235,13 @@ body {
     text-shadow: 1px 1px 2px #000;
     font-size: 2.4em;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1em;
+    right: 1em;
     width: 70%;
+}
+.top-cont article .meta h3 {
+	font-weight: bold;
+    font-size: 1.5em;
 }
 .feature article:first-of-type {
 	height: 100%;
@@ -240,14 +257,12 @@ body {
     text-orientation: upright;
 }
 .feature article:nth-of-type(2) {
-	display: block;
 	height: 50%;
     width: 60%;
     background-size: auto 120%;
     background-position: center;
 }
 .feature article:nth-of-type(3) {
-	display: block;
 	height: 50%;
     width: 60%;
     background-size: auto 120%;
@@ -263,44 +278,95 @@ body {
     //border: 2px solid #fff;
 }
 /* temp END */
-
 .atcl {
+	background: #edecec;
+    margin-bottom: 3em;
+}
+.atcl > div {
 	position: relative;
     overflow: hidden;
-    background: #edecec;
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
 }
-.atcl article:first-of-type {
+.atcl article {
+	position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.atcl article .meta h3 {
+	font-size: 1.3em;
+}
+/*first*/
+.atcl:nth-of-type(3n+1) article:first-of-type {
 	height: 50%;
     width: 60%;
     background-size: auto 120%;
-    background-position: center;
-    //text-align: right;
-	-webkit-writing-mode: vertical-rl;
-    -ms-writing-mode: tb-rl;
-    writing-mode: vertical-rl;
-    -webkit-text-orientation: upright;
-    -ms-text-orientation: upright;
-    text-orientation: upright;
+	
 }
-.atcl article:nth-of-type(2) {
+.atcl:nth-of-type(3n+1) article:nth-of-type(2) {
 	height: 50%;
     width: 60%;
     background-size: auto 120%;
-    background-position: center;
-    float: left;
-    clear: left;
 }
-.atcl article:nth-of-type(3) {
+.atcl:nth-of-type(3n+1) article:nth-of-type(3) {
     height: 110%;
     width: 50%;
     background-size: auto 120%;
-    background-position: center;
     position: absolute;
     top: -5%;
     right: -50px;
     -webkit-transform: rotateZ(5deg);
     transform: rotateZ(5deg);
 }
+/* second */
+.atcl:nth-of-type(3n+2) article:first-of-type {
+	height: 55%;
+    width: 55%;
+    background-size: auto 120%;
+    float: left;
+}
+.atcl:nth-of-type(3n+2) article:nth-of-type(2) {
+	height: 55%;
+    width: 45%;
+    background-size: auto 120%;
+    float: left;
+}
+.atcl:nth-of-type(3n+2) article:nth-of-type(3) {
+	clear: both;
+    height: 45%;
+    width: 100%;
+    background-size: 120% auto;
+}
+/* third */
+.atcl:nth-of-type(3n+3) article:first-of-type {
+	height: 100%;
+    width: 40%;
+    background-size: auto 120%;
+    float: left;
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    -webkit-text-orientation: upright;
+    -ms-text-orientation: upright;
+    text-orientation: upright;
+}
+.atcl:nth-of-type(3n+3) article:nth-of-type(2) {
+	height: 40%;
+    width: 60%;
+    background-size: 120% auto;
+    float: left;
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+}
+.atcl:nth-of-type(3n+3) article:nth-of-type(3) {
+    height: 60%;
+    width: 60%;
+    background-size: 120% auto;
+    float: left;
+}
+
 
 
 /* Archive */
@@ -369,16 +435,8 @@ body {
 .main-list .no-img:hover {
 	
 }
-#main .main-list article h2 {
-	font-size: 1.0em;
-    margin: 0.3em 0 0.2em;
-    line-height: 1.2em;
-}
-.main-list article .meta p {
-	font-size: 0.8em;
-    margin: 0;
-    padding: 0;
-}
+
+
 
 .no-img {
 	display: block;

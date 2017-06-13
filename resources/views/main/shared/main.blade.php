@@ -5,8 +5,8 @@
     use App\FeatureCategory;
 ?>
 
-<div class="top-cont feature clear">
-
+<section class="top-cont feature clear">
+<h2>特集</h2>
     @foreach($features as $feature)
     <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
@@ -23,27 +23,26 @@
             ?>
 
             <div class="meta">
-            	<h2>{{ $feature->title }}</h2>
-                <p>{{ User::find($feature->model_id)->name }}</p>
+            	<h3>{{ $feature->title }}</h3>
+                {{-- <p>{{ User::find($feature->model_id)->name }}</p> --}}
             </div>
         </a>
     </article>
     @endforeach
-    </div>
+</section>
 
-	<div class="temporary">
 
-    </div>
+<section class="temporary">
+</section>
 
-    <div class="temporary">
-
-    </div>
+<section class="temporary">
+</section>
 
 
     @foreach($atcls as $key => $obj)
-    	<div class="top-cont atcl clear">
-		<h3>{{ $key }}</h3>
-
+    	<section class="top-cont atcl clear">
+		<h2>{{ $key }}</h2>
+		<div class="clear">
     	@foreach($obj as $atcl)
             <article style="background-image:url({{Storage::url($atcl->thumb_path)}})">
 
@@ -61,14 +60,14 @@
                 ?>
 
                 <div class="meta">
-                    <h2>{{ $atcl->title }}</h2>
+                    <h3>{{ $atcl->title }}</h3>
                     <p>{{ User::find($atcl->model_id)->name }}</p>
                 </div>
                 </a>
             </article>
     	@endforeach
-
-        </div>
+		</div>
+        </section>
     @endforeach
 
 

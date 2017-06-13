@@ -44,7 +44,7 @@
                 ?>
 
                 <div class="meta">
-                    <h2>{{ $feature->title }}</h2>
+                    <h3>{{ $feature->title }}</h3>
                     <p>{{ User::find($feature->model_id)->name }}</p>
                 </div>
             </a>

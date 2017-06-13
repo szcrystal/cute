@@ -70,7 +70,7 @@ class HomeController extends Controller
         
         	$whereArr['cate_id'] = $cate->id;
             
-        	$as = $this->article->where($whereArr)->orderBy('created_at','DESC')->get()->all();
+        	$as = $this->article->where($whereArr)->orderBy('created_at','DESC')->take(3)->get()->all();
             
             if(count($as) > 0) {
             	$atcls[$cate->name] = $as;

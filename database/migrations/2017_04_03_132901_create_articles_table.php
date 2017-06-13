@@ -24,7 +24,7 @@ class CreateArticlesTable extends Migration
             //$table->string('tag_id')->nullable()->default(NULL);
             $table->string('title')->nullable()->default(NULL);
             //$table->string('sub_title')->nullable()->default(NULL);
-            $table->string('slug')->unique()->nullable()->default(NULL);
+            $table->string('slug')->nullable()->default(NULL);
             $table->string('address')->nullable()->default(NULL);
             
             $table->string('thumb_path')->nullable()->default(NULL);
