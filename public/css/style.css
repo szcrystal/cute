@@ -100,7 +100,8 @@
     padding: 1.2em 0 1.6em;
 }
 .menu-dropdown h2 {
-	font-size: 1.1em;
+	font-size: 1em;
+    padding-bottom: 0.2em;
     border-bottom: 1px solid #aaa;
 }
 .menu-dropdown ul {
@@ -115,7 +116,9 @@
     margin: 0;
     padding: 0 1em 0 0;
     text-align: left;
-    //border: 1px solid blue;
+/*    background: azure;*/
+/*    border: 1px solid #50BFC2;*/
+/*    border-radius: 3px;*/
 }
 
 
@@ -138,7 +141,7 @@ body {
 /* Custom */
 .wrap-all {
 	width: 100%;
-	margin-top: 65px;
+	margin-top: 55px;
     min-height: 1000px;
     padding: 0;
     //border: 1px solid green;

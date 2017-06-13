@@ -57,7 +57,7 @@
 				<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
                 	<div class="float-left col-md-2">
                     	<ul class="clear">
-                    		<li><a href="{{ url('/') }}" class="dropdown-item">四国 TOP</a>
+                    		<li><a href="{{ url('/') }}" class="dropdown-item">{{ env('AREA', 'env') }} TOP</a>
                     		<li><a href="{{ url('all/model') }}" class="dropdown-item">モデル</a>
                         </ul>
                     </div>
@@ -114,8 +114,6 @@
                 @endforeach
 
             </div>
-
-
 
 </nav>
 
