@@ -2,14 +2,24 @@
 
 .site-header {
 	background: #50BFC2;
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
+    padding: 5px 10px;
     z-index: 10000;
 }
 .site-header h1 {
     width: 40%;
     font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+.site-header .btn {
+	background: none;
+    padding: 0.5em 0.7em;
+    border: 1px solid #A1DBDD;
+    cursor: pointer;
+}
+.site-header .btn .fa {
+	color: #fff;
+    font-size: 1.3em;
 }
 .navbar {
 	background: skyblue;
@@ -109,12 +119,6 @@
 }
 
 
-
-
-
-.btn {
-	cursor: pointer;
-}
 /*.h2 {*/
 /*	font-size: 1.5em;*/
 /*}*/

@@ -1,6 +1,6 @@
 <div class="fixed-top">
 
-<header class="site-header clearfix py-2">
+<header class="site-header clear">
 	<!-- Branding Image -->
     <h1 class="float-left"><a class="navbar-brand" href="{{ url('/') }}">
         {{ config('app.name', 'Cute.Campus') }} {{ env('AREA', '') }}
@@ -22,9 +22,9 @@
     </form>
     -->
 
-        <button style="display:inline;" class="btn btn-default my-2 my-sm-0 col-md-1 float-right" type="submit">
-            <i class="fa fa-search"></i>
-        </button>
+    <button style="display:inline;" class="btn float-right" type="submit">
+        <i class="fa fa-search"></i>
+    </button>
 </header>
 
 
