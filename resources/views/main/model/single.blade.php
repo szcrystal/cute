@@ -43,7 +43,7 @@
 
                                 <tr>
                                     <th>Twitter</th>
-                                    <td><a href="https://twitter.com/{{ $twa->name }}">@{{ $twa->name }}</a></td>
+                                    <td><a href="https://twitter.com/{{ $twa->name }}">＠{{ $twa->name }}</a></td>
                                 </tr>
 
                                 <tr>
