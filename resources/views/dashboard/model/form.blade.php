@@ -69,6 +69,12 @@
                         <label for="model_thumb" class="col-md-12 text-left">サムネイル</label>
                         <div class="col-md-12">
                             <input id="model_thumb" class="thumb-file" type="file" name="model_thumb">
+
+                            @if ($errors->has('model_thumb'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('model_thumb') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                 </div>

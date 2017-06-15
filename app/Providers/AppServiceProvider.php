@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             
         });
         
+        
         Validator::extend('secondcheck', function ($attribute, $value, $parameters, $validator) {
         	//print_r($value); //秒数 input moviesec[]
             $sum = $parameters[0]; //musicId

@@ -92,6 +92,8 @@ class ModelController extends Controller
             'name' => 'required|max:255', /* |unique:admins 注意:unique */
         	'email' => 'required|email|max:255|unique:users,email'.$valueId,
             'state_id' => 'required',
+            'model_thumb' => 'filenaming',
+            'snap_thumb.*' => 'filenaming',
         
             //'movie_site' => 'required|max:255',
             //'password' => 'required|min:8',
@@ -100,6 +102,8 @@ class ModelController extends Controller
         
         $messages = [
             'state_id.required' => '「都道府県名」を選択して下さい。',
+            'model_thumb.filenaming' => '「サムネイル-ファイル名」は半角英数字、及びハイフンとアンダースコアのみにして下さい。',
+            'snap_thumb.*.filenaming' => '「スナップ画像-ファイル名」は半角英数字、及びハイフンとアンダースコアのみにして下さい。',
         ];
         
         $this->validate($request, $rules, $messages);
