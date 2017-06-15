@@ -159,6 +159,9 @@ body {
     overflow: hidden;
     position: relative;
 }
+.carousel img {
+	width: 100%;
+}
 .carousel-caption {
 	position: absolute;
     width: 53%;
