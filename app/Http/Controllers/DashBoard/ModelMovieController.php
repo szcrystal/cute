@@ -235,6 +235,8 @@ class ModelMovieController extends Controller
         //$input .= ' -i ' . $whitePath;
         
         $c = count($mvSubName);
+        echo $c;
+        exit;
         //$c++; //whiteout分 +1
         
         exec($cdCmd . 'ffmpeg'. $input . ' -filter_complex "concat=n='.$c.':v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
