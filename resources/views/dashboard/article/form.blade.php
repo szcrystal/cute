@@ -209,6 +209,13 @@
 					<label for="post_thumb" class="col-md-12">記事サムネイル</label><br>
                     <div class="col-md-12">
                         <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
+
+                        @if ($errors->has('post_thumb'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('post_thumb') }}</strong>
+                            </span>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -219,7 +226,7 @@
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">カテゴリー</label>
                 <div class="col-md-7">
-                    <select class="form-control" name="cate_id">
+                    <select class="form-control" name="cate_id" required>
 						<option disabled selected>選択</option>
                         @foreach($cates as $cate)
 
@@ -257,7 +264,7 @@
             <div class="form-group{{ $errors->has('state_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">都道府県</label>
                 <div class="col-md-7">
-                    <select class="form-control" name="state_id">
+                    <select class="form-control" name="state_id" required>
 						<option disabled selected>選択</option>
                         @foreach($states as $state)
 

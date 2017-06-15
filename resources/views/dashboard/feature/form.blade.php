@@ -135,6 +135,12 @@
 					<label for="post_movie" class="col-md-12">動画</label><br>
                     <div class="col-md-12">
                         <input id="post_movie" class="post_thumb post_movie video-file" type="file" name="post_movie">
+
+                        @if ($errors->has('post_movie'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('post_movie') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -161,6 +167,12 @@
 					<label for="post_thumb" class="col-md-12">サムネイル</label><br>
                     <div class="col-md-12">
                         <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
+
+                        @if ($errors->has('post_thumb'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('post_thumb') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -169,7 +181,7 @@
             <div class="form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">特集カテゴリー</label>
                 <div class="col-md-7">
-                    <select class="form-control" name="cate_id">
+                    <select class="form-control" name="cate_id" required>
 						<option disabled selected>選択</option>
                         @foreach($cates as $cate)
 
@@ -202,7 +214,7 @@
             <div class="form-group{{ $errors->has('state_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">都道府県</label>
                 <div class="col-md-7">
-                    <select class="form-control" name="state_id">
+                    <select class="form-control" name="state_id" required>
 						<option disabled selected>選択</option>
                         @foreach($states as $state)
 

@@ -148,11 +148,17 @@ class ArticleController extends Controller
         
         $rules = [
         	'title' => 'required|max:255',
-            'state_id' => 'required',
+            'cate_id' => 'required',
+        	'state_id' => 'required',
+            'post_movie' => 'filenaming',
+            'post_thumb' => 'filenaming',
         ];
         
         $messages = [
+        	'cate_id.required' => '「カテゴリー」を選択して下さい。',
             'state_id.required' => '「都道府県名」を選択して下さい。',
+            'post_thumb.filenaming' => '「サムネイル-ファイル名」は半角英数字、及びハイフンとアンダースコアのみにして下さい。',
+        	'post_movie.filenaming' => '「動画-ファイル名」は半角英数字、及びハイフンとアンダースコアのみにして下さい。',
             //'slug.unique' => '「スラッグ」が既に存在します。',
         ];
         

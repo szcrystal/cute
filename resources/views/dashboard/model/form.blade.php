@@ -424,7 +424,7 @@
 
 
                 <div class="form-group">
-                    <div class="col-md-3 col-md-offset-2">
+                    <div class="col-md-4 col-md-offset-4">
                         <button type="submit" class="btn btn-primary col-md-12">
                             更　新
                         </button>
