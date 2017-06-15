@@ -237,7 +237,7 @@ class ModelMovieController extends Controller
         $c = count($mvSubName);
         //$c++; //whiteout分 +1
         
-        exec($cdCmd . 'ffmpeg'. $input . ' -filter_complex "concat=n='.$c.':v=1:a=1" -strict -2 '. $pre.'.mp4', $out, $status);
+        exec($cdCmd . 'ffmpeg'. $input . ' -filter_complex "concat=n='.$c.':v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'combine error no music(1004): '. $status;
             return back()->withInput()->withErrors($es);
@@ -256,7 +256,7 @@ class ModelMovieController extends Controller
         ];
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'set filter error(1005): '. $status;
             return back()->withInput()->withErrors(array($es));
@@ -289,7 +289,7 @@ class ModelMovieController extends Controller
         
         
         //file + music結合
-        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 complete.mp4', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 complete.mp4 -y', $out, $status);
         if($status) {
             $es = 'complete error(1008): '. $status;
             return back()->withInput()->withErrors(array($es));
