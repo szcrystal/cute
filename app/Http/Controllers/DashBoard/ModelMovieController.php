@@ -239,8 +239,8 @@ class ModelMovieController extends Controller
         
         exec($cdCmd . 'ffmpeg'. $input . ' -filter_complex "concat=n='.$c.':v=1:a=1" -strict -2 '. $pre.'.mp4', $out, $status);
         if($status) {
-            $es = 'combine error no music(1004): '. $out;
-            return back()->withInput()->withErrors(array($es));
+            $es = 'combine error no music(1004): '. $status;
+            return back()->withInput()->withErrors(array($es, $out));
         }
 
         
