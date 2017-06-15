@@ -93,6 +93,17 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('owner_id') ? ' has-error' : '' }}">
+                <label for="group" class="col-md-3 control-label">Music</label>
+
+                <div style="margin-top:0.4em;" class="col-md-9">
+                	<?php use App\Music;
+                    	$music = Music::find($mvCombine->music_id);
+                    ?>
+                	{{ $music->name }} ({{ $music->file }})
+                </div>
+            </div>
+
 
 			@if(Ctm::isDev())
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
