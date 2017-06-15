@@ -4,9 +4,9 @@
 	
 	<h3 class="page-header">
 	@if(isset($edit))
-    動画編集
+    動画確認
 	@else
-	動画新規追加
+	動画確認
     @endif
     </h3>
 
@@ -100,7 +100,7 @@
                 	<?php use App\Music;
                     	$music = Music::find($mvCombine->music_id);
                     ?>
-                	{{ $music->name }} ({{ $music->file }})
+                	{{ $music->name }} （{{ str_replace('music/', '', $music->file) }}）
                 </div>
             </div>
 
