@@ -61,7 +61,7 @@
                 </td>
 
                 <td>
-
+					{{ $atclModel->where('cate_id', $cate->id)->count() }}
                 </td>
 
                 {{--

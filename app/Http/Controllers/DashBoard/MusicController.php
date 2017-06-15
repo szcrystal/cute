@@ -87,7 +87,14 @@ class MusicController extends Controller
             $path = $data['music_file']->storeAs('public', $filename);
         
             $data['file'] = $filename;
+            
+            //秒数を取る
+            $ffprobe = FFMpeg\FFProbe::create();
+        	$s = $ffprobe->format(base_path() . '/storage/app/public/' . $filename)->get('duration');
+        	
+            $data['second'] = floor($s); //小数点を切り捨てて少なめの整数にする
         }
+        
         
         if($editId) { //update（編集）の時
         	$status = 'Musicが更新されました！';

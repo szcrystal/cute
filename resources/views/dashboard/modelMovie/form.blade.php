@@ -98,9 +98,9 @@
                         @foreach($musics as $music)
 
                             @if(old('music_id') !== NULL)
-                                <option value="{{ $music->id }}"{{ old('music_id') == $music->id ? ' selected' : '' }}>{{ $music->name }}</option>
+                                <option value="{{ $music->id }}"{{ old('music_id') == $music->id ? ' selected' : '' }}>{{ $music->name }} ({{ $music->second }}s)</option>
                             @else
-                                <option value="{{ $music->id }}"{{ isset($combine) && $combine->music_id == $music->id ? ' selected' : '' }}>{{ $music->name }}</option>
+                                <option value="{{ $music->id }}"{{ isset($combine) && $combine->music_id == $music->id ? ' selected' : '' }}>{{ $music->name }} ({{ $music->second }}s)</option>
                             @endif
                         @endforeach
 
@@ -157,9 +157,11 @@
 
 			<?php $n = 0; ?>
 
-            <div>
+            <div style="margin: 2.5em 0;">
+            	<p style="font-weight:bold;">合計秒：{{ $branches->sum('second') }}秒</p>
+
                 @foreach($branches as $obj)
-                    <div style="margin: 2.5em 0;" class="clearfix">
+                    <div class="clearfix">
                         <h5><i class="fa fa-square" aria-hidden="true"></i> {{ $obj->title }} {{ $obj->second }}秒</h5>
 
                         <div class="pull-left col-md-3">
@@ -169,6 +171,8 @@
                         <div class="col-md-9 pull-left form-group{{ $errors->has('subtext.'.$n) ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <input style="color:#222;" class="form-control" type="text" name="subtext[]" value="{{ isset($obj) && !count(old()) ? $obj->sub_text : old('subtext.'.$n) }}">
+
+                                <input type="hidden" name="moviesec[]" value="{{ $obj->second }}">
 
                                 @if ($errors->has('subtext.'.$n))
                                     <span class="help-block">

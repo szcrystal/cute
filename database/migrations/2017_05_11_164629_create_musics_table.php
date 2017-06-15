@@ -18,6 +18,7 @@ class CreateMusicsTable extends Migration
             
             $table->string('name');
             $table->string('file');
+            $table->integer('second')->nullable()->default(null);
             
             $table->timestamps();
         });

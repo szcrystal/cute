@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\DashBoard;
 
 use App\FeatureCategory;
+use App\Article;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FeatureCateController extends Controller
 {
-    public function __construct(FeatureCategory $featureCate)
+    public function __construct(FeatureCategory $featureCate, Article $article)
     {
     	$this->featureCate = $featureCate;
+        $this->article = $article;
         
         $this->perPage = 30;
     }
@@ -25,7 +27,9 @@ class FeatureCateController extends Controller
     {
         $cates = FeatureCategory::orderBy('id', 'desc')->paginate($this->perPage);
         
-        return view('dashboard.featureCate.index', ['cates'=>$cates]);
+        $atclModel = $this->article->where('feature', 1)->get();
+        
+        return view('dashboard.featureCate.index', ['cates'=>$cates, 'atclModel'=>$atclModel]);
     }
 
     /**

@@ -84,8 +84,8 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
-    	$valueId = $request->input('model_id') ? ','. $request->input('model_id') : '';
-        $modelId = $request->input('model_id') ? $request->input('model_id') : 0;
+    	$valueId = $request->has('model_id') ? ','. $request->input('model_id') : '';
+        $modelId = $request->has('model_id') ? $request->input('model_id') : 0;
         
         $rules = [
             //'cate_id' => 'required',

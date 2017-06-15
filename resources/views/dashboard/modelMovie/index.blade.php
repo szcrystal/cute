@@ -83,7 +83,7 @@
                     @if($obj->combine_status)
                     <span class="text-success">結合済</span>
                     @else
-                    <span class="text-warning">未結合</span>
+                    <span class="text-danger">未結合</span>
                     @endif
 
                 </td>

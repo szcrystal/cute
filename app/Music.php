@@ -9,5 +9,6 @@ class Music extends Model
     protected $fillable = [
 		'name',
         'file',
+        'second'
 	];
 }

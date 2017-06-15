@@ -28,13 +28,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $cates = Category::orderBy('id', 'desc')
+        $cates = Category::orderBy('id', 'desc')->paginate($this->perPage);
            //->take(10)
-           ->paginate($this->perPage);
+        
+        $atclModel = $this->article->where('feature', 0)->get();
         
         $cateItem = $this->categoryItem;
         
-        return view('dashboard.category.index', ['cates'=>$cates, 'cateItem'=>$cateItem]);
+        return view('dashboard.category.index', ['cates'=>$cates, 'cateItem'=>$cateItem, 'atclModel'=>$atclModel]);
     }
 
     /**

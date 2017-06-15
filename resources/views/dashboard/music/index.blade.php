@@ -51,13 +51,11 @@
                 </td>
 
                 <td>
-					<?php $s = $ffprobe->format(asset('storage/'. $music->file))->get('duration'); ?>
-                    {{ floor($s) }} s
-
+					{{ $music->second }} s
                 </td>
 
                 <td>
-                	<a style="margin:auto;" href="{{url('dashboard/musics/'.$music->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
+                	<a style="margin:auto;" href="{{url('dashboard/musics/'. $music->id)}}" class="btn btn-primary btn-sm center-block">編集</a>
                 </td>
 
                 <td>

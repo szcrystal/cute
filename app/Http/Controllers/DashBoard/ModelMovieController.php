@@ -95,22 +95,30 @@ class ModelMovieController extends Controller
      */
     public function store(Request $request)
     {
-    	$rules = [
+    	//$mId = $request->has('music_id') ? $request->input('music_id') : 0;
+    	
+        $sec = $request->input('moviesec');
+        $sec = array_sum($sec);
+        
+        $rules = [
             //'movie.*' => 'required|file|filled',
-            'music_id' => 'required',
+            'music_id' => 'required|secondcheck:'.$sec,
             'filter_id' => 'required',
             'subtext.*' => 'max:20',
+            //'moviesec' => 'sometimes|secondcheck:'.$mId .'|music_id',
         ];
         
         $messages = [
         	'music_id.required' => '「Music」は必須です。',
             'filter_id.required' => '「フィルター」は必須です。',
         	'subtext.*.max' => '「字幕テキスト」は20文字以内です。',
+            'music_id.secondcheck' => '「音楽ファイル」の秒数が動画合計秒数に足りてません。',
         ];
         
         $this->validate($request, $rules, $messages);
         
     	$data = $request->all();
+        exit;
         
         //return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
         
