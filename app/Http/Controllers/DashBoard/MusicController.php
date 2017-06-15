@@ -67,10 +67,11 @@ class MusicController extends Controller
         
         $rules = [
             'name' => 'required|unique:musics,name,'.$editId.'|max:255',
-            'music_file' => 'required|mimetypes:audio/mpeg,audio/x-m4a', //mimetypes:audio/mpeg,audio/quicktime  audio/mpeg,audio/x-m4a
+            'music_file' => 'required|mimetypes:audio/mpeg,audio/x-m4a|filenaming', //mimetypes:audio/mpeg,audio/quicktime  audio/mpeg,audio/x-m4a
         ];
         $messages = [
             'music_file.mimetypes' => '「ファイル」は .mp3 か .m4a をUPして下さい。',
+            'music_file.filenaming' => '「ファイル名」は半角英数字、及びハイフン、アンダースコアのみにして下さい。',
             //'slug.unique' => '「スラッグ」が既に存在します。',
         ];
         

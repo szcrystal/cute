@@ -197,8 +197,8 @@
 
 
 			<div class="form-group">
-                <div class="col-md-4 col-md-offset-3">
-                    <button type="submit" class="btn btn-primary center-block w-btn">更　新</button>
+                <div class="col-md-offset-4">
+                    <button type="submit" class="col-md-6 btn btn-primary">結　合</button>
                 </div>
         	</div>
 

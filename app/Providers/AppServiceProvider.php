@@ -20,11 +20,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
     
-        Validator::extend('audio', function ($attribute, $value, $parameters, $validator) {
-        	echo $value->getClientOriginalName();
-            var_dump($value);
-            exit;
-            return $value == 'foo';
+        Validator::extend('filenaming', function ($attribute, $value, $parameters, $validator) {
+        	$name = $value->getClientOriginalName();
+            //echo $name;
+            //print_r($value);
+            
+            return preg_match("/^[a-zA-Z0-9._-]+$/", $name);
+            
         });
         
         Validator::extend('secondcheck', function ($attribute, $value, $parameters, $validator) {
