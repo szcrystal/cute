@@ -283,8 +283,8 @@ class ModelMovieController extends Controller
 
         exec($cdCmd . 'ffmpeg -i '.$music .' -y -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1" -strict -2 audio.m4a', $out, $status);
         if($status) {
-            $es = 'set music error(1007): '. $status;
-            return back()->withInput()->withErrors(array($es));
+            $out[] = 'make music error(1007): '. $status;
+            return back()->withInput()->withErrors(array($out));
         }
         
         
