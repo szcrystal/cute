@@ -132,6 +132,12 @@
                         {{-- @foreach($filters as $filter) --}}
 
                             @if(old('filter_id') !== NULL)
+                            	<option value="1"{{ old('filter_id') == 1 ? ' selected' : '' }}>ノーマル</option>
+								<option value="2"{{ old('filter_id') == 2 ? ' selected' : '' }}>モノクロ</option>
+                                <option value="3"{{ old('filter_id') == 3 ? ' selected' : '' }}>昔感</option>
+                                <option value="4"{{ old('filter_id') == 4 ? ' selected' : '' }}>色薄め</option>
+                                <option value="5"{{ old('filter_id') == 5 ? ' selected' : '' }}>色暗め</option>
+                                <option value="6"{{ old('filter_id') == 6 ? ' selected' : '' }}>色濃いめ</option>
 
                             @else
                                 <option value="1"{{ isset($combine) && $combine->filter_id == 1 ? ' selected' : '' }}>ノーマル</option>
