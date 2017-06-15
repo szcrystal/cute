@@ -43,12 +43,12 @@
 
                                 <tr>
                                     <th>Twitter</th>
-                                    <td><a href="https://twitter.com/{{ $twa->name }}">＠{{ $twa->name }}</a></td>
+                                    <td><a href="https://twitter.com/{{ $twa->name }}" target="_brank">＠{{ $twa->name }}</a></td>
                                 </tr>
 
                                 <tr>
 									<th>Instagram</th>
-                                    <td><a href="https://www.instagram.com/{{ $model->instagram }}">{{ $model->instagram }}</a></td>
+                                    <td><a href="https://www.instagram.com/{{ $model->instagram }}" target="_brank">{{ $model->instagram }}</a></td>
                                 </tr>
 
 
@@ -60,7 +60,7 @@
                     <div>
                     	<div class="clearfix">
                             <div class="col-md-8 mx-auto">
-                                {{ $model->per_info }}
+                                {!! nl2br($model->per_info) !!}
 
                             </div>
 
@@ -70,7 +70,7 @@
                         </div>
 
 
-                        <div class="rv-content mt-5 pb-5">
+                        <div class="rv-content snaps mt-5 pb-5">
 
                                 @foreach($snaps as $snap)
                                     <div class="snap-wrap">

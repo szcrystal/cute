@@ -211,6 +211,7 @@ class ModelController extends Controller
                 if(isset($data['snap_thumb'][$count])) {
                 
                     $filename = $data['snap_thumb'][$count]->getClientOriginalName();
+                    $filename = str_replace(' ', '_', $filename);
                     
                     //$aId = $editId ? $editId : $rand;
                     //$pre = time() . '-';

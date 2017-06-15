@@ -466,6 +466,14 @@ body {
     //height: 1000px;
 }
 
+
+
+/* model */
+.snaps img {
+	width: 100%;
+}
+
+
 /* Tag */
 .rank-tag {
 	display: inline-block;
