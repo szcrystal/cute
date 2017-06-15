@@ -36,7 +36,7 @@
             ?>
 
             <div class="meta">
-            	<h2>{{ $model->name }}＠{{ $model->school }}</h2>
+            	<h3>{{ $model->name }}＠{{ $model->school }}</h3>
             </div>
         </a>
     </article>
