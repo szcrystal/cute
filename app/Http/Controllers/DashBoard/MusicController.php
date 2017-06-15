@@ -19,7 +19,7 @@ class MusicController extends Controller
         
         $this->music = $music;
         
-        $this->perPage = 20;
+        $this->perPage = 10;
 	}
 
 
@@ -70,7 +70,7 @@ class MusicController extends Controller
             'music_file' => 'required|mimetypes:audio/mpeg,audio/x-m4a|filenaming', //mimetypes:audio/mpeg,audio/quicktime  audio/mpeg,audio/x-m4a
         ];
         $messages = [
-            'music_file.mimetypes' => '「ファイル」は .mp3 か .m4a をUPして下さい。',
+            'music_file.mimetypes' => '「ファイル」は .mp3 か.m4a をUPして下さい。',
             'music_file.filenaming' => '「ファイル名」は半角英数字、及びハイフン、アンダースコアのみにして下さい。',
             //'slug.unique' => '「スラッグ」が既に存在します。',
         ];
