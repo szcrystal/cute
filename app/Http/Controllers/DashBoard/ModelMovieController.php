@@ -118,7 +118,7 @@ class ModelMovieController extends Controller
         $this->validate($request, $rules, $messages);
         
     	$data = $request->all();
-        exit;
+        //exit;
         
         //return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
         
@@ -177,7 +177,7 @@ class ModelMovieController extends Controller
             $mvSubName[$num] = 'mv_' .$num .'.mp4'; //subtextを入れたfile名
             
             
-			
+			//iphoneからの4:3を16:9にする
           	$ffprobe = FFMpeg\FFProbe::create();
         	$mvInfo = $ffprobe->streams(base_path().'/storage/app/public/'. $basePath. $mf) // extracts streams informations
                         ->videos() // filters video streams
@@ -192,13 +192,21 @@ class ModelMovieController extends Controller
             
             if($res != $height) { //16:9でなければpadを入れてアスペクト変更
             	exec($cdCmd . 'ffmpeg -i '. $mf. ' -vf "scale=-1:720,pad=1280:0:'.$pad.':0:black" -strict -2 '. 'temp_'. $mf .' -y', $out, $status);
-                echo 'pad: '. $status;
+                if($status) {
+                	$es = 'set pad error(1001): '. $status;
+	                return back()->withInput()->withErrors(array($es));
+    	            //return redirect('mypage/'.$getId.'create')->withInput()->withErrors(array('画像の取得ができませんでした'));
+                }
                 
                 $mf = 'temp_'. $mf;
             }
             else if ($width != 1280) { //横1280でなければサイズ変更
                 exec($cdCmd . 'ffmpeg -i '. $mf. ' -s 1280x720 -strict -2 '. 'temp_'. $mf .' -y', $out, $status);
-            	echo 'size: '. $status;
+                
+                if($status) {
+                	$es = 'set size error(1002): '. $status;
+	                return back()->withInput()->withErrors(array($es));
+                }
                 
                 $mf = 'temp_'. $mf;
             }
@@ -206,7 +214,10 @@ class ModelMovieController extends Controller
 			//subtext入れ
             exec($cdCmd . 'ffmpeg -i '. $mf . ' -vf ass='.$ass.' -strict -2 ' . $mvSubName[$num] .' -y', $out, $status);
             //print_r($out);
-            echo 'SubText: '. $status;
+            if($status) {
+                $es = 'set subtext error(1003): '. $status;
+                return back()->withInput()->withErrors(array($es));
+            }
             
             //break;
         }
@@ -227,7 +238,11 @@ class ModelMovieController extends Controller
         //$c++; //whiteout分 +1
         
         exec($cdCmd . 'ffmpeg'. $input . ' -filter_complex "concat=n='.$c.':v=1:a=1" -strict -2 '. $pre.'.mp4', $out, $status);
-        echo 'combine: '.$status;
+        if($status) {
+            $es = 'combine error no music(1004): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
+
         
         
         //Filter掛け --------
@@ -242,12 +257,18 @@ class ModelMovieController extends Controller
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
         exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
-        echo 'filter: '.$status;
+        if($status) {
+            $es = 'set filter error(1005): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
         
         
         //Whiteout追加 ---------
         exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
-        echo 'whiteCombine: '.$status;
+        if($status) {
+            $es = 'white combine error(1006): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
         
         
         
@@ -261,12 +282,18 @@ class ModelMovieController extends Controller
         $sum = $branches->sum('duration');
 
         exec($cdCmd . 'ffmpeg -i '.$music .' -y -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1" -strict -2 audio.m4a', $out, $status);
-        echo 'music: '.$status;
+        if($status) {
+            $es = 'set music error(1007): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
         
         
         //file + music結合
         exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 complete.mp4', $out, $status);
-        echo 'comp: '.$status;
+        if($status) {
+            $es = 'complete error(1008): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
         
         
         //完成した動画をStorage移動 & DBSave
@@ -299,7 +326,10 @@ class ModelMovieController extends Controller
         
         //不要動画を消すか ------
         exec($cdCmd . 'rm -rf mv_* sub_* temp_* com_* audio.m4a complete.mp4 '.$pre.'.mp4', $out, $status);
-        echo 'Delete: '. $status;
+        if($status) {
+            $es = 'delete error(1009): '. $status;
+            return back()->withInput()->withErrors(array($es));
+        }
         //--------------------
         
         $status = '動画が完成しました。';
