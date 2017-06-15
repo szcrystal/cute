@@ -21,6 +21,7 @@
             <tr>
               <th>ID</th>
               <th>サムネイル</th>
+              <th class="col-md-1">県名</th>
               <th class="col-md-2">名前</th>
               <th class="col-md-3">メールアドレス</th>
               <th class="col-md-2">フルネーム</th>
@@ -34,7 +35,11 @@
           <tbody>
           
     	<?php //echo "SESSION: " . session('del_key'); ?>
-        
+
+        <?php
+            use App\State;
+        ?>
+
     	@foreach($users as $obj)
         	<tr>
             	<td>
@@ -47,6 +52,10 @@
                     @else
                     <span class="no-img">No Image</span>
                     @endif
+                </td>
+
+                <td>
+					{{ State::find($obj->state_id)->name }}
                 </td>
 
 				<td>
