@@ -82,10 +82,10 @@ class MusicController extends Controller
         if(isset($data['music_file'])) {
             $filename = $data['music_file']->getClientOriginalName();
             $filename = str_replace(' ', '_', $filename);
-            $filename = str_replace('(', '_', $filename);
-            $filename = str_replace(')', '_', $filename);
-            $filename = str_replace('（', '_', $filename);
-            $filename = str_replace('）', '_', $filename);
+//            $filename = str_replace('(', '_', $filename);
+//            $filename = str_replace(')', '_', $filename);
+//            $filename = str_replace('（', '_', $filename);
+//            $filename = str_replace('）', '_', $filename);
            
             //$pre = time() . '-';
             $filename = 'music/'/* . $pre*/ . $filename;
