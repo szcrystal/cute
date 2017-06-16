@@ -435,6 +435,8 @@ class ArticleController extends Controller
 
 		//$editId = $request->input('edit_id');
         
+        session_start(); //必要
+        
         $data = session('data');
         
         $atclId = $data['atcl_id'];
@@ -446,7 +448,7 @@ class ArticleController extends Controller
         }
         //array_unshift($tagArr, 'cute.campus');
 
-		session_start(); //必要
+		//session_start(); //必要
 
 		// --- Google側のOAuth設定でリダイレクトURLと下記のリダイレクトを一致させる必要がある ---
         //認証情報作成->OAuthクライアントID->Webアプリケーション
@@ -512,8 +514,16 @@ class ArticleController extends Controller
             // REPLACE this value with the path to the file you are uploading.
             //$videoPath = base_path() . "/storage/app/public/movie/2/main.mp4";
             
-            $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            //$videoPath = base_path() . "/storage/app/". $data['mvPath'];
             //$videoPath = $_SERVER['DOCUMENT_ROOT'] . "/storage". str_replace('public', '', $data['mvPath']);
+            
+            try {
+                $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            }
+            catch (\Exception $e) {
+                return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
+            }
+            
             
 
             // Create a snippet with title, description, tags and category ID
