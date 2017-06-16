@@ -439,8 +439,10 @@ class ArticleController extends Controller
         
         $data = session('data');
         
-        print_r($data);
+        print_r($_SESSION);
         exit;
+
+//https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fcutecampus.jp%2Fdashboard%2Farticles%2Fytup&state=964284452&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&approval_prompt=auto
         
         $atclId = $data['atcl_id'];
         
@@ -665,7 +667,6 @@ class ArticleController extends Controller
         return redirect('dashboard/articles/snsup/'. $atclId)->with('ytStatus', $status);
     }
 
-//https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fcutecampus.jp%2Fdashboard%2Farticles%2Fytup&state=964284452&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&approval_prompt=auto
     
     public function getTwFbUp(Request $request)
     {
