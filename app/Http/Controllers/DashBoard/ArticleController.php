@@ -440,7 +440,7 @@ class ArticleController extends Controller
         //$data = session('data');
         //$data = $_SESSION['data'];
         
-        print_r($_SESSION);
+        print_r($request->session()->all());
         exit;
 
 //https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fcutecampus.jp%2Fdashboard%2Farticles%2Fytup&state=964284452&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&approval_prompt=auto
