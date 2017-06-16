@@ -524,8 +524,11 @@ body {
 
 
 /* model */
-.snaps img {
-	width: 100%;
+.snaps > div {
+	height: 450px;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-position: center;
 }
 
 

@@ -75,13 +75,13 @@
                     <div class="rv-content snaps mt-5 pb-5">
 
                             @foreach($snaps as $snap)
-                                <div class="snap-wrap">
-                                    @if(isset($snap->snap_path))
-                                    <img src="{{ Storage::url($snap->snap_path)}}">
-                                    @endif
-                                    <h4>{{ $snap->ask }}</h4>
-                                    <p>{{ $snap->answer}}</p>
-                                </div>
+                            	@if(isset($snap->snap_path))
+                                <div style="background-image:url(Storage::url($snap->snap_path))" class="snap-wrap"></div>
+
+                                <h4>{{ $snap->ask }}</h4>
+                                <p>{{ $snap->answer}}</p>
+                                
+                                @endif
                             @endforeach
 
                     </div>
