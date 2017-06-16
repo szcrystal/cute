@@ -524,7 +524,10 @@ body {
 
 
 /* model */
-.snaps > div {
+.snaps .snap-wrap {
+	margin: 3em 0;
+}
+.snaps .snap-wrap div {
 	width: 100%;
 	height: 450px;
     overflow: hidden;

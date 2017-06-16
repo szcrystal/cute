@@ -72,18 +72,18 @@
                     </div>
 
 
-                    <div class="rv-content snaps mt-5 pb-5">
-
+                    <div class="snaps mt-5 pb-5">
+                        <div class="snap-wrap">
                             @foreach($snaps as $snap)
                             	@if(isset($snap->snap_path))
-                                <div style="background-image:url({{ Storage::url($snap->snap_path) }})" class="snap-wrap"></div>
+                                <div style="background-image:url({{ Storage::url($snap->snap_path) }})"></div>
 
                                 <h4>{{ $snap->ask }}</h4>
                                 <p>{!! nl2br($snap->answer) !!}</p>
 
                                 @endif
                             @endforeach
-
+						</div>
                     </div>
 
 
