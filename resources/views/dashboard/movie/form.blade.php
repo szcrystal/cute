@@ -104,10 +104,6 @@
                 </div>
             </div>
 
-            <div class="col-md-4 pull-right text-right">
-	            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="btn btn-warning center-block">この動画を結合し直す >></a>
-	        </div>
-
 
 			@if(Ctm::isDev())
             <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
@@ -215,6 +211,9 @@
         </form>
 
 
+		<div class="col-md-4 pull-right text-right">
+            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="btn btn-warning center-block">この動画を結合し直す >></a>
+        </div>
 
 
     </div>
