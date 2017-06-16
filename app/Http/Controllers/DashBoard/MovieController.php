@@ -29,7 +29,7 @@ class MovieController extends Controller
         $this->mvRel = $mvRel;
         
         
-        $this->perPage = 20;
+        $this->perPage = 10;
         
 	}
 

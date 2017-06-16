@@ -166,7 +166,7 @@
             </div>
 
 			<div class="form-group">
-                <label for="group" class="col-md-4 control-label">モデル名</label>
+                <label for="group" class="col-md-4 control-label">モデル</label>
 
                 <div class="col-md-7">
 					<p style="margin-top: 0.4em;" class="">{{ $modelName }}</p>
@@ -184,7 +184,7 @@
                 <label for="group" class="col-md-4 control-label">動画メモ</label>
 
                 <div class="col-md-7">
-					<p style="margin-top: 0.4em;" class="">{{ $mv->title }}</p>
+					<p style="margin-top: 0.4em;" class="">{{ $rel->memo }}</p>
                 </div>
             </div>
 

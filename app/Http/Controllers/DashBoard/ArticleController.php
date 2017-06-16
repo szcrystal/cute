@@ -11,6 +11,7 @@ use App\Category;
 use App\MovieCombine;
 use App\TwAccount;
 use App\State;
+use App\MovieBranchRel;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -25,7 +26,7 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine, TwAccount $twAccount, State $state)
+	public function __construct(Admin $admin, Article $article, Tag $tag, User $user, Category $category, TagRelation $tagRelation, MovieCombine $mvCombine, TwAccount $twAccount, State $state, MovieBranchRel $mvRel)
     {
     	
         $this -> middleware('adminauth');
@@ -42,6 +43,7 @@ class ArticleController extends Controller
         $this->mvCombine = $mvCombine;
         $this->twAccount = $twAccount;
         $this->state = $state;
+        $this->mvRel = $mvRel;
         
         $this->perPage = 20;
         
@@ -72,6 +74,7 @@ class ArticleController extends Controller
         
         $mvId = $atcl->movie_id;
         $mv = $this->mvCombine->find($mvId);
+        $rel = $this->mvRel->find($mv->rel_id);
         
         $states = $this->state->all();
         
@@ -105,7 +108,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'states'=>$states, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'states'=>$states, 'rel'=>$rel, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
     }
 
 
@@ -121,6 +124,7 @@ class ArticleController extends Controller
         $states = $this->state->all();
         
         $mv = $this->mvCombine->find($mvId);
+        $rel = $this->mvRel->find($mv->rel_id);
 //        $mvPath = Storage::url($mv->movie_path);
 //        $modelId = $mv->model_id;
         $modelName = $this->user->find($mv->model_id)->name;
@@ -132,7 +136,7 @@ class ArticleController extends Controller
         })->all();
         
         
-    	return view('dashboard.article.form', ['cates'=>$cates, 'states'=>$states, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags/*, 'users'=>$users*/]);
+    	return view('dashboard.article.form', ['cates'=>$cates, 'states'=>$states, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags, 'rel'=>$rel]);
     }
 
     /**
