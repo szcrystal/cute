@@ -153,12 +153,12 @@ body {
 
 #main {
     width: 1200px;
-	margin: 2em auto;
+	margin: 7px auto;
     min-height: 1000px;
     //border: 1px solid blue;
 }
 #main.top {
-	width: 99%;
+	width: 100%;
 }
 
 .single .cont-wrap {
@@ -176,7 +176,7 @@ body {
 }
 .carousel-caption {
 	position: absolute;
-    width: 53%;
+    width: 58%;
     height: auto;
 	top: 35%;
     right: 1em;
@@ -197,12 +197,12 @@ body {
 /*  text-align: center;*/
 }
 .carousel-caption h3 {
-	font-size: 3.5em;
+	font-size: 4.2em;
     font-weight: bold;
     text-shadow: 1px 1px 2px #000;
 }
 .carousel-caption p {
-	font-size: 2.5em;
+	font-size: 2.8em;
     font-weight: bold;
 	text-shadow: 1px 1px 2px #000;
     text-align: right;
@@ -218,17 +218,17 @@ body {
 .top-cont h2 {
 	position: absolute;
     top: 0;
-    left: 0;
+    left: 1em;
     z-index: 99;
     font-size: 2.5em;
-    background: antiquewhite/*#50BFC2*/;
+    background: #50BFC2;
     color: #4a4a4a;
     font-weight: bold;
     padding: 0.3em 2.5em;
-    border-radius: 0.3em;
+    border-radius: 1px;
     text-transform: uppercase;
-    -webkit-transform: rotateZ(-6deg);
-    transform: rotateZ(-6deg);
+    -webkit-transform: rotateZ(-8deg);
+    transform: rotateZ(-8deg);
 }
 .top-cont article {
 	padding: 0;
@@ -250,7 +250,7 @@ body {
     //border: 2px solid red;
 }
 .top-cont article .meta {
-	color: #fff;
+	color: salmon;
     text-shadow: 1px 1px 2px #000;
     font-size: 2.4em;
     position: absolute;
