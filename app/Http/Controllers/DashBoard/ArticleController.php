@@ -435,9 +435,10 @@ class ArticleController extends Controller
 
 		//$editId = $request->input('edit_id');
         
-        session_start(); //必要
+        //session_start(); //必要
         
-        $data = session('data');
+        //$data = session('data');
+        $data = $_SESSION['data'];
         
         print_r($_SESSION);
         exit;
@@ -453,7 +454,7 @@ class ArticleController extends Controller
         }
         //array_unshift($tagArr, 'cute.campus');
 
-		//session_start(); //必要
+		session_start(); //必要
 
 		// --- Google側のOAuth設定でリダイレクトURLと下記のリダイレクトを一致させる必要がある ---
         //認証情報作成->OAuthクライアントID->Webアプリケーション
