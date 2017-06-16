@@ -521,7 +521,7 @@ class ArticleController extends Controller
                 $videoPath = base_path() . "/storage/app/". $data['mvPath'];
             }
             catch (\Exception $e) {
-                return back()->withInput()->withErrors(array('画像の取得ができませんでした'));
+                return back()->withInput()->withErrors(array('session-data:'.$data['mvPath']));
             }
             
             
@@ -636,6 +636,8 @@ class ArticleController extends Controller
             $state = mt_rand();
             $client->setState($state);
             $_SESSION['state'] = $state;
+            
+            $_SESSION['data'] = $data;
 
             $authUrl = $client->createAuthUrl();
             $htmlBody = "<p class=\"text-warning\">Authorization Required</p>";
