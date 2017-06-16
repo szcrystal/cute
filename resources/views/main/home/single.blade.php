@@ -8,23 +8,21 @@ use App\User;
 ?>
 
     <div class="row">
-        <div class="col-md-12 py-5 single">
-            <div>
-                <div class="movie-frame text-center">
-                    {{-- @include('main.shared.movie') --}}
-                    @if(isset($atcl->yt_id))
+        <div class="col-md-12 single">
 
-                        <?php $width = Ctm::isAgent('sp') ? '100%' : '1280'; ?>
+            <div class="movie-frame text-center">
+                {{-- @include('main.shared.movie') --}}
+                @if(isset($atcl->yt_id))
 
-                        <iframe width="{{ $width }}" height="720" src="https://www.youtube.com/embed/{{ $atcl->yt_id }}" frameborder="0" allowfullscreen></iframe>
-                    @else
-                        <span style="color:#fff;" class="no-video">No Video</span>
-                    @endif
+                    <?php $width = Ctm::isAgent('sp') ? '100%' : '1280'; ?>
 
-                </div>
-
+                    <iframe width="{{ $width }}" height="720" src="https://www.youtube.com/embed/{{ $atcl->yt_id }}" frameborder="0" allowfullscreen></iframe>
+                @else
+                    <span style="color:#fff;" class="no-video">No Video</span>
+                @endif
 
             </div>
+
 
             <div class="panel-body">
 

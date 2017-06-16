@@ -485,8 +485,8 @@ body {
 /* Single */
 .single h2 {
 	margin-top: 1em;
-    color: #5a5a5a;
-    border: red;
+    color: #4a4a4a;
+    text-align: center;
 }
 .single .contents {
 	line-height: 1.8em;
@@ -503,7 +503,20 @@ body {
 }
 .movie-frame {
 	background: #111;
-    //height: 1000px;
+    padding: 0;
+    margin: 0;
+    height: 720px;
+}
+.movie-frame iframe {
+	max-width: 1280px;
+    //height: auto;
+	padding: 0;
+    margin: 0;
+    //border: 1px solid red;
+}
+.no-video {
+	display: inline-block;
+	padding-top: 25%;
 }
 
 

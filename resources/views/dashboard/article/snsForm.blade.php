@@ -113,7 +113,7 @@
                 <label for="yt_description" class="col-md-3 control-label">YouTube用 説明</label>
 
                 <div class="col-md-9">
-					<p style="margin-top: 0.3em;" class="">{{ $atcl->yt_description }}</p>
+					<p style="margin-top: 0.3em;" class="">{!! nl2br($atcl->yt_description) !!}</p>
                     <input type="hidden" name="description" value="{{ $atcl->yt_description }}">
 
                 </div>
