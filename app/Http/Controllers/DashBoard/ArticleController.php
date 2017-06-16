@@ -437,12 +437,18 @@ class ArticleController extends Controller
         
         session_start(); //必要
         
-        //$data = session('data');
-        //$data = $_SESSION['data'];
-        
-        //print_r($request->session()->all());
-        print_r($_SESSION);
-        exit;
+        //authorized requireからリダイレクトされた時にlaravelのsessionが消えるのはなぜか？（laravelのsessionと$_SESSIONは別）
+        if( $request->session()->has('data') ) { //snsupページからwithでsessionがある時
+       	 	$data = session('data');
+            //print_r($data);
+        }
+        else { //Authorize requireされてリダイレクトされた時
+        	$data = $_SESSION['data']; //googleが最後に$_SESSIONを消している？
+//            echo "NO";
+//            print_r($data);
+        }
+
+        //exit;
 
 //https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fcutecampus.jp%2Fdashboard%2Farticles%2Fytup&state=964284452&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&approval_prompt=auto
         
@@ -521,17 +527,15 @@ class ArticleController extends Controller
             // REPLACE this value with the path to the file you are uploading.
             //$videoPath = base_path() . "/storage/app/public/movie/2/main.mp4";
             
-            //$videoPath = base_path() . "/storage/app/". $data['mvPath'];
+            $videoPath = base_path() . "/storage/app/". $data['mvPath'];
             //$videoPath = $_SERVER['DOCUMENT_ROOT'] . "/storage". str_replace('public', '', $data['mvPath']);
             
-            try {
-                $videoPath = base_path() . "/storage/app/". $data['mvPath'];
-            }
-            catch (\Exception $e) {
-                return back()->withInput()->withErrors(array('session-data:'.$data['mvPath']));
-            }
-            
-            
+//            try {
+//                $videoPath = base_path() . "/storage/app/". $data['mvPath'];
+//            }
+//            catch (\Exception $e) {
+//                return back()->withInput()->withErrors(array('session-data:'.$data['mvPath']));
+//            }
 
             // Create a snippet with title, description, tags and category ID
             // Create an asset resource and set its snippet metadata and type.
@@ -618,6 +622,10 @@ class ArticleController extends Controller
                 $status['id']);
 
             $htmlBody .= '</ul>';
+            
+            //if(isset($_SESSION['data'])) {
+            	//$_SESSION['data'] = '';
+            //}
 
           }
           catch (Google_Service_Exception $e) {
@@ -645,6 +653,10 @@ class ArticleController extends Controller
             $_SESSION['state'] = $state;
             
             $_SESSION['data'] = $data;
+            //$request->session()->put('data', $data); //なぜか効かない??
+            
+            //print_r($_SESSION);
+            //exit;
 
             $authUrl = $client->createAuthUrl();
             $htmlBody = "<p class=\"text-warning\">Authorization Required</p>";
