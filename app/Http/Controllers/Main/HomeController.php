@@ -131,6 +131,8 @@ class HomeController extends Controller
         $cateObj = $this->category->find($atcl->cate_id);
         $stateObj = $this->state->find($atcl->state_id);
         
+        $otherAtcl = $this->article->where('model_id', $atcl->model_id)->take(5)->get();
+        
         $tagRels = $this->tagRel->where('atcl_id', $atcl->id)->get()->map(function($obj){
         	return $obj->id;
         })->all();
@@ -138,7 +140,7 @@ class HomeController extends Controller
         $tags = $this->tag->find($tagRels);
         
         
-        return view('main.home.single', ['atcl'=>$atcl, 'cateObj'=>$cateObj, 'tags'=>$tags, 'stateObj'=>$stateObj]);
+        return view('main.home.single', ['atcl'=>$atcl, 'otherAtcl'=>$otherAtcl, 'cateObj'=>$cateObj, 'tags'=>$tags, 'stateObj'=>$stateObj]);
     }
 
 

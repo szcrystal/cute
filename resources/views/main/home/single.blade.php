@@ -10,25 +10,26 @@ use App\User;
     <div class="row">
         <div class="col-md-12 py-5 single">
             <div>
-                <div>
-					<div class="movie-frame text-center">
-                    	{{-- @include('main.shared.movie') --}}
-                        @if(isset($atcl->yt_id))
+                <div class="movie-frame text-center">
+                    {{-- @include('main.shared.movie') --}}
+                    @if(isset($atcl->yt_id))
 
-                        	<?php $width = Ctm::isAgent('sp') ? '100%' : '1280'; ?>
+                        <?php $width = Ctm::isAgent('sp') ? '100%' : '1280'; ?>
 
-                            <iframe width="{{ $width }}" height="720" src="https://www.youtube.com/embed/{{ $atcl->yt_id }}" frameborder="0" allowfullscreen></iframe>
-                        @else
-                        	<span style="color:#fff;" class="no-video">No Video</span>
-                        @endif
+                        <iframe width="{{ $width }}" height="720" src="https://www.youtube.com/embed/{{ $atcl->yt_id }}" frameborder="0" allowfullscreen></iframe>
+                    @else
+                        <span style="color:#fff;" class="no-video">No Video</span>
+                    @endif
 
-                    </div>
+                </div>
 
-                    <h2>{{ $atcl -> title }}</h2>
-				</div>
 
-                <div class="panel-body">
+            </div>
 
+            <div class="panel-body">
+
+                <div class="cont-wrap">
+                	<h2>{{ $atcl -> title }}</h2>
 
                     <div class="table-responsive py-3">
                     	<table class="table table-bordered">
@@ -47,6 +48,11 @@ use App\User;
                                     @endif
                                     </th>
                                     <td>{{ User::find($atcl->model_id)->name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>エリア</th>
+                                    <td>{{ $stateObj->name }}</td>
                                 </tr>
 
                                 <tr>
@@ -75,29 +81,44 @@ use App\User;
                                     </td>
                                 </tr>
 
+								<tr>
+									<th>このモデルが撮影した他の記事</th>
+                                    <td>
+                                    	<?php
+                                        	use App\State;
+                                        	use App\Category;
+                                        ?>
+                                    	@foreach($otherAtcl as $oAtcl)
+                                        	<?php $url = State::find($oAtcl->state_id)->slug . '/' . Category::find($oAtcl->cate_id)->slug . '/' .$oAtcl->id; ?>
+                                            <span class="rank-tag">
+                                            <a href="{{ url($url) }}">{{ $oAtcl->title }}</a>
+                                            </span>
+                                        @endforeach
 
+                                    </td>
+                                </tr>
 
                             </tbody>
                 		</table>
                     </div>
 
-                    <div>
-                    	<div class="clearfix">
-                            <div class="col-md-6 float-left">
-                                @if($atcl -> thumb_path)
-                            	<img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
-                                @else
-                                <span class="no-img">No Image</span>
-                                @endif
-                            </div>
 
-                            <div class="col-md-6 float-right">
-								{!! nl2br($atcl->contents) !!}
-                            </div>
+                    <div class="clear contents">
+                    	<h4>Infomation</h4>
+                        <div class="col-md-6 float-left">
+                            @if($atcl -> thumb_path)
+                            <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
+                            @else
+                            <span class="no-img">No Image</span>
+                            @endif
                         </div>
 
+                        <div class="col-md-6 float-right">
+                            <p>{!! nl2br($atcl->contents) !!}</p>
+                        </div>
+                    </div>
 
-                        <div class="rv-content mt-5 pb-5">
+                    <div class="rv-content mt-5 pb-5">
                         	@if($atcl->address != '')
                         	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
 
@@ -160,6 +181,5 @@ use App\User;
 				</div><!-- panelbody -->
 
             </div>
-        </div>
     </div>
 @endsection

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 
+body {
+	min-width: 1200px;
+    color: #515151;
+}
+
+
 .site-header {
 	background: #50BFC2;
     padding: 5px 10px;
@@ -134,9 +140,7 @@
     padding: 0 !important;
 }
 
-body {
-	min-width: 1200px;
-}
+
 
 /* Custom */
 .wrap-all {
@@ -153,6 +157,14 @@ body {
     min-height: 1000px;
     //border: 1px solid blue;
 }
+#main.top {
+	width: 99%;
+}
+
+.single .cont-wrap {
+	width: 1200px;
+    margin: 3.5em auto 4.5em;
+}
 
 .carousel {
 	height: 700px;
@@ -167,7 +179,7 @@ body {
     width: 53%;
     height: auto;
 	top: 35%;
-    right: 0;
+    right: 1em;
     left: auto;
     margin: 0;
     padding: 0;
@@ -194,6 +206,7 @@ body {
     font-weight: bold;
 	text-shadow: 1px 1px 2px #000;
     text-align: right;
+    margin-right: 1em;
 }
 
 /* TOP 特集 */
@@ -207,12 +220,15 @@ body {
     top: 0;
     left: 0;
     z-index: 99;
-    font-size: 1.8em;
-    background: #50BFC2;
-    color: #fff;
-    padding: 0.3em 1.5em;
-    -webkit-transform: rotateZ(-8deg);
-    transform: rotateZ(-8deg);
+    font-size: 2.5em;
+    background: antiquewhite/*#50BFC2*/;
+    color: #4a4a4a;
+    font-weight: bold;
+    padding: 0.3em 2.5em;
+    border-radius: 0.3em;
+    text-transform: uppercase;
+    -webkit-transform: rotateZ(-6deg);
+    transform: rotateZ(-6deg);
 }
 .top-cont article {
 	padding: 0;
@@ -456,15 +472,31 @@ body {
 }
 
 
+/* Single */
 .single h2 {
 	margin-top: 1em;
     color: #5a5a5a;
     border: red;
 }
+.single .contents {
+	line-height: 1.8em;
+    font-size: 1.1em;
+}
+.single .contents h4 {
+	font-size: 1.2em;
+    font-weight: normal;
+    color: #515151;
+    text-align: center;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #aaa;
+}
 .movie-frame {
 	background: #111;
     //height: 1000px;
 }
+
+
 
 
 
@@ -566,7 +598,7 @@ body {
 
 /* contact */
 .cth {
-	background: #fefcfb;
+	background: #fefcfb; /*url(../images/tile-wave.png),  */
     width: 25%;
 }
 textarea#context {
@@ -967,49 +999,49 @@ button.subm-link {
 /*	width: 97%;*/
 /*    margin-bottom: 3em;*/
 /*}*/
-.single-img > img {
-	width: 70%;
-}
-.single-img h5 {
-	font-size: 1.1em;
-	margin: 0.2em 0;
-}
-.single-img p {
-	font-size: 0.9em;
-}
-.single-img,
-.single-link {
-	margin-bottom: 3em;
-}
-.single-link a > .fa {
-	margin-left: 0.4em;
-}
-.single-link .type-a {
-	display: inline-block;
-    background: #FFBC41;
-    border: 2px solid orange;
-    padding: 0.5em 1.7em;
-    color: #fff;
-    border-radius: 0.3em;
-}
-.single-link .type-b {
-	display: inline-block;
-    background: skyblue;
-    color: #fff;
-    padding: 1em 3.5em;
-    font-weight: bold;
-    font-size: 1.1em;
-    border-radius: 0.3em;
-}
-.single-link .type-n {
-	font-size: 1.1em;
-}
-.single-link .type-a:hover,
-.single-link .type-b:hover,
-.single-link a:hover > img {
-	opacity: 0.7;
-    text-decoration: none;
-}
+/*.single-img > img {*/
+/*	width: 70%;*/
+/*}*/
+/*.single-img h5 {*/
+/*	font-size: 1.1em;*/
+/*	margin: 0.2em 0;*/
+/*}*/
+/*.single-img p {*/
+/*	font-size: 0.9em;*/
+/*}*/
+/*.single-img,*/
+/*.single-link {*/
+/*	margin-bottom: 3em;*/
+/*}*/
+/*.single-link a > .fa {*/
+/*	margin-left: 0.4em;*/
+/*}*/
+/*.single-link .type-a {*/
+/*	display: inline-block;*/
+/*    background: #FFBC41;*/
+/*    border: 2px solid orange;*/
+/*    padding: 0.5em 1.7em;*/
+/*    color: #fff;*/
+/*    border-radius: 0.3em;*/
+/*}*/
+/*.single-link .type-b {*/
+/*	display: inline-block;*/
+/*    background: skyblue;*/
+/*    color: #fff;*/
+/*    padding: 1em 3.5em;*/
+/*    font-weight: bold;*/
+/*    font-size: 1.1em;*/
+/*    border-radius: 0.3em;*/
+/*}*/
+/*.single-link .type-n {*/
+/*	font-size: 1.1em;*/
+/*}*/
+/*.single-link .type-a:hover,*/
+/*.single-link .type-b:hover,*/
+/*.single-link a:hover > img {*/
+/*	opacity: 0.7;*/
+/*    text-decoration: none;*/
+/*}*/
 
 /* footer */
 #colop {

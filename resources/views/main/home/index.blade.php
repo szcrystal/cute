@@ -5,7 +5,7 @@
 
 	@include('main.shared.carousel')
 
-<div id="main">
+<div id="main" class="top">
 
         <div class="panel panel-default">
 

@@ -39,7 +39,11 @@ use App\User;
               <img class="d-block img-fluid" src="{{ Storage::url($obj->thumb_path) }}" alt="slide">
               <div class="carousel-caption d-none d-md-block">
                 <h3>{{ $obj->title}}</h3>
-                <p>{{ User::find($obj->model_id)->name}}＠{{ User::find($obj->model_id)->school }}</p>
+                <p>{{ User::find($obj->model_id)->name}}
+					@if($obj->model_id > 2)
+                		＠{{ User::find($obj->model_id)->school }}
+					@endif
+                </p>
               </div>
             </div>
             

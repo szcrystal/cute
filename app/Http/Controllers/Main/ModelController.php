@@ -43,9 +43,10 @@ class ModelController extends Controller
             $whereArr['state_id'] = $stateObj->id;
         }
         
-        $newModel = $this->user->where($whereArr)->whereNotIn('id',[1, 2])->orderBy('created_at','DESC')->take(3)->get();
+        $user = $this->user->where($whereArr)->whereNotIn('id',[1, 2]);
+        $newModel = $user->orderBy('created_at','DESC')->take(3)->get();
         
-        $models = $this->user->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
+        $models = $user->orderBy('created_at','DESC')->paginate($this->perPage);
 
 		return view('main.model.index', ['models'=>$models, 'newModel'=>$newModel, 'modelSlide'=>1]);
     }
