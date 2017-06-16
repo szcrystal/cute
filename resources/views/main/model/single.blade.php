@@ -79,7 +79,7 @@
                                 <div style="background-image:url({{ Storage::url($snap->snap_path) }})" class="snap-wrap"></div>
 
                                 <h4>{{ $snap->ask }}</h4>
-                                <p>{{ $snap->answer}}</p>
+                                <p>{!! nl2br($snap->answer) !!}</p>
 
                                 @endif
                             @endforeach
