@@ -435,12 +435,13 @@ class ArticleController extends Controller
 
 		//$editId = $request->input('edit_id');
         
-        //session_start(); //必要
+        session_start(); //必要
         
         //$data = session('data');
         //$data = $_SESSION['data'];
         
-        print_r($request->session()->all());
+        //print_r($request->session()->all());
+        print_r($_SESSION);
         exit;
 
 //https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=938943463544-1lgj32og5nice7pddbmo25mj3io7fs9v.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Fcutecampus.jp%2Fdashboard%2Farticles%2Fytup&state=964284452&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&approval_prompt=auto
@@ -454,7 +455,7 @@ class ArticleController extends Controller
         }
         //array_unshift($tagArr, 'cute.campus');
 
-		session_start(); //必要
+		//session_start(); //必要
 
 		// --- Google側のOAuth設定でリダイレクトURLと下記のリダイレクトを一致させる必要がある ---
         //認証情報作成->OAuthクライアントID->Webアプリケーション
