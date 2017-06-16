@@ -438,7 +438,7 @@ class ArticleController extends Controller
         //session_start(); //必要
         
         //$data = session('data');
-        $data = $_SESSION['data'];
+        //$data = $_SESSION['data'];
         
         print_r($_SESSION);
         exit;
