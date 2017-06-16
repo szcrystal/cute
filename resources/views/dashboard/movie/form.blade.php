@@ -210,9 +210,9 @@
 
         </form>
 
-		aaaaa
+		
 		<div class="col-md-12 text-right">
-            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="btn btn-warning center-block">この動画を結合し直す >></a>
+            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="col-md-4 btn btn-warning center-block">この動画を結合し直す >></a>
         </div>
 
     </div>
