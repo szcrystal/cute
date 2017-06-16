@@ -3,22 +3,23 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-12 py-5">
-            <div>
-                <div>
-					<div class="movie-frame text-center">
-                        @if(isset($model->model_thumb))
-                        	<img src="{{ Storage::url($model->model_thumb) }}" width="100%" height="auto">
-                        @else
-                        	<span class="no-img">No Image</span>
-                        @endif
+        <div class="col-md-12 single">
 
-                    </div>
+            <div class="thumb-frame text-center">
+                @if(isset($model->model_thumb))
+                    <img src="{{ Storage::url($model->model_thumb) }}" width="100%" height="auto">
+                @else
+                    <span class="no-img">No Image</span>
+                @endif
+
+            </div>
+
+
+            <div class="panel-body">
+                <div class="cont-wrap">
 
                     <h2>{{ $model -> name }}</h2>
-				</div>
 
-                <div class="panel-body">
                     <div class="table-responsive py-3">
                     	<table class="table table-bordered">
                             <colgroup>
@@ -51,45 +52,44 @@
                                     <td><a href="https://www.instagram.com/{{ $model->instagram }}" target="_brank">{{ $model->instagram }}</a></td>
                                 </tr>
 
+                                <tr>
+									<th>投稿した記事</th>
+                                    <td></td>
+                                </tr>
+
 
 
                             </tbody>
                 		</table>
                     </div>
 
-                    <div>
-                    	<div class="clearfix">
-                            <div class="col-md-8 mx-auto">
-                                {!! nl2br($model->per_info) !!}
-
-                            </div>
-
-                            <div class="col-md-6 float-right">
-
-                            </div>
-                        </div>
-
-
-                        <div class="rv-content snaps mt-5 pb-5">
-
-                                @foreach($snaps as $snap)
-                                    <div class="snap-wrap">
-                                    	@if(isset($snap->snap_path))
-                                        <img src="{{ Storage::url($snap->snap_path)}}">
-                                        @endif
-                                        <h4>{{ $snap->ask }}</h4>
-                                        <p>{{ $snap->answer}}</p>
-                                    </div>
-                                @endforeach
+                    <div class="clearfix contents">
+                        <div class="col-md-8 mx-auto">
+                            {!! nl2br($model->per_info) !!}
 
                         </div>
 
+                    </div>
 
-                	</div>
 
-				</div><!-- panelbody -->
+                    <div class="rv-content snaps mt-5 pb-5">
 
-            </div>
+                            @foreach($snaps as $snap)
+                                <div class="snap-wrap">
+                                    @if(isset($snap->snap_path))
+                                    <img src="{{ Storage::url($snap->snap_path)}}">
+                                    @endif
+                                    <h4>{{ $snap->ask }}</h4>
+                                    <p>{{ $snap->answer}}</p>
+                                </div>
+                            @endforeach
+
+                    </div>
+
+
+                </div>
+            </div><!-- panelbody -->
+
         </div>
     </div>
 @endsection
