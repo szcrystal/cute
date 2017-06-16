@@ -199,7 +199,6 @@
 
             @endif
 
-
 			@if(Ctm::isDev())
 			<div class="form-group">
                 <div class="col-md-4 col-md-offset-3">
@@ -210,11 +209,9 @@
 
         </form>
 
-
 		<div class="col-md-12 text-right">
             <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="btn btn-warning center-block">この動画を結合し直す >></a>
         </div>
-
 
     </div>
 
