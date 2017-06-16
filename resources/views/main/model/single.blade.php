@@ -76,11 +76,11 @@
 
                             @foreach($snaps as $snap)
                             	@if(isset($snap->snap_path))
-                                <div style="background-image:url(Storage::url($snap->snap_path))" class="snap-wrap"></div>
+                                <div style="background-image:url({{ Storage::url($snap->snap_path) }})" class="snap-wrap"></div>
 
                                 <h4>{{ $snap->ask }}</h4>
                                 <p>{{ $snap->answer}}</p>
-                                
+
                                 @endif
                             @endforeach
 
