@@ -81,13 +81,16 @@ use App\User;
                                     </td>
                                 </tr>
 
+								<?php
+                                    use App\State;
+                                    use App\Category;
+                                ?>
+
+								@if(!isset($feature))
 								<tr>
 									<th>このモデルが撮影した他の記事</th>
                                     <td>
-                                    	<?php
-                                        	use App\State;
-                                        	use App\Category;
-                                        ?>
+
                                     	@foreach($otherAtcl as $oAtcl)
                                         	<?php $url = State::find($oAtcl->state_id)->slug . '/' . Category::find($oAtcl->cate_id)->slug . '/' .$oAtcl->id; ?>
                                             <span class="rank-tag">
@@ -97,6 +100,7 @@ use App\User;
 
                                     </td>
                                 </tr>
+                                @endif
 
                             </tbody>
                 		</table>
