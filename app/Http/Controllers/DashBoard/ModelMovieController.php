@@ -289,7 +289,7 @@ class ModelMovieController extends Controller
         
         
         //file + music結合
-        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 complete.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 -strict -2 complete.mp4 -y', $out, $status);
         if($status) {
             $es = 'complete error(1008): '. $status;
             return back()->withInput()->withErrors(array($es));
