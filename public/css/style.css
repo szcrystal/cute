@@ -234,7 +234,9 @@ body {
 	padding: 0;
     margin: 0;
     position: relative;
-    border: 1px solid #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    //border: 1px solid #fff;
 }
 .top-cont article a {
 	display: block;
@@ -266,7 +268,7 @@ body {
 	height: 100%;
     width: 40%;
     background-size: auto 120%;
-    background-position: center;
+    
     //text-align: right;
 	-webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
@@ -278,13 +280,13 @@ body {
 .feature article:nth-of-type(2) {
 	height: 50%;
     width: 60%;
-    background-size: auto 120%;
+    background-size: 120% auto;
     background-position: center;
 }
 .feature article:nth-of-type(3) {
 	height: 50%;
     width: 60%;
-    background-size: auto 120%;
+    background-size: 120% auto;
     background-position: center;
 }
 
@@ -525,7 +527,7 @@ body {
 
 /* model */
 .snaps .snap-wrap {
-	margin: 3em 0;
+	margin: 6em 0;
 }
 .snaps .snap-wrap div {
 	width: 100%;

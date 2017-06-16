@@ -73,7 +73,7 @@ class HomeController extends Controller
         	$as = $this->article->where($whereArr)->orderBy('created_at','DESC')->take(3)->get()->all();
             
             if(count($as) > 0) {
-            	$atcls[$cate->name] = $as;
+            	$atcls[$cate->slug] = $as;
             }
         }
 //        $atcls = $this->article->where(['open_status'=>1, 'feature'=>0])->orderBy('created_at','DESC')->get();
