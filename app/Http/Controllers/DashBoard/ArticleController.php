@@ -420,8 +420,8 @@ class ArticleController extends Controller
             //$this->getTwFbUp($data);
         }
     }
-    
-    
+
+
     public function getYtUp(Request $request)
     {
     	//API Key: AIzaSyBYJdFgn76FsGpxNSSY2G4qPYESVygzzMo
