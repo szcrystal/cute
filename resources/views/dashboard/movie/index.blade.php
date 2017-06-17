@@ -51,9 +51,9 @@
 
                 <td>
 					<video id="mainMv" width="180" height="100" poster="" controls>
-        			{{-- autoplay loop tabindex="0" --}}
                     <source src="{{ Storage::url($obj -> movie_path) }}">
-        			</video>
+                    </video>
+
                 </td>
 
 				{{--
