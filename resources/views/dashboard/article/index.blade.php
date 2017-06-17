@@ -107,7 +107,7 @@
                 </td>
 
                 <td>
-                    <small>{{ $obj->created_at }}</small>
+                    <small>{{ Ctm::changeDate($obj->created_at, 1) }}</small>
                 </td>
 
 				<td><a href="{{ url('dashboard/movies/'.$obj->movie_id) }}">{{ $obj->movie_id }}</a></td>
