@@ -256,7 +256,7 @@ class ModelMovieController extends Controller
         ];
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -ac 2 -af volume=10dB -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -ac 2 -af volume=15dB -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'set filter error(1005): '. $status;
             return back()->withInput()->withErrors(array($es));
