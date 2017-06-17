@@ -515,7 +515,7 @@ class ArticleController extends Controller
             $client->authenticate($_GET['code']);
             $_SESSION['token'] = $client->getAccessToken();
             header('Location: ' . $redirect);
-            //exit();
+            exit();
         }
 
         if (isset($_SESSION['token'])) {
@@ -631,9 +631,9 @@ class ArticleController extends Controller
             $atclModel->yt_id = $status['id'];
             $atclModel->save();
             
-            //if(isset($_SESSION['datayt'])) {
-            //	$_SESSION['datayt'] = '';
-            //}
+            if(isset($_SESSION['datayt'])) {
+            	$_SESSION['datayt'] = '';
+            }
 
           }
           catch (Google_Service_Exception $e) {
