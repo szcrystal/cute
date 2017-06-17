@@ -263,8 +263,9 @@ class ModelMovieController extends Controller
         }
         
         
-        //Whiteout追加 ---------
-        exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
+        //Whiteout追加 ステレオ音声にもここでする---------
+        //exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -ac 2 -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'white combine error(1006): '. $status;
             return back()->withInput()->withErrors(array($es));
@@ -281,16 +282,17 @@ class ModelMovieController extends Controller
         //$sum = array_sum($durations); //upされた動画の秒数合計 + whiteoutの3秒
         $sum = $branches->sum('duration');
 
-        exec($cdCmd . 'ffmpeg -i '.$music .' -y -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1" -strict -2 audio.m4a', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$music .' -vol 150 -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1" -strict -2 audio.m4a -y', $out, $status);
+        //-acodec aac OR -c:a aac aaacコーデックの場合は-strict -2 が必要
         if($status) {
             $out[] = 'make music error(1007): '. $status;
             return back()->withInput()->withErrors(array($out));
         }
         
         
-        
         //file + music結合
-        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c copy -map 0:0 -map 0:1 -map 1:0 -vcodec copy -acodec copy complete.mp4 -y', $out, $status);
+        //exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c:a copy -map 0:0 -map 0:1 -map 1:0 complete.mp4 -y', $out, $status); //org strictなし
+        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" -c:v h264 -c:a aac -strict -2 complete.mp4 -y', $out, $status);
         if($status) {
             $es = 'complete error(1008): '. $status;
             return back()->withInput()->withErrors(array($es));

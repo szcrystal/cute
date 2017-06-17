@@ -226,8 +226,11 @@
 							NoViaRemember
                         @endif
 						--}}
-						{{ Auth::guard('admin')->user()->name }}
-                        <i class="fa fa-caret-down"></i>
+
+                        @if(Auth::guard('admin')->check())
+							{{ Auth::guard('admin')->user()->name }}
+                        	<i class="fa fa-caret-down"></i>
+                        @endif
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         {{-- <li><a href="{{ url('dashboard/register/'. Auth::guard('admin')->user()->id) }}"><i class="fa fa-gear fa-fw"></i> 編集</a>
