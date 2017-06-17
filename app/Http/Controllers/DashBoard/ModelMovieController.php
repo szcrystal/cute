@@ -256,16 +256,16 @@ class ModelMovieController extends Controller
         ];
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -ac 2 -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'set filter error(1005): '. $status;
             return back()->withInput()->withErrors(array($es));
         }
         
         
-        //Whiteout追加 ステレオ音声にもここでする---------
+        //Whiteout追加 ---------
         //exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -ac 2 -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.'com_'.$pre.'.mp4 -i '. $whitePath . ' -filter_complex "concat=n=2:v=1:a=1" -strict -2 '. $pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'white combine error(1006): '. $status;
             return back()->withInput()->withErrors(array($es));
@@ -328,10 +328,12 @@ class ModelMovieController extends Controller
         $rel->save();
         
         //不要動画を消すか ------
-        exec($cdCmd . 'rm -rf mv_* sub_* temp_* com_* audio.m4a complete.mp4 '.$pre.'.mp4', $out, $status);
-        if($status) {
-            $es = 'delete error(1009): '. $status;
-            return back()->withInput()->withErrors(array($es));
+        if(env('ENVIRONMENT') != 'dev') {
+            exec($cdCmd . 'rm -rf mv_* sub_* temp_* com_* audio.m4a complete.mp4 '.$pre.'.mp4', $out, $status);
+            if($status) {
+                $es = 'delete error(1009): '. $status;
+                return back()->withInput()->withErrors(array($es));
+            }
         }
         //--------------------
         
