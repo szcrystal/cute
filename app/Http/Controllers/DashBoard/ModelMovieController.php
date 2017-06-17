@@ -291,8 +291,9 @@ class ModelMovieController extends Controller
         
         
         //file + music結合
+        //-mapを3つ結合だと、youtubeにアップした時ストリームmapが2つまでなので、3つめが削られるorステレオ音声が優先されるので、 音声結合mapにする
         //exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -c:a copy -map 0:0 -map 0:1 -map 1:0 complete.mp4 -y', $out, $status); //org strictなし
-        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -movflags faststart -strict -2 complete.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$pre.'.mp4 -i audio.m4a -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -movflags faststart -strict -2 complete.mp4 -y', $out, $status); //-c:v(vcodec)はcopyにしないと、vpsでCannot allocate memoryになる
         if($status) {
             $es = 'complete error(1008): '. $status;
             return back()->withInput()->withErrors(array($es));

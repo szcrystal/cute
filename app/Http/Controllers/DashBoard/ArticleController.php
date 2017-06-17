@@ -623,9 +623,9 @@ class ArticleController extends Controller
 
             $htmlBody .= '</ul>';
             
-            if(isset($_SESSION['data'])) {
-            	$_SESSION['data'] = '';
-            }
+            //if(isset($_SESSION['data'])) {
+            //	$_SESSION['data'] = '';
+            //}
             
             //atcl save
         	$atclModel = $this->article->find($atclId);
@@ -654,6 +654,7 @@ class ArticleController extends Controller
             $client->setState($state);
             $_SESSION['state'] = $state;
             
+            $_SESSION['data'] = array();
             $_SESSION['data'] = $data;
             //$request->session()->put('data', $data); //なぜか効かない??
             
