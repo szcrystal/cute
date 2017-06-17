@@ -631,7 +631,7 @@ class ArticleController extends Controller
             $atclModel->yt_id = $status['id'];
             $atclModel->save();
             
-            if(isset($_SESSION['data'])) {
+            if(isset($_SESSION['datayt'])) {
             	$_SESSION['datayt'] = '';
             }
 
