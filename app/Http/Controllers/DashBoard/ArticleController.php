@@ -515,7 +515,7 @@ class ArticleController extends Controller
             $client->authenticate($_GET['code']);
             $_SESSION['token'] = $client->getAccessToken();
             header('Location: ' . $redirect);
-            exit();
+            //exit();
         }
 
         if (isset($_SESSION['token'])) {
@@ -656,7 +656,7 @@ class ArticleController extends Controller
             $client->setState($state);
             $_SESSION['state'] = $state;
             
-            $_SESSION['datayt'] = array();
+            //$_SESSION['datayt'] = array();
             $_SESSION['datayt'] = $data;
             //$request->session()->put('data', $data); //なぜか効かない??
             
