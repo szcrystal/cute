@@ -631,9 +631,9 @@ class ArticleController extends Controller
             $atclModel->yt_id = $status['id'];
             $atclModel->save();
             
-            if(isset($_SESSION['datayt'])) {
-            	$_SESSION['datayt'] = '';
-            }
+            //if(isset($_SESSION['datayt'])) {
+            //	$_SESSION['datayt'] = '';
+            //}
 
           }
           catch (Google_Service_Exception $e) {
@@ -656,7 +656,7 @@ class ArticleController extends Controller
             $client->setState($state);
             $_SESSION['state'] = $state;
             
-            //$_SESSION['datayt'] = array();
+            $_SESSION['datayt'] = array();
             $_SESSION['datayt'] = $data;
             //$request->session()->put('data', $data); //なぜか効かない??
             
