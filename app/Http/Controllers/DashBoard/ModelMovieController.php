@@ -256,7 +256,7 @@ class ModelMovieController extends Controller
         ];
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);
-        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -ac 2 -af volume=5dB -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . $filter[$data['filter_id']].' -ac 2 -af volume=7dB -strict -2 '. 'com_'.$pre.'.mp4 -y', $out, $status);
         if($status) {
             $es = 'set filter error(1005): '. $status;
             return back()->withInput()->withErrors(array($es));
@@ -282,7 +282,7 @@ class ModelMovieController extends Controller
         //$sum = array_sum($durations); //upされた動画の秒数合計 + whiteoutの3秒
         $sum = $branches->sum('duration');
 
-        exec($cdCmd . 'ffmpeg -i '.$music .' -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1,volume=-8dB" -strict -2 audio.m4a -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$music .' -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1,volume=-5dB" -strict -2 audio.m4a -y', $out, $status);
         //-acodec aac OR -c:a aac aaacコーデックの場合は-strict -2 が必要
         if($status) {
             $out[] = 'make music error(1007): '. $status;
