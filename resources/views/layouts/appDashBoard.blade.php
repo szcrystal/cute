@@ -316,6 +316,18 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+                        <li>
+                        	<a href="#"><i class="fa fa-newspaper-o"></i> 音楽管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ url('/dashboard/musics') }}">音楽一覧</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/dashboard/musics/create') }}">音楽追加</a>
+                                </li>
+                        	</ul>
+                        </li>
+
 						<li>
                             <a href="#"><i class="fa fa-video-camera" aria-hidden="true"></i> 動画管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -342,17 +354,7 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        <li>
-                        	<a href="#"><i class="fa fa-newspaper-o"></i> 音楽管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ url('/dashboard/musics') }}">音楽一覧</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/dashboard/musics/create') }}">音楽追加</a>
-                                </li>
-                        	</ul>
-                        </li>
+
 
                         <li>
                             <a href="#"><i class="fa fa-newspaper-o"></i> 記事管理<span class="fa arrow"></span></a>
