@@ -623,9 +623,15 @@ class ArticleController extends Controller
 
             $htmlBody .= '</ul>';
             
-            //if(isset($_SESSION['data'])) {
-            	//$_SESSION['data'] = '';
-            //}
+            if(isset($_SESSION['data'])) {
+            	$_SESSION['data'] = '';
+            }
+            
+            //atcl save
+        	$atclModel = $this->article->find($atclId);
+            $atclModel->yt_up = 1;
+            $atclModel->yt_id = $status['id'];
+            $atclModel->save();
 
           }
           catch (Google_Service_Exception $e) {
@@ -639,11 +645,7 @@ class ArticleController extends Controller
 
           $_SESSION['token'] = $client->getAccessToken();
         
-        	//atcl save
-        	$atclModel = $this->article->find($atclId);
-            $atclModel->yt_up = 1;
-            $atclModel->yt_id = $status['id'];
-            $atclModel->save();
+        	
             
         }
         else { //Up前のAuhorized確認

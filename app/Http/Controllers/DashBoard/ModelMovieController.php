@@ -282,7 +282,7 @@ class ModelMovieController extends Controller
         //$sum = array_sum($durations); //upされた動画の秒数合計 + whiteoutの3秒
         $sum = $branches->sum('duration');
 
-        exec($cdCmd . 'ffmpeg -i '.$music .' -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1,volume=-12dB" -strict -2 audio.m4a -y', $out, $status);
+        exec($cdCmd . 'ffmpeg -i '.$music .' -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1,volume=-10dB" -strict -2 audio.m4a -y', $out, $status);
         //-acodec aac OR -c:a aac aaacコーデックの場合は-strict -2 が必要
         if($status) {
             $out[] = 'make music error(1007): '. $status;
