@@ -107,11 +107,7 @@
                 </td>
 
                 <td>
-					@if($obj->open_date)
-						<small>{{ $obj->created_at }}</small>
-                    @else
-						--
-                    @endif
+                    <small>{{ $obj->created_at }}</small>
                 </td>
 
 				<td><a href="{{ url('dashboard/movies/'.$obj->movie_id) }}">{{ $obj->movie_id }}</a></td>
