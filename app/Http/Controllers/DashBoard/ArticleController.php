@@ -515,6 +515,7 @@ class ArticleController extends Controller
             $client->authenticate($_GET['code']);
             $_SESSION['token'] = $client->getAccessToken();
             header('Location: ' . $redirect);
+            exit();
         }
 
         if (isset($_SESSION['token'])) {
