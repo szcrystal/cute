@@ -443,7 +443,7 @@ class ArticleController extends Controller
             //print_r($data);
         }
         else { //Authorize requireされてリダイレクトされた時
-        	$data = $_SESSION['data']; //googleが最後に$_SESSIONを消している？
+        	$data = $_SESSION['datayt']; //googleが最後に$_SESSIONを消している？
 //            echo "NO";
 //            print_r($data);
         }
@@ -654,8 +654,8 @@ class ArticleController extends Controller
             $client->setState($state);
             $_SESSION['state'] = $state;
             
-            $_SESSION['data'] = array();
-            $_SESSION['data'] = $data;
+            $_SESSION['datayt'] = array();
+            $_SESSION['datayt'] = $data;
             //$request->session()->put('data', $data); //なぜか効かない??
             
             //print_r($_SESSION);
