@@ -95,7 +95,7 @@ use App\User;
 
 								@if(!isset($feature))
 								<tr>
-									<th>このモデルが投稿した他の記事</th>
+									<th>{{ User::find($atcl->model_id)->name }}が投稿した他の記事</th>
                                     <td class="td-post">
 									@if($otherAtcl !== null)
                                     	@foreach($otherAtcl as $oAtcl)

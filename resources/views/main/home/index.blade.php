@@ -65,7 +65,7 @@
 
             <div class="meta">
             	<h3>{{ $pickUp->title }}</h3>
-                <p>{{ User::find($feature->model_id)->name }}</p>
+                <p>{{ User::find($pickUp->model_id)->name }}</p>
             </div>
         </a>
     </article>
