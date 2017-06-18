@@ -78,7 +78,11 @@
 					<div class="float-left col-md-5">
                     	<h2>特集</h2>
 						<ul class="clear">
-                        	<li><a href="{{ url('all/feature') }}">特集All</a></li>
+                        	<li>
+                            	<span class="rank-tag">
+                            	<a href="{{ url('all/feature') }}">特集All</a>
+                                </span>
+                            </li>
                         	@foreach($fCates as $fCate)
 								<li>
                                 	<span class="rank-tag">

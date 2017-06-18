@@ -134,16 +134,20 @@ Route::get('/{state?}', 'Main\HomeController@index');
 //Feature
 Route::get('{state}/feature', 'Main\FeatureController@index');
 Route::get('{state}/feature/{cate}', 'Main\FeatureController@showCate');
-Route::get('{state}/feature/{cate}/{id}', 'Main\FeatureController@showSingle');
+Route::get('{state}/feature/{cate}/{id}', 'Main\FeatureController@showSingle'); //Feature Single Page
 
 //Model
 Route::get('{state}/model', 'Main\ModelController@index');
 Route::get('{state}/model/{id}', 'Main\ModelController@showSingle');
 
+//Tag
+Route::get('{state}/tag/{tag}', 'Main\HomeController@showTag');
 
 //Category
 Route::get('{state}/{cate}', 'Main\HomeController@showCate');
-Route::get('{state}/{cate}/{id}', 'Main\HomeController@showSingle');
+Route::get('{state}/{cate}/{id}', 'Main\HomeController@showSingle'); //Atcl Single Page
+
+
 
 
 

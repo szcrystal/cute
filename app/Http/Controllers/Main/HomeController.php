@@ -33,7 +33,7 @@ class HomeController extends Controller
 //        $this->totalize = $totalize;
 //        $this->totalizeAll = $totalizeAll;
         
-        $this->perPage = env('PER_PAGE', 20);
+        $this->perPage = env('PER_PAGE', 12);
         $this->itemPerPage = 15;
         
     }
@@ -117,9 +117,41 @@ class HomeController extends Controller
         //404
         if(!isset($cateObj)) abort(404);
         
+        $whereArr['cate_id'] = $cateObj->id;
         $atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
 
-		return view('main.archive.index', ['atcls'=>$atcls, 'cateObj'=>$cateObj]);
+		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$cateObj]);
+        
+	}
+    
+    public function showTag($state = 'all', $tag)
+    {
+        //$whereArrSec = ['open_status'=>1,'feature'=>1,];
+        
+        $whereArr = ['open_status'=>1];
+        
+        if($state != 'all') {
+        	$stateObj = $this->state->where('slug', $state)->get()->first();
+            
+            //404
+            if(!isset($stateObj)) abort(404);
+            
+            $whereArr['state_id'] = $stateObj->id;
+        }
+        
+        
+        $tagObj = $this->tag->where('slug', $tag)->get()->first();
+        
+        //404
+        if(!isset($tagObj)) abort(404);
+        
+        $ids = $tagRel = $this->tagRel->where('tag_id', $tagObj->id)->get()->map(function($obj){
+            return $obj->atcl_id;
+        });
+        $atcls = $this->article->find($ids)->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
+        //$atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
+
+		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$tagObj]);
         
 	}
     

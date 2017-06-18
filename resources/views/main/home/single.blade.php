@@ -81,7 +81,7 @@ use App\User;
                                     	@foreach($tags as $tag)
                                             <span class="rank-tag">
                                             <i class="fa fa-tag" aria-hidden="true"></i>
-                                            <a href="{{ url($stateObj->slug .'/tag/' . $tag->id) }}">{{ $tag->name }}</a>
+                                            <a href="{{ url($stateObj->slug .'/tag/' . $tag->slug) }}">{{ $tag->name }}</a>
                                             </span>
                                         @endforeach
 
