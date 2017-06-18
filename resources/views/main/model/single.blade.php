@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-12 single">
+        <div class="col-md-12 single model">
 
             <div class="thumb-frame text-center">
                 @if(isset($model->model_thumb))
@@ -20,7 +20,8 @@
 
                     <h2>{{ $model -> name }}</h2>
 
-                    <div class="table-responsive py-3">
+					<div class="clear py-3">
+                    <div class="table-responsive float-left">
                     	<table class="table table-bordered">
                             <colgroup>
                                 <col class="cth">
@@ -44,7 +45,11 @@
 
                                 <tr>
                                     <th>Twitter</th>
-                                    <td><a href="https://twitter.com/{{ $twa->name }}" target="_brank">＠{{ $twa->name }}</a></td>
+                                    <td>
+                                    	@if($twa->name != '')
+                                    	<a href="https://twitter.com/{{ $twa->name }}" target="_brank">＠{{ $twa->name }}</a>
+                                        @endif
+                                    </td>
                                 </tr>
 
                                 <tr>
@@ -53,8 +58,17 @@
                                 </tr>
 
                                 <tr>
-									<th>投稿した記事</th>
-                                    <td></td>
+									<th>{{ $model->name }}が投稿した記事</th>
+                                    <td>
+                                    	@if($otherAtcl !== null)
+										@foreach($otherAtcl as $oAtcl)
+                                            <span class="rank-tag">
+                                            	<i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                            	<a href="{{ url(Ctm::getAtclUrl($oAtcl->id)) }}">{{ $oAtcl->title }}</a>
+                                            </span>
+                                        @endforeach
+                                        @endif
+                                    </td>
                                 </tr>
 
 
@@ -63,8 +77,8 @@
                 		</table>
                     </div>
 
-                    <div class="clearfix contents">
-                        <div class="col-md-8 mx-auto">
+
+                        <div class="contents float-right">
                             {!! nl2br($model->per_info) !!}
 
                         </div>

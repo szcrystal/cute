@@ -97,15 +97,14 @@ use App\User;
 								<tr>
 									<th>このモデルが投稿した他の記事</th>
                                     <td class="td-post">
-
+									@if($otherAtcl !== null)
                                     	@foreach($otherAtcl as $oAtcl)
-                                        	<?php $url = State::find($oAtcl->state_id)->slug . '/' . Category::find($oAtcl->cate_id)->slug . '/' .$oAtcl->id; ?>
                                             <span class="rank-tag">
                                             <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                            <a href="{{ url($url) }}">{{ $oAtcl->title }}</a>
+                                            <a href="{{ url(Ctm::getAtclUrl($oAtcl->id)) }}">{{ $oAtcl->title }}</a>
                                             </span>
                                         @endforeach
-
+									@endif
                                     </td>
                                 </tr>
                                 @endif

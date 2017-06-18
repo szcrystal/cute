@@ -168,7 +168,7 @@ class HomeController extends Controller
         $stateObj = $this->state->find($atcl->state_id);
         
         //Other Atcl
-        $otherAtcl = $this->article->where('model_id', $atcl->model_id)->whereNotIn('id', [$id])->take(5)->get();
+        $otherAtcl = $this->article->where(['model_id'=>$atcl->model_id, 'open_status'=>1])->whereNotIn('id', [$id])->orderBy('created_at','DESC')->take(5)->get();
         
         //Tag
         $tagRels = $this->tagRel->where('atcl_id', $atcl->id)->get()->map(function($obj){

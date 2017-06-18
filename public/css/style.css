@@ -596,7 +596,13 @@ body {
     transform: rotateZ(-8deg);
 }
 
-
+.model .table-responsive,
+.model .contents {
+	width: 49%;
+}
+.model .cth {
+	width: 30%;
+}
 
 
 

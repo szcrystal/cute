@@ -6,13 +6,14 @@ use App\User;
 use App\State;
 use App\ModelSnap;
 use App\TwAccount;
+use App\Article;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ModelController extends Controller
 {
-    public function __construct(User $user, State $state, ModelSnap $modelSnap, TwAccount $twAccount)
+    public function __construct(User $user, State $state, ModelSnap $modelSnap, TwAccount $twAccount, Article $article)
     {
         //$this->middleware('auth');
         
@@ -21,7 +22,7 @@ class ModelController extends Controller
         $this->modelSnap = $modelSnap;
         $this->twAccount = $twAccount;
         //$this->contactCate = $contactCate;
-        //$this->article = $article;
+        $this->article = $article;
         
         $this->perPage = env('PER_PAGE', 20);
     }
@@ -60,8 +61,10 @@ class ModelController extends Controller
         
         $snaps = $this->modelSnap->where('model_id', $id)->orderBy('number', 'ASC')->get();
         
+        //Other Atcl
+        $otherAtcl = $this->article->where(['model_id'=>$id, 'open_status'=>1])->orderBy('created_at','DESC')->take(5)->get();
         
-        return view('main.model.single', ['model'=>$model, 'state'=>$state, 'snaps'=>$snaps, 'twa'=>$twa]);
+        return view('main.model.single', ['model'=>$model, 'state'=>$state, 'snaps'=>$snaps, 'twa'=>$twa, 'otherAtcl'=>$otherAtcl]);
     }
     
 
