@@ -27,7 +27,7 @@ use App\User;
             <div class="panel-body">
 
                 <div class="cont-wrap">
-                	<h2>{{ $atcl -> title }}</h2>
+                	<h2><i class="fa fa-check-circle" aria-hidden="true"></i>{{ $atcl -> title }}</h2>
 
                     <div class="table-responsive py-3">
                     	<table class="table table-bordered">
@@ -37,20 +37,10 @@ use App\User;
                             </colgroup>
                             
                             <tbody>
-                                <tr>
-                                    <th>
-									@if(isset($feature))
-									特集
-                                    @else
-                                    モデル
-                                    @endif
-                                    </th>
-                                    <td>{{ User::find($atcl->model_id)->name }}</td>
-                                </tr>
 
                                 <tr>
                                     <th>エリア</th>
-                                    <td>{{ $stateObj->name }}</td>
+                                    <td><a href="{{ url($stateObj->slug) }}">{{ $stateObj->name }}</a></td>
                                 </tr>
 
                                 <tr>
@@ -65,6 +55,25 @@ use App\User;
                                     @endif
                                     </td>
                                 </tr>
+
+                                <tr>
+									@if(isset($feature))
+									<th>作成</th>
+									<td>{{ User::find($atcl->model_id)->name }}</td>
+                                    @else
+                                    <th>モデル</th>
+                                    @if($atcl->model_id > 2)
+									<td>
+										<span class="rank-tag">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <a href="{{ Ctm::getModelUrl($atcl->model_id) }}">{{ User::find($atcl->model_id)->name }}</a></td>
+                                        </span>
+                                    @else
+									<td>{{ User::find($atcl->model_id)->name }}</td>
+                                    @endif
+                                    @endif
+                                </tr>
+
 
                                 <tr>
 									<th>タグ</th>
@@ -86,12 +95,13 @@ use App\User;
 
 								@if(!isset($feature))
 								<tr>
-									<th>このモデルが撮影した他の記事</th>
-                                    <td>
+									<th>このモデルが投稿した他の記事</th>
+                                    <td class="td-post">
 
                                     	@foreach($otherAtcl as $oAtcl)
                                         	<?php $url = State::find($oAtcl->state_id)->slug . '/' . Category::find($oAtcl->cate_id)->slug . '/' .$oAtcl->id; ?>
                                             <span class="rank-tag">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
                                             <a href="{{ url($url) }}">{{ $oAtcl->title }}</a>
                                             </span>
                                         @endforeach
@@ -106,8 +116,8 @@ use App\User;
 
 
                     <div class="clear contents">
-                    	<h4>Infomation</h4>
-                        <div class="col-md-6 float-left">
+
+                        <div class="float-left">
                             @if($atcl -> thumb_path)
                             <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
                             @else
@@ -115,13 +125,16 @@ use App\User;
                             @endif
                         </div>
 
-                        <div class="col-md-6 float-right">
+                        <div class="float-right">
+                        	<h4>Info</h4>
                             <p>{!! nl2br($atcl->contents) !!}</p>
                         </div>
                     </div>
 
-                    <div class="rv-content mt-5 pb-5">
-                        	@if($atcl->address != '')
+                    <div class="map-wrap">
+
+                        @if($atcl->address != '')
+                            <h4>MAP</h4>
                         	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
 
                             <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyCtPtTSkIY1yGa5Rt8klarv45YnPXVpenc&callback=initMap"></script>

@@ -134,10 +134,12 @@ class HomeController extends Controller
         $cateObj = $this->category->find($atcl->cate_id);
         $stateObj = $this->state->find($atcl->state_id);
         
-        $otherAtcl = $this->article->where('model_id', $atcl->model_id)->take(5)->get();
+        //Other Atcl
+        $otherAtcl = $this->article->where('model_id', $atcl->model_id)->whereNotIn('id', [$id])->take(5)->get();
         
+        //Tag
         $tagRels = $this->tagRel->where('atcl_id', $atcl->id)->get()->map(function($obj){
-        	return $obj->id;
+        	return $obj->tag_id;
         })->all();
         
         $tags = $this->tag->find($tagRels);

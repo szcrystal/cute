@@ -163,7 +163,7 @@ body {
 
 .single .cont-wrap {
 	width: 1200px;
-    margin: 3.5em auto 4.5em;
+    margin: 3.0em auto 4.5em;
 }
 
 .carousel {
@@ -266,7 +266,7 @@ body {
 }
 .top-cont article .meta {
 	color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 2px 2px 2px #000;
     font-size: 2.4em;
     position: absolute;
     top: 2em;
@@ -514,26 +514,7 @@ body {
     height: 100%;
 }
 
-
-/* Single */
-.single h2 {
-	margin-top: 1em;
-    color: #4a4a4a;
-    text-align: center;
-}
-.single .contents {
-	line-height: 1.8em;
-    font-size: 1.1em;
-}
-.single .contents h4 {
-	font-size: 1.2em;
-    font-weight: normal;
-    color: #515151;
-    text-align: center;
-    padding-bottom: 0.3em;
-    margin-bottom: 0.5em;
-    border-bottom: 1px solid #aaa;
-}
+/* Movie Flame */
 .movie-frame {
 	background: #111;
     padding: 0;
@@ -551,6 +532,58 @@ body {
 	display: inline-block;
 	padding-top: 25%;
 }
+
+
+/* Single */
+.single h2 {
+	margin-top: 1em;
+    color: #4a4a4a;
+    font-weight: bold;
+    font-size: 2.4em;
+    color: #4FBFC1;
+    text-align: center;
+}
+.single h2 .fa {
+	margin-right: 0.2em;
+}
+.single .contents {
+	line-height: 1.8em;
+    font-size: 1.1em;
+}
+.single .contents div {
+	width: 49%;
+}
+.single .contents h4 {
+	display: inline-block;
+	font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    background: tomato;
+    text-align: center;
+    padding: 0.2em 2em;
+    border-radius: 1em;
+}
+.single .map-wrap {
+	margin-top: 1em;
+    position: relative;
+}
+.single .map-wrap h4 {
+	display: inline-block;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    z-index: 999;
+	font-size: 1.3em;
+    font-weight: bold;
+    color: #fff;
+    background: darkorange;
+    text-align: center;
+    padding: 0.3em 2em;
+    border-radius: 1em;
+	-webkit-transform: rotateZ(-8deg);
+    transform: rotateZ(-8deg);
+}
+
 
 
 
@@ -572,15 +605,17 @@ body {
 /* Tag */
 .rank-tag {
 	display: inline-block;
-	background: #F7EBE4;
+	background: #F7F1E4;/*#F7EBE4*/
     padding: 0.2em 0.5em;
     margin-bottom: 0.7em;
 	border-radius: 0.5em;
     border: 1px solid #E2D2C8;
+    cursor: pointer;
 }
-.rank-tag {
-	cursor: pointer;
+.main-navigation .rank-tag {
+	background: #F7EBE4;/*#F7F1E4*/
 }
+
 .rank-tag:hover {
 	opacity: 0.7;
 }
@@ -589,7 +624,7 @@ body {
     text-decoration: none;
 }
 .rank-tag .fa {
-	margin-right: 0.3em;
+	margin-right: 0.1em;
     color: #aaa;
 }
 .cate-list .fa {
@@ -661,7 +696,7 @@ body {
 
 /* contact */
 .cth {
-	background: #fefcfb; /*url(../images/tile-wave.png),  */
+	background: #EEF6F0; /*url(../images/tile-wave.png),  */
     width: 25%;
 }
 textarea#context {

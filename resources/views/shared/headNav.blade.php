@@ -66,7 +66,11 @@
                         <h2>カテゴリー</h2>
                         <ul class="clear">
                         @foreach($cates as $cate)
-                            <li><a href="{{ url('all/' . $cate->slug) }}">{{ $cate->name }}</a></li>
+                            <li>
+								<span class="rank-tag">
+                            	<a href="{{ url('all/' . $cate->slug) }}">{{ $cate->name }}</a>
+								</span>
+                            </li>
                         @endforeach
                         </ul>
                     </div>
@@ -76,7 +80,11 @@
 						<ul class="clear">
                         	<li><a href="{{ url('all/feature') }}">特集All</a></li>
                         	@foreach($fCates as $fCate)
-								<li><a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
+								<li>
+                                	<span class="rank-tag">
+                                	<a href="{{ url('all/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a>
+                                    </span>
+                                </li>
 							@endforeach
                         </ul>
                     </div>
@@ -96,7 +104,11 @@
                             <h2>カテゴリー</h2>
                             <ul class="clear">
                                 @foreach($cates as $cate)
-                                    <li><a href="{{ url($state->slug .'/' .$cate->slug) }}">{{ $cate->name }}</a>
+                                    <li>
+                                    	<span class="rank-tag">
+                                    	<a href="{{ url($state->slug .'/' .$cate->slug) }}">{{ $cate->name }}</a>
+                                        </span>
+                                    </li>
                                 @endforeach
                             </ul>
                     	</div>
@@ -104,9 +116,17 @@
                         <div class="float-left col-md-5">
                             <h2>特集</h2>
                             <ul class="clear">
-                                <li><a href="{{ url($state->slug .'/feature') }}">特集</a>
+                                <li>
+                                	<span class="rank-tag">
+                                	<a href="{{ url($state->slug .'/feature') }}">特集</a>
+                                    </span>
+                                </li>
                                 @foreach($fCates as $fCate)
-                                    <li><a href="{{ url($state->slug .'/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a></li>
+                                    <li>
+										<span class="rank-tag">
+                                    	<a href="{{ url($state->slug .'/feature/' . $fCate->slug) }}">{{ $fCate->name }}</a>
+                                        </span>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
