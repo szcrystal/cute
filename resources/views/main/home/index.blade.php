@@ -53,7 +53,7 @@
 
             <a href="{{ url(Ctm::getAtclUrl($pickUp->id)) }}">
 
-            @if($feature->thumb_path == '')
+            @if($pickUp->thumb_path == '')
                 <span class="no-img">No Image</span>
             @else
                 <div class="main-thumb"></div>
