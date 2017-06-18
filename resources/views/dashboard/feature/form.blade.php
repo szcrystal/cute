@@ -114,6 +114,29 @@
             </div>
 
 
+            <div class="form-group">
+                <div style="margin-left: 1.5em;" class="col-md-10 text-left">
+                    <div class="checkbox">
+                        <label>
+                        	<?php
+                            	$checked = '';
+                                if(Ctm::isOld()) {
+                                    if(old('pick_up'))
+                                        $checked = ' checked';
+                                }
+                                else {
+                                    if(isset($atcl) && $atcl->pick_up) {
+                                        $checked = ' checked';
+                                    }
+                                }
+                            ?>
+                            <input type="checkbox" name="pick_up" value="1"{{ $checked }}> この記事をPickUpする
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
 			<div class="clearfix thumb-wrap">
                 <div class="col-md-4 pull-left thumb-prev">
                     @if(count(old()) > 0)

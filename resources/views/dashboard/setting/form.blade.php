@@ -43,11 +43,24 @@
 
             {{ csrf_field() }}
 
+			<div class="form-group{{ $errors->has('all_area') ? ' has-error' : '' }}">
+                <label for="all_area" class="col-md-2 control-label">エリア</label>
+
+                <div class="col-md-9">
+                    <input id="all_area" type="text" class="form-control" name="all_area" value="{{ old('all_area') === NULL && isset($setting) ? $setting->all_area : old('all_area') }}">
+
+                    @if ($errors->has('all_area'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('all_area') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">管理者名</label>
+                <label for="name" class="col-md-2 control-label">管理者名</label>
 
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') === NULL && isset($setting) ? $setting->name : old('name') }}">
 
                     @if ($errors->has('name'))
@@ -59,9 +72,9 @@
             </div>
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <label for="email" class="col-md-3 control-label">管理者メール</label>
+                <label for="email" class="col-md-2 control-label">管理者メール</label>
 
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <input id="email" type="text" class="form-control" name="email" value="{{ old('email') === NULL && isset($setting) ? $setting->email : old('email') }}">
 
                     @if ($errors->has('email'))
@@ -71,6 +84,39 @@
                     @endif
                 </div>
             </div>
+
+
+            <div class="form-group{{ $errors->has('mail_header') ? ' has-error' : '' }}">
+                <label for="mail_header" class="col-md-2 control-label">メールヘッダー</label>
+
+                <div class="col-md-9">
+                    <textarea id="mail_header" type="text" class="form-control" name="mail_header" rows="15">{{ isset($setting) && !count(old()) ? $setting->mail_header : old('mail_header') }}</textarea>
+
+                    @if ($errors->has('mail_header'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('mail_header') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+
+            <div class="form-group{{ $errors->has('mail_footer') ? ' has-error' : '' }}">
+                <label for="mail_footer" class="col-md-2 control-label">メールフッター</label>
+
+                <div class="col-md-9">
+                    <textarea id="mail_footer" type="text" class="form-control" name="mail_footer" rows="15">{{ isset($setting) && !count(old()) ? $setting->mail_footer : old('mail_footer') }}</textarea>
+
+                    @if ($errors->has('mail_footer'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('mail_footer') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+
+            <hr>
 
 
             <div class="form-group{{ $errors->has('snap_count') ? ' has-error' : '' }}">

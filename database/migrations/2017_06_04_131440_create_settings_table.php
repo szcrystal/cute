@@ -16,17 +16,21 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             
+            $table->string('all_area');
             $table->string('name')->nullable()->default(NULL);
             $table->string('email')->nullable()->default(NULL);
+            $table->text('mail_header')->nullable()->default(NULL);
+            $table->text('mail_footer')->nullable()->default(NULL);
+            
             $table->integer('snap_count');
             $table->integer('item_count');
-            
             
             $table->timestamps();
         });
         
         DB::table('settings')->insert(
             [
+            	'all_area' => '四国',
                 'snap_count' => 7,
                 'item_count' => 7,
                 'created_at' => date('Y-m-d H:i:s', time()),

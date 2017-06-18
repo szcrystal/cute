@@ -557,6 +557,7 @@ body {
 }
 .single h2 .fa {
 	margin-right: 0.2em;
+    //color: dodgerblue;
 }
 .single .contents {
 	line-height: 1.8em;
