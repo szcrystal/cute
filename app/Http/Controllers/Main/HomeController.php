@@ -147,7 +147,8 @@ class HomeController extends Controller
         
         $ids = $this->tagRel->where('tag_id', $tagObj->id)->get()->map(function($obj){
             return $obj->atcl_id;
-        });
+        })->all();
+        
         $atcls = $this->article->find($ids)->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
         //$atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
 
