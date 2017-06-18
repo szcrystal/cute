@@ -5,7 +5,13 @@
 <div id="main" class="archive-index">
 
     <div class="panel panel-default">
-        <h2>{{ $archiveObj->name }}</h2>
+    	@if($type == 'cate')
+        	<h2>カテゴリー {{ $archiveObj->name }}</h2>
+        @elseif($type == 'tag')
+			<h2>タグ {{ $archiveObj->name }}</h2>
+		@elseif($type == 'search')
+			<h2>Search {{ $archiveObj->name }}</h2>
+        @endif
 
 
         <div class="panel-body">

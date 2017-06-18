@@ -120,7 +120,7 @@ class HomeController extends Controller
         $whereArr['cate_id'] = $cateObj->id;
         $atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
 
-		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$cateObj]);
+		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$cateObj, 'type'=>'cate']);
         
 	}
     
@@ -149,10 +149,10 @@ class HomeController extends Controller
             return $obj->atcl_id;
         })->all();
         
-        $atcls = $this->article->find($ids)->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
+        $atcls = $this->article->whereIn('id', $ids)->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
         //$atcls = $this->article->where($whereArr)->orderBy('created_at','DESC')->paginate($this->perPage);
 
-		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$tagObj]);
+		return view('main.archive.index', ['atcls'=>$atcls, 'archiveObj'=>$tagObj, 'type'=>'tag']);
         
 	}
     
