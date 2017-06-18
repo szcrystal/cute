@@ -32,7 +32,8 @@ class CreateArticlesTable extends Migration
             
             $table->text('contents')->nullable()->default(NULL);
             
-            $table->integer('feature')->nullable()->default(0);
+            $table->boolean('feature')->default(0);
+            $table->boolean('pick_up')->default(0);
             
             $table->boolean('open_status')->default(1);
             $table->timestamp('open_date')->nullable()->default(NULL);

@@ -154,7 +154,7 @@
                                         $checked = ' checked';
                                 }
                                 else {
-                                    if(isset($article) && $article->open_status) {
+                                    if(isset($atcl) && ! $atcl->open_status) {
                                         $checked = ' checked';
                                     }
                                 }
@@ -185,6 +185,28 @@
 
                 <div class="col-md-7">
 					<p style="margin-top: 0.4em;" class="">{{ $rel->memo }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="margin-left: 1.5em;" class="col-md-10 text-left">
+                    <div class="checkbox">
+                        <label>
+                        	<?php
+                            	$checked = '';
+                                if(Ctm::isOld()) {
+                                    if(old('pick_up'))
+                                        $checked = ' checked';
+                                }
+                                else {
+                                    if(isset($atcl) && $atcl->pick_up) {
+                                        $checked = ' checked';
+                                    }
+                                }
+                            ?>
+                            <input type="checkbox" name="pick_up" value="1"{{ $checked }}> この記事をPickUpする
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -294,37 +316,6 @@
                     @endif
                 </div>
             </div>
-
-			{{--
-            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
-                <label for="group" class="col-md-3 control-label">位置情報</label>
-                <div class="col-md-6">
-                    <select class="form-control" name="group_id">
-                    	<option disabled selected>選択</option>
-
-                    
-                        @foreach($groups as $group)
-                            @if(old('group_id') !== NULL)
-                                <option value="{{ $group->id }}"{{ old('group_id') == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
-                            @else
-                                <option value="{{ $group->id }}"{{ isset($tag) && $tag->group_id == $group->id ? ' selected' : '' }}>{{ $group->name }}</option>
-                            @endif
-                        @endforeach
-                        
-
-						<option>愛媛</option>
-                        <option>香川</option>
-                    </select>
-
-                    @if ($errors->has('group_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('group_id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-            --}}
-
 
 
 			<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">

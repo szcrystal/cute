@@ -46,10 +46,31 @@
 </section>
 
 
-<section class="temporary">
-</section>
+<section class="top-cont pickup clear">
+<h2>Pick Up</h2>
+	@foreach($pickUps as $pickUp)
+    <article style="background-image:url({{Storage::url($pickUp->thumb_path)}})" class="float-left">
 
-<section class="temporary">
+            <a href="{{ url(Ctm::getAtclUrl($pickUp->id)) }}">
+
+            @if($feature->thumb_path == '')
+                <span class="no-img">No Image</span>
+            @else
+                <div class="main-thumb"></div>
+            @endif
+
+            <?php
+                $num = Ctm::isAgent('sp') ? 30 : 18;
+            ?>
+
+            <div class="meta">
+            	<h3>{{ $pickUp->title }}</h3>
+                <p>{{ User::find($feature->model_id)->name }}</p>
+            </div>
+        </a>
+    </article>
+    @endforeach
+
 </section>
 
 

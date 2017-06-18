@@ -22,6 +22,7 @@ class Article extends Model
         'open_status',
         'open_date',
         'feature',
+        'pick_up',
     
     	'yt_id',
         'yt_description',

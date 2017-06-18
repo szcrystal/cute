@@ -10,47 +10,57 @@ use App\User;
   </ol>
   <div class="carousel-inner" role="listbox">
 
-
     <?php $n = 0; ?>
 
 	@if(isset($modelSlide))
     	@foreach($newModel as $obj)
+
             @if($n > 0)
                 <div class="carousel-item">
             @else
                 <div class="carousel-item active">
             @endif
-              <img class="d-block img-fluid" src="{{ Storage::url($obj->model_thumb) }}" alt="slide">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>{{ $obj->name}}＠{{ $obj->school }}</h3>
-              </div>
+            	<a href="{{ url(Ctm::getModelUrl($obj->id)) }}">
+              	<img class="d-block img-fluid" src="{{ Storage::url($obj->model_thumb) }}" alt="slide">
+              	<div class="carousel-caption d-none d-md-block">
+                	<h3>{{ $obj->name}}＠{{ $obj->school }}</h3>
+                </div>
+              </a>
             </div>
             
             <?php $n++; ?>
+
+
         @endforeach
 
 	@else
         @foreach($newAtcl as $obj)
+
+
             @if($n > 0)
                 <div class="carousel-item">
             @else
                 <div class="carousel-item active">
             @endif
-              <img class="d-block img-fluid" src="{{ Storage::url($obj->thumb_path) }}" alt="slide">
-              <div class="carousel-caption d-none d-md-block">
-                <h3>{{ $obj->title}}</h3>
-                <p>{{ User::find($obj->model_id)->name}}
-					@if($obj->model_id > 2)
-                		＠{{ User::find($obj->model_id)->school }}
-					@endif
-                </p>
-              </div>
-            </div>
+            	<a href="{{ url(Ctm::getAtclUrl($obj->id)) }}">
+                    <img class="d-block img-fluid" src="{{ Storage::url($obj->thumb_path) }}" alt="slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{ $obj->title}}</h3>
+                        <p>{{ User::find($obj->model_id)->name}}
+                        @if($obj->model_id > 2)
+                            ＠{{ User::find($obj->model_id)->school }}
+                        @endif
+                        </p>
+                    </div>
+				</a>
+            	</div>
             
             <?php $n++; ?>
+
         @endforeach
     @endif
 
+    </div>
 
 <!--
     <div class="carousel-item active">
@@ -75,9 +85,6 @@ use App\User;
       </div>
     </div>
 -->
-
-	</div>
-
 
 <!--
   <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">

@@ -6,6 +6,7 @@ use App\Article;
 use App\State;
 use App\Category;
 use App\FeatureCategory;
+use App\User;
 
 
 use Illuminate\Http\Request;
@@ -46,6 +47,16 @@ class CustomController extends Controller
         	$cateSlug = Category::find($atcl->cate_id)->slug;
         	$url = $stateSlug . '/'. $cateSlug . '/' .$atclId;
         }
+        
+        return $url;
+    }
+    
+    static function getModelUrl($modelId)
+    {
+    	$model = User::find($modelId);
+        $stateSlug = State::find($model->state_id)->slug;
+        
+        $url = $stateSlug . '/model/' . $modelId;
         
         return $url;
     }

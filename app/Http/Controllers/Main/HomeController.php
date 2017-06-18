@@ -53,8 +53,11 @@ class HomeController extends Controller
         $whereArr = ['open_status'=>1, 'feature'=>0];
         $whereArrSec = ['open_status'=>1,'feature'=>1];
         
-        //新着3件
+        //新着3件 carousel
         $newAtcl = $this->article->where($whereArr)->orderBy('created_at','DESC')->take(3)->get();
+        
+        //PickUp 2件
+        $pickUps = $this->article->where($whereArr)->where('pick_up', 1)->orderBy('created_at','DESC')->take(2)->get();
         
         $stateObj = null;
         
@@ -88,7 +91,7 @@ class HomeController extends Controller
         $features = $this->article->where($whereArrSec)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->take(3)->get();
         
     	
-    	return view('main.home.index', ['newAtcl'=>$newAtcl, 'atcls'=>$atcls, 'cates'=>$cates, 'features'=>$features, 'stateObj'=>$stateObj]);
+    	return view('main.home.index', ['newAtcl'=>$newAtcl, 'atcls'=>$atcls, 'cates'=>$cates, 'pickUps'=>$pickUps, 'features'=>$features, 'stateObj'=>$stateObj]);
 
     }
     

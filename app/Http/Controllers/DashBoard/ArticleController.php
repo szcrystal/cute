@@ -181,15 +181,24 @@ class ArticleController extends Controller
 //        }
         
         
-        // Total
+        // Feature
         if($feature) {
             $data['feature'] = 1;
             $data['model_id'] = 1;
             //$data['cate_id'] = 0;
             $data['movie_id'] = 0;
         }
+        else {
+        	$data['feature'] = 0;
+        }
         
-        if(isset($data['open_status'])) {
+        //PickUp
+        if(! isset($data['pick_up'])) {
+        	$data['pick_up'] = 0;
+        }
+                
+        //status
+        if(isset($data['open_status'])) { //非公開On
         	$data['open_status'] = 0;
         }
         else {
