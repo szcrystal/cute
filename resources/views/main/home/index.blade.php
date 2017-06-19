@@ -48,6 +48,7 @@
 
 <section class="top-cont pickup clear">
 <h2>Pick Up</h2>
+<div>
 	@foreach($pickUps as $pickUp)
     <article style="background-image:url({{Storage::url($pickUp->thumb_path)}})" class="float-left">
 
@@ -70,12 +71,12 @@
         </a>
     </article>
     @endforeach
-
+</div>
 </section>
 
 
-    @foreach($atcls as $key => $obj)
-    	<section class="top-cont atcl clear">
+@foreach($atcls as $key => $obj)
+    <section class="top-cont atcl clear">
 		<h2>{{ $key }}</h2>
 		<div class="clear">
     	@foreach($obj as $atcl)
@@ -102,8 +103,8 @@
             </article>
     	@endforeach
 		</div>
-        </section>
-    @endforeach
+    </section>
+@endforeach
 
 
 
