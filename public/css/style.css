@@ -341,6 +341,7 @@ body {
     transform: rotateZ(-3deg);
 }
 .pickup article:first-of-type .meta {
+	width: 45%;
 	//top: 10%;
 	left: 40%;
 }
@@ -636,6 +637,9 @@ body {
 
 
 /* model */
+.model-index article .meta {
+	top: 65%;
+}
 .snaps .snap-wrap {
 	margin: 6em 0;
 }
