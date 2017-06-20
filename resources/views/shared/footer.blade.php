@@ -1,5 +1,5 @@
 <footer id="colop">
-	<div class="container clearfix pt-2">
+	<div class="container clearfix">
     	<div class="col-md-2 float-left">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Cute.Campus') }}

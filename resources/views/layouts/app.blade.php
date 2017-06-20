@@ -11,7 +11,7 @@
 		<div class="container wrap-all">
 			<div class="">
                 <?php $className = isset($className) ? $className : ''; ?>
-                <div class="py-4 {{ $className }}"><!-- offset-md-1-->
+                <div class="{{ $className }}"><!-- offset-md-1-->
                     @yield('content')
                     {{-- @yield('leftbar') --}}
                 </div>
