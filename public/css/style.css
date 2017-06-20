@@ -52,7 +52,7 @@ body {
     border-right: 1px solid #fff;
 }
 .navbar-nav .nav-item .nav-link {
-	color: #fff; !important;
+	color: #fff !important;
     font-size: 1.0em;
     font-weight: bold;
     padding: 0;
@@ -87,7 +87,7 @@ body {
 	color: #fff;
 }
 .main-navigation > ul > li.nav-active {
-	background: #fdfcfb;
+	background: #fafbfb;
     color: #555;
     -webkit-transition: all ease-in-out .15s;
     transition: all ease-in-out .15s;
@@ -95,13 +95,13 @@ body {
 
 .menu-dropdown-wrap {
 	width: 100%;
-    background: #fdfcfb;
+    background: #fafbfb/*#fdfcfb*/;
 }
 .menu-dropdown {
 	position: relative;
     top: 0;
     left: 0;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #c1c1c1;
     display: none;
     padding: 1.2em 0 1.6em;
 }
@@ -120,7 +120,7 @@ body {
 .menu-dropdown ul li {
 	float: left;
     margin: 0;
-    padding: 0 1em 0 0;
+    padding: 0 0.5em 0 0;
     text-align: left;
 /*    background: azure;*/
 /*    border: 1px solid #50BFC2;*/
@@ -1273,8 +1273,8 @@ button.subm-link {
 
 /* footer */
 #colop {
-	background: #fdfcfc;
-    border-top: 1px solid #efefef;
+	background: #fafbfb/*#50BFC2 #fdfcfc*/;
+    border-top: 1px solid #ddd;
 }
 #colop > .container {
 	min-height: 10em;
@@ -1295,7 +1295,7 @@ button.subm-link {
 }
 #colop ul li a,
 #colop ul li a:visited {
-	color: #6a6a6a;
+	color: #5a5a5a;
 }
 #colop ul li a .fa {
 	margin-right: 0.15em;

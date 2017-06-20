@@ -118,7 +118,7 @@
                     	</div>
 
                         <div class="float-left col-md-5">
-                            <h2>特集</h2>
+                            <h2>特集All</h2>
                             <ul class="clear">
                                 <li>
                                 	<span class="rank-tag">
