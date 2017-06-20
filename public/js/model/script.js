@@ -438,15 +438,15 @@ var exe = (function() {
                                 nextAllow = 6;
                             }
                             
-                            if(duration < second - preAllow) { //少ない場合　誤差-1
+                            if(duration < second - preAllow) { //少ない場合　誤差-1.5
                                 errors.push(outputError('input.video-file', mvsmall, n));
                                 temps++;
                             }
-                            else if(duration > second + nextAllow) { //少ない場合 誤差+2
+                            else if(duration > second + nextAllow) { //多い場合 誤差+6
                                 errors.push(outputError('input.video-file', mvlarge, n));
                                 temps++;
                             }
-                            else if(h > w) {
+                            else if(h > w) { //縦横判定
                             	errors.push(outputError('input.video-file', mvheight, n));
                                 temps++;
                             }

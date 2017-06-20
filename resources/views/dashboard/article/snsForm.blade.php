@@ -54,6 +54,7 @@
 
         <hr>
 
+		{{--
 		<div class="bs-component clearfix">
             <div class="pull-left">
             	@if($mvId)
@@ -63,6 +64,7 @@
                 @endif
             </div>
         </div>
+        --}}
 
 
     @if (session('ytStatus'))
@@ -81,7 +83,12 @@
             <input type="hidden" name="movie_id" value="{{ $mvId }}">
 
             <div style="margin-bottom:2em;" class="clearfix">
-            	<p class="pull-left col-md-5"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+            	<p class="pull-left col-md-12"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+                @if($mvId)
+                	<a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @else
+					<a href="{{ url('/dashboard/features/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @endif
 
                 <div class="btn-group-md pull-right col-md-7">
                         <div class="pull-right text-right">
@@ -103,7 +110,7 @@
                 <label for="group" class="col-md-3 control-label">タイトル</label>
 
                 <div class="col-md-9">
-					<p style="margin-top: 0.3em;" class="">{{ $atcl->title }}</p>
+					<p style="margin-top: 0.4em;" class="">{{ $atcl->title }}</p>
                     <input type="hidden" name="title" value="{{ $atcl->title }}">
 
                 </div>
@@ -113,7 +120,7 @@
                 <label for="yt_description" class="col-md-3 control-label">YouTube用 説明</label>
 
                 <div class="col-md-9">
-					<p style="margin-top: 0.3em;" class="">{!! nl2br($atcl->yt_description) !!}</p>
+					<p style="margin-top: 0.4em;" class="">{!! nl2br($atcl->yt_description) !!}</p>
                     <input type="hidden" name="description" value="{{ $atcl->yt_description }}">
 
                 </div>
@@ -153,7 +160,12 @@
     @endif
 
 		<div style="margin-bottom: 2em;" class="clearfix">
-            <p class="pull-left col-md-5"><b>Twitter/FBへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+            <p class="pull-left col-md-12"><b>Twitter/FBへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
+            @if($mvId)
+                	<a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @else
+					<a href="{{ url('/dashboard/features/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @endif
         </div>
 
 		<div class="clearfix">
@@ -161,7 +173,7 @@
                 <label for="group" class="col-md-3 control-label">タイトル</label>
 
                 <div class="col-md-9">
-					<p style="margin-top: 0.3em;" class="">{{ $atcl->title }}</p>
+					<p style="margin-top: 0.4em;" class="">{{ $atcl->title }}</p>
 
                 </div>
             </div>
@@ -170,8 +182,8 @@
                 <label for="group" class="col-md-3 control-label">コメント</label>
 
                 <div class="col-md-9">
-                	<?php $str = mb_substr($atcl->contents, 0, 15); ?>
-					<p style="margin-top: 0.3em;" class="">{{ $str }}...</p>
+                	<?php $str = mb_substr($atcl->contents, 0, 30); ?>
+					<p style="margin-top: 0.4em;" class="">{{ $str }}...</p>
                     <input type="hidden" name="tw_comment" value="{{ $str }}">
 
                 </div>
@@ -211,7 +223,7 @@
                             <p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
                         @endif
                         --}}
-                        <input type="submit" id="twFbUp" class="btn btn-info center-block w-btn" name="twFbUp" value="TW FB UP">
+                        <input type="submit" id="twFbUp" class="btn btn-success center-block w-btn" name="twFbUp" value="TW FB UP">
                     </div>
                 </div>
             </div>

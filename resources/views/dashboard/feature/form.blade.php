@@ -71,7 +71,7 @@
 
                 <div class="col-md-4 pull-left">
                     <div class="pull-left">
-                        <a href="{{ url('dashboard/articles/snsup/'. $ftId) }}" class="btn btn-warning">Social UP Page >></a>
+                        <a href="{{ url('dashboard/articles/snsup/'. $ftId) }}" class="btn btn-info">SNS UP Page >></a>
                     </div>
                 </div>
             @endif

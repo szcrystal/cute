@@ -32,12 +32,12 @@ class AppServiceProvider extends ServiceProvider
         
         Validator::extend('secondcheck', function ($attribute, $value, $parameters, $validator) {
         	//print_r($value); //秒数 input moviesec[]
-            $sum = $parameters[0]; //musicId
+            $sum = $parameters[0]; //inputの合計値
             
             //$sum = array_sum($value);
             
             //if($musicId) {
-            	return ($sum+3) < Music::find($value)->second;
+            	return ($sum+15) < Music::find($value)->second;
             //}
             
         });
