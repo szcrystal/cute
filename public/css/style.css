@@ -665,6 +665,7 @@ body {
 	width: 30%;
     height: auto;
 	position: absolute;
+    font-size: 0.95em;
     padding: 1.2em;
     color: #fff;
     background: rgba(0,0,0,0.6)/*rgba(80,191,194,0.6)*/;
