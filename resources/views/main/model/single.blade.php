@@ -89,10 +89,12 @@
                             @if(isset($snap->snap_path))
                             <div style="background-image:url({{ Storage::url($snap->snap_path) }})">
 
+								@if($snap->ask != '' && $snap->answer != '')
                                 <div class="snap-meta">
                                     <h4><i class="fa fa-question-circle" aria-hidden="true"></i>{{ $snap->ask }}</h4>
-                                    <p>A,{!! nl2br($snap->answer) !!}</p>
+                                    <p>{!! nl2br($snap->answer) !!}</p>
                                 </div>
+                                @endif
 
                             </div>
 

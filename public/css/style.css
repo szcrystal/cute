@@ -677,7 +677,7 @@ body {
     border-bottom: 1px dashed #fff;
 }
 .snap-wrap div:nth-of-type(odd) .snap-meta {
-	top: 10%;
+	top: 13%;
     right: 1em;
 }
 .snap-wrap div:nth-of-type(even) .snap-meta {
