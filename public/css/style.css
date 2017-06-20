@@ -675,7 +675,7 @@ body {
 .snap-wrap div .snap-meta h4 {
 	font-size: 1.1em;
     padding-bottom: 0.3em;
-    border-bottom: 1px dashed #fff;
+    border-bottom: 1px dotted #fff;
 }
 .snap-wrap div:nth-of-type(odd) .snap-meta {
 	top: 13%;
