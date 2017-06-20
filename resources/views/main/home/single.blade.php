@@ -7,8 +7,7 @@ use App\User;
 
 ?>
 
-    <div class="row">
-        <div class="col-md-12 single">
+    <div class="single">
 
             <div class="movie-frame text-center">
                 {{-- @include('main.shared.movie') --}}
@@ -24,10 +23,10 @@ use App\User;
             </div>
 
 
-            <div class="panel-body">
+            <div class="col-md-12 panel-body">
 
                 <div class="cont-wrap">
-                	<h2><i class="fa fa-check-circle" aria-hidden="true"></i>{{ $atcl -> title }}</h2>
+                	<h2>{{ $atcl -> title }}</h2>
 
                     <div class="table-responsive py-3">
                     	<table class="table table-bordered">
@@ -194,6 +193,5 @@ use App\User;
 
 				</div><!-- panelbody -->
 
-            </div>
     </div>
 @endsection

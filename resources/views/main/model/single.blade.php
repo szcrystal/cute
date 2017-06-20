@@ -2,8 +2,7 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12 single model">
+        <div class="single model">
 
             <div class="thumb-frame text-center">
                 @if(isset($model->model_thumb))
@@ -15,7 +14,7 @@
             </div>
 
 
-            <div class="panel-body">
+            <div class="col-md-12 panel-body">
                 <div class="cont-wrap">
 
                     <h2>{{ $model -> name }}</h2>
@@ -71,11 +70,10 @@
                                     </td>
                                 </tr>
 
-
-
                             </tbody>
                 		</table>
                     </div>
+
 
 
                         <div class="contents float-right">
@@ -86,18 +84,20 @@
                     </div>
 
 
-                    <div class="snaps mt-5 pb-5">
-                        <div class="snap-wrap">
-                            @foreach($snaps as $snap)
-                            	@if(isset($snap->snap_path))
-                                <div style="background-image:url({{ Storage::url($snap->snap_path) }})"></div>
+                    <div class="snap-wrap">
+                        @foreach($snaps as $snap)
+                            @if(isset($snap->snap_path))
+                            <div style="background-image:url({{ Storage::url($snap->snap_path) }})">
 
-                                <h4>{{ $snap->ask }}</h4>
-                                <p>{!! nl2br($snap->answer) !!}</p>
+                                <div class="snap-meta">
+                                    <h4><i class="fa fa-question-circle" aria-hidden="true"></i>{{ $snap->ask }}</h4>
+                                    <p>A,{!! nl2br($snap->answer) !!}</p>
+                                </div>
 
-                                @endif
-                            @endforeach
-						</div>
+                            </div>
+
+                            @endif
+                        @endforeach
                     </div>
 
 
@@ -105,5 +105,5 @@
             </div><!-- panelbody -->
 
         </div>
-    </div>
+
 @endsection
