@@ -32,7 +32,7 @@ class FeatureController extends Controller
 //        $this->totalizeAll = $totalizeAll;
         
         $this->perPage = env('PER_PAGE', 20);
-        $this->itemPerPage = 15;
+        $this->itemPerPage = 12;
         
     }
 
