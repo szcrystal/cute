@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="main">
+<div id="main" class="feature-index">
 
         <div class="panel panel-default">
         	@if(isset($cateObj))
@@ -19,19 +19,22 @@
     use App\User;
     use App\Category;
     use App\FeatureCategory;
+    
+    $n = 1;
 ?>
 
-<div class="top-cont feature clear">
+
 
 	@if(count($features) > 0)
         @foreach($features as $feature)
+
+		@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
+		<div class="top-cont feature clear">
+        @endif
+
         <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
-                <?php
-                    //$fCateSlug = FeatureCategory::find($feature->cate_id)->slug;
-                ?>
-
-                <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
+            <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
 
                 @if($feature->thumb_path == '')
                     <span class="no-img">No Image</span>
@@ -49,6 +52,12 @@
                 </div>
             </a>
         </article>
+
+        @if($n%3 == 0)
+		</div>
+        @endif
+
+        <?php $n++; ?>
         @endforeach
     @else
 		<p class="mt-3">まだ記事がありません。</p>
