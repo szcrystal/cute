@@ -215,8 +215,7 @@
                 </div>
             </div>
 
-            <div class="btn-group-md pull-right">
-                <div class="pull-left">
+            <div style="padding-bottom:6em;" class="btn-group-md pull-right">
                     <div class="col-md-6 pull-left">
                     	{{--
                         @if($atcl->tw_up)
@@ -225,7 +224,7 @@
                         --}}
                         <input type="submit" id="twFbUp" class="btn btn-success center-block w-btn" name="twFbUp" value="TW FB UP">
                     </div>
-                </div>
+
             </div>
 
         </div>
