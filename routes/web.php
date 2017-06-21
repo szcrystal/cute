@@ -127,6 +127,8 @@ Route::resource('contribute', 'Model\HomeController');
 
 
 //Main All ==================================
+//Contact
+Route::resource('contact', 'Main\ContactController');
 
 Route::get('/{state?}', 'Main\HomeController@index');
 
@@ -152,8 +154,7 @@ Route::get('{state}/{cate}/{id}', 'Main\HomeController@showSingle'); //Atcl Sing
 
 
 
-//Contact
-Route::resource('contact', 'Main\ContactController');
+
 
 
 Auth::routes();

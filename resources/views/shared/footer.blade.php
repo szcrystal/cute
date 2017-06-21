@@ -5,6 +5,10 @@
                 {{ config('app.name', 'Cute.Campus') }}
                 {{ env('AREA', '') }}
             </a>
+            <small><p>運営<br>
+				株式会社ロコフル<br>
+				<a href="http://locofull.jp">http://locofull.jp</a>
+            </p></small>
         </div>
         <div class="col-md-10 float-left">
         	<?php
@@ -27,6 +31,8 @@
                 <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
             @endif
+
+
         </div>
 
     </div>

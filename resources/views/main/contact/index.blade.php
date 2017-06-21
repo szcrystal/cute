@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="contact">
-        <div class="col-md-12 mx-auto py-4">
+        <div class="col-md-12 mx-auto contact">
             <div class="panel panel-default">
 
                 <div class="panel-heading">
                 	<h2>お問い合わせ</h2>
+                    <p>当社へサービスに関するお問い合わせは下記フォームよりお願いいたします。<br>内容により返信できない場合もありますのであらかじめご了承ください。<br>お客様から取得したお名前、ご連絡先電話番号、回答先メールアドレス、ご住所などの個人情報（その他お客様からいただいた情報のうち個人情報に該当するものを含む）およびお問い合わせの内容の利用目的は、次のとおりです。</p>
+<ul>
+<li>ご意見、ご要望、お問い合わせへの対応および確認
+<li>商品、サービスの改善のための分析
+<li>応対サービス向上のための分析
+</ul>
+<p>当社は、お客様の個人情報の流出・漏洩の防止、その他個人情報の安全管理のために必要かつ適切な措置を講じるものとし、法令などに正当な理由がある場合を除き、お客様の同意なく目的外での利用および第三者への提供は行いません。</p>
                 </div>
 
                 <div class="panel-body">
@@ -40,7 +46,7 @@
                                     <td>
 										<div class="form-group{{ $errors->has('askcate_id') ? ' has-error' : '' }}">
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-8">
                                                     <select class="form-control" name="askcate_id">
                                                     	<option selected disabled>選択</option>
                                                         @foreach($cate_option as $val)
@@ -279,5 +285,4 @@
             </div><!-- panel -->
 
         </div>
-    </div>
 @endsection
