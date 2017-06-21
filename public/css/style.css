@@ -164,8 +164,9 @@ body {
 	width: 100%;
 }
 #main.archive-index,
-#main.feature-index {
-	margin-top: 105px;
+#main.feature-index,
+#main.page {
+	margin-top: 108px;
 }
 
 .single .cont-wrap {
@@ -685,11 +686,6 @@ body {
 }
 
 
-
-
-
-
-
 /* model */
 .model-index article .meta {
 	top: 65%;
@@ -742,7 +738,14 @@ body {
 }
 
 
-
+.page h2 {
+	font-size: 1.9em;
+    //color: #50BFC2;
+	//background: #50BFC2;
+	border-bottom: 3px solid skyblue/*#50BFC2*/;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.3em;
+}
 
 
 /* Tag */
@@ -841,6 +844,9 @@ body {
 .cth {
 	background: #EEF6F0; /*url(../images/tile-wave.png),  */
     width: 25%;
+}
+.table th {
+	color: #6a6a6a;
 }
 textarea#context {
 	min-height: 17em;

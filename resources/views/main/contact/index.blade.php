@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="col-md-12 mx-auto contact">
-            <div class="panel panel-default">
 
-                <div class="panel-heading">
-                	<h2>お問い合わせ</h2>
-                    <p>当社へサービスに関するお問い合わせは下記フォームよりお願いいたします。<br>内容により返信できない場合もありますのであらかじめご了承ください。<br>お客様から取得したお名前、ご連絡先電話番号、回答先メールアドレス、ご住所などの個人情報（その他お客様からいただいた情報のうち個人情報に該当するものを含む）およびお問い合わせの内容の利用目的は、次のとおりです。</p>
+<div id="main" class="page contact">
+        <div class="panel panel-default col-md-12 mx-auto ">
+
+            <div class="panel-heading">
+                <h2>お問い合わせ</h2>
+                <p class="col-md-8">当社へサービスに関するお問い合わせは下記フォームよりお願いいたします。<br>内容により返信できない場合もありますのであらかじめご了承ください。<br>お客様から取得したお名前、ご連絡先電話番号、回答先メールアドレス、ご住所などの個人情報（その他お客様からいただいた情報のうち個人情報に該当するものを含む）およびお問い合わせの内容の利用目的は、次のとおりです。</p>
 <ul>
 <li>ご意見、ご要望、お問い合わせへの対応および確認
 <li>商品、サービスの改善のための分析
 <li>応対サービス向上のための分析
 </ul>
-<p>当社は、お客様の個人情報の流出・漏洩の防止、その他個人情報の安全管理のために必要かつ適切な措置を講じるものとし、法令などに正当な理由がある場合を除き、お客様の同意なく目的外での利用および第三者への提供は行いません。</p>
-                </div>
+<p class="col-md-8">当社は、お客様の個人情報の流出・漏洩の防止、その他個人情報の安全管理のために必要かつ適切な措置を講じるものとし、法令などに正当な理由がある場合を除き、お客様の同意なく目的外での利用および第三者への提供は行いません。</p>
+            </div>
 
-                <div class="panel-body">
+            <div class="panel-body mt-5">
 
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -28,11 +29,14 @@
                         </div>
                     @endif
 
-					<div class="table-responsive col-md-10 mx-auto">
+					<div class="table-responsive col-md-12 mx-auto">
                     	<form class="form-horizontal" role="form" method="POST" action="/contact">
                             {{ csrf_field() }}
 
                             <input type="hidden" name="done_status" value="0">
+
+                        <small><span class="text-danger">*</span>必須項目</small>
+                        <small><span class="text-primary">*</span>モデル応募時必須</small>
 
                         <table class="table table-bordered">
                             <colgroup>
