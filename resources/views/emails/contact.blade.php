@@ -54,19 +54,19 @@ $setting = Setting::first();
 
 @if($attach_1 != '')
 ◆画像1<br />
-<img src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_1) }}">
+<img style="width:85%; display:block; margin:auto;" src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_1) }}">
 <br><br>
 @endif
 
 @if($attach_2 != '')
 ◆画像2<br />
-<img src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_2) }}">
+<img style="width:85%; display:block; margin:auto;" src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_2) }}">
 @endif
 
 <br /><br /><br /><br />
 
 {!! nl2br($setting->mail_footer) !!}
 
-<br /><br />
+<br><br><br><br><br><br>
 
 
