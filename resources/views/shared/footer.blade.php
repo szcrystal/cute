@@ -7,12 +7,9 @@
                 {{ env('AREA', '') }}
             </a>
             <div>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</div>
-            <div class="small">運営会社<br>
-				株式会社ロコフル<br>
-				<a href="http://locofull.jp">http://locofull.jp</a>
-            </div>
+
         </div>
-        <div class="col-md-9 float-left mt-3">
+        <div class="col-md-7 float-left mt-3">
         	<?php
             	use App\Fix;
             	$fixes = Fix::where('open_status', 1)->orderBy('id', 'asc')->get();
@@ -32,8 +29,13 @@
                 <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
             @endif
+        </div>
 
-
+        <div class="col-md-2 float-left mt-5">
+			<div class="small">運営会社<br>
+				株式会社ロコフル<br>
+				<a href="http://locofull.jp">http://locofull.jp</a>
+            </div>
         </div>
 
     </div>

@@ -4,7 +4,7 @@
 
 @include('main.shared.carousel')
 
-<div id="main" class="archive-index model-index">
+<div id="main" class="model-index">
 
         <div class="panel panel-default">
 			<h2>モデル</h2>
