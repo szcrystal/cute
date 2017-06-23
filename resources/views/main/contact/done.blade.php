@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="col-md-12 mx-auto py-4">
-            <div class="panel panel-default">
+        <div id="main" class="fix-page">
+            <div class="panel panel-default col-md-12 text-center">
 
                 <div class="panel-heading">
                 	<h2 class="h2">お問合せ完了</h2>
