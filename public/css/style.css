@@ -281,6 +281,7 @@ body {
     left: 0.5em;
     background: tomato;
     color: moccasin;
+    
 	-webkit-transform: rotateZ(-6deg);
     transform: rotateZ(-6deg);
 }
