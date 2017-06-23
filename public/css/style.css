@@ -140,13 +140,16 @@ body {
     color: #ccc;
 }
 
+.btn-send {
+	background: #50BFC2;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+.btn-send:hover {
+	opacity: 0.7;
+}
 
-/*.h2 {*/
-/*	font-size: 1.5em;*/
-/*}*/
-/*.h3 {*/
-/*	font-size: 1.2em;*/
-/*}*/
 .container {
 	width: 100%;
 	//border: 1px solid red;
@@ -175,6 +178,7 @@ body {
 }
 #main.fix-page {
 	width: 1000px;
+    margin-bottom: 4em;
 }
 #main.archive-index,
 #main.feature-index,

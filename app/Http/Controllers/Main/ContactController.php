@@ -71,7 +71,8 @@ class ContactController extends Controller
         $this->validate($request, $rules);
         
         $data = $request->all(); //requestから配列として$dataにする
-//		echo $data['askcate_id'];
+
+//		print_r($data['pic_1']);
 //        exit;
         
         
@@ -79,7 +80,42 @@ class ContactController extends Controller
         
         $contactModel->fill($data); //モデルにセット
         $contactModel->save(); //モデルからsave
-        //$id = $postModel->id;
+        $conId = $contactModel->id;
+        
+        
+        
+        //Thumbnail upload
+        if(isset($data['pic_1'])) {
+            
+            $filename = $data['pic_1']->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
+            
+            $pre = time() . '-';
+            $filename = 'contact/' . $conId . '/' . $pre . $filename;
+            
+            $path =  $data['pic_1']->storeAs('public', $filename);
+            
+            $contactModel->pic_1 = $path;
+            $contactModel->save();
+            
+            $data['attach_1'] = $filename;
+        }
+        
+        if(isset($data['pic_2'])) {
+            
+            $filename = $data['pic_2']->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
+            
+            $pre = time() . '-';
+            $filename = 'contact/' . $conId . '/' . $pre . $filename;
+            
+            $path =  $data['pic_2']->storeAs('public', $filename);
+            
+            $contactModel->pic_2 = $path;
+            $contactModel->save();
+            
+            $data['attach_2'] = $filename;
+        }
         
 		$data['ask_cate'] = $this->contactCate->find($data['askcate_id'])->cate_name;
         

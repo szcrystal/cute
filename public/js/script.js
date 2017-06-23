@@ -306,6 +306,47 @@ var exe = (function() {
         },
         
         
+        eventItem: function() {
+           
+            //Thumbnail Upload
+            $('.thumb-file').on('click', function(){
+            	var $th = $(this);
+                $th.on('change', function(e){
+                	var file = e.target.files[0],
+                    reader = new FileReader(),
+                    $preview = $(this).parents('.thumb-wrap').find('.thumb-prev');
+                    //t = this;
+
+                    // 画像ファイル以外の場合は何もしない
+                    if(file.type.indexOf("image") < 0){
+                      return false;
+                    }
+
+                    // ファイル読み込みが完了した際のイベント登録
+                    reader.onload = (function(file) {
+                      return function(e) {
+                        //既存のプレビューを削除
+                        $preview.empty();
+                        // .prevewの領域の中にロードした画像を表示するimageタグを追加
+                        $preview.append($('<img>').attr({
+                                  src: e.target.result,
+                                  width: "100%",
+                                  //class: "preview",
+                                  title: file.name
+                        }));
+                        //console.log(file.name);
+
+                    };
+                })(file);
+
+                reader.readAsDataURL(file);
+                });
+            	
+            });
+        
+        },
+        
+        
         
         
         
@@ -322,6 +363,7 @@ $(function(e){ //ready
     exe.toggleSp();
   
     exe.dropDown();
+    exe.eventItem();
   
   	//exe.addClass();
   

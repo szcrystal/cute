@@ -168,7 +168,7 @@ class ArticleController extends Controller
         
         $this->validate($request, $rules, $messages);
         
-        $data = $request->all(); //requestから配列として$dataにする
+        $data = $request->all();
 
         
 //        if(isset($data['ytUp'])) {

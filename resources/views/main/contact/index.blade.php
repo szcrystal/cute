@@ -30,7 +30,7 @@
                     @endif
 
 					<div class="table-responsive col-md-12 mx-auto">
-                    	<form class="form-horizontal" role="form" method="POST" action="/contact">
+                    	<form class="form-horizontal" role="form" method="POST" action="/contact" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <input type="hidden" name="done_status" value="0">
@@ -108,15 +108,14 @@
                                 <tr>
                                 	<th>年齢</th>
                                     <td>
-                                    	<div class="form-group{{ $errors->has('per_name') ? ' has-error' : '' }}">
-                                            {{-- <label for="per_name" class="col-md-4 control-label">お名前</label> --}}
+                                    	<div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
 
                                             <div class="col-md-12">
-                                                <input id="per_name" type="text" class="form-control" name="per_name" value="{{ old('per_name') }}" required>
+                                                <input id="age" type="text" class="form-control" name="age" value="{{ old('age') }}">
 
-                                                @if ($errors->has('per_name'))
+                                                @if ($errors->has('age'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('per_name') }}</strong>
+                                                        <strong>{{ $errors->first('age') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -127,15 +126,14 @@
                                 <tr>
                                 	<th>学校</th>
                                     <td>
-                                    	<div class="form-group{{ $errors->has('per_name') ? ' has-error' : '' }}">
-                                            {{-- <label for="per_name" class="col-md-4 control-label">お名前</label> --}}
+                                    	<div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
 
                                             <div class="col-md-12">
-                                                <input id="per_name" type="text" class="form-control" name="per_name" value="{{ old('per_name') }}" required>
+                                                <input id="school" type="text" class="form-control" name="school" value="{{ old('school') }}">
 
-                                                @if ($errors->has('per_name'))
+                                                @if ($errors->has('school'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('per_name') }}</strong>
+                                                        <strong>{{ $errors->first('school') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -147,10 +145,9 @@
                                 	<th>電話番号</th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('tel_num') ? ' has-error' : '' }}">
-                                            {{-- <label for="per_name" class="col-md-4 control-label">お名前</label> --}}
 
                                             <div class="col-md-12">
-                                                <input id="tel_num" type="text" class="form-control" name="tel_num" value="{{ old('tel_num') }}" required>
+                                                <input id="tel_num" type="text" class="form-control" name="tel_num" value="{{ old('tel_num') }}">
 
                                                 @if ($errors->has('tel_num'))
                                                     <span class="help-block">
@@ -167,7 +164,7 @@
                                     <td>
                                     	<div class="form-group{{ $errors->has('post_num') ? ' has-error' : '' }}">
                                             <div class="col-md-12">
-                                                <input id="post_num" type="text" class="form-control" name="post_num" value="{{ old('post_num') }}" required>
+                                                <input id="post_num" type="text" class="form-control" name="post_num" value="{{ old('post_num') }}">
 
                                                 @if ($errors->has('post_num'))
                                                     <span class="help-block">
@@ -197,7 +194,7 @@
                                 </tr>
 
                                 <tr>
-                                	<th>写真１</th>
+                                	<th>写真１(バストアップ)</th>
                                     <td>
                                     	<div class="clearfix thumb-wrap">
                                             <div class="col-md-4 pull-left thumb-prev">
@@ -216,10 +213,10 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-8 pull-left text-left form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
+                                            <div class="col-md-8 pull-left text-left form-group{{ $errors->has('pic_1') ? ' has-error' : '' }}">
                                                 <label for="post_thumb" class="col-md-12">写真１</label><br>
                                                 <div class="col-md-12">
-                                                    <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
+                                                    <input id="pic_1" class="post_thumb thumb-file" type="file" name="pic_1">
                                                 </div>
                                             </div>
                                         </div>
@@ -227,29 +224,25 @@
                                 </tr>
 
                                 <tr>
-                                	<th>写真２</th>
+                                	<th>写真２(全身)</th>
                                     <td>
                                         <div class="clearfix thumb-wrap">
                                             <div class="col-md-4 pull-left thumb-prev">
                                                 @if(count(old()) > 0)
-                                                    @if(old('post_thumb') != '' && old('post_thumb'))
-                                                    <img src="{{ Storage::url(old('post_thumb')) }}" class="img-fluid">
-                                                    @elseif(isset($atcl) && $atcl->thumb_path)
-                                                    <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
+                                                    @if(old('pic_2') != '' && old('pic_2'))
+                                                    <img src="{{ Storage::url(old('pic_2')) }}" class="img-fluid">
                                                     @else
                                                     <span class="no-img">No Image</span>
                                                     @endif
-                                                @elseif(isset($atcl) && $atcl->thumb_path)
-                                                    <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
                                                 @else
                                                     <span class="no-img">No Image</span>
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-8 pull-left text-left form-group{{ $errors->has('post_thumb') ? ' has-error' : '' }}">
+                                            <div class="col-md-8 pull-left text-left form-group{{ $errors->has('pic_2') ? ' has-error' : '' }}">
                                                 <label for="post_thumb" class="col-md-12">写真２</label><br>
                                                 <div class="col-md-12">
-                                                    <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
+                                                    <input id="pic_2" class="post_thumb thumb-file" type="file" name="pic_2">
                                                 </div>
                                             </div>
                                         </div>
@@ -261,7 +254,7 @@
                                     <td>
 										<div class="form-group{{ $errors->has('context') ? ' has-error' : '' }}">
                                             <div class="col-md-12">
-                                                <textarea id="context" class="form-control" name="context" required>{{ old('context') }}</textarea>
+                                                <textarea id="context" class="form-control" name="context">{{ old('context') }}</textarea>
 
                                                 @if ($errors->has('context'))
                                                     <span class="help-block">
@@ -278,8 +271,8 @@
                             </tbody>
                 		</table>
                         <div class="form-group">
-                            <div class="col-md-3 mx-auto">
-                                <button type="submit" class="btn btn-primary col-md-12">送信</button>
+                            <div class="col-md-4 mx-auto">
+                                <button type="submit" class="btn btn-send col-md-12">SEND</button>
                             </div>
                         </div>
                     </form>
