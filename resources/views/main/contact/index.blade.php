@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="main" class="page contact">
+<div id="main" class="fix-page contact">
         <div class="panel panel-default col-md-12 mx-auto ">
 
             <div class="panel-heading">
