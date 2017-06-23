@@ -35,8 +35,8 @@
 
                             <input type="hidden" name="done_status" value="0">
 
-                        <small><span class="text-danger">*</span>必須項目</small>
-                        <small><span class="text-primary">*</span>モデル応募時必須</small>
+                        <span><em class="text-danger">*</em> 必須項目</span>
+                        <span><em class="text-primary">*</em> モデル応募時必須</span>
 
                         <table class="table table-bordered">
                             <colgroup>
@@ -46,7 +46,7 @@
                             
                             <tbody>
                                 <tr>
-                                	<th>お問い合わせ内容</th>
+                                	<th>お問い合わせ内容 <em class="text-danger">*</em></th>
                                     <td>
 										<div class="form-group{{ $errors->has('askcate_id') ? ' has-error' : '' }}">
 
@@ -70,10 +70,9 @@
 
 
                                 <tr>
-                                	<th>お名前</th>
+                                	<th>お名前 <em class="text-danger">*</em></th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('per_name') ? ' has-error' : '' }}">
-                                            {{-- <label for="per_name" class="col-md-4 control-label">お名前</label> --}}
 
                                             <div class="col-md-12">
                                                 <input id="per_name" type="text" class="form-control" name="per_name" value="{{ old('per_name') }}" required>
@@ -89,7 +88,7 @@
                                 </tr>
 
                                 <tr>
-                                	<th>メールアドレス</th>
+                                	<th>メールアドレス <em class="text-danger">*</em></th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('per_email') ? ' has-error' : '' }}">
                                             <div class="col-md-12">
@@ -106,7 +105,7 @@
                                 </tr>
 
                                 <tr>
-                                	<th>年齢</th>
+                                	<th>年齢 <em class="text-primary">*</em></th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
 
@@ -124,7 +123,7 @@
                                 </tr>
 
                                 <tr>
-                                	<th>学校</th>
+                                	<th>学校 <em class="text-primary">*</em></th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
 
@@ -142,7 +141,7 @@
                                 </tr>
 
                                 <tr>
-                                	<th>電話番号</th>
+                                	<th>電話番号 <em class="text-danger">*</em></th>
                                     <td>
                                     	<div class="form-group{{ $errors->has('tel_num') ? ' has-error' : '' }}">
 
