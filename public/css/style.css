@@ -267,15 +267,17 @@ body {
 .top-cont h2 {
 	position: absolute;
     top: -0.6em;
-    left: 31%;
-    width: 38%;
+    left: 29%;
+    width: 42%;
     text-align: center;
     z-index: 99;
     font-size: 2.6em;
-    background: #4FBFC1;
-    color: #BAE8E8;
+/*    background: #4FBFC1;*/
+/*    color: #BAE8E8;*/
+	background: orange;
+    color: moccasin;
     font-weight: bold;
-    padding: 3px 0;
+    padding: 4px 0;
     border-radius: 2em;
     text-transform: uppercase;
 }
@@ -378,6 +380,7 @@ body {
     left: -15px;
 }
 .pickup article .meta {
+	color: thistle;
 	-webkit-transform: rotateZ(-3deg);
     transform: rotateZ(-3deg);
 }
