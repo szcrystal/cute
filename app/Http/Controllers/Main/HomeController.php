@@ -8,13 +8,14 @@ use App\FeatureCategory;
 use App\State;
 use App\Tag;
 use App\TagRelation;
+use App\Fix;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-	public function __construct(Article $article, Category $category, FeatureCategory $featureCate, State $state, Tag $tag, TagRelation $tagRel)
+	public function __construct(Article $article, Category $category, FeatureCategory $featureCate, State $state, Tag $tag, TagRelation $tagRel, Fix $fix)
     {
         //$this->middleware('search');
         
@@ -24,6 +25,7 @@ class HomeController extends Controller
         $this->state = $state;
         $this->tag = $tag;
         $this->tagRel = $tagRel;
+        $this->fix = $fix;
 //        $this->tag = $tag;
 //        $this->tagRelation = $tagRelation;
 //        $this->tagGroup = $tagGroup;
@@ -60,11 +62,13 @@ class HomeController extends Controller
         $pickUps = $this->article->where($whereArr)->where('pick_up', 1)->orderBy('created_at','DESC')->take(2)->get();
         
         $stateObj = null;
+        //$stateName = '';
         
     	if(isset($state)) {
         	$stateObj = $this->state->where('slug', $state)->get()->first();
             $whereArr['state_id'] = $stateObj->id;
             $whereArrSec['state_id'] = $stateObj->id;
+            //$stateName = $stateObj->name;
         }
         
         $atcls = array();
@@ -182,6 +186,13 @@ class HomeController extends Controller
     }
 
 
+	public function getFix(Request $request)
+    {
+    	$path = $request->path();
+        $fix = $this->fix->where('slug', $path)->first();
+        
+        return view('main.home.fix', ['fix'=>$fix]);
+    }
     
     public function create()
     {

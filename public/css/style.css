@@ -111,7 +111,9 @@ body {
 .menu-dropdown h2 {
 	font-size: 1em;
     padding-bottom: 0.2em;
-    border-bottom: 1px solid #aaa;
+    font-weight: bold;
+    color: #8a8a8a;
+    border-bottom: 1px dotted #aaa;
 }
 .menu-dropdown ul {
 	list-style: none;
@@ -128,6 +130,14 @@ body {
 /*    background: azure;*/
 /*    border: 1px solid #50BFC2;*/
 /*    border-radius: 3px;*/
+}
+.dropdown-item {
+	color: #50BFC2;
+    font-weight: bold;
+}
+.dropdown-item:hover {
+	background: none;
+    color: #ccc;
 }
 
 
@@ -163,9 +173,12 @@ body {
 #main.top {
 	width: 100%;
 }
+#main.fix-page {
+	width: 1000px;
+}
 #main.archive-index,
 #main.feature-index,
-#main.page {
+#main.fix-page {
 	margin-top: 108px;
 }
 .single {
@@ -764,11 +777,21 @@ body {
     margin-bottom: 0.3em;
 }
 
+.fix-page h2 {
+	border-bottom: 1px solid #aaa;
+    margin-bottom: 1em;
+    padding-bottom: 0.3em;
+}
+.fix-page h3 {
+	font-size: 1.1em;
+    font-weight: bold;
+}
+
 
 /* Tag */
 .rank-tag {
 	display: inline-block;
-	background: #F7F1E4;/*#F7EBE4*/
+	background: #F7EBE4;/*#F7EBE4*/
     padding: 0.2em 0.5em;
     margin-bottom: 0.7em;
 	border-radius: 0.5em;
@@ -776,11 +799,11 @@ body {
     cursor: pointer;
 }
 .main-navigation .rank-tag {
-	background: #F7EBE4;/*#F7F1E4*/
+	background: mintcream/*#F7EBE4*/;/*#F7F1E4*/
 }
 
 .rank-tag:hover {
-	opacity: 0.7;
+	opacity: 0.65;
 }
 .rank-tag a {
 	color: #5a5a5a;
@@ -964,278 +987,7 @@ textarea {
 
 
 
-.add-item {
-	width: 100%;
-    margin: 3em auto;
-}
-.add-item label {
-	margin-bottom: 0;
-    padding-bottom: 0;
-}
-.add-item input {
-	margin-bottom: 0.6em;
-}
-.add-item section {
-	border: 1px solid #ddd;
-    padding: 0.3em 0.3em 0.3em;
-    border-radius: 0.2em;
-    position: relative;
-}
-.add-item section:after {
-	display: block;
-    clear: both;
-    content: "";
-    height: 0;
-}
-.add-item section p {
-	width: 80%;
-}
-.add-item > .ctrl-nav:first-of-type {
-	display: none;
-}
-.item-form {
-    clear: both;
-}
-.ctrl-nav {
-	display: inline-block;
-    list-style: none;
-    float: right;
-/*    width: 40%;*/
-    position: absolute;
-    top: 0.3em;
-    right: 0;
-/*    margin-top: -2em;*/
-}
-.ctrl-nav:after {
-	display: block;
-    clear: both;
-    content: "";
-    height: 0;
-}
-.ctrl-nav li {
-	float: left;
-    margin-right: 0.4em;
-    cursor: pointer;
-    border: 1px solid #bfbfbf;
-    border-radius: 0.2em;
-    min-width: 2.5em;
-    text-align: center;
-    color: #555;
-    background: #EBF3E8;
-}
 
-.item-panel {
-	width: 100%;
-}
-.item-panel.border-dash {
-    padding: 0.3em 0.3em 0.3em;
-    border: 1px dashed #aaa;
-    border-radius: 0.2em;
-    margin: 1.5em 0;
-}
-.add-item section .item-panel.border-dash {
-	border: none;
-    border-radius: 0;
-    padding: 0;
-    margin: 1.5em 0 0;
-}
-.item-btn ul {
-	border: 1px solid #ddd;
-    list-style: none;
-    background: #fdfcfc;
-    margin: 0.3em 0 0;
-    padding: 0.3em 1em;
-}
-.item-btn li {
-	float: left;
-    margin-right: 4em;
-    cursor: pointer;
-}
-.item-btn li .fa {
-	margin-right: 0.3em;
-}
-.item-panel button {
-	display: block;
-    margin-top: 0.8em;
-}
-.item-panel input,
-.item-panel textarea {
-	display: block;
-    width: 85%;
-    margin-bottom: 0.5em;
-}
-.item-panel textarea {
-	border: 1px solid #cfcfcf;
-}
-
-/*.first-panel .add-nav {*/
-/*	display: none;*/
-/*}*/
-/*.first-panel .item-btn {*/
-/*	display: block;*/
-/*}*/
-
-.visible-none {
-	display: none;
-}
-
-.add-nav {
-
-}
-.add-nav span {
-	display: block;
-    padding: 0.2em;
-	cursor: pointer;
-    color: palevioletred;
-}
-.add-nav span:last-of-type {
-	display: none;
-}
-.add-nav span .fa {
-	margin-right: 0.3em;
-}
-
-.item-btn {
-	display: none;
-}
-.item-title,
-.item-text,
-.item-image,
-.item-link {
-	display: none;
-    position: relative;
-    width: 100%;
-    background: #eceaea;
-    padding: 1em;
-    z-index: 9999;
-}
-
-/* item-title */
-.item-title select {
-	display: block;
-    margin-bottom: 0.5em;
-}
-/* item-text */
-.item-text textarea {
-	min-height: 25em;
-}
-
-/* item-link */
-.item-link {
-	min-height: 35em;
-}
-.item-link select {
-	display: block;
-    margin-bottom: 0.6em;
-}
-.item-link input[type="text"] {
-	display: block;
-/*    margin-bottom: 0.2em;*/
-}
-.item-link .subm-check {
-	display: block;
-    margin-top: -3px;
-/*    margin-bottom: 1em;*/
-}
-.link-frame {
-	display: block;
-    width: 75%;
-    min-height: 20em;
-    margin-top: 1.2em;
-}
-.item-link .link-check {
-/*    display: block;*/
-}
-.linkimg-wrap {
-	overflow: hidden;
-    position: relative;
-    height: 150px;
-    margin-top: 1.3em;
-}
-.linkimg-wrap img {
-	display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    height: 80%;
-}
-.linkimg-wrap img:first-of-type {
-	display: block;
-}
-.linksel-wrap {
-
-}
-.linksel-wrap span {
-	border: 1px solid #aaa;
-    padding: 0.5em;
-    cursor: pointer;
-    background: #fff;
-}
-.linksel-wrap small {
-	font-size: 1.2em;
-}
-.linksel-wrap small em {
-	font-style: normal;
-}
-
-/* item-image */
-.item-image .preview {
-	width: 170px;
-    height: 170px;
-    overflow: hidden;
-    //border: 1px solid red;
-}
-.item-image .preview .no-img {
-	line-height: 170px;
-    font-size: 0.9em;
-}
-.item-image .preview + div {
-	width: 78%;
-    margin-left: 2%;
-}
-.item-image .img-check {
-	margin-top: -3px;
-	margin-bottom: 1em;
-}
-.item-image input,
-.item-image textarea {
-	width: 100%;
-}
-.add-item section > .preview {
-	margin: 0.5em 0.8em 0.5em 0.5em;
-    width: 220px;
-}
-.add-item section .preview img,
-.add-item section .preview span {
-	width: 100%;
-}
-.add-item section .preview .no-img {
-	line-height: 160px;
-}
-.add-item section > .preview + h4 + p {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-
-button.subm-title,
-button.subm-text,
-button.subm-image,
-button.subm-link {
-	display: inline-block;
-    width: 8em;
-    margin-right: 0.5em;
-}
-
-
-.add-item section h1 {
-	font-weight: bold;
-}
-.add-item section h2 {
-	font-weight: normal;
-    border: none;
-}
 
 
 /* footer */
@@ -1269,6 +1021,17 @@ button.subm-link {
 }
 #colop ul li:last-of-type {
 
+}
+#colop .navbar-brand {
+	font-size: 1.4em !important;
+}
+#colop .navbar-brand + div {
+	color: #709A9B;
+    margin-bottom: 1.4em;
+    font-size: 0.9em;
+}
+#colop .small{
+	margin-bottom: 2em;
 }
 #colop > p {
 	margin: 0;

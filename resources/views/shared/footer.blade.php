@@ -1,25 +1,26 @@
 <footer id="colop">
-	<div class="container clearfix">
-    	<div class="col-md-2 float-left">
+	<div class="container clear">
+    	<div class="col-md-3 float-left mt-3">
+
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Cute.Campus') }}
                 {{ env('AREA', '') }}
             </a>
-            <small><p>運営<br>
+            <div>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</div>
+            <div class="small">運営会社<br>
 				株式会社ロコフル<br>
 				<a href="http://locofull.jp">http://locofull.jp</a>
-            </p></small>
+            </div>
         </div>
-        <div class="col-md-10 float-left">
+        <div class="col-md-9 float-left mt-3">
         	<?php
             	use App\Fix;
-            	$fixes = Fix::where('open_status', 0)->orderBy('id', 'asc')->get();
+            	$fixes = Fix::where('open_status', 1)->orderBy('id', 'asc')->get();
             ?>
         	@if($fixes)
 			<ul>
             	@foreach($fixes as $fix)
 				<li><a href="{{ url($fix->slug) }}">
-                	<i class="fa fa-angle-right" aria-hidden="true"></i>
 					@if($fix->sub_title != '')
                     {{ $fix->sub_title }}
                     @else

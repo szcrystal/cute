@@ -115,6 +115,7 @@
             </div>
 
 			@if(Ctm::isDev())
+            {{--
 			<div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
                 <label for="content" class="col-md-2 control-label">コンテンツ</label>
 
@@ -133,6 +134,7 @@
                     </script>
                 </div>
             </div>
+            --}}
             @endif
 
 

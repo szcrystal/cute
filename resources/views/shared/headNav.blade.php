@@ -3,7 +3,25 @@
 <header class="site-header clear">
 	<!-- Branding Image -->
     <h1 class="float-left"><a class="navbar-brand" href="{{ url('/') }}">
-        {{ config('app.name', 'Cute.Campus') }} {{ env('AREA', '') }}
+		<?php
+        	use App\State;
+            use App\Setting;
+        	$path = Request::path();
+            $path = explode('/', $path);
+            
+            $stateName = '';
+            
+            $state = State::where('slug', $path[0])->first();
+            if(isset($state)) {
+            	$stateName = $state->name;
+            }
+            else {
+            	$stateName = Setting::first()->all_area; //env('AREA', '')
+            }
+            
+        ?>
+
+        {{ config('app.name', 'Cute.Campus') }} {{ $stateName }}
     </a></h1>
 
 	<!--
@@ -32,7 +50,7 @@
 
             <?php
                 use App\Category;
-                use App\State;
+                //use App\State;
                 use App\FeatureCategory;
                 
                 $states = State::all();
@@ -57,8 +75,8 @@
 				<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
                 	<div class="float-left col-md-2">
                     	<ul class="clear">
-                    		<li><a href="{{ url('/') }}" class="dropdown-item">{{ env('AREA', 'env') }} TOP</a>
-                    		<li><a href="{{ url('all/model') }}" class="dropdown-item">モデル</a>
+                    		<li><a href="{{ url('/') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ $stateName }} TOP</a>
+                    		<li><a href="{{ url('all/model') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> モデル</a>
                         </ul>
                     </div>
 
@@ -99,8 +117,8 @@
                 	<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
 						<div class="float-left col-md-2">
                         	<ul class="clear">
-                        		<li><a href="{{ url($state->slug) }}" class="dropdown-item">{{ $state->name }} TOP</a>
-                        		<li><a href="{{ url($state->slug .'/model') }}" class="dropdown-item">モデル</a>
+                        		<li><a href="{{ url($state->slug) }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ $state->name }} TOP</a>
+                        		<li><a href="{{ url($state->slug .'/model') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> モデル</a>
                             </ul>
                         </div>
 
@@ -118,11 +136,11 @@
                     	</div>
 
                         <div class="float-left col-md-5">
-                            <h2>特集All</h2>
+                            <h2>特集</h2>
                             <ul class="clear">
                                 <li>
                                 	<span class="rank-tag">
-                                	<a href="{{ url($state->slug .'/feature') }}">特集</a>
+                                	<a href="{{ url($state->slug .'/feature') }}">特集All</a>
                                     </span>
                                 </li>
                                 @foreach($fCates as $fCate)

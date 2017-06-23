@@ -61,9 +61,12 @@ class FixController extends Controller
         
         $data = $request->all(); //requestから配列として$dataにする
         
-//        if(! isset($data['not_open'])) { //checkbox
-//        	$data['not_open'] = 0;
-//        }
+        if(! isset($data['open_status'])) { //checkbox
+        	$data['open_status'] = 1;
+        }
+        else {
+        	$data['open_status'] = 0;
+        }
         
         //$data['up_date'] = $request->input('up_year'). '-' .$request->input('up_month') . '-' . $request->input('up_day');
 //        $data['up_date'] = '2017-01-01 11:11:11';
@@ -87,10 +90,10 @@ class FixController extends Controller
 
         if($request->input('edit_id') !== NULL ) { //update（編集）の時
             $fixModel = $this->fix->find($request->input('edit_id'));
-            $status = '静的ページが更新されました！';
+            $status = '固定ページが更新されました！';
         }
         else { //新規追加の時
-            $status = '静的ページが追加されました！';
+            $status = '固定ページが追加されました！';
         	$fixModel = $this->fix;
         }
         
