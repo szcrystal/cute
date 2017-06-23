@@ -240,13 +240,17 @@ body {
 /*  text-align: center;*/
 }
 .carousel-item:first-of-type .carousel-caption {
-	color: snow;
-}
-.carousel-item:nth-of-type(2) .carousel-caption {
 	color: cornsilk;
 }
+.carousel-item:nth-of-type(2) .carousel-caption {
+	color: pink;
+    left: 1em;
+    top: 4.5em;
+    //bottom: 2.5em !important;
+}
 .carousel-item:nth-of-type(3) .carousel-caption {
-	color: mintcream;
+	color: thistle;
+    top: 2.5em;
 }
 .carousel-caption h3 {
 	font-size: 4.2em;
