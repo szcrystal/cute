@@ -28,7 +28,85 @@ use App\User;
                 <div class="cont-wrap">
                 	<h2>{{ $atcl -> title }}</h2>
 
-                    <div class="table-responsive py-3">
+
+
+
+                    <div class="clear contents mt-5">
+
+                        <div class="float-left">
+                            @if($atcl -> thumb_path)
+                            <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
+                            @else
+                            <span class="no-img">No Image</span>
+                            @endif
+                        </div>
+
+                        <div class="float-right">
+                        	<h4>Info</h4>
+                            <p>{!! nl2br($atcl->contents) !!}</p>
+                        </div>
+                    </div>
+
+                    <div class="map-wrap">
+
+                        @if($atcl->address != '')
+                            <h4>MAP</h4>
+                        	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
+
+                            <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyCtPtTSkIY1yGa5Rt8klarv45YnPXVpenc&callback=initMap"></script>
+                            <!-- ?sensor=false -->
+
+                            <script>
+                                function drawMap(address) {
+                                    var geocoder = new google.maps.Geocoder();
+                                    //住所から座標を取得する
+                                    geocoder.geocode(
+                                        {
+                                            'address': address,//検索する住所　〒◯◯◯-◯◯◯◯ 住所　みたいな形式でも検索できる
+                                            'region': 'jp'
+                                        },
+                                        
+                                        function (results, status) {
+                                            if (status == google.maps.GeocoderStatus.OK) {
+                                                google.maps.event.addDomListener(window, 'load', function () {
+                                                    var map_tag = document.getElementById('map');
+                                                    // 取得した座標をセット緯度経度をセット
+                                                    var map_location = new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng());
+                                                    //マップ表示のオプション
+                                                    var map_options =
+                                                    {
+                                                        zoom: 17,//縮尺
+                                                        center: map_location,//地図の中心座標
+                                                        //ここをfalseにすると地図上に人みたいなアイコンとか表示される
+                                                        disableDefaultUI: true,
+                                                        mapTypeId: google.maps.MapTypeId.ROADMAP//地図の種類を指定
+                                                    };
+
+                                                    //マップを表示する
+                                                    var map = new google.maps.Map(map_tag, map_options);
+
+                                                    //地図上にマーカーを表示させる
+                                                    var marker = new google.maps.Marker({
+                                                        position: map_location,//マーカーを表示させる座標
+                                                        map: map//マーカーを表示させる地図
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    );
+                                }
+
+								var add = $('#map').data('address');
+                                drawMap(add);
+                            </script>
+
+                            @else
+								<span class="no-img">No Address</span>
+                            @endif
+
+                        </div>
+
+                        <div class="table-responsive py-3">
                     	<table class="table table-bordered">
                             <colgroup>
                                 <col class="cth">
@@ -111,82 +189,6 @@ use App\User;
                             </tbody>
                 		</table>
                     </div>
-
-
-                    <div class="clear contents">
-
-                        <div class="float-left">
-                            @if($atcl -> thumb_path)
-                            <img src="{{ Storage::url($atcl->thumb_path) }}" class="img-fluid">
-                            @else
-                            <span class="no-img">No Image</span>
-                            @endif
-                        </div>
-
-                        <div class="float-right">
-                        	<h4>Info</h4>
-                            <p>{!! nl2br($atcl->contents) !!}</p>
-                        </div>
-                    </div>
-
-                    <div class="map-wrap">
-
-                        @if($atcl->address != '')
-                            <h4>MAP</h4>
-                        	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
-
-                            <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyCtPtTSkIY1yGa5Rt8klarv45YnPXVpenc&callback=initMap"></script>
-                            <!-- ?sensor=false -->
-
-                            <script>
-                                function drawMap(address) {
-                                    var geocoder = new google.maps.Geocoder();
-                                    //住所から座標を取得する
-                                    geocoder.geocode(
-                                        {
-                                            'address': address,//検索する住所　〒◯◯◯-◯◯◯◯ 住所　みたいな形式でも検索できる
-                                            'region': 'jp'
-                                        },
-                                        
-                                        function (results, status) {
-                                            if (status == google.maps.GeocoderStatus.OK) {
-                                                google.maps.event.addDomListener(window, 'load', function () {
-                                                    var map_tag = document.getElementById('map');
-                                                    // 取得した座標をセット緯度経度をセット
-                                                    var map_location = new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng());
-                                                    //マップ表示のオプション
-                                                    var map_options =
-                                                    {
-                                                        zoom: 17,//縮尺
-                                                        center: map_location,//地図の中心座標
-                                                        //ここをfalseにすると地図上に人みたいなアイコンとか表示される
-                                                        disableDefaultUI: true,
-                                                        mapTypeId: google.maps.MapTypeId.ROADMAP//地図の種類を指定
-                                                    };
-
-                                                    //マップを表示する
-                                                    var map = new google.maps.Map(map_tag, map_options);
-
-                                                    //地図上にマーカーを表示させる
-                                                    var marker = new google.maps.Marker({
-                                                        position: map_location,//マーカーを表示させる座標
-                                                        map: map//マーカーを表示させる地図
-                                                    });
-                                                });
-                                            }
-                                        }
-                                    );
-                                }
-
-								var add = $('#map').data('address');
-                                drawMap(add);
-                            </script>
-
-                            @else
-								<span class="no-img">No Address</span>
-                            @endif
-
-                        </div>
 
 
                 	</div>

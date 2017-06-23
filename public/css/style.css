@@ -168,10 +168,12 @@ body {
 #main.page {
 	margin-top: 108px;
 }
-
+.single {
+	margin-top: 85px;
+}
 .single .cont-wrap {
 	width: 1200px;
-    margin: 3.0em auto 4.5em;
+    margin: 1em auto 3em;
 }
 
 .carousel {
@@ -217,6 +219,15 @@ body {
 /*  color: #fff;*/
 /*  text-align: center;*/
 }
+.carousel-item:first-of-type .carousel-caption {
+	color: snow;
+}
+.carousel-item:nth-of-type(2) .carousel-caption {
+	color: cornsilk;
+}
+.carousel-item:nth-of-type(3) .carousel-caption {
+	color: mintcream;
+}
 .carousel-caption h3 {
 	font-size: 4.2em;
     font-weight: bold;
@@ -255,6 +266,8 @@ body {
 .top-cont:nth-of-type(2) h2 {
 	top: 0;
     left: 0.5em;
+    background: tomato;
+    color: moccasin;
 	-webkit-transform: rotateZ(-6deg);
     transform: rotateZ(-6deg);
 }
@@ -421,6 +434,10 @@ body {
 	top: 70%;
     left: 1em;
 }
+.atcl:nth-of-type(3n) article .meta {
+	color: powderblue;
+}
+
 /* second */
 .atcl:nth-of-type(3n+1) article:first-of-type,
 .feature:nth-of-type(3) article:first-of-type {
@@ -444,7 +461,7 @@ body {
     background-size: 120% auto;
 }
 .atcl:nth-of-type(3n+1) article .meta {
-	color: #fff;
+	color: lavenderblush;
 }
 
 /* third */
@@ -479,7 +496,7 @@ body {
     float: left;
 }
 .atcl:nth-of-type(3n+2) article .meta {
-	color: #fff;
+	color: blanchedalmond;
 }
 
 
@@ -493,10 +510,10 @@ body {
 /*    color: #BAE8E8;*/
     border-radius: 3px;
     font-weight: bold;
-    font-size: 2.3em;
+    font-size: 2.6em;
     text-align: center;
     padding: 0.1em 0;
-    width: 45%;
+    width: 48%;
     margin: 0 auto -0.5em;
     position: relative;
     z-index: 999;
