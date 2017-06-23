@@ -316,7 +316,7 @@ body {
     //border: 2px solid red;
 }
 .top-cont article .meta {
-	color: #fff;
+	color: aquamarine;
     text-shadow: 2px 2px 2px #000;
     font-size: 2.4em;
     position: absolute;
@@ -485,7 +485,7 @@ body {
     background-size: 120% auto;
 }
 .atcl:nth-of-type(3n+1) article .meta {
-	color: lavenderblush;
+	color: pink;
 }
 
 /* third */
