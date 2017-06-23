@@ -595,6 +595,7 @@ body {
 }
 .archive article .meta {
 	font-size: 1.8em;
+    color: snow;
 }
 .archive article .meta p {
 	text-align: right;
@@ -903,8 +904,16 @@ body {
 	background: #EEF6F0; /*url(../images/tile-wave.png),  */
     width: 25%;
 }
+.ctd {
+	background: #fefcfd;
+}
 .table th {
 	color: #6a6a6a;
+}
+input[type="text"],
+input[type="mail"],
+textarea {
+	//background: #fdfbfc;
 }
 textarea#context {
 	min-height: 17em;

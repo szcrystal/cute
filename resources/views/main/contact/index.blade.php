@@ -92,7 +92,7 @@
                                     <td>
                                     	<div class="form-group{{ $errors->has('per_email') ? ' has-error' : '' }}">
                                             <div class="col-md-12">
-                                                <input id="per_email" type="per_email" class="form-control" name="per_email" value="{{ old('per_email') }}" required>
+                                                <input id="per_email" type="mail" class="form-control" name="per_email" value="{{ old('per_email') }}">
 
                                                 @if ($errors->has('per_email'))
                                                     <span class="help-block">
