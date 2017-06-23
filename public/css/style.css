@@ -250,7 +250,9 @@ body {
 }
 .carousel-item:nth-of-type(3) .carousel-caption {
 	color: thistle;
-    top: 2.5em;
+    top: 3.5em;
+    -webkit-transform: rotateZ(5deg);
+    transform: rotateZ(5deg);
 }
 .carousel-caption h3 {
 	font-size: 4.2em;
