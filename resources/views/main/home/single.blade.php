@@ -28,9 +28,6 @@ use App\User;
                 <div class="cont-wrap">
                 	<h2>{{ $atcl -> title }}</h2>
 
-
-
-
                     <div class="clear contents mt-5">
 
                         <div class="float-left">
@@ -50,7 +47,7 @@ use App\User;
                     <div class="map-wrap">
 
                         @if($atcl->address != '')
-                            <h4>MAP</h4>
+                            <h4>Map</h4>
                         	<div id="map" style="width:100%; height:500px; background:#fefcfb;" data-address="{{ $atcl->address }}"></div>
 
                             <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyCtPtTSkIY1yGa5Rt8klarv45YnPXVpenc&callback=initMap"></script>
