@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/contribute'; //Reset後は自動ログインされる
 
     /**
      * Create a new controller instance.
