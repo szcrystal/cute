@@ -69,8 +69,9 @@
 
 </div>
 
-
+<div class="pagination-wrap">
 {{ $features->links() }}
+</div>
 
 
 

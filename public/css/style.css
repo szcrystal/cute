@@ -3,6 +3,7 @@
 body {
 	min-width: 1200px;
     color: #515151;
+    background: #fdfefe;
 }
 
 
@@ -818,9 +819,14 @@ body {
 
 
 /* Pagination */
+.pagination-wrap {
+	width: 100%;
+    text-align: center;
+}
 .pagination {
 	font-size: 1.3em;
-    padding-left: 40%;
+    display: inline-block;
+    //padding-left: 40%;
     //border: 1px solid red;
 }
 .pagination li {

@@ -61,7 +61,9 @@
 
     </div>
 
+	<div class="pagination-wrap">
         {{ $atcls->links() }}
+    </div>
 
     </div>
 

@@ -52,8 +52,9 @@
 
 </div>
 
-
+<div class="pagination-wrap">
 {{ $models->links() }}
+</div>
 
 
 
