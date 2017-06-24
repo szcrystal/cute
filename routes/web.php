@@ -117,6 +117,12 @@ $this->post('contribute/logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('contribute/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('contribute/register', 'Auth\RegisterController@register');
 
+//Reset
+$this->get('contribute/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+$this->post('contribute/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+$this->get('contribute/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+$this->post('contribute/password/reset', 'Auth\ResetPasswordController@reset');
+
 //Index
 //Route::post('contribute/item', 'Model\HomeController@postItem');
 //Route::post('contribute/movie', 'Model\HomeController@postMovie');

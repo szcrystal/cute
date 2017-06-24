@@ -37,25 +37,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6">
+                        <div class="form-group clear">
+                            <div class="col-md-6 float-left">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 次回から自動でログイン
                                     </label>
                                 </div>
                             </div>
+
+							<div class="col-md-6 float-right text-right">
+                                <a class="" href="{{ url('contribute/password/reset') }}">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> パスワードを忘れた <i class="fa fa-question" aria-hidden="true"></i> 
+                                </a>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8">
-                                <button type="submit" class="btn btn-info">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-info col-md-12 mt-3">
                                     ログイン
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    パスワードを忘れた？
-                                </a>
+
                             </div>
                         </div>
                     </form>
