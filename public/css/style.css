@@ -241,6 +241,7 @@ body {
 }
 .carousel-item:first-of-type .carousel-caption {
 	color: lightskyblue;
+    font-size: 1.2em;
 }
 .carousel-item:nth-of-type(2) .carousel-caption {
 	color: pink;
@@ -250,6 +251,7 @@ body {
 }
 .carousel-item:nth-of-type(3) .carousel-caption {
 	color: thistle;
+    font-size: 1.4em;
     top: 3.5em;
     -webkit-transform: rotateZ(5deg);
     transform: rotateZ(5deg);
@@ -358,6 +360,7 @@ body {
     width: 60%;
     background-size: 120% auto;
     background-position: center;
+    font-size: 1.2em;
 }
 .feature:first-of-type article:nth-of-type(3) {
 	height: 50%;
@@ -406,6 +409,7 @@ body {
 	width: 90%;
 	top: 30%;
 	left: 2em;
+    font-size: 3.3em;
 }
 
 
@@ -493,6 +497,7 @@ body {
     height: 45%;
     width: 100%;
     background-size: 120% auto;
+    font-size: 1.3em;
 }
 .atcl:nth-of-type(3n+1) article .meta {
 	color: pink;
