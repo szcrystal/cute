@@ -240,7 +240,7 @@ body {
 /*  text-align: center;*/
 }
 .carousel-item:first-of-type .carousel-caption {
-	color: cornsilk;
+	color: lightskyblue;
 }
 .carousel-item:nth-of-type(2) .carousel-caption {
 	color: pink;
@@ -276,8 +276,8 @@ body {
 .top-cont h2 {
 	position: absolute;
     top: -0.6em;
-    left: 29%;
-    width: 42%;
+    left: 27%;
+    width: 46%;
     text-align: center;
     z-index: 99;
     font-size: 2.6em;
@@ -294,11 +294,12 @@ body {
 .top-cont:nth-of-type(2) h2 {
 	top: 0;
     left: 0.5em;
+    width: 38%;
     background: tomato;
     color: moccasin;
     
-	-webkit-transform: rotateZ(-6deg);
-    transform: rotateZ(-6deg);
+	-webkit-transform: rotateZ(-8deg);
+    transform: rotateZ(-8deg);
 }
 .top-cont article {
 	padding: 0;
@@ -322,7 +323,7 @@ body {
     //border: 2px solid red;
 }
 .top-cont article .meta {
-	color: aquamarine;
+	color: snow;
     text-shadow: 2px 2px 2px #000;
     font-size: 2.4em;
     position: absolute;
@@ -345,6 +346,9 @@ body {
     -webkit-text-orientation: upright;
     -ms-text-orientation: upright;
     text-orientation: upright;
+    -webkit-text-combine: horizontal;
+	-ms-text-combine-horizontal: all;
+	text-combine-upright: all;
 }
 .feature:first-of-type article:first-of-type .meta {
 	top: 2em;

@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             //$sum = array_sum($value);
             
             //if($musicId) {
-            	return ($sum+15) < Music::find($value)->second;
+            	return ($sum+3) < Music::find($value)->second;
             //}
             
         });
