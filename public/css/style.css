@@ -865,6 +865,7 @@ body {
 .pagination li:first-of-type a,
 .pagination li:last-of-type a {
 	color: #4FBFC1;
+    background: none;
 }
 
 
