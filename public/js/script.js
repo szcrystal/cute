@@ -262,11 +262,9 @@ var exe = (function() {
             var speed = 180;
            	var easing = 'linear';
            
-            console.log(len);
+            //console.log(len);
            
            	//$('.menu-dropdown').eq(1).slideToggle(200);
-           
-           
            
             $stateNav.on('click', function(e){
 				
@@ -299,9 +297,6 @@ var exe = (function() {
                 
                 
             });
-           
-
-           
            
         },
         
@@ -346,9 +341,23 @@ var exe = (function() {
         
         },
         
-        
-        
-        
+        searchSlide: function() {
+        	$input = $('.s-form input');
+           
+        	$('.btn-s').on('click', function(){
+            	if($input.is(':hidden')) {
+            		$input.show().animate({width:'20em', opacity:1}, 300, 'linear', function(){
+                
+                	});
+                }
+                else {
+                	$input.animate({width:0, opacity:0}, 300, 'linear', function(){
+                
+                	}).fadeOut(600);
+                
+                }
+            });
+        },
         
     } //return
 
@@ -364,6 +373,7 @@ $(function(e){ //ready
   
     exe.dropDown();
     exe.eventItem();
+    exe.searchSlide();
   
   	//exe.addClass();
   

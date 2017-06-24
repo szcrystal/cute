@@ -2,47 +2,45 @@
 
 <header class="site-header clear">
 	<!-- Branding Image -->
-    <h1 class="float-left"><a class="navbar-brand" href="{{ url('/') }}">
-		<?php
-        	use App\State;
-            use App\Setting;
-        	$path = Request::path();
-            $path = explode('/', $path);
-            
-            $stateName = '';
-            
-            $state = State::where('slug', $path[0])->first();
-            if(isset($state)) {
-            	$stateName = $state->name;
-            }
-            else {
-            	$stateName = Setting::first()->all_area; //env('AREA', '')
-            }
-            
-        ?>
+    <?php
+        use App\State;
+        use App\Setting;
+        $path = Request::path();
+        $path = explode('/', $path);
+        
+        $stateName = '';
+        $stateUrl = '';
+        
+        $state = State::where('slug', $path[0])->first();
+        if(isset($state)) {
+            $stateName = $state->name;
+            $stateUrl = $state->slug;
+        }
+        else {
+            $stateName = Setting::first()->all_area; //env('AREA', '')
+        }
+    ?>
 
-        {{ config('app.name', 'Cute.Campus') }} {{ $stateName }}
+    <h1 class="float-left"><a class="navbar-brand" href="{{ url('/'. $stateUrl) }}">
+        {{ config('app.name', 'Cute.Campus') }} <span>{{ $stateName }}</span>
     </a></h1>
 
-	<!--
-    <form class="my-1 my-lg-0" role="form" method="GET" action="{{ url('search') }}">
-        {{-- csrf_field() --}}
-        <div class="row">
-            <div class="col-md-12">
-            <div class="input-group">
-              <input type="search" class="form-control" name="s" placeholder="Search...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </div>
-        </div>
-    </form>
-    -->
+	<div class="float-right clear s-form">
+		<div class="float-left">
+            <form class="my-1 my-lg-0" role="form" method="GET" action="{{ url('search') }}">
+                {{-- csrf_field() --}}
 
-    <button style="display:inline;" class="btn float-right" type="submit">
-        <i class="fa fa-search"></i>
-    </button>
+                <div class="">
+                    <input type="search" class="form-control" name="s" placeholder="Search...">
+                </div>
+            </form>
+        </div>
+
+
+        <button class="btn btn-s float-left" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
 </header>
 
 

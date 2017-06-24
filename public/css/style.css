@@ -10,7 +10,7 @@ body {
 
 .site-header {
 	background: #50BFC2;
-    padding: 5px 10px;
+    padding: 5px 0 5px 10px;
     z-index: 10000;
 }
 .site-header h1 {
@@ -22,16 +22,7 @@ body {
 .site-header h1 a:hover {
 	color: #40979B;
 }
-.site-header .btn {
-	background: none;
-    padding: 0.5em 0.7em;
-    border: 1px solid #A1DBDD;
-    cursor: pointer;
-}
-.site-header .btn .fa {
-	color: #fff;
-    font-size: 1.3em;
-}
+
 .navbar {
 	background: skyblue;
 }
@@ -143,6 +134,39 @@ body {
 .dropdown-item:disabled {
 	background: none !important;
     color: #ccc !important;
+}
+
+
+.s-form input {
+	background: #3a3a3a;
+    color: #fff;
+    border-radius: 2em;
+    border: none;
+    width: 0;
+    position: relative;
+    //left: 5%;
+    z-index: 9;
+    display: none;
+    opacity: 0;
+    //padding: 0.1em 0.7em;
+}
+.s-form input:focus {
+	background: #3a3a3a;
+    color: #fff;
+	border: none;
+}
+.site-header .btn-s {
+	background: #50BFC2;
+    padding: 0.5em 0.8em;
+    position: relative;
+    z-index: 10;
+    border-radius: 0;
+    //border: 1px solid #A1DBDD;
+    cursor: pointer;
+}
+.site-header .btn-s .fa {
+	color: #fff;
+    font-size: 1.3em;
 }
 
 .btn-send {
