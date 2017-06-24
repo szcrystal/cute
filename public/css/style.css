@@ -817,6 +817,43 @@ body {
 }
 
 
+/* Pagination */
+.pagination {
+	font-size: 1.3em;
+    padding-left: 40%;
+    //border: 1px solid red;
+}
+.pagination li {
+	background: #4FBFC1;
+    margin-right: 0.2em;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    color: #7a7a7a;
+}
+.pagination li:hover {
+	opacity: 0.7;
+}
+.pagination li.active {
+	background: none;
+}
+.pagination li:first-of-type,
+.pagination li:last-of-type {
+	background: none;
+}
+.pagination li a {
+	color: #fff;
+}
+.pagination li a:hover {
+	text-decoration: none;
+}
+.pagination li:first-of-type a,
+.pagination li:last-of-type a {
+	color: #4FBFC1;
+}
+
+
 /* Tag */
 .rank-tag {
 	display: inline-block;
