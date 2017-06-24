@@ -68,7 +68,7 @@ class User extends Authenticatable
         {
             $message -> from($data['admin_email'], $data['admin_name'])
                      -> to($data['email'], $data['name'])
-                     -> subject('パスワードリセット用リンク');
+                     -> subject('Cute.Campus パスワードリセット用リンク');
             //$message->attach($pathToFile);
         });
     }
