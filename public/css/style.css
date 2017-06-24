@@ -826,12 +826,19 @@ body {
 .pagination {
 	font-size: 1.3em;
     display: inline-block;
-    //padding-left: 40%;
-    //border: 1px solid red;
+    width: auto;
+}
+.pagination:after {
+	display: block;
+    clear: both;
+    content: "";
+    height: 0;
 }
 .pagination li {
+	display: block;
+    float: left;
 	background: #4FBFC1;
-    margin-right: 0.2em;
+    margin-right: 0.15em;
     width: 1.5em;
     height: 1.5em;
     line-height: 1.5em;
@@ -850,6 +857,9 @@ body {
 }
 .pagination li a {
 	color: #fff;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }
 .pagination li a:hover {
 	text-decoration: none;
