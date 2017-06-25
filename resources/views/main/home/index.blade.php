@@ -40,6 +40,8 @@
             	<h3>{{ $feature->title }}</h3>
                 {{-- <p>{{ User::find($feature->model_id)->name }}</p> --}}
             </div>
+
+            <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
         </a>
     </article>
     @endforeach
@@ -68,6 +70,8 @@
             	<h3>{{ $pickUp->title }}</h3>
                 <p>{{ User::find($pickUp->model_id)->name }}</p>
             </div>
+
+            <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
         </a>
     </article>
     @endforeach
@@ -84,21 +88,24 @@
 
                 <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
 
-                @if($atcl->thumb_path == '')
-                    <span class="no-img">No Image</span>
-                @else
-                    <div class="main-thumb"></div>
-                @endif
+                    @if($atcl->thumb_path == '')
+                        <span class="no-img">No Image</span>
+                    @else
+                        <div class="main-thumb"></div>
+                    @endif
 
 
-                <?php
-                    $num = Ctm::isAgent('sp') ? 30 : 18;
-                ?>
+                    <?php
+                        $num = Ctm::isAgent('sp') ? 30 : 18;
+                    ?>
 
-                <div class="meta">
-                    <h3>{{ $atcl->title }}</h3>
-                    <p>{{ User::find($atcl->model_id)->name }}</p>
-                </div>
+                    <div class="meta">
+                        <h3>{{ $atcl->title }}</h3>
+                        <p>{{ User::find($atcl->model_id)->name }}</p>
+                    </div>
+
+                    <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+
                 </a>
             </article>
     	@endforeach

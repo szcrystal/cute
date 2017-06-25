@@ -1,15 +1,16 @@
 <footer id="colop">
 	<div class="container clear">
-    	<div class="col-md-3 float-left mt-3">
 
+        <div class="float-left foot-wrap">
+        	<div>
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Cute.Campus') }}
-                {{ env('AREA', '') }}
             </a>
-            <div>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</div>
-
+            <p>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</p>
+            </div>
         </div>
-        <div class="col-md-7 float-left mt-3">
+
+        <div class="float-left foot-wrap">
         	<?php
             	use App\Fix;
             	$fixes = Fix::where('open_status', 1)->orderBy('id', 'asc')->get();
@@ -26,15 +27,16 @@
                 </a></li>
 				@endforeach
 
-                <li class="nav-link"><a href="{{ url('/contact') }}">Contact</a></li>
+                <li class="nav-link"><a href="{{ url('/contact') }}">お問合わせ</a></li>
             </ul>
             @endif
         </div>
 
-        <div class="col-md-2 float-left mt-5">
-			<div class="small">運営会社<br>
-				株式会社ロコフル<br>
-				<a href="http://locofull.jp">http://locofull.jp</a>
+        <div class="float-right foot-wrap">
+			<div class="text-center">
+            	<h6>ー 運営会社 ー</h6>
+                <img src="{{ url('images/lcfl_logo.png') }}" alt="株式会社ロコフル">
+				<a href="http://locofull.jp" target="_brank">locofull.jp</a>
             </div>
         </div>
 

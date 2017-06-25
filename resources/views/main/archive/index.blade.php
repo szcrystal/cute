@@ -10,7 +10,7 @@
         @elseif($type == 'tag')
 			<h2>タグ {{ $archiveObj->name }}</h2>
 		@elseif($type == 'search')
-			<h2>Search {{ $archiveObj->name }}</h2>
+			<h2>Search {{ $searchStr }}</h2>
         @endif
 
 
