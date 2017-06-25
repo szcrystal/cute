@@ -210,10 +210,10 @@ body {
 #main.fix-page {
 	width: 1000px;
     margin-bottom: 4em;
+    margin-top: 120px;
 }
 #main.archive-index,
-#main.feature-index,
-#main.fix-page {
+#main.feature-index {
 	margin-top: 108px;
 }
 .single {
@@ -268,17 +268,20 @@ body {
 /*  text-align: center;*/
 }
 .carousel-item:first-of-type .carousel-caption {
-	color: lightskyblue;
+	//color: lightskyblue;
+    color: #fff;
     font-size: 1.2em;
 }
 .carousel-item:nth-of-type(2) .carousel-caption {
-	color: pink;
+	//color: pink;
+    color: #fff;
     left: 1em;
     top: 4.5em;
     //bottom: 2.5em !important;
 }
 .carousel-item:nth-of-type(3) .carousel-caption {
-	color: thistle;
+	//color: thistle;
+    color: #fff;
     font-size: 1.4em;
     top: 3.5em;
     -webkit-transform: rotateZ(5deg);

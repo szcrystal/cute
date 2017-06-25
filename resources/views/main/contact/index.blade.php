@@ -46,7 +46,7 @@
                             
                             <tbody>
                                 <tr>
-                                	<th>お問い合わせ内容 <em class="text-danger">*</em></th>
+                                	<th>お問合わせ種別 <em class="text-danger">*</em></th>
                                     <td>
 										<div class="form-group{{ $errors->has('askcate_id') ? ' has-error' : '' }}">
 
