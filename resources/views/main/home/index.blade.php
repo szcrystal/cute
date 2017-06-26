@@ -19,7 +19,12 @@
     use App\FeatureCategory;
 ?>
 
+@if(Ctm::isAgent('sp'))
+<section class="top-cont clear">
+@else
 <section class="top-cont feature clear">
+@endif
+
 <h2>特集</h2>
     @foreach($features as $feature)
     <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
@@ -47,8 +52,12 @@
     @endforeach
 </section>
 
-
+@if(Ctm::isAgent('sp'))
+<section class="top-cont clear">
+@else
 <section class="top-cont pickup clear">
+@endif
+
 <h2>Pick Up</h2>
 <div>
 	@foreach($pickUps as $pickUp)
@@ -80,7 +89,12 @@
 
 
 @foreach($atcls as $key => $obj)
+	@if(Ctm::isAgent('sp'))
+    <section class="top-cont clear">
+    @else
     <section class="top-cont atcl clear">
+    @endif
+    
 		<h2>{{ $key }}</h2>
 		<div class="clear">
     	@foreach($obj as $atcl)

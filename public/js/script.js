@@ -68,34 +68,7 @@ var exe = (function() {
             return bool;
         },
         
-        toggleSp: function() {
-        	$('.navbar .fa-search').on('click', function(){
-            	$('.searchform').slideToggle(150);
-            });
-           
-            var t;
-            $('.navbar .fa-bars').on('click', function(){
-            	var $leftbar = $('#left-bar');
-                
-                var h = $(window).height();
-                $leftbar.find('.panel-body').css({height:h-60});
-
-            	if($leftbar.is(':visible')) {
-                	$leftbar.stop().animate({left:'-200px'}, 80, 'linear', function(){
-                    	$(this).hide(0);
-                        $('html,body').css({position:'static'}).scrollTop(t);
-                    });
-                }
-                else {
-                	t = $(window).scrollTop();
-            		$leftbar.show(50, function(){
-                    	$(this).stop().animate({left:0}, 100);
-                        $('html,body').css({position:'fixed', top:-t}); //overflow:'hidden',
-                    });
-                }
-                //$('.navbar-brand').text(t);
-            });
-        },
+        
         
         
         put: function(tag, argText) {
@@ -254,14 +227,31 @@ var exe = (function() {
             return str;
         },
         
+        
+        toggleSp: function() {
+        	$('.navbar .fa-search').on('click', function(){
+            	$('.searchform').slideToggle(150);
+            });
+           
+            //var t;
+            $('.site-header .fa-bars').on('click', function(){
+            	$('.main-navigation').slideToggle(250, 'linear', function(){
+                	$('.menu-dropdown').hide();
+                });
+                
+            });
+        },
+        
+        
         dropDown: function() {
         	var $stateNav = $('.state-nav li');
-        	var len = $stateNav.length;
+        	//var len = $('.state-nav li').length;
             var num = 0;
            
-            var speed = 180;
+            var speed = 200;
            	var easing = 'linear';
            
+           	var hideSpeed = this.isSpTab('sp') ? 150 : 0;
             //console.log(len);
            
            	//$('.menu-dropdown').eq(1).slideToggle(200);
@@ -283,12 +273,11 @@ var exe = (function() {
                 }
                 else {
                 
-                    $('.menu-dropdown').hide(0, function(){
+                    $('.menu-dropdown').slideUp(hideSpeed, function(){
                         $stateNav.removeClass('nav-active');
                         $clickThis.addClass('nav-active');
                         
                         $('.menu-dropdown').eq(n).slideDown(speed, easing, function() {
-                        	
                             $(this).queue([]).stop();
                         });
                     
@@ -366,7 +355,7 @@ var exe = (function() {
 
 $(function(e){ //ready
     
-    exe.autoComplete();
+    //exe.autoComplete();
     
     exe.scrollFunc();
     exe.toggleSp();
@@ -376,9 +365,6 @@ $(function(e){ //ready
     exe.searchSlide();
   
   	//exe.addClass();
-  
-  
-
 });
 
 

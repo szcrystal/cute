@@ -2,11 +2,8 @@
 <body>
 
     <div id="app">
-    	@if(Ctm::isAgent('sp'))
-			@include('shared.headNavSp')
-        @else
-        	@include('shared.headNav')
-        @endif
+
+        @include('shared.headNav')
 
 		<div class="container wrap-all">
 			<div class="">
