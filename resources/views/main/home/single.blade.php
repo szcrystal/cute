@@ -114,18 +114,20 @@ use App\User;
 
                                 <tr>
                                     <th>エリア</th>
-                                    <td><a href="{{ url($stateObj->slug) }}">{{ $stateObj->name }}</a></td>
+                                    <td><span class="rank-tag"><a href="{{ url($stateObj->slug) }}">{{ $stateObj->name }}</a></span></td>
                                 </tr>
 
                                 <tr>
                                     <th>カテゴリー</th>
                                     <td>
                                     @if($cateObj)
+                                    	<span class="rank-tag">
                                     	@if(isset($feature))
 											<a href="{{ url($stateObj->slug .'/feature/' . $cateObj->slug) }}">{{ $cateObj->name }}</a>
                                         @else
                                     		<a href="{{ url($stateObj->slug .'/' . $cateObj->slug) }}">{{ $cateObj->name }}</a>
                                         @endif
+                                        </span>
                                     @endif
                                     </td>
                                 </tr>
