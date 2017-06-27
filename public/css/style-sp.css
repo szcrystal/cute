@@ -55,13 +55,25 @@
     	min-height: 300px;
     }
 
-    #main {
+    #main,
+    #main.fix-page {
         width: 100%;
+    }
+    .single,
+    .single .cont-wrap {
+    	width: 100%;
+    }
+    .single {
+        margin-top: 35px;
     }
     
     .site-header .fa-bars {
     	color: #fff;
         font-size: 3em;
+    }
+    
+    .navbar-brand {
+    	margin-top: 0.2em;
     }
     
     .carousel {
@@ -116,7 +128,20 @@
         right: 0 !important;
     }
     
-    
+    .movie-frame {
+    	width: 100%;
+    	height: auto;
+    }
+    .movie-frame iframe {
+    	width: 100%;
+    }
+    .single .contents div {
+    	float: none;
+        width: 100%;
+    }
+    .single .contents h4 {
+    	margin-top: 1em;
+    }
     
     
     .searchform {
@@ -154,9 +179,7 @@
     }
     
     
-    .movie-frame iframe {
-    	width: 100%;
-    }
+
     .single .table tbody tr th {
     	font-size: 0.75em;
         font-weight: normal;

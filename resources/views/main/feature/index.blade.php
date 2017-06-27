@@ -29,7 +29,11 @@
         @foreach($features as $feature)
 
 		@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
-		<div class="top-cont feature clear">
+			@if(Ctm::isAgent('sp'))
+			<div class="top-cont clear">
+            @else
+            <div class="top-cont feature clear">
+            @endif
         @endif
 
         <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
@@ -50,6 +54,8 @@
                     <h3>{{ $feature->title }}</h3>
                     <p>{{ User::find($feature->model_id)->name }}</p>
                 </div>
+
+                <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
             </a>
         </article>
 

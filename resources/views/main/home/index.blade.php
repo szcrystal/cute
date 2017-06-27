@@ -94,7 +94,7 @@
     @else
     <section class="top-cont atcl clear">
     @endif
-    
+
 		<h2>{{ $key }}</h2>
 		<div class="clear">
     	@foreach($obj as $atcl)
