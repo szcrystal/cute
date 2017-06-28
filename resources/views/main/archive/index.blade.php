@@ -47,6 +47,8 @@
                     <h3>{{ $atcl->title }}</h3>
                     <p>{{ User::find($atcl->model_id)->name }}</p>
                 </div>
+
+                <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
         	</a>
     	</article>
     @endforeach

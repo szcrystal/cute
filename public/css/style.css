@@ -243,7 +243,7 @@ a {
 }
 .carousel img {
 	width: 100%;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .carousel-inner a {
@@ -362,7 +362,7 @@ a {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: rgba(151,147,130,0.45);
+    background: rgba(151,147,130,0.2);
     -webkit-transition: all ease-in-out .15s;
     transition: all ease-in-out .15s;
     //border: 2px solid red;
@@ -384,7 +384,7 @@ a {
     transform: rotateZ(360deg);
 }
 .top-cont article .meta {
-	color: snow/*#CFEBF4*/;
+	color: #fff/*#CFEBF4*/;
     text-shadow: 1px 1px 1px #888;
     font-size: 2.4em;
     position: absolute;

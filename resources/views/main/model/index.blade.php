@@ -38,6 +38,8 @@
             <div class="meta">
             	<h3>{{ $model->name }}＠{{ $model->school }}</h3>
             </div>
+
+            <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
         </a>
     </article>
     @endforeach
