@@ -360,7 +360,7 @@ a {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: rgba(171,166,147,0.35);
+    background: rgba(151,147,130,0.45);
     -webkit-transition: all ease-in-out .15s;
     transition: all ease-in-out .15s;
     //border: 2px solid red;
@@ -382,7 +382,7 @@ a {
     transform: rotateZ(360deg);
 }
 .top-cont article .meta {
-	color: snow;
+	color: snow/*#CFEBF4*/;
     text-shadow: 1px 1px 1px #888;
     font-size: 2.4em;
     position: absolute;
@@ -590,7 +590,7 @@ a {
     font-size: 1.3em;
 }
 .atcl:nth-of-type(3n+1) article .meta {
-	color: pink;
+	color: #fff;/*pink*/
 }
 
 
@@ -627,7 +627,7 @@ a {
     font-size: 1.2em;
 }
 .atcl:nth-of-type(3n+2) article .meta {
-	color: blanchedalmond;
+	color: snow/*blanchedalmond*/;
 }
 
 
