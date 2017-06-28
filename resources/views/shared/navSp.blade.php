@@ -19,7 +19,7 @@
                 <div class="menu-dropdown clear" aria-labelledby="dropdown01" role="menu">
                     <div class="col-md-12">
                         <ul class="clear">
-                            <li><a href="{{ url('/') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 四国 TOP</a>
+                            <li><a href="{{ url('/') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> TOP</a>
                             <li><a href="{{ url('all/model') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> モデル</a>
                         </ul>
                     </div>

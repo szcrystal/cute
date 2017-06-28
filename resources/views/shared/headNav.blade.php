@@ -18,7 +18,8 @@
             $stateUrl = $state->slug;
         }
         else {
-            $stateName = Setting::first()->all_area; //env('AREA', '')
+            //$stateName = Setting::first()->all_area; //env('AREA', '')
+            $stateName = '';
         }
     ?>
 
