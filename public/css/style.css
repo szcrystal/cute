@@ -342,7 +342,7 @@ a {
 	top: 0;
     left: 0.5em;
     width: 38%;
-    background: #FF694E;
+    background: #FF694E; /*tomato*/
     color: moccasin;
     
 	-webkit-transform: rotateZ(-8deg);
@@ -1060,8 +1060,15 @@ a {
 .ctd {
 	background: #fefcfd;
 }
+.req-wrap {
+	margin-bottom: 0.7em;
+}
 .table th {
 	color: #6a6a6a;
+}
+.req-wrap em,
+.table th em {
+	font-size: 1.1em;
 }
 input[type="text"],
 input[type="mail"],

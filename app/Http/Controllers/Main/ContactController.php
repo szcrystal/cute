@@ -62,10 +62,28 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $rules = [
+        	'askcate_id' => 'required',
             'per_name' => 'required|max:255',
             'per_email' => 'required|email|max:255', /* |unique:admins 注意:unique */
-            'askcate_id' => 'required',
+            'tel_num' => 'required|max:255',
 //            'admin_password' => 'required|min:6',
+        ];
+        
+        if($request->input('askcate_id') == 1) {
+        	$addArr = [
+            	'age' => 'required|max:255',
+                'school' => 'required|max:255',
+            ];
+            
+            $rules = array_merge($rules, $addArr);
+        }
+        
+        $message = [
+        	'askcate_id.required' => '「お問合わせ種別」は必須です。',
+//            'per_name.required' => '「お問合わせ種別」は必須です。',
+//            'per_email.required' => '「お問合わせ種別」は必須です。',
+//            'per_name.required' => '「お問合わせ種別」は必須です。',
+//            'per_email.required' => '「お問合わせ種別」は必須です。',
         ];
         
         $this->validate($request, $rules);

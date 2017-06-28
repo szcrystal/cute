@@ -76,145 +76,7 @@ var exe = (function() {
             console.log("CheckText is『 %s 』" , argText);
         },
         
-        autoComplete: function() {
-           
-            var data = [];
-           
-           	function addTagOnArea(target, text, groupId, val=0) {
-           		var $tagArea = $(target).siblings('.tag-area');
-           		var bool = true;
-           
-                $tagArea.find('.text-danger').remove();
-           
-                $tagArea.find('span').each(function(){
-                	var preTag = $(this).text();
-
-                	if(text == preTag) {
-                    	bool = false;
-                    }
-                });
-           
-           		if(bool) {
-                	//$tagArea.append('<span data-text="'+text+'" data-group="'+groupId+'" data-value="'+val+'"><em>' + text + '</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>');
-                    $tagArea.append('<span><em>' + text + '</em><i class="fa fa-times del-tag" aria-hidden="true"></i></span>');
-           			$tagArea.append('<input type="hidden" name="'+groupId+'[]" value="'+text+'">');
-                }
-                else {
-           			$tagArea.prepend('<p class="text-danger"><i class="fa fa-exclamation" aria-hidden="true"></i> 既に追加されているタグです</p>');
-                }
-           
-                return bool;
-            }
-           
-            $(document).delegate('.del-tag', 'click', function(e){
-                var $span = $(e.target).parent('span');
-//                if($span.data('value'))
-//                	data[$span.data('group')].splice($span.data('value'), 0, $span.data('text')); //or push
-                
-                $span.next('input').remove(); //先にinputをremove
-                $span.fadeOut(150).remove();
-            });
-           
-           
-            $('.tag-control').each(function(){
-            	var group = $(this).attr('id');
-                var tagList = $(this).siblings('span').text();
-                //$('.panel-heading').text(tagList);
-
-                data[group] = tagList.split(',');
-                var $tagInput = $('#' + group);
-                
-                $tagInput.autocomplete({
-                    source: data[group],
-                    autoFocus: true,
-                    delay: 50,
-                    minLength: 1,
-                    
-                    select: function(e, ui){
-                    	var $num = data[group].indexOf(ui.item.value); //配列内の位置
-                        var bool = addTagOnArea(e.target, ui.item.value, group, $num);
-                        if(bool) {
-//                        	if($num != -1)
-//                            	data[group].splice($num, 1); //リストから削除
-	                        
-                            ui.item.value = '';
-                        }
-                    },
-                    
-                    response: function(e, ui){
-                    	//$('.panel-heading').text(ui.content['label']);
-                    	//if(ui.content == '') {
-                        	$(e.target).siblings('.add-btn:hidden').fadeIn(50).css({display:'inline-block'});
-                            //console.log('response');
-                        //}
-                        //else {
-                        //	$(e.target).siblings('.add-btn').fadeOut(100);
-                        //}
-                        
-                        //$(this).autocomplete('widget')
-                    },
-                    close: function(e, ui){
-                    	/*
-                    	if($(e.target).val().length > 1) {
-                        	$(e.target).siblings('.add-btn').fadeIn(100).css({display:'inline-block'});
-                        }
-                        */
-                    },
-                    focus: function(e, ui){
-						//console.log(ui.item);
-                    },
-                    search: function(e, ui){
-                    },
-                    change: function(e, ui) {
-                    	console.log(ui);
-                    },
-                    
-            	}); //autocomplete
-
-                
-                $tagInput.next('.add-btn').on('click keydown', function(event){
-                	//console.log(event.which);
-                	if (event.which == 1 || event.which == 13) {
-                        var texts = $('#' + group).val();
-                        
-                        var bool = addTagOnArea('#' + group, texts, group);
-                        if(bool) {
-                        	$tagInput.val('');
-                        	$(this).fadeOut(100);
-                        }
-                    }
-                });
-                
-                $tagInput.on('keydown keyup', function(event){ //or keypress
-                	if(event.which == 13) {//40
-                    	if(event.type=='keydown') { // && $('.ui-menu').is(':hidden')
-                        	var texts = $(this).val();
-                            if(texts != '') {
-                        		if(addTagOnArea(this, texts, group)) { //tag追加
-                             		$(this).val('');
-                                    //$(this).next('.add-btn:visible').fadeOut(50);
-                                }
-                             
-                                $('.ui-autocomplete').hide();                             
-                            }
-                        }
-                    	event.preventDefault();
-                    }
-                    
-                    //if($(this).val().length < 2) { //event.which == 8 &&
-                    if(event.type=='keyup' && $(this).val().length < 1) {
-                		$(this).next('.add-btn').fadeOut(10);
-                        $(this).siblings('.tag-area').find('.text-danger').remove();
-                	}
-                    
-                    if(event.which != 13 && event.which != 8 && $(this).val().length > 0) {
-                    	$(this).siblings('.add-btn:hidden').fadeIn(50).css({display:'inline-block'});
-                    }
-                });
-            
-            }); //each function
-           
-        },
+        
         
         addClass: function() {
         	//$('.add-item').find('.item-panel').eq(0).addClass('first-panel');
@@ -235,7 +97,20 @@ var exe = (function() {
            
             //var t;
             $('.site-header .fa-bars').on('click', function(){
-            	$('.main-navigation').slideToggle(250, 'linear', function(){
+            	
+                var $nav = $('.main-navigation');
+                var t = $(window).scrollTop();
+                
+                if($nav.is(':visible')) {
+                	var top = $nav.data('top');
+                    $('html,body').css({position:'static'}).scrollTop(top);
+                }
+                else {
+                    $('html,body').css({position:'fixed', top:-t});
+                    $nav.data('top', t);
+                }
+
+            	$nav.slideToggle(250, 'linear', function(){
                 	$('.menu-dropdown').hide();
                 });
                 

@@ -77,11 +77,13 @@
     }
     
     .carousel {
-    	height: 400px;
+    	height: 250px;
     }
     
     .main-navigation {
     	display: none;
+        overflow-y: scroll;
+        height: 500px;
     }
     .main-navigation > ul > li {
     	float: none;
@@ -103,6 +105,7 @@
     	width: 100%;
         border-bottom: 0;
         display: none;
+        //overflow-y: scroll;
     }
 
     .dropdown-item {
@@ -113,19 +116,29 @@
     .top-cont {
     	height: auto;
     }
+    .top-cont h2 {
+    	font-size: 1.8em;
+        left: 0.5em;
+        width: auto;
+        padding: 5px 1em;
+    }
     .top-cont article {
     	width: 100%;
         height: 250px;
         float: none;
         background-size: 120% auto;
     }
-    .top-cont article .meta {
+    .top-cont article .meta,
+    .top-cont article a:hover .meta {
     	font-size: 1em;
         width: 90%;
         top: auto;
         left: auto;
         bottom: 0 !important;
         right: 0 !important;
+    }
+    .top-cont article span {
+    	display: none;
     }
     
     .movie-frame {
@@ -161,9 +174,25 @@
     }
     
     
+    /* Archive */
+    .archive-index h2,
+	.feature-index h2,
+    .model-index h2 {
+    	width: auto;
+        padding: 5px 1em;
+        font-size: 1.4em;
+        -webkit-transform: none;
+        transform: none;
+    }
     
+    
+    
+/*    .contact .table-responsive {*/
+/*    	width: 100%;*/
+/*    }*/
     .contact .table {
     	border: none;
+        //width: 90%;
     }
     .contact .table tbody tr th {
     	width: 100%;
@@ -176,6 +205,11 @@
         display: block;
         border: none;
         padding: 0;
+    }
+    .contact input,
+    .contact select,
+    .contact textarea {
+    	width: 100%;
     }
     
     
@@ -216,24 +250,29 @@
     }
     
     #colop .foot-wrap:first-of-type {
-        width: 77%;
+        width: 90%;
 		float: none;
         -webkit-transform: rotateZ(0);
     	transform: rotateZ(0);
     }
 
     #colop .foot-wrap:nth-of-type(2) {
-        width: 62%;
+        width: 54%;
     }
     #colop .foot-wrap:last-of-type {
-        width: 30%;
+        width: 35%;
         float: none;
         margin-top: 2em;
     }
+    #colop ul {
+    	margin: 1em 0 0;
+        padding: 0;
+    }
     #colop ul li {
+    	float: none;
     	font-size: 0.9em;
         padding-left: 0;
-        padding-right: 1.4em;
+        padding-right: 0;
     }
     #colop ul li:first-of-type {
     	padding-left: 0;

@@ -113,6 +113,12 @@ return [
         'password' => '「パスワード」', //for login register
         'user_name' => '「お名前」', // forお問い合わせ
         'user_email' => '「メールアドレス」',// forお問い合わせ
+        'per_name' => '「お名前」', // forお問い合わせ
+        'per_email' => '「メールアドレス」',// forお問い合わせ
+        'askcate_id' => '「お問合わせ種別」',
+        'tel_num' => '「電話番号」',
+        'age' => '「年齢」',
+        'school' => '「学校」',
         'ask_category' => 'お問合わせ内容',
         'name' => '「名前」',
         'email' => '「メールアドレス」',

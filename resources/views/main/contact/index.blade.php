@@ -29,14 +29,15 @@
                         </div>
                     @endif
 
-					<div class="table-responsive col-md-12 mx-auto">
+					<div class="table-responsive mx-auto">
                     	<form class="form-horizontal" role="form" method="POST" action="/contact" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            <input type="hidden" name="done_status" value="0">
 
-                        <span><em class="text-danger">*</em> 必須項目</span>
-                        <span><em class="text-primary">*</em> モデル応募時必須</span>
+						<div class="req-wrap">
+                        	<span><em class="text-danger">*</em> 必須項目</span>
+                        	<span><em class="text-primary">*</em> モデル応募時必須</span>
+                        </div>
 
                         <table class="table table-bordered">
                             <colgroup>
@@ -59,7 +60,7 @@
                                                     </select>
 
                                                     @if ($errors->has('askcate_id'))
-                                                        <span class="help-block">
+                                                        <span class="help-block text-danger">
                                                             <strong>{{ $errors->first('askcate_id') }}</strong>
                                                         </span>
                                                     @endif
@@ -75,10 +76,10 @@
                                     	<div class="form-group{{ $errors->has('per_name') ? ' has-error' : '' }}">
 
                                             <div class="col-md-12">
-                                                <input id="per_name" type="text" class="form-control" name="per_name" value="{{ old('per_name') }}" required>
+                                                <input id="per_name" type="text" class="form-control" name="per_name" value="{{ old('per_name') }}">
 
                                                 @if ($errors->has('per_name'))
-                                                    <span class="help-block">
+                                                    <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('per_name') }}</strong>
                                                     </span>
                                                 @endif
@@ -95,13 +96,65 @@
                                                 <input id="per_email" type="mail" class="form-control" name="per_email" value="{{ old('per_email') }}">
 
                                                 @if ($errors->has('per_email'))
-                                                    <span class="help-block">
+                                                    <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('per_email') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
                                     	</div>
                                     </td>
+                                </tr>
+
+                                <tr>
+                                	<th>電話番号 <em class="text-danger">*</em></th>
+                                    <td>
+                                    	<div class="form-group{{ $errors->has('tel_num') ? ' has-error' : '' }}">
+
+                                            <div class="col-md-12">
+                                                <input id="tel_num" type="text" class="form-control" name="tel_num" value="{{ old('tel_num') }}">
+
+                                                @if ($errors->has('tel_num'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('tel_num') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                    	</div>
+                    				</td>
+                                </tr>
+
+                                <tr>
+                                	<th>郵便番号</th>
+                                    <td>
+                                    	<div class="form-group{{ $errors->has('post_num') ? ' has-error' : '' }}">
+                                            <div class="col-md-12">
+                                                <input id="post_num" type="text" class="form-control" name="post_num" value="{{ old('post_num') }}">
+
+                                                @if ($errors->has('post_num'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('post_num') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                    	</div>
+                    				</td>
+                                </tr>
+
+                                <tr>
+                                	<th>住所</th>
+                                    <td>
+                                    	<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                            <div class="col-md-12">
+                                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}">
+
+                                                @if ($errors->has('address'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('address') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                    	</div>
+                    				</td>
                                 </tr>
 
                                 <tr>
@@ -113,7 +166,7 @@
                                                 <input id="age" type="text" class="form-control" name="age" value="{{ old('age') }}">
 
                                                 @if ($errors->has('age'))
-                                                    <span class="help-block">
+                                                    <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('age') }}</strong>
                                                     </span>
                                                 @endif
@@ -131,60 +184,8 @@
                                                 <input id="school" type="text" class="form-control" name="school" value="{{ old('school') }}">
 
                                                 @if ($errors->has('school'))
-                                                    <span class="help-block">
+                                                    <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('school') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                    	</div>
-                    				</td>
-                                </tr>
-
-                                <tr>
-                                	<th>電話番号 <em class="text-danger">*</em></th>
-                                    <td>
-                                    	<div class="form-group{{ $errors->has('tel_num') ? ' has-error' : '' }}">
-
-                                            <div class="col-md-12">
-                                                <input id="tel_num" type="text" class="form-control" name="tel_num" value="{{ old('tel_num') }}">
-
-                                                @if ($errors->has('tel_num'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('tel_num') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                    	</div>
-                    				</td>
-                                </tr>
-
-                                <tr>
-                                	<th>郵便番号</th>
-                                    <td>
-                                    	<div class="form-group{{ $errors->has('post_num') ? ' has-error' : '' }}">
-                                            <div class="col-md-12">
-                                                <input id="post_num" type="text" class="form-control" name="post_num" value="{{ old('post_num') }}">
-
-                                                @if ($errors->has('post_num'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('post_num') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                    	</div>
-                    				</td>
-                                </tr>
-
-                                <tr>
-                                	<th>住所</th>
-                                    <td>
-                                    	<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                            <div class="col-md-12">
-                                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}">
-
-                                                @if ($errors->has('address'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('address') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -216,6 +217,12 @@
                                                 <label for="post_thumb" class="col-md-12">写真１</label><br>
                                                 <div class="col-md-12">
                                                     <input id="pic_1" class="post_thumb thumb-file" type="file" name="pic_1">
+
+                                                    @if ($errors->has('pic_1'))
+                                                        <span class="help-block text-danger">
+                                                            <strong>{{ $errors->first('pic_1') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -242,6 +249,11 @@
                                                 <label for="post_thumb" class="col-md-12">写真２</label><br>
                                                 <div class="col-md-12">
                                                     <input id="pic_2" class="post_thumb thumb-file" type="file" name="pic_2">
+                                                    @if ($errors->has('pic_2'))
+                                                        <span class="help-block text-danger">
+                                                            <strong>{{ $errors->first('pic_2') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -256,7 +268,7 @@
                                                 <textarea id="context" class="form-control" name="context">{{ old('context') }}</textarea>
 
                                                 @if ($errors->has('context'))
-                                                    <span class="help-block">
+                                                    <span class="help-block text-danger">
                                                         <strong>{{ $errors->first('context') }}</strong>
                                                     </span>
                                                 @endif
@@ -265,10 +277,10 @@
                                     </td>
                                 </tr>
 
-
-
                             </tbody>
                 		</table>
+
+
                         <div class="form-group">
                             <div class="col-md-4 mx-auto">
                                 <button type="submit" class="btn btn-send col-md-12">SEND</button>
