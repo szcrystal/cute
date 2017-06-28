@@ -55,15 +55,18 @@ a {
     background: red;
 }
 .navbar-nav .nav-item {
-	padding: 0;
-    width: 66px !important;
-    border-right: 1px solid #fff;
+/*	padding: 0;*/
+/*    font-size: 0.9em;*/
+/*    //width: 66px !important;*/
+/*    border-right: 1px solid #fff;*/
 }
 .navbar-nav .nav-item .nav-link {
 	color: #fff !important;
-    font-size: 1.0em;
+    font-size: 0.9em;
     font-weight: bold;
     padding: 0;
+    width: 66px;
+    border: 1px solid red;
 }
 .input-group .form-control {
 	border: 1px solid #f7f7f7;
@@ -77,6 +80,9 @@ a {
     border-left: 1px solid #ddd;
 }
 
+.main-navigation {
+	min-width: 1200px;
+}
 .main-navigation > ul {
 	width: 100%;
     list-style: none;
@@ -87,11 +93,13 @@ a {
 }
 .main-navigation > ul > li {
 	float: left;
-    padding: 0.3em 2em;
+    width: 5.5%;
+    padding: 0.3em 0;
     border-right: 1px solid #fff;
     cursor: pointer;
     color: #fff;
-    font-size: 1.05em;
+    font-size: 1.0em;
+    text-align: center;
     //position: relative;
     //font-weight: bold;
 }
@@ -330,7 +338,7 @@ a {
     width: 100%;
     text-align: center;
     z-index: 99;
-    font-size: 2.2em;
+    font-size: 2.1em;
 /*    background: #4FBFC1;*/
 /*    color: #BAE8E8;*/
 	background: #FFBF48;
@@ -515,7 +523,7 @@ a {
 	background: orange;
 }
 .top-cont:nth-of-type(6) h2 {
-	background: purple;
+	background: orchid;
 }
 .top-cont:nth-of-type(7) h2 {
 
