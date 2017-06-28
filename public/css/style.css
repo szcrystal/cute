@@ -55,7 +55,8 @@ a {
     background: red;
 }
 .navbar-nav .nav-item {
-	padding: 0 1.5em;
+	padding: 0;
+    width: 66px !important;
     border-right: 1px solid #fff;
 }
 .navbar-nav .nav-item .nav-link {
@@ -349,6 +350,21 @@ a {
     
 /*	-webkit-transform: rotateZ(-8deg);*/
 /*    transform: rotateZ(-8deg);*/
+}
+.top-cont h2:first-of-type {
+	background: skyblue;
+}
+.top-cont h2:nth-of-type(2) {
+	background: deeppink;
+}
+.top-cont h2:nth-of-type(3) {
+	background: orange;
+}
+.top-cont h2:nth-of-type(4) {
+	background: purple;
+}
+.top-cont h2:nth-of-type(5) {
+
 }
 .top-cont article {
 	padding: 0;
