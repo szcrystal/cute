@@ -1,43 +1,72 @@
 @import url('style.css');
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1170px) {
 	body {
     	min-width: 100%;
-    	font-size: 14px;
+    	font-size: 12px;
     }
+    .navbar-brand span {
+    	font-size: 1.1em;
+    }
+    #main,
+    #main.fix-page {
+        width: 100%;
+    }
+    .single,
+    .single .cont-wrap {
+    	width: 100%;
+    }
+    #main.fix-page {
+        margin-bottom: 4em;
+        margin-top: 120px;
+    }
+    #main.archive-index,
+    #main.feature-index {
+        margin-top: 108px;
+    }
+    .single {
+        margin-top: 75px;
+    }
+
     .container {
         min-width: 100%;
     }
     
-    #main {
-    	width: 100%;
+    .carousel {
+    	height: 450px;
+    }
+    .top-cont {
+		height: 500px;
+    }
+    .top-cont article span {
+    	display: none;
+    }
+	.top-cont article .meta,
+    .top-cont article a:hover .meta {
+    	font-size: 2em;
+        width: 90%;
     }
     
-    .navbar-toggleable-md .navbar-nav .dropdown-menu {
-        position: absolute;
-        float: none;
+    .movie-frame {
+    	width: 100%;
+    	height: auto;
     }
-    .navbar-nav {
-    	margin-top: 0.4em;
+    .movie-frame iframe {
+    	width: 100%;
+        height: 530px;
+    }
+    
+    .archive article {
+    	height: 250px;
+    }
+    .archive article .meta {
+    	font-size: 1.5em;
     }
 
 
-    .thumb-wrap .form-group .col-md-10 {
-    	max-width: 100%;
-    }
     .thumb-prev .no-img {
         line-height: 170px;
-    }
-    .mp-edit .panel-heading .float-left,
-    .mp-create .panel-heading .float-left {
-    	float: none !important;
-    }
-    .mp-edit .panel-heading .float-right,
-    .mp-create .panel-heading .float-right {
-    	float: none !important;
-        text-align: center;
-        margin-top: 1.5em;
     }
     
     
@@ -55,13 +84,13 @@
     	min-height: 300px;
     }
 
-    #main,
-    #main.fix-page {
-        width: 100%;
+	#main.fix-page {
+        margin-bottom: 3em;
+        margin-top: 100px;
     }
-    .single,
-    .single .cont-wrap {
-    	width: 100%;
+    #main.archive-index,
+    #main.feature-index {
+        margin-top: 70px;
     }
     .single {
         margin-top: 35px;
@@ -130,23 +159,18 @@
     }
     .top-cont article .meta,
     .top-cont article a:hover .meta {
-    	font-size: 1em;
+    	font-size: 1.1em;
         width: 90%;
         top: auto;
         left: auto;
-        bottom: 0 !important;
-        right: 0 !important;
-    }
-    .top-cont article span {
-    	display: none;
+        bottom: 1em !important;
+        right: 0.3em !important;
     }
     
-    .movie-frame {
-    	width: 100%;
-    	height: auto;
-    }
+    
     .movie-frame iframe {
     	width: 100%;
+        height: 360px;
     }
     .single .contents div {
     	float: none;
@@ -176,15 +200,36 @@
     
     /* Archive */
     .archive-index h2,
-	.feature-index h2,
-    .model-index h2 {
+	.feature-index h2 {
+    	display: inline-block;
     	width: auto;
         padding: 5px 1em;
         font-size: 1.4em;
-        -webkit-transform: none;
-        transform: none;
+        margin-left: 0.3em;
+/*        -webkit-transform: none;*/
+/*        transform: none;*/
     }
-    
+    .model-index h2 {
+    	font-size: 1.4em;
+    }
+    .model .table-responsive,
+    .model .contents {
+        width: 100%;
+    }
+    .snap-wrap > div.snap-sp {
+    	height: 250px;
+        position: static;
+        background-position: 0;
+        margin-bottom: 0.7em;
+        //border: 1px solid red;
+    }
+    .snap-wrap > div.snap-meta {
+    	position: static;
+    	//position: relative;
+        width: 100%;
+        height: auto;
+        overflow: auto;
+    }
     
     
 /*    .contact .table-responsive {*/

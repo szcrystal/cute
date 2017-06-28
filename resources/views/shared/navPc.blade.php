@@ -12,12 +12,12 @@
             ?>
 
             <ul class="state-nav clear">
-            	<li class="dropdown nav-item" data-toggle="dropdown" role="button">
+            	<li class="dropdown nav-item">
                     ALL <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </li>
 
 				@foreach($states as $state)
-                    <li class="dropdown nav-item" data-toggle="dropdown" role="button">
+                    <li class="dropdown nav-item">
                     	{{ $state->name }} <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </li>
                 @endforeach
@@ -25,7 +25,7 @@
             </ul>
 
 			<div class="menu-dropdown-wrap">
-				<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
+				<div class="menu-dropdown clear col-md-12">
                 	<div class="float-left col-md-2">
                     	<ul class="clear">
                     		<li><a href="{{ url('/') }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> 四国 TOP</a>
@@ -67,7 +67,7 @@
                 </div>
 
 				@foreach($states as $state)
-                	<div class="menu-dropdown clear col-md-12" aria-labelledby="dropdown01" role="menu">
+                	<div class="menu-dropdown clear col-md-12">
 						<div class="float-left col-md-2">
                         	<ul class="clear">
                         		<li><a href="{{ url($state->slug) }}" class="dropdown-item"><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ $state->name }} TOP</a>

@@ -40,6 +40,7 @@ a {
 }
 .navbar-brand span {
     font-weight: bold;
+    margin-left: 0.3em;
 }
 .navbar-brand:hover {
 /*	color: #40979B;*/
@@ -536,7 +537,7 @@ a {
 }
 .atcl:nth-of-type(3n) article:nth-of-type(2) .meta,
 .feature:nth-of-type(2) article:nth-of-type(2) .meta {
-	right: 2.5em;
+	left: 0.7em;
 }
 .atcl:nth-of-type(3n) article:nth-of-type(3),
 .feature:nth-of-type(2) article:nth-of-type(3) {
@@ -852,38 +853,40 @@ a {
     width: 30%;
 }
 .snap-wrap {
-	margin: 6em 0;
+	margin: 2em 0;
 }
-.snap-wrap div {
+.snap-wrap > div {
 	width: 100%;
-	height: 500px;
+	height: 600px;
     overflow: hidden;
     background-size: 100% auto;
     background-position: center;
+    background-repeat: no-repeat;
     position: relative;
+    //border: 1px solid red;
 }
-.snap-wrap div .snap-meta {
+.snap-wrap > div .snap-meta {
 	//display: inline;
-	width: 30%;
+	width: 35%;
     height: auto;
 	position: absolute;
     font-size: 0.95em;
     padding: 1.2em;
     color: #fff;
-    background: rgba(64,152,155,0.75);
+    background: rgba(0,0,0,0.7)/*rgba(64,152,155,0.75)*/;
     //border: 2px solid rgba(80,191,194,0.6);
     border-radius: 1px;
 }
-.snap-wrap div .snap-meta h4 {
+.snap-wrap > div .snap-meta h4 {
 	font-size: 1.1em;
     padding-bottom: 0.3em;
     border-bottom: 1px dotted #fff;
 }
-.snap-wrap div:nth-of-type(odd) .snap-meta {
+.snap-wrap > div:nth-of-type(odd) .snap-meta {
 	top: 13%;
     right: 1em;
 }
-.snap-wrap div:nth-of-type(even) .snap-meta {
+.snap-wrap > div:nth-of-type(even) .snap-meta {
 	bottom: 1em;
     left: 1em;
     width: 28%;

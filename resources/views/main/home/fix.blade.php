@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="main" class="fix-page">
+<div id="main" class="fix-page col-md-12">
 
     <div class="panel panel-default">
         <h2>{{ $fix->title }}</h2>

@@ -19,7 +19,7 @@
 
                     <h2>{{ $model -> name }}</h2>
 
-					<div class="clear py-3">
+					<div class="clear py-1">
                     <div class="table-responsive float-left">
                     	<table class="table table-bordered">
                             <colgroup>
@@ -84,22 +84,39 @@
                     </div>
 
 
-                    <div class="snap-wrap">
-                        @foreach($snaps as $snap)
-                            @if(isset($snap->snap_path))
-                            <div style="background-image:url({{ Storage::url($snap->snap_path) }})">
-
-								@if($snap->ask != '' && $snap->answer != '')
-                                <div class="snap-meta">
-                                    <h4><i class="fa fa-question-circle" aria-hidden="true"></i>{{ $snap->ask }}</h4>
-                                    <p>{!! nl2br($snap->answer) !!}</p>
+                    <div class="snap-wrap clear">
+                    	@if(Ctm::isAgent('sp'))
+                        	@foreach($snaps as $snap)
+                            	@if(isset($snap->snap_path) && $snap->snap_path != '')
+                                <div style="background-image:url({{ Storage::url($snap->snap_path) }})" class="snap-sp">
                                 </div>
                                 @endif
 
-                            </div>
+                                @if($snap->ask != '' && $snap->answer != '')
+                                    <div class="snap-meta">
+                                        <h4><i class="fa fa-question-circle" aria-hidden="true"></i>{{ $snap->ask }}</h4>
+                                        <p>{!! nl2br($snap->answer) !!}</p>
+                                    </div>
+                                @endif
+                            @endforeach
 
-                            @endif
-                        @endforeach
+                        @else
+                            @foreach($snaps as $snap)
+                                @if(isset($snap->snap_path) && $snap->snap_path != '')
+                                    <div style="background-image:url({{ Storage::url($snap->snap_path) }})">
+
+                                        @if($snap->ask != '' && $snap->answer != '')
+                                        <div class="snap-meta">
+                                            <h4><i class="fa fa-question-circle" aria-hidden="true"></i>{{ $snap->ask }}</h4>
+                                            <p>{!! nl2br($snap->answer) !!}</p>
+                                        </div>
+                                        @endif
+
+                                    </div>
+
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
 
 
