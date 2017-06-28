@@ -9,6 +9,12 @@
     .navbar-brand span {
     	font-size: 1.1em;
     }
+    .s-form input {
+    	font-size: 0.85em;
+        width:
+    }
+    
+    
     #main,
     #main.fix-page {
         width: 100%;
@@ -23,7 +29,7 @@
     }
     #main.archive-index,
     #main.feature-index {
-        margin-top: 108px;
+        margin-top: 98px;
     }
     .single {
         margin-top: 75px;
@@ -180,14 +186,6 @@
     	margin-top: 1em;
     }
     
-    
-    .searchform {
-        width: 93%;
-        margin: auto;
-        padding: 0.4em 0 0;
-        display: none;
-        z-index: 9999;
-    }
     
     .h2 {
         font-size: 1.2em !important;

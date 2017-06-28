@@ -52,13 +52,13 @@ $setting = Setting::first();
 {!! nl2br($context) !!}
 <br /><br />
 
-@if($attach_1 != '')
+@if(isset($attach_1) && $attach_1 != '')
 ◆画像1<br />
 <img style="width:85%; display:block; margin:auto;" src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_1) }}">
 <br><br>
 @endif
 
-@if($attach_2 != '')
+@if(isset($attach_2) && $attach_2 != '')
 ◆画像2<br />
 <img style="width:85%; display:block; margin:auto;" src="{{ $message->embed(base_path() . '/storage/app/public/' .$attach_2) }}">
 @endif
