@@ -347,7 +347,7 @@
     .model-index .top-cont article {
     	width: 50%;
         height: 150px;
-        background-size: auto 110%;
+        background-size: auto 115%;
     }
     
     .single h2 {
@@ -418,10 +418,14 @@
     }
     
     #colop .foot-wrap:first-of-type {
-        width: 90%;
-		float: none;
+        width: 85%;
+        float: none;
+        font-size: 90%;
         -webkit-transform: rotateZ(0);
     	transform: rotateZ(0);
+    }
+    #colop .foot-wrap:first-of-type p {
+        margin: 0;
     }
 
     #colop .foot-wrap:nth-of-type(2) {

@@ -3,10 +3,10 @@
 
         <div class="float-left foot-wrap">
         	<div>
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Cute.Campus') }}
-            </a>
-            <p>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</p>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Cute.Campus') }}
+                </a>
+                <p>あなたの身近な美人学生が<br>地元の情報を発信する動画マガジン</p>
             </div>
         </div>
 
