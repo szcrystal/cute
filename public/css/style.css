@@ -360,6 +360,16 @@ a {
 /*	-webkit-transform: rotateZ(-8deg);*/
 /*    transform: rotateZ(-8deg);*/
 }
+.top-cont h2 a {
+	display: inline-block;
+    width: 100%;
+    height: auto;
+    color: #fff;
+}
+.top-cont h2 a:hover {
+	text-decoration: none;
+    opacity: 0.7;
+}
 
 .top-cont article {
 	padding: 0;
@@ -1289,11 +1299,12 @@ textarea {
 }
 #colop ul li {
 	display: inline-block;
-    padding: 0.1em 0.5em 0.1em 1.2em;
+    padding: 0.1em 0.4em 0.1em 1.0em;
 }
 #colop ul li a,
 #colop ul li a:visited {
 	color: #5a5a5a;
+    font-size: 0.9em;
 }
 #colop ul li a .fa {
 	margin-right: 0.15em;

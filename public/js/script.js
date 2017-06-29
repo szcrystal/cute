@@ -98,7 +98,11 @@ var exe = (function() {
                 	var $nav = $('.main-navigation');
                     
                     if($nav.is(':visible')) {
-                    	$nav.slideUp(200, 'linear', function(){
+                    	
+                        var top = $nav.data('top');
+                    	$('html,body').css({position:'static'}).scrollTop(top);
+                    	
+                        $nav.slideUp(200, 'linear', function(){
                             $('.menu-dropdown').hide();
                             $('.s-form > div').slideToggle(220);
                         });

@@ -99,7 +99,7 @@
     }
     #main.archive-index,
     #main.feature-index {
-        margin-top: 48px;
+        margin-top: 39px;
     }
     .single {
         margin-top: 35px;
@@ -154,7 +154,7 @@
         opacity: 1;
         margin: auto;
         font-size: 0.8em;
-     	padding: 0.2em 0.7em;
+     	padding: 0.3em 0.7em;
     }
     .site-header .btn-s {
     	padding-right: 4px;
@@ -239,8 +239,8 @@
     .main-navigation > ul > li > span {
     	display: inline-block;
     	margin-left: 1.6em;
-        font-size: 1.1em;
-        padding: 0.5em 0;
+        font-size: 1.0em;
+        padding: 0.4em 0;
     }
     .menu-dropdown {
     	width: 100%;
@@ -275,7 +275,7 @@
 /*    }*/
     .top-cont article .meta,
     .top-cont article a:hover .meta {
-    	font-size: 0.75em;
+    	font-size: 0.7em;
         width: 90%;
         top: auto;
         left: auto;
@@ -345,6 +345,10 @@
     	width: 50%;
         height: 150px;
         background-size: auto 110%;
+    }
+    
+    .single h2 {
+    	font-size: 1.4em;
     }
     
     

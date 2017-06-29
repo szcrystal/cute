@@ -17,6 +17,25 @@
     use App\User;
     use App\Category;
     use App\FeatureCategory;
+    
+    use App\State;
+    use App\Setting;
+    
+    $path = Request::path();
+    $path = explode('/', $path);
+    
+    //$stateName = '';
+    $stateSlug = '';
+    
+    $state = State::where('slug', $path[0])->first();
+    if(isset($state)) {
+        $stateSlug = $state->slug . '/';
+    }
+    else {
+        //$stateName = Setting::first()->all_area; //env('AREA', '')
+        $stateSlug = 'all/';
+    }
+    
 ?>
 
 @if(Ctm::isAgent('sp'))
@@ -25,7 +44,7 @@
 <section class="top-cont feature clear">
 @endif
 
-<h2>特集</h2>
+<h2><a href="{{ url($stateSlug . 'feature') }}">特集</a></h2>
     @foreach($features as $feature)
     <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
 
@@ -85,7 +104,7 @@
     <section class="top-cont atcl clear">
     @endif
 
-		<h2>{{ $key }}</h2>
+		<h2><a href="{{ url($stateSlug . $key) }}">{{ $key }}</a></h2>
 		<div class="clear">
     	@foreach($obj as $atcl)
             <article style="background-image:url({{Storage::url($atcl->thumb_path)}})">
