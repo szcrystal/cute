@@ -216,7 +216,7 @@ a {
 .wrap-all {
 	width: 100%;
 	margin-top: 55px;
-    min-height: 1000px;
+    //min-height: 1000px;
     padding: 0;
     //border: 1px solid green;
 }
@@ -1217,13 +1217,7 @@ a.ui-button:active,
     vertical-align: top;
 }
 
-.mp-edit .panel-body,
-.mp-create .panel-body {
-	min-height: 2000px;
-}
-.mp-index .panel {
-	min-height: 1000px;
-}
+
 textarea {
 	min-height: 10em;
 }

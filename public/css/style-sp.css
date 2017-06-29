@@ -92,6 +92,9 @@
     	min-height: 300px;
         margin-top: 37px;
     }
+    #main {
+    	min-height: 300px;
+    }
 
 	#main.fix-page {
         margin-bottom: 3em;
@@ -258,7 +261,7 @@
     	height: auto;
     }
     .top-cont h2 {
-    	font-size: 1.5em;
+    	font-size: 1.2em;
         left: 0;
         width: 100%;
         padding: 2px 0;
