@@ -97,6 +97,27 @@ class FeatureCateController extends Controller
         $cateId = $cateModel->id;
         
         
+        //Thumbnail upload
+        if(isset($data['cate_thumb'])) {
+            
+            $filename = $data['cate_thumb']->getClientOriginalName();
+            $filename = str_replace(' ', '_', $filename);
+            
+            $pre = time() . '-';
+            $filename = 'featureCate/' . $cateId . '/' . $pre . $filename;
+            
+            //if (App::environment('local'))
+            $path =  $data['cate_thumb']->storeAs('public', $filename);
+            //else
+            //$path = Storage::disk('s3')->putFileAs($filename, $request->file('thumbnail'), 'public');
+            //$path = $request->file('thumbnail')->storeAs('', $filename, 's3');
+        
+            
+            $cateModel->cate_thumb = $path;
+            $cateModel->save();
+        }
+        
+        
         return redirect('dashboard/featurecates/'.$cateId)->with('status', $status);
     }
 

@@ -89,16 +89,49 @@ var exe = (function() {
             return str;
         },
         
+        searchSlide: function() {
+        	$input = $('.s-form input');
+           
+           	if(this.isSpTab('sp')) {
+           
+                $('.btn-s').on('click', function(){
+                	var $nav = $('.main-navigation');
+                    
+                    if($nav.is(':visible')) {
+                    	$nav.slideUp(200, 'linear', function(){
+                            $('.menu-dropdown').hide();
+                            $('.s-form > div').slideToggle(220);
+                        });
+                    }
+                    else {
+                    	$('.s-form > div').slideToggle(220);
+                    }
+                });
+           	}
+            else {
+                $('.btn-s').on('click', function(){
+                    if($input.is(':hidden')) {
+                        $input.show().animate({width:'22em', opacity:1}, 300, 'linear', function(){
+                    
+                        });
+                    }
+                    else {
+                        $input.animate({width:0, opacity:0}, 300, 'linear', function(){
+                    
+                        }).fadeOut(600);
+                    
+                    }
+                });
+            }
+        },
         
         toggleSp: function() {
-        	$('.navbar .fa-search').on('click', function(){
-            	$('.searchform').slideToggle(150);
-            });
            
-            //var t;
-            $('.site-header .fa-bars').on('click', function(){
+            //SP Only
+            $('.site-header .nav-tgl').on('click', function(){
             	
                 var $nav = $('.main-navigation');
+                var $sForm = $('.s-form > div');
                 var t = $(window).scrollTop();
                 
                 if($nav.is(':visible')) {
@@ -110,9 +143,20 @@ var exe = (function() {
                     $nav.data('top', t);
                 }
 
-            	$nav.slideToggle(250, 'linear', function(){
-                	$('.menu-dropdown').hide();
-                });
+				if($sForm.is(':visible')) {
+                	$sForm.slideUp(200, function(){
+                        $nav.slideToggle(250, 'linear', function(){
+                            $('.menu-dropdown').hide();
+                        });
+                        
+                        $(this).queue([]).stop();
+                    });
+                }
+                else {
+                    $nav.slideToggle(250, 'linear', function(){
+                        $('.menu-dropdown').hide();
+                    });
+                }
                 
             });
         },
@@ -205,23 +249,7 @@ var exe = (function() {
         
         },
         
-        searchSlide: function() {
-        	$input = $('.s-form input');
-           
-        	$('.btn-s').on('click', function(){
-            	if($input.is(':hidden')) {
-            		$input.show().animate({width:'22em', opacity:1}, 300, 'linear', function(){
-                
-                	});
-                }
-                else {
-                	$input.animate({width:0, opacity:0}, 300, 'linear', function(){
-                
-                	}).fadeOut(600);
-                
-                }
-            });
-        },
+        
         
     } //return
 

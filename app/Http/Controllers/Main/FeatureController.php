@@ -39,24 +39,23 @@ class FeatureController extends Controller
     public function index($state = 'all')
     {
     	
-        $fCates = $this->featureCate->where('status', 1)->get()->map(function($obj){
-        	return $obj->id;
-        })->all();
         
-        $whereArr = ['open_status'=>1,'feature'=>1];
         
-        if($state != 'all') {
-        	$stateObj = $this->state->where('slug', $state)->get()->first();
-            
-            //404
-            if(!isset($stateObj)) abort(404);
-            
-            $whereArr['state_id'] = $stateObj->id;
-        }
+//        $whereArr = ['open_status'=>1, 'feature'=>1];
+//        
+//        if($state != 'all') {
+//        	$stateObj = $this->state->where('slug', $state)->get()->first();
+//            
+//            //404
+//            if(!isset($stateObj)) abort(404);
+//            
+//            $whereArr['state_id'] = $stateObj->id;
+//        }
         
-        $features = $this->article->where($whereArr)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->paginate($this->perPage);
+        $features = $this->featureCate->where('status', 1)->orderBy('created_at','DESC')->paginate($this->perPage);
         
-    	
+        //$features = $this->article->where($whereArr)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->paginate($this->perPage);
+        
     	return view('main.feature.index', ['features'=>$features]);
     }
 

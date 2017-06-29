@@ -23,8 +23,21 @@
         }
     ?>
 
-    <h1 class="float-left"><a class="navbar-brand" href="{{ url('/'. $stateUrl) }}">
-        <img src="{{ url('images/cc_logo.png') }}" alt="{{ config('app.name', 'Cute.Campus') }}"> <span>{{ $stateName }}</span>
+    @if(Ctm::isAgent('sp'))
+        <div id="menuButton" class="nav-tgl">
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    @endif
+
+    <h1><a class="navbar-brand" href="{{ url('/'. $stateUrl) }}">
+        <img src="{{ url('images/cc_logo.png') }}" alt="{{ config('app.name', 'Cute.Campus') }}">
+		@if($stateName != '')
+        <span>{{ $stateName }}</span>
+        @endif
     </a></h1>
 
 	<div class="float-right clear s-form">
@@ -38,14 +51,9 @@
             </form>
         </div>
 
-		@if(Ctm::isAgent('sp'))
-        	<i class="fa fa-bars" aria-hidden="true"></i>
-
-        @else
-            <button class="btn btn-s float-left" type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        @endif
+        <button class="btn btn-s float-left" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
     </div>
 </header>
 

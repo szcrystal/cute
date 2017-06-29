@@ -34,7 +34,7 @@
     @endif
         
     <div class="well">
-        <form class="form-horizontal" role="form" method="POST" action="/dashboard/featurecates">
+        <form class="form-horizontal" role="form" method="POST" action="/dashboard/featurecates" enctype="multipart/form-data">
 			@if(isset($edit))
                 <input type="hidden" name="edit_id" value="{{$id}}">
             @endif
@@ -62,6 +62,39 @@
                     </div>
                 </div>
             </div>
+
+			<div class="clearfix thumb-wrap">
+                <div class="col-md-4 pull-left thumb-prev">
+                    @if(count(old()) > 0)
+                        @if(old('cate_thumb') != '' && old('cate_thumb'))
+                        <img src="{{ Storage::url(old('cate_thumb')) }}" class="img-fluid">
+                        @elseif(isset($cate) && $cate->cate_thumb)
+                        <img src="{{ Storage::url($$cate->cate_thumb) }}" class="img-fluid">
+                        @else
+                        <span class="no-img">No Image</span>
+                        @endif
+                    @elseif(isset($cate) && $cate->cate_thumb)
+                        <img src="{{ Storage::url($cate->cate_thumb) }}" class="img-fluid">
+                    @else
+                        <span class="no-img">No Image</span>
+                    @endif
+                </div>
+
+                <div class="col-md-8 pull-left text-left form-group{{ $errors->has('cate_thumb') ? ' has-error' : '' }}">
+					<label for="cate_thumb" class="col-md-12">サムネイル</label><br>
+                    <div class="col-md-12">
+                        <input id="cate_thumb" class="post_thumb thumb-file" type="file" name="cate_thumb">
+
+                        @if ($errors->has('cate_thumb'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('cate_thumb') }}</strong>
+                            </span>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">カテゴリー名</label>

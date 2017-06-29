@@ -86,13 +86,20 @@ class HomeController extends Controller
 //        $atcls = $this->article->where(['open_status'=>1, 'feature'=>0])->orderBy('created_at','DESC')->get();
 //        $atcls = $atcls->groupBy('cate_id')->toArray();
         
-        
-        $fCates = $this->featureCate->where('status', 1)->get()->map(function($obj){
-        	return $obj->id;
+        //特集
+        $fCateIds = $this->article->where($whereArrSec)->orderBy('created_at','DESC')->get()->map(function($objs){
+        	return $objs->cate_id;
         })->all();
         
+        $fCateIds = array_unique($fCateIds);
+//        exit;
+//
+//        $fCates = $this->featureCate->where('status', 1)->get()->map(function($obj){
+//        	return $obj->id;
+//        })->all();
+        
         //特集
-        $features = $this->article->where($whereArrSec)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->take(3)->get();
+        $features = $this->featureCate->where('status', 1)->whereIn('id', $fCateIds)->take(8)->get();
         
     	
     	return view('main.home.index', ['newAtcl'=>$newAtcl, 'atcls'=>$atcls, 'cates'=>$cates, 'pickUps'=>$pickUps, 'features'=>$features, 'stateObj'=>$stateObj]);

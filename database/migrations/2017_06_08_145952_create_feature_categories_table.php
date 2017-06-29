@@ -18,6 +18,7 @@ class CreateFeatureCategoriesTable extends Migration
             
             $table->string('name')->nullable()->default(NULL);
             $table->string('slug')->unique()->nullable()->default(NULL);
+            $table->string('cate_thumb')->nullable()->default(NULL);
             $table->boolean('status')->default(1);
             
             $table->timestamps();

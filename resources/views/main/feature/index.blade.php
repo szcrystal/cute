@@ -36,23 +36,13 @@
             @endif
         @endif
 
-        <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
+        <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
 
-            <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
-
-                @if($feature->thumb_path == '')
-                    <span class="no-img">No Image</span>
-                @else
-                    <div class="main-thumb"></div>
-                @endif
-
-                <?php
-                    $num = Ctm::isAgent('sp') ? 30 : 18;
-                ?>
+            <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
 
                 <div class="meta">
-                    <h3>{{ $feature->title }}</h3>
-                    <p>{{ User::find($feature->model_id)->name }}</p>
+                    <h3>{{ $feature->name }}</h3>
+                    <p>{{-- User::find($feature->model_id)->name --}}</p>
                 </div>
 
                 <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>

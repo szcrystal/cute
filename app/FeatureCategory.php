@@ -9,6 +9,7 @@ class FeatureCategory extends Model
     protected $fillable = [
         'name',
         'slug',
+        'cate_thumb',
         'status',
     ];
 }

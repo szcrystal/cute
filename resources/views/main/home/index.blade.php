@@ -27,22 +27,12 @@
 
 <h2>特集</h2>
     @foreach($features as $feature)
-    <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
+    <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
 
-            <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
-
-            @if($feature->thumb_path == '')
-                <span class="no-img">No Image</span>
-            @else
-                <div class="main-thumb"></div>
-            @endif
-
-            <?php
-                $num = Ctm::isAgent('sp') ? 30 : 18;
-            ?>
+            <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
 
             <div class="meta">
-            	<h3>{{ $feature->title }}</h3>
+            	<h3>{{ $feature->name }}</h3>
                 {{-- <p>{{ User::find($feature->model_id)->name }}</p> --}}
             </div>
 
@@ -101,17 +91,6 @@
             <article style="background-image:url({{Storage::url($atcl->thumb_path)}})">
 
                 <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
-
-                    @if($atcl->thumb_path == '')
-                        <span class="no-img">No Image</span>
-                    @else
-                        <div class="main-thumb"></div>
-                    @endif
-
-
-                    <?php
-                        $num = Ctm::isAgent('sp') ? 30 : 18;
-                    ?>
 
                     <div class="meta">
                         <h3>{{ $atcl->title }}</h3>

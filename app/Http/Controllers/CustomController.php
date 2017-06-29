@@ -51,6 +51,27 @@ class CustomController extends Controller
         return $url;
     }
     
+    static function getFeatureCateUrl($cateId, $requestPath)
+    {
+    	$cateSlug = FeatureCategory::find($cateId)->slug;
+        
+    	//$path = Request::path();
+        $path = explode('/', $requestPath);
+        
+        $state = State::where('slug', $path[0])->first();
+        
+        if(isset($state)) {
+            $stateSlug = $state->slug . '/';
+        }
+        else {
+            $stateSlug = 'all/';
+        }
+        
+        $url = $stateSlug . 'feature/' . $cateSlug;
+        
+        return $url;
+    }
+    
     static function getModelUrl($modelId)
     {
     	$model = User::find($modelId);

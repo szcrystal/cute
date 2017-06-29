@@ -11,13 +11,15 @@
     }
     .s-form input {
     	font-size: 0.85em;
-        width:
     }
     
     
     #main,
     #main.fix-page {
         width: 100%;
+    }
+    .main-navigation {
+    	min-width: 100%;
     }
     .single,
     .single .cont-wrap {
@@ -76,7 +78,7 @@
     }
     
     
-}	
+}
 
 @media only screen and (max-width: 800px) {
 
@@ -88,6 +90,7 @@
     }
 	.wrap-all {
     	min-height: 300px;
+        margin-top: 40px;
     }
 
 	#main.fix-page {
@@ -106,10 +109,111 @@
     	color: #fff;
         font-size: 3em;
     }
-    
-    .navbar-brand {
-    	margin-top: 0.2em;
+    .site-header {
+    	text-align: center;
+        padding: 0 7px;
     }
+    .site-header h1 {
+    	float: none;
+        display: inline-block;
+    	//border: 1px solid blue;
+        width: 60%;
+        text-align: center;
+        margin: 0.2em auto;
+    }
+    .site-header h1 span {
+    	font-size: 0.6em;
+        margin-left: 0;
+    }
+    .navbar-brand {
+    	width: auto;
+        display: inline-block;
+    	margin: 0;
+        padding: 0;
+        //border: 1px solid red;
+    }
+    .navbar-brand img {
+    	width: 90px;
+        margin: 0.2em 0 0;
+        padding: 0;
+        //border: 1px solid orange;
+    }
+    
+    .s-form > div {
+    	display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 9998;
+        width: 100%;
+        background: #50BFC2;
+    }
+    .s-form input {
+    	display: block;
+        width: 90%;
+        opacity: 1;
+        margin: auto;
+        font-size: 0.8em;
+     	padding: 0.2em 0.7em;
+    }
+    .site-header .btn-s {
+    	padding-right: 4px;
+        //z-index: 99999;
+    }
+    .site-header .btn-s .fa {
+    	font-size: 1.2em;
+    }
+    
+    /* ******** */
+    #menuButton {
+      display: block;
+      width: 38px;
+      height: 35px;
+      float: left;
+      margin: 4px 0 0 3px;
+      position: relative;
+      text-decoration: none;
+      //border: 1px solid red;
+    }
+    #menuButton span {
+      display: block;
+      background: #fff;
+      width: 28px;
+      height: 2px;
+      position: absolute;
+      left: 0;
+/*      transition: all 0.4s;*/
+/*      -webkit-transition: all 0.4s;*/
+/*      -moz-transition: all 0.4s;*/
+    }
+    #menuButton em {
+    	display: block;
+    	font-style: normal;
+        position: absolute;
+        bottom: 3px;
+        left: 2px;
+        font-size: 0.8em;
+    }
+    #menuButton span:first-child {
+    	top: 5px;
+    }
+    #menuButton span:nth-child(2) {
+    	top: 14px;
+    }
+    #menuButton span:last-child {
+    	top: 23px;
+    }
+/*    #menuButton.active span:first-child {*/
+/*    	-webkit-transform: translateY(10px) rotate(225deg);*/
+/*      transform: translateY(10px) rotate(225deg);*/
+/*    }*/
+/*    #menuButton.active span:nth-child(2) {*/
+/*      opacity: 0;*/
+/*    }*/
+/*    #menuButton.active span:last-child {*/
+/*    	-webkit-transform: translateY(-10px) rotate(-225deg);*/
+/*      transform: translateY(-10px) rotate(-225deg);*/
+/*    }*/
     
     .carousel {
     	height: 250px;
@@ -122,6 +226,8 @@
     }
     .main-navigation > ul > li {
     	float: none;
+        width: 100%;
+        text-align: left;
         border-bottom: 1px solid #fff;
         border-right: 0;
         padding: 0;
@@ -132,9 +238,9 @@
     }
     .main-navigation > ul > li > span {
     	display: inline-block;
-    	margin-left: 2em;
+    	margin-left: 1.6em;
         font-size: 1.1em;
-        padding: 0.7em 0;
+        padding: 0.5em 0;
     }
     .menu-dropdown {
     	width: 100%;
@@ -152,20 +258,20 @@
     	height: auto;
     }
     .top-cont h2 {
-    	font-size: 1.8em;
-        left: 0.5em;
-        width: auto;
-        padding: 5px 1em;
+    	font-size: 1.5em;
+        left: 0;
+        width: 100%;
+        padding: 3px 0;
     }
     .top-cont article {
     	width: 100%;
-        height: 250px;
+        height: 200px;
         float: none;
         background-size: 120% auto;
     }
     .top-cont article .meta,
     .top-cont article a:hover .meta {
-    	font-size: 1.0em;
+    	font-size: 0.8em;
         width: 90%;
         top: auto;
         left: auto;
@@ -200,7 +306,7 @@
     .archive-index h2,
 	.feature-index h2 {
     	display: inline-block;
-    	width: auto;
+    	width: 100%;
         padding: 5px 1em;
         font-size: 1.4em;
         margin-left: 0.3em;
@@ -320,6 +426,9 @@
     #colop ul li:first-of-type {
     	padding-left: 0;
     }
+    
+    
+    
 
 }
 

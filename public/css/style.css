@@ -14,9 +14,10 @@ a {
 .site-header {
 	background: #50BFC2;
     padding: 5px 10px;
-    z-index: 10000;
+    z-index: 9999;
 }
 .site-header h1 {
+	float: left;
     width: 40%;
     font-size: 1.2em;
     margin: 0;
@@ -338,13 +339,13 @@ a {
     width: 100%;
     text-align: center;
     z-index: 99;
-    font-size: 2.1em;
+    font-size: 2.0em;
 /*    background: #4FBFC1;*/
 /*    color: #BAE8E8;*/
 	background: #FFBF48;
     color: #fff;
     font-weight: bold;
-    padding: 4px 0;
+    padding: 3px 0;
     //border-radius: 2em;
     text-transform: uppercase;
 }
@@ -429,7 +430,21 @@ a {
     font-size: 5em;
     margin-left: 0.1em;
 }
-.feature:first-of-type article:first-of-type {
+
+.top-cont.feature {
+	height: 1000px;
+}
+.top-cont.feature article {
+	height: 25%;
+    width: 50%;
+    background-size: 100% auto;
+}
+
+/* feature index */
+.feature-index .top-cont.feature {
+	height: 800px;
+}
+.feature-index .feature:first-of-type article:first-of-type {
 	height: 100%;
     width: 40%;
     background-size: auto 120%;
@@ -444,17 +459,17 @@ a {
 	-ms-text-combine-horizontal: all;
 	text-combine-upright: all;
 }
-.feature:first-of-type article:first-of-type .meta {
+.feature-index .feature:first-of-type article:first-of-type .meta {
 	top: 2em;
 }
-.feature:first-of-type article:nth-of-type(2) {
+.feature-index .feature:first-of-type article:nth-of-type(2) {
 	height: 50%;
     width: 60%;
     background-size: 120% auto;
     background-position: center;
     font-size: 1.2em;
 }
-.feature:first-of-type article:nth-of-type(3) {
+.feature-index .feature:first-of-type article:nth-of-type(3) {
 	height: 50%;
     width: 60%;
     background-size: 120% auto;
@@ -668,7 +683,7 @@ a {
     color: #fff;
 /*    background: #4FBFC1;*/
 /*    color: #BAE8E8;*/
-    border-radius: 3px;
+    //border-radius: 3px;
     font-weight: bold;
     font-size: 2.2em;
     text-align: center;
