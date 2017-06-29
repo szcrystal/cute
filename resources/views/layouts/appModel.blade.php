@@ -77,7 +77,7 @@
         	use App\Setting;
         ?>
 
-    	<h3 style="color: #627883;" class="text-center mt-5">{{ config('app.name') }} {{ Setting::first()->all_area }}</h3>
+    	<h3 style="color: #627883;" class="text-center mt-5">{{ config('app.name') }}{{-- Setting::first()->all_area --}}</h3>
         <p style="color: #627883;" class="text-center">モデル投稿</p>
 
 		@if(!Auth::user())
