@@ -261,7 +261,7 @@
     	font-size: 1.5em;
         left: 0;
         width: 100%;
-        padding: 3px 0;
+        padding: 2px 0;
     }
     .top-cont article {
     	width: 100%;
@@ -435,6 +435,7 @@
     }
     #colop ul li {
     	float: none;
+        width: 100%;
     	font-size: 0.9em;
         padding-left: 0;
         padding-right: 0;
