@@ -56,7 +56,7 @@ class FeatureController extends Controller
         
         //$features = $this->article->where($whereArr)->whereIn('cate_id', $fCates)->orderBy('created_at','DESC')->paginate($this->perPage);
         
-    	return view('main.feature.index', ['features'=>$features]);
+    	return view('main.feature.index', ['features'=>$features, 'allIndex'=>1]);
     }
 
     

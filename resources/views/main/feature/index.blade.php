@@ -12,7 +12,6 @@
 			@endif
 
             <div class="panel-body">
-                {{-- @include('main.shared.main') --}}
 
 			<div class="main-list clearfix">
 <?php
@@ -23,40 +22,76 @@
     $n = 1;
 ?>
 
+	@if(isset($allIndex) && $allIndex)
+    	@if(count($features) > 0)
+            @foreach($features as $feature)
 
-
-	@if(count($features) > 0)
-        @foreach($features as $feature)
-
-		@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
-			@if(Ctm::isAgent('sp'))
-			<div class="top-cont clear">
-            @else
-            <div class="top-cont feature clear">
+            @if($n == 1 || $n == 4 || $n == 7 || $n == 10)
+                @if(Ctm::isAgent('sp'))
+                <div class="top-cont clear">
+                @else
+                <div class="top-cont feature clear">
+                @endif
             @endif
+
+            <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
+
+                <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
+
+                    <div class="meta">
+                        <h3>{{ $feature->name }}</h3>
+                        <p>{{-- User::find($feature->model_id)->name --}}</p>
+                    </div>
+
+                    <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </a>
+            </article>
+
+            @if($n%3 == 0)
+            </div>
+            @endif
+
+            <?php $n++; ?>
+            @endforeach
+        @else
+            <p class="mt-3">まだ記事がありません。</p>
         @endif
 
-        <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
+	@else
+        @if(count($features) > 0)
+            @foreach($features as $feature)
 
-            <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
+            @if($n == 1 || $n == 4 || $n == 7 || $n == 10)
+                @if(Ctm::isAgent('sp'))
+                <div class="top-cont clear">
+                @else
+                <div class="top-cont feature clear">
+                @endif
+            @endif
 
-                <div class="meta">
-                    <h3>{{ $feature->name }}</h3>
-                    <p>{{-- User::find($feature->model_id)->name --}}</p>
-                </div>
+            <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
-                <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
-            </a>
-        </article>
+                <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
 
-        @if($n%3 == 0)
-		</div>
+                    <div class="meta">
+                        <h3>{{ $feature->title }}</h3>
+                        <p>{{ User::find($feature->model_id)->name }}</p>
+                    </div>
+
+                    <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </a>
+            </article>
+
+            @if($n%3 == 0)
+            </div>
+            @endif
+
+            <?php $n++; ?>
+            @endforeach
+        @else
+            <p class="mt-3">まだ記事がありません。</p>
         @endif
 
-        <?php $n++; ?>
-        @endforeach
-    @else
-		<p class="mt-3">まだ記事がありません。</p>
     @endif
     </div>
 
