@@ -225,7 +225,7 @@
     .main-navigation {
     	display: none;
         overflow-y: scroll;
-        height: 500px;
+        height: 520px;
     }
     .main-navigation > ul > li {
     	float: none;

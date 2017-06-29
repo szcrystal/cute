@@ -579,6 +579,7 @@ a {
 .atcl:nth-of-type(3n) article:first-of-type .meta,
 .feature:nth-of-type(2) article:first-of-type .meta {
 	top: 3em;
+    left: 1em;
 }
 .atcl:nth-of-type(3n) article:nth-of-type(2),
 .feature:nth-of-type(2) article:nth-of-type(2) {
@@ -681,7 +682,11 @@ a {
     font-size: 1.2em;
 }
 .atcl:nth-of-type(3n+2) article .meta {
-	color: snow/*blanchedalmond*/;
+	color: #fff/*blanchedalmond*/;
+}
+.atcl:nth-of-type(3n+2) article:first-of-type span .fa {
+	-webkit-transform: translateX(5px);
+	transform: translateX(5px);
 }
 
 
