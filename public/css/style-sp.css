@@ -420,7 +420,7 @@
     #colop .foot-wrap:first-of-type {
         width: 85%;
         float: none;
-        font-size: 90%;
+        font-size: 80%;
         -webkit-transform: rotateZ(0);
     	transform: rotateZ(0);
     }
