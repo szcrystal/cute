@@ -1258,10 +1258,10 @@ textarea {
 	//border: 1px solid red;
 }
 #colop .foot-wrap:first-of-type {
-	width: 23%;
+	width: 22%;
     background: #50BFC2;
     color: #fff;
-    padding: 0.7em;
+    padding: 0.5em;
     border-radius: 1em;
     margin-top: -3.5em;
     margin-left: -1em;
@@ -1274,10 +1274,10 @@ textarea {
     border-radius: 0.7em;
 }
 #colop .foot-wrap:nth-of-type(2) {
-	width: 62%;
+	width: 65%;
 }
 #colop .foot-wrap:last-of-type {
-	width: 15%;
+	width: 13%;
     background: #E9545D;
     color: #fff;
     border-radius: 1em;
@@ -1289,7 +1289,7 @@ textarea {
 	font-size: 0.95em;
 }
 #colop .foot-wrap:last-of-type img {
-	width: 95%;
+	width: 93%;
 }
 #colop .foot-wrap:last-of-type a {
 	color: #fff;
@@ -1305,11 +1305,11 @@ textarea {
 #colop ul {
 	list-style: none;
     padding: 0;
-    margin: 0 0 0 2em;
+    margin: 0 0 0 1em;
 }
 #colop ul li {
 	display: inline-block;
-    padding: 0.1em 0.4em 0.1em 1.0em;
+    padding: 0.1em 0.3em 0.1em 0.8em;
 }
 #colop ul li a,
 #colop ul li a:visited {

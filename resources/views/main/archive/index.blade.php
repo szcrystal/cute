@@ -6,16 +6,15 @@
 
     <div class="panel panel-default">
     	@if($type == 'cate')
-        	<h2>カテゴリー {{ $archiveObj->name }}</h2>
+        	<h2>{{ $archiveObj->name }}</h2>
         @elseif($type == 'tag')
-			<h2>タグ {{ $archiveObj->name }}</h2>
+			<h2>{{ $archiveObj->name }}</h2>
 		@elseif($type == 'search')
-			<h2>Search {{ $searchStr }}</h2>
+			<h2>Search: {{ $searchStr }}</h2>
         @endif
 
 
         <div class="panel-body">
-            {{-- @include('main.shared.main') --}}
 
 			<div class="main-list clear">
 <?php

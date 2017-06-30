@@ -7,7 +7,7 @@
 <div id="main" class="model-index">
 
         <div class="panel panel-default">
-			<h2>モデル</h2>
+			<h2>Models</h2>
 
 
             <div class="panel-body">

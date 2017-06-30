@@ -27,6 +27,8 @@
                 </a></li>
 				@endforeach
 
+
+				<li class="nav-link"><a href="http://locofull.jp">運営会社</a></li>
                 <li class="nav-link"><a href="{{ url('/contact') }}">お問合わせ</a></li>
             </ul>
             @endif

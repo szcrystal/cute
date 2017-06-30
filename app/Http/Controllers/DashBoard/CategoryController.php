@@ -109,13 +109,16 @@ class CategoryController extends Controller
         
         //$items = $this->categoryItem->where('cate_id'=>$cateId)->get();
         
+        
         foreach($titles as $key => $title) {
         	
             if(isset($data['del_item'][$key]) && $data['del_item'][$key]) {
                 
             	$itemModel = $this->categoryItem->where(['item_num'=>$itemNums[$key], 'cate_id'=>$cateId])->first();
-                $itemModel ->delete();
                 
+                if($itemModel !== null) {
+	                $itemModel ->delete();
+    			}
 //                $snapModel = $this->modelSnap->create(
 //                    [
 //                        'model_id'=>$modelId,
