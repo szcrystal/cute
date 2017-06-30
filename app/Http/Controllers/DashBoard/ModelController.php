@@ -188,7 +188,10 @@ class ModelController extends Controller
             	//exit;
                 
             	$snapModel = $this->modelSnap->where(['model_id'=>$modelId, 'number'=>$count+1])->first();
-                $snapModel ->delete();
+                
+                if($snapModel !== null) {
+                	$snapModel ->delete();
+                }
                 //exit;
                 
 //                $snapModel = $this->modelSnap->create(
