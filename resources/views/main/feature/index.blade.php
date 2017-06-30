@@ -2,7 +2,11 @@
 
 @section('content')
 
+@if(isset($allIndex) && $allIndex)
+<div id="main" class="feature-top">
+@else
 <div id="main" class="feature-index">
+@endif
 
         <div class="panel panel-default">
         	@if(isset($cateObj))
@@ -24,17 +28,13 @@
 
 	@if(isset($allIndex) && $allIndex) <?php /*特集ALL*/ ?>
     	@if(count($features) > 0)
-            @foreach($features as $feature)
+        	@if(Ctm::isAgent('sp'))
+                <div class="top-cont clear">
+            @else
+                <div class="top-cont feature clear">
+            @endif
 
-                @if(Ctm::isAgent('sp'))
-                	@if($n == 1 || $n == 5 || $n == 8 || $n == 11)
-                		<div class="top-cont clear">
-                    @endif
-                @else
-                	@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
-                        <div class="top-cont feature clear">
-                    @endif
-                @endif
+            @foreach($features as $feature)
 
                 <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
 
@@ -49,19 +49,12 @@
                     </a>
                 </article>
 
-				@if(Ctm::isAgent('sp'))
-                	@if($n%4 == 0)
-                    	</div>
-                    @endif
-                @else
-                	@if($n%3 == 0)
-                    	</div>
-                    @endif
-                @endif
-
-
             <?php $n++; ?>
+
             @endforeach
+
+            </div>
+
         @else
             <p class="mt-3">まだ記事がありません。</p>
         @endif

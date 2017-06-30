@@ -243,7 +243,8 @@ a {
     margin-top: 120px;
 }
 #main.archive-index,
-#main.feature-index {
+#main.feature-index,
+#main.feature-top {
 	margin-top: 108px;
 }
 .single {
@@ -458,6 +459,13 @@ a {
 }
 
 /* feature index */
+.feature-top .feature article {
+	width: 50%;
+    height: 337px;
+    background-size: 100% auto;
+}
+
+
 .feature-index .top-cont.feature {
 	height: 800px;
 }
@@ -701,7 +709,8 @@ a {
 
 /* index */
 .archive-index h2,
-.feature-index h2 {
+.feature-index h2,
+.feature-top h2 {
 	background: #FF694E;
     color: #fff;
 /*    background: #4FBFC1;*/
@@ -1309,7 +1318,7 @@ textarea {
 }
 #colop ul li {
 	display: inline-block;
-    padding: 0.1em 0.3em 0.1em 0.8em;
+    padding: 0.1em 0.4em 0.1em 0.8em;
 }
 #colop ul li a,
 #colop ul li a:visited {
