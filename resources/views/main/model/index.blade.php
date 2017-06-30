@@ -39,7 +39,7 @@
     @endforeach
 
     @else
-		<p>まだモデル記事がありません</p>
+		<p class="my-5">まだモデル記事がありません</p>
     @endif
 
 </div>
