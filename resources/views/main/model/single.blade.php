@@ -119,22 +119,26 @@
                         @endif
                     </div>
 
+                    <div style="" class="my-3 col-md-12">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- cute.campus2017 -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-8915257973665991"
+                             data-ad-slot="7606073469"
+                             data-ad-format="auto"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
 
                 </div>
+
+
+
             </div><!-- panelbody -->
 
-            <div class="my-3 col-md-12">
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- cute.campus2017 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8915257973665991"
-     data-ad-slot="7606073469"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+
 
         </div>
 
