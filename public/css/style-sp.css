@@ -125,7 +125,7 @@
         margin: 5px auto;
     }
     .site-header h1 span {
-    	font-size: 0.6em;
+    	font-size: 0.7em;
         margin-left: 0;
     }
     .navbar-brand {
@@ -293,6 +293,13 @@
     }
     
     
+    .h2 {
+        font-size: 1.1em !important;
+        //line-height: 1.3em;
+    }
+    .h3 {
+        font-size: 1.0em !important;
+    }
     
     .movie-frame iframe {
     	width: 100%;
@@ -300,10 +307,16 @@
     }
     
     /* Single */
+    .single h2 {
+    	font-size: 1.4em;
+    }
     .single .contents {
     	font-size: 0.95em;
         line-height: 1.6em;
         margin-top: 1em;
+    }
+    .single .map-wrap {
+    	font-size: 0.85em;
     }
     .single .contents div {
     	float: none;
@@ -314,13 +327,7 @@
     }
     
     
-    .h2 {
-        font-size: 1.1em !important;
-        //line-height: 1.3em;
-    }
-    .h3 {
-        font-size: 1.0em !important;
-    }
+    
     
     
     /* Archive */
@@ -363,9 +370,7 @@
         background-size: auto 115%;
     }
     
-    .single h2 {
-    	font-size: 1.4em;
-    }
+    
     
     
 /*    .contact .table-responsive {*/
