@@ -745,8 +745,6 @@ a {
 
 
 
-
-
 /* Archive */
 .archive-index h2 {
 	//border: 1px solid #ccc;
@@ -764,9 +762,13 @@ a {
 .archive article .meta {
 	font-size: 1.5em;
     color: #fff;
-    width: 95%;
+    width: 92%;
+}
+.archive article a:hover .meta {
+	font-size: 1em;
 }
 .archive article .meta p {
+	width: 75%;
 	text-align: right;
 }
 
