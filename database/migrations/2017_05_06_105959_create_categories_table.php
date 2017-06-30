@@ -24,29 +24,29 @@ class CreateCategoriesTable extends Migration
         
 //        $n = 0;
 //        while($n < 2) {
-            DB::table('categories')->insert([
-                    'name' => 'レジャー',
-                    'slug' => 'leisure',
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
-            DB::table('categories')->insert([
-                    'name' => 'ビューティー',
-                    'slug' => 'beauty',
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
-            DB::table('categories')->insert([
-                    'name' => 'グルメ',
-                    'slug' => 'gourmet',
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
+//            DB::table('categories')->insert([
+//                    'name' => 'レジャー',
+//                    'slug' => 'leisure',
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+//            
+//            DB::table('categories')->insert([
+//                    'name' => 'ビューティー',
+//                    'slug' => 'beauty',
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+//            
+//            DB::table('categories')->insert([
+//                    'name' => 'グルメ',
+//                    'slug' => 'gourmet',
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
             
 //            $n++;
 //        }

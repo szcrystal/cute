@@ -45,8 +45,8 @@ class CreateUsersTable extends Migration
         
         DB::table('users')->insert([
         		'state_id' => 1,
-                'name' => 'みいたけ',
-                'full_name' => '武村美空',
+                'name' => 'トライアル',
+                'full_name' => 'トライアルトラ',
 				'email' => 'opal@frank.fam.cx',
                 'password' => bcrypt('aaaaa111'),
                 'created_at' => date('Y-m-d H:i:s', time()),
