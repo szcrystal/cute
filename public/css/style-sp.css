@@ -86,7 +86,7 @@
 
 @media only screen and (max-width: 750px) {
 	body {
-    	font-size: 1em;
+    	font-size: 0.9em;
     }
 	.wrap-all {
     	min-height: 300px;
@@ -261,7 +261,7 @@
     	height: auto;
     }
     .top-cont h2 {
-    	font-size: 1.2em;
+    	font-size: 1.0em;
         left: 0;
         width: 100%;
         padding: 2px 0;
@@ -278,12 +278,18 @@
 /*    }*/
     .top-cont article .meta,
     .top-cont article a:hover .meta {
-    	font-size: 0.7em;
+    	font-size: 1em;
         width: 90%;
         top: auto;
         left: auto;
         bottom: 1em !important;
         right: 0.3em !important;
+    }
+    .top-cont article .meta h3 {
+    	font-size: 0.8em;
+    }
+    .top-cont article .meta p {
+    	font-size: 0.7em;
     }
     
     
@@ -291,6 +297,13 @@
     .movie-frame iframe {
     	width: 100%;
         height: 360px;
+    }
+    
+    /* Single */
+    .single .contents {
+    	font-size: 0.95em;
+        line-height: 1.6em;
+        margin-top: 1em;
     }
     .single .contents div {
     	float: none;
@@ -316,7 +329,7 @@
     	display: block;
     	width: 100%;
         padding: 2px 0;
-        font-size: 1.2em;
+        font-size: 0.9em;
         margin: 0;
 /*        -webkit-transform: none;*/
 /*        transform: none;*/
@@ -418,7 +431,7 @@
     }
     
     #colop .foot-wrap:first-of-type {
-        width: 85%;
+        width: 70%;
         float: none;
         font-size: 80%;
         -webkit-transform: rotateZ(0);

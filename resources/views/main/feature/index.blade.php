@@ -22,34 +22,43 @@
     $n = 1;
 ?>
 
-	@if(isset($allIndex) && $allIndex)
+	@if(isset($allIndex) && $allIndex) <?php /*特集ALL*/ ?>
     	@if(count($features) > 0)
             @foreach($features as $feature)
 
-            @if($n == 1 || $n == 4 || $n == 7 || $n == 10)
                 @if(Ctm::isAgent('sp'))
-                <div class="top-cont clear">
+                	@if($n == 1 || $n == 5 || $n == 8 || $n == 11)
+                		<div class="top-cont clear">
+                    @endif
                 @else
-                <div class="top-cont feature clear">
+                	@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
+                        <div class="top-cont feature clear">
+                    @endif
                 @endif
-            @endif
 
-            <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
+                <article style="background-image:url({{Storage::url($feature->cate_thumb)}})" class="float-left">
 
-                <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
+                    <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
 
-                    <div class="meta">
-                        <h3>{{ $feature->name }}</h3>
-                        <p>{{-- User::find($feature->model_id)->name --}}</p>
-                    </div>
+                        <div class="meta">
+                            <h3>{{ $feature->name }}</h3>
+                            <p>{{-- User::find($feature->model_id)->name --}}</p>
+                        </div>
 
-                    <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
-                </a>
-            </article>
+                        <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                    </a>
+                </article>
 
-            @if($n%3 == 0)
-            </div>
-            @endif
+				@if(Ctm::isAgent('sp'))
+                	@if($n%4 == 0)
+                    	</div>
+                    @endif
+                @else
+                	@if($n%3 == 0)
+                    	</div>
+                    @endif
+                @endif
+
 
             <?php $n++; ?>
             @endforeach
@@ -57,7 +66,7 @@
             <p class="mt-3">まだ記事がありません。</p>
         @endif
 
-	@else
+	@else <?php /*特集ALL以外の特集*/ ?>
         @if(count($features) > 0)
             @foreach($features as $feature)
 

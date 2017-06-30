@@ -854,6 +854,7 @@ a {
 .single .contents {
 	line-height: 1.8em;
     font-size: 1.1em;
+    margin-top: 3em;
 }
 .single .contents div {
 	width: 49%;

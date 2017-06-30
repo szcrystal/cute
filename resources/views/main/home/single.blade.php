@@ -28,7 +28,7 @@ use App\User;
                 <div class="cont-wrap">
                 	<h2>{{ $atcl -> title }}</h2>
 
-                    <div class="clear contents mt-5">
+                    <div class="clear contents">
 
                         <div class="float-left">
                             @if($atcl -> thumb_path)
