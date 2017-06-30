@@ -24,7 +24,7 @@ class ModelController extends Controller
         //$this->contactCate = $contactCate;
         $this->article = $article;
         
-        $this->perPage = 16;
+        $this->perPage = env('PER_PAGE', 12);
     }
     /**
      * Display a listing of the resource.

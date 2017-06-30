@@ -35,7 +35,7 @@ class HomeController extends Controller
 //        $this->totalize = $totalize;
 //        $this->totalizeAll = $totalizeAll;
         
-        $this->perPage = 16;
+        $this->perPage = env('PER_PAGE', 12);
         $this->itemPerPage = 15;
         
     }

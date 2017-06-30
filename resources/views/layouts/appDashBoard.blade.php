@@ -13,7 +13,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/dashboard">CuteCampus-{{ env('AREA', '') }} DashBoard</a>
+                <a class="navbar-brand" href="/dashboard">CuteCampus DashBoard</a>
             </div>
             <!-- /.navbar-header -->
 

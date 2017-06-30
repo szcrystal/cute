@@ -29,7 +29,7 @@ class SearchController extends Controller
         $this->tagRelation = $tagRelation;
         $this->category = $category;
         
-        $this->perPage = 2;
+        $this->perPage = env('PER_PAGE', 12);
     }
 
     /**

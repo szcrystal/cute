@@ -13,12 +13,12 @@
 
             <ul class="state-nav clear">
             	<li class="dropdown nav-item">
-                    ALL <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    ALL<i class="fa fa-caret-down" aria-hidden="true"></i>
                 </li>
 
 				@foreach($states as $state)
                     <li class="dropdown nav-item">
-                    	{{ $state->name }} <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    	{{ $state->name }}<i class="fa fa-caret-down" aria-hidden="true"></i>
                     </li>
                 @endforeach
 
