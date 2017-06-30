@@ -96,7 +96,7 @@ class ModelController extends Controller
             'snap_thumb.*' => 'filenaming',
         
             //'movie_site' => 'required|max:255',
-            //'password' => 'required|min:8',
+            'password' => 'required|min:8',
             //'movie_url' => 'required|max:255|unique:articles,movie_url'.$except,
         ];
         
