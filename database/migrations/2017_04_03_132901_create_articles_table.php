@@ -50,38 +50,38 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
         });
         
-        $n = 2;
-        while($n < 3) {
-            DB::table('articles')->insert(
-            	[
-                    'model_id' => 2,
-                    
-                    'cate_id' => 1,
-                    'movie_id' => 1,
-                    'state_id' => 1,
-                    'title' => 'みいたけのお気に入り-'. $n,
-                    'slug' => 'miitake-favorite-'. $n,
-
-					//'post_thumb' => '',
-                    
-                    'contents' =>'',
-                   	
-                    'open_status' => 1,
-                    'open_date' => date('Y-m-d H:i:s', time()),
-                    'view_count' => $n+3,
-                    
-                    //'yt_id' =>,
-                    'yt_up' => 0,
-                	'tw_up' => 0,
-                    'fb_up' =>0,
-                    
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
-            $n++;
-        }
+//        $n = 2;
+//        while($n < 3) {
+//            DB::table('articles')->insert(
+//            	[
+//                    'model_id' => 2,
+//                    
+//                    'cate_id' => 1,
+//                    'movie_id' => 1,
+//                    'state_id' => 1,
+//                    'title' => 'みいたけのお気に入り-'. $n,
+//                    'slug' => 'miitake-favorite-'. $n,
+//
+//					//'post_thumb' => '',
+//                    
+//                    'contents' =>'',
+//                   	
+//                    'open_status' => 1,
+//                    'open_date' => date('Y-m-d H:i:s', time()),
+//                    'view_count' => $n+3,
+//                    
+//                    //'yt_id' =>,
+//                    'yt_up' => 0,
+//                	'tw_up' => 0,
+//                    'fb_up' =>0,
+//                    
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+//            
+//            $n++;
+//        }
 
     }
 

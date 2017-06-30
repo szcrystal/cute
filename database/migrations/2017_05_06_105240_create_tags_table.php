@@ -24,34 +24,34 @@ class CreateTagsTable extends Migration
         
 //        $n = 0;
 //        while($n < 2) {
-            DB::table('tags')->insert(
-            	[
-                    'name' => '古着',
-                    'slug' => 'old-fas',
-                    //'view_count' => $n+5,
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
-            DB::table('tags')->insert(
-            	[
-                    'name' => '松山',
-                    'slug' => 'matsuyama',
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
-            DB::table('tags')->insert(
-            	[
-                    'name' => 'パン',
-                    'slug' => 'bread',
-                    'created_at' => date('Y-m-d H:i:s', time()),
-                    'updated_at' => date('Y-m-d H:i:s', time()),
-                ]
-            );
-            
+//            DB::table('tags')->insert(
+//            	[
+//                    'name' => '古着',
+//                    'slug' => 'old-fas',
+//                    //'view_count' => $n+5,
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+//            
+//            DB::table('tags')->insert(
+//            	[
+//                    'name' => '松山',
+//                    'slug' => 'matsuyama',
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+//            
+//            DB::table('tags')->insert(
+//            	[
+//                    'name' => 'パン',
+//                    'slug' => 'bread',
+//                    'created_at' => date('Y-m-d H:i:s', time()),
+//                    'updated_at' => date('Y-m-d H:i:s', time()),
+//                ]
+//            );
+        
 //            $n++;
 //        }
     }

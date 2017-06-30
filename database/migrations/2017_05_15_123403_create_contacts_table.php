@@ -31,18 +31,18 @@ class CreateContactsTable extends Migration
             $table->timestamps();
         });
         
-        DB::table('contacts')->insert([
-                'askcate_id' => 1,
-                'per_name' => 'あいうえお',
-                'per_email' => 'aaa@bbb.com',
-                'school' => '愛媛大学',
-                'tel_num' => '00-1111-2222',
-                'context' => 'あいうえおかきくけこさしすせそ',
-
-                'created_at' => date('Y-m-d H:i:s', time()),
-                'updated_at' => date('Y-m-d H:i:s', time()),
-            ]
-        );
+//        DB::table('contacts')->insert([
+//                'askcate_id' => 1,
+//                'per_name' => 'あいうえお',
+//                'per_email' => 'aaa@bbb.com',
+//                'school' => '愛媛大学',
+//                'tel_num' => '00-1111-2222',
+//                'context' => 'あいうえおかきくけこさしすせそ',
+//
+//                'created_at' => date('Y-m-d H:i:s', time()),
+//                'updated_at' => date('Y-m-d H:i:s', time()),
+//            ]
+//        );
     }
 
     /**
