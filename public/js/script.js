@@ -149,7 +149,7 @@ var exe = (function() {
 
 				if($sForm.is(':visible')) {
                 	$sForm.slideUp(200, function(){
-                        $nav.slideToggle(250, 'linear', function(){
+                        $nav.slideToggle(300, 'linear', function(){
                             $('.menu-dropdown').hide();
                         });
                         
@@ -157,7 +157,7 @@ var exe = (function() {
                     });
                 }
                 else {
-                    $nav.slideToggle(250, 'linear', function(){
+                    $nav.slideToggle(300, 'linear', function(){
                         $('.menu-dropdown').hide();
                     });
                 }

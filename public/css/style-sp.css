@@ -122,7 +122,7 @@
     	//border: 1px solid blue;
         width: 60%;
         text-align: center;
-        margin: 0.2em auto;
+        margin: 5px auto;
     }
     .site-header h1 span {
     	font-size: 0.6em;
@@ -428,6 +428,7 @@
     }
     
     #colop {
+    	font-size: 0.9em;
     }
     
     #colop .foot-wrap:first-of-type {
@@ -445,9 +446,9 @@
         width: 54%;
     }
     #colop .foot-wrap:last-of-type {
-        width: 35%;
+        width: 38%;
         float: none;
-        margin-top: 2em;
+        margin-top: 1em;
     }
     #colop ul {
     	margin: 1em 0 0;

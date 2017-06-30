@@ -78,7 +78,7 @@ class ContactController extends Controller
             $rules = array_merge($rules, $addArr);
         }
         
-        $message = [
+        $message = [ //lang内に記載
         	'askcate_id.required' => '「お問合わせ種別」は必須です。',
 //            'per_name.required' => '「お問合わせ種別」は必須です。',
 //            'per_email.required' => '「お問合わせ種別」は必須です。',
