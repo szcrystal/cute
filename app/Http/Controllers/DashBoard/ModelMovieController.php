@@ -254,10 +254,10 @@ class ModelMovieController extends Controller
             5=> ' -vf hue=b=-1', //暗く
             6=> ' -vf hue=s=1.5', //濃く unsharp=3:3:0.5 hue=h=1:s=0.1:b=2
             //7=> '-vf hue=h=1:s=0.1:b=2,boxblur=2:1', //ピンクがかった白黒 プラスぼかし
-            7=> '-vf tblend=all_mode=screen,eq=saturation=0.1:brightness=0.1', //ピンクがかった白黒
-            8=> '-vf noise=alls=60:allf=t+u', //ノイズ
-            9=> '-vf tblend=all_mode=overlay', //オーバーレイ
-            10=> '-vf eq=saturation=0.2:brightness=0.2:gamma_g=1.0:gamma_r=1.1:gamma_b=0.4,boxblur=2:1', //ヴィンテージ（黄味）プラスぼかし
+            7=> ' -vf tblend=all_mode=screen,eq=saturation=0.1:brightness=0.1', //ピンクがかった白黒
+            8=> ' -vf noise=alls=60:allf=t+u', //ノイズ
+            9=> ' -vf tblend=all_mode=overlay', //オーバーレイ
+            10=> ' -vf eq=saturation=0.2:brightness=0.2:gamma_g=1.0:gamma_r=1.1:gamma_b=0.4,boxblur=2:1', //ヴィンテージ（黄味）プラスぼかし
             //10=> '-vf tblend=all_mode=screen,eq=saturation=0.3:brightness=0.2' //eq=saturation=1:brightness=0.1:gamma_g=0.4:gamma_r=0.3:gamma_b=0.3
         ];
         
@@ -289,7 +289,7 @@ class ModelMovieController extends Controller
         $sum = $branches->sum('duration');
 
         exec($cdCmd . 'ffmpeg -i '.$music .' -to '. ($sum+2) .' -af "afade=t=out:st='. $sum .':d=1,volume=-1dB" -strict -2 audio.m4a -y', $out, $status);
-        //-acodec aac OR -c:a aac aaacコーデックの場合は-strict -2 が必要
+        //-acodec aac OR -c:a aac aacコーデックの場合は-strict -2 が必要
         if($status) {
             $out[] = 'make music error(1007): '. $status;
             return back()->withInput()->withErrors(array($out));
