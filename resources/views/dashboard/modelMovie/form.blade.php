@@ -129,6 +129,10 @@
                             4=>'色薄め',
                             5=>'色暗め',
                             6=>'色濃いめ',
+                            7=>'白黒（ピンク味）',
+                            8=>'ノイズ',
+                            9=>'オーバーレイ',
+                            10=>'ヴィンテージ（黄味）',
                         ];
                         ?>
 
@@ -136,20 +140,16 @@
                         {{-- @foreach($filters as $filter) --}}
 
                             @if(old('filter_id') !== NULL)
-                            	<option value="1"{{ old('filter_id') == 1 ? ' selected' : '' }}>ノーマル</option>
-								<option value="2"{{ old('filter_id') == 2 ? ' selected' : '' }}>モノクロ</option>
-                                <option value="3"{{ old('filter_id') == 3 ? ' selected' : '' }}>昔感</option>
-                                <option value="4"{{ old('filter_id') == 4 ? ' selected' : '' }}>色薄め</option>
-                                <option value="5"{{ old('filter_id') == 5 ? ' selected' : '' }}>色暗め</option>
-                                <option value="6"{{ old('filter_id') == 6 ? ' selected' : '' }}>色濃いめ</option>
+                            	@foreach($filters as $key => $filter)
+									<option value="{{ $key }}"{{ old('filter_id') == $key ? ' selected' : '' }}>{{ $filter }}</option>
+                                @endforeach
+
 
                             @else
-                                <option value="1"{{ isset($combine) && $combine->filter_id == 1 ? ' selected' : '' }}>ノーマル</option>
-								<option value="2"{{ isset($combine) && $combine->filter_id == 2 ? ' selected' : '' }}>モノクロ</option>
-                                <option value="3"{{ isset($combine) && $combine->filter_id == 3 ? ' selected' : '' }}>昔感</option>
-                                <option value="4"{{ isset($combine) && $combine->filter_id == 4 ? ' selected' : '' }}>色薄め</option>
-                                <option value="5"{{ isset($combine) && $combine->filter_id == 5 ? ' selected' : '' }}>色暗め</option>
-                                <option value="6"{{ isset($combine) && $combine->filter_id == 6 ? ' selected' : '' }}>色濃いめ</option>
+                            	@foreach($filters as $key => $filter)
+									<option value="{{ $key }}"{{ isset($combine) && $combine->filter_id == $key ? ' selected' : '' }}>{{ $filter }}</option>
+                                @endforeach
+
                             @endif
                         {{-- @endforeach --}}
 

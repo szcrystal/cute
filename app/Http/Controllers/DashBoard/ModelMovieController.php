@@ -252,7 +252,13 @@ class ModelMovieController extends Controller
             3=> ' -vf hue=h=5:s=1.7:b=1', //古ぼけ ORG h=10s=1.5b=3
             4=> ' -vf hue=b=2', //明るく
             5=> ' -vf hue=b=-1', //暗く
-            6=> ' -vf hue=s=1.5', //濃く
+            6=> ' -vf hue=s=1.5', //濃く unsharp=3:3:0.5 hue=h=1:s=0.1:b=2
+            //7=> '-vf hue=h=1:s=0.1:b=2,boxblur=2:1', //ピンクがかった白黒 プラスぼかし
+            7=> '-vf tblend=all_mode=screen,eq=saturation=0.1:brightness=0.1', //ピンクがかった白黒
+            8=> '-vf noise=alls=60:allf=t+u', //ノイズ
+            9=> '-vf tblend=all_mode=overlay', //オーバーレイ
+            10=> '-vf eq=saturation=0.2:brightness=0.2:gamma_g=1.0:gamma_r=1.1:gamma_b=0.4,boxblur=2:1', //ヴィンテージ（黄味）プラスぼかし
+            //10=> '-vf tblend=all_mode=screen,eq=saturation=0.3:brightness=0.2' //eq=saturation=1:brightness=0.1:gamma_g=0.4:gamma_r=0.3:gamma_b=0.3
         ];
         
         //exec($cdCmd . 'ffmpeg -i '. $pre.'.mp4' . ' -vf '.$filter[$data['filter_id']].' -strict -2 '. 'com_'.$pre.'.mp4', $out, $status);

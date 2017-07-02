@@ -199,7 +199,7 @@
                             	$pass = decrypt($twa->pass);
                             }
                             else if(old('tw_pass')!==null) {
-                                $pass = decrypt(old('tw_pass'));
+                                $pass = old('tw_pass');
                             }
                         ?>
                         <input id="tw_pass" type="text" class="form-control" name="tw_pass" value="{{ $pass }}">
