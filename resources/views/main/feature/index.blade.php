@@ -41,7 +41,7 @@
                     <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
 
                         <div class="meta">
-                            <h3>{{ $feature->name }}</h3>
+                            {{-- <h3>{{ $feature->name }}</h3> --}}
                             <p>{{-- User::find($feature->model_id)->name --}}</p>
                         </div>
 

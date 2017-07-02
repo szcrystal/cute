@@ -40,7 +40,7 @@
         @endif
     </a></h1>
 
-	<div class="float-right clear s-form">
+	<div class="clear s-form">
 		<div class="float-left">
             <form class="my-1 my-lg-0" role="form" method="GET" action="{{ url('search') }}">
                 {{-- csrf_field() --}}

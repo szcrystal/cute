@@ -38,11 +38,8 @@
     
 ?>
 
-@if(Ctm::isAgent('sp'))
-<section class="top-cont clear">
-@else
+
 <section class="top-cont feature clear">
-@endif
 
 <h2><a href="{{ url($stateSlug . 'feature') }}">特集</a></h2>
     @foreach($features as $feature)
@@ -51,7 +48,7 @@
             <a href="{{ url(Ctm::getFeatureCateUrl($feature->id, Request::path())) }}">
 
             <div class="meta">
-            	<h3>{{ $feature->name }}</h3>
+            	{{-- <h3>{{ $feature->name }}</h3> --}}
                 {{-- <p>{{ User::find($feature->model_id)->name }}</p> --}}
             </div>
 

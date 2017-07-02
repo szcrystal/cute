@@ -94,6 +94,10 @@
     }
     #main {
     	min-height: 600px;
+        
+    }
+    #main.top {
+    	margin-top: 0.5em;
     }
 
 	#main.fix-page {
@@ -124,6 +128,7 @@
         width: 60%;
         text-align: center;
         margin: 5px auto;
+        padding: 0;
     }
     .site-header h1 span {
     	font-size: 0.7em;
@@ -143,6 +148,10 @@
         //border: 1px solid orange;
     }
     
+    .s-form {
+    	position: static;
+        float: right;
+    }
     .s-form > div {
     	display: none;
         position: absolute;
@@ -291,6 +300,17 @@
     }
     .top-cont article .meta p {
     	font-size: 0.7em;
+    }
+
+    .top-cont.feature {
+        height: auto;
+        //border: 1px solid red;
+    }
+    .top-cont.feature article {
+    	width: 100%;
+        height: 300px;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
     }
     
     
@@ -486,6 +506,7 @@
 
 @media only screen and (max-width: 500px) {
     /* Feature */
+    .top-cont.feature article,
     .feature-top .top-cont article {
         width: 100%;
         height: 200px;
