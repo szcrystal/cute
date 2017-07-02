@@ -211,8 +211,8 @@
         </form>
 
 		
-		<div class="col-md-12 text-right">
-            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="col-md-4 btn btn-warning center-block">この動画を結合し直す >></a>
+		<div class="col-md-12 clear">
+            <a href="{{ url('dashboard/model-movies/' . $mvCombine->rel_id) }}" class="col-md-4 col-md-offset-4 btn btn-warning">この動画を結合し直す >></a>
         </div>
 
     </div>
