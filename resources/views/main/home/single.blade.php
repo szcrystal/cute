@@ -133,20 +133,22 @@ use App\User;
                                 </tr>
 
                                 <tr>
-									@if(isset($feature))
+									{{--
 									<th>作成</th>
 									<td>{{ User::find($atcl->model_id)->name }}</td>
-                                    @else
+                                    --}}
+
+                                    @if(! isset($feature))
                                     <th>モデル</th>
-                                    @if($atcl->model_id > 2)
-									<td>
-										<span class="rank-tag">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href="{{ Ctm::getModelUrl($atcl->model_id) }}">{{ User::find($atcl->model_id)->name }}</a></td>
-                                        </span>
-                                    @else
-									<td>{{ User::find($atcl->model_id)->name }}</td>
-                                    @endif
+                                        @if($atcl->model_id > 2)
+                                        <td>
+                                            <span class="rank-tag">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <a href="{{ Ctm::getModelUrl($atcl->model_id) }}">{{ User::find($atcl->model_id)->name }}</a></td>
+                                            </span>
+                                        @else
+                                        <td>{{ User::find($atcl->model_id)->name }}</td>
+                                        @endif
                                     @endif
                                 </tr>
 
