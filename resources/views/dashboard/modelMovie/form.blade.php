@@ -172,7 +172,7 @@
 
                 @foreach($branches as $obj)
                     <div class="clearfix">
-                        <h5><i class="fa fa-square" aria-hidden="true"></i> {{ $obj->title }} {{ $obj->second }}秒</h5>
+                        <h5><i class="fa fa-square" aria-hidden="true"></i> {{ $obj->title }} [{{ $obj->second }}秒]</h5>
 
                         <div class="pull-left col-md-3">
                             <video src="{{ Storage::url($obj->movie_path) }}" width="200" height="auto" controls>
