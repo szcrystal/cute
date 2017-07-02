@@ -52,7 +52,7 @@ a {
 
 .s-form {
 	position: absolute;
-    top: 0;
+    top: 3px;
     right: 0;
 }
 .s-form input {
@@ -75,7 +75,7 @@ a {
 }
 .site-header .btn-s {
 	background: #50BFC2;
-    padding: 0.5em 0.7em 0.4em;
+    padding: 0.4em 0.7em 0.4em;
     position: relative;
     z-index: 10;
     border-radius: 0;
@@ -466,12 +466,14 @@ a {
 }
 
 .top-cont.feature {
-	height: 1000px;
+	height: 1300px;
+    //border: 1px solid red;
 }
 .top-cont.feature article {
-	height: 33%;
+	height: 25%;
     width: 50%;
     background-size: 100% auto;
+    border: none;
 }
 
 /* feature index */

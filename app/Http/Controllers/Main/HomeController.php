@@ -99,7 +99,8 @@ class HomeController extends Controller
 //        })->all();
         
         //特集
-        $features = $this->featureCate->where('status', 1)->whereIn('id', $fCateIds)->take(8)->get();
+        //$features = $this->featureCate->where('status', 1)->whereIn('id', $fCateIds)->take(8)->get();
+        $features = $this->featureCate->where('status', 1)->take(8)->get();
         
     	
     	return view('main.home.index', ['newAtcl'=>$newAtcl, 'atcls'=>$atcls, 'cates'=>$cates, 'pickUps'=>$pickUps, 'features'=>$features, 'stateObj'=>$stateObj]);
