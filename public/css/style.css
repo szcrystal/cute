@@ -264,7 +264,7 @@ a {
 	margin-top: 108px;
 }
 .single {
-	margin-top: 85px;
+	margin-top: 82px;
 }
 .single .cont-wrap {
 	width: 1200px;
@@ -941,6 +941,9 @@ a {
 .model .table-responsive,
 .model .contents {
 	width: 49%;
+}
+.model .contents {
+	margin-top: 0;
 }
 .model .cth {
 	background: azure;
