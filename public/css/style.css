@@ -42,7 +42,7 @@ a {
 }
 .navbar-brand span {
     font-weight: bold;
-    margin-left: 0.3em;
+    margin-left: 0.2em;
 }
 .navbar-brand:hover {
 /*	color: #40979B;*/
@@ -1304,7 +1304,8 @@ textarea {
     border-radius: 0.7em;
 }
 #colop .foot-wrap:nth-of-type(2) {
-	width: 65%;
+	width: 63%;
+    margin-left: 2%;
 }
 #colop .foot-wrap:last-of-type {
 	width: 13%;
@@ -1336,10 +1337,13 @@ textarea {
 	list-style: none;
     padding: 0;
     margin: 0 0 0 1em;
+    width: 100%;
+    //border: 1px solid red;
 }
 #colop ul li {
 	display: inline-block;
-    padding: 0.1em 0.4em 0.1em 0.8em;
+    padding: 0.1em 0 0.1em;
+    margin-right: 1.5%;
 }
 #colop ul li a,
 #colop ul li a:visited {
