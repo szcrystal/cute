@@ -195,8 +195,15 @@
                 <div class="col-md-6">
                     <select class="form-control" name="addModel_id">
 						<option disabled selected>選択</option>
+
+                        <?php $idNum = 2; ?>
+
+                        @if(Auth::guard('admin')->id() == 2)
+                        	<?php $idNum = 1; ?>
+                        @endif
+
                         @foreach($users as $user)
-							@if($user->id > 1 && $atcl->model_id != $user->id)
+							@if($user->id > $idNum && $atcl->model_id != $user->id)
                                 @if(old('user_id') !== NULL)
                                     <option value="{{ $user->id }}"{{ old('user_id') == $user->id ? ' selected' : '' }}>{{ $user->name }}</option>
                                 @else
