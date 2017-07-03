@@ -61,15 +61,13 @@
 
 	@else <?php /*特集ALL以外の特集*/ ?>
         @if(count($features) > 0)
-            @foreach($features as $feature)
-
-            @if($n == 1 || $n == 4 || $n == 7 || $n == 10)
-                @if(Ctm::isAgent('sp'))
+        	@if(Ctm::isAgent('sp'))
                 <div class="top-cont clear">
-                @else
+            @else
                 <div class="top-cont feature clear">
-                @endif
             @endif
+
+            @foreach($features as $feature)
 
             <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
@@ -84,12 +82,12 @@
                 </a>
             </article>
 
-            @if($n%3 == 0)
-            </div>
-            @endif
 
             <?php $n++; ?>
+
             @endforeach
+
+            </div>
         @else
             <p class="mt-3">まだ記事がありません。</p>
         @endif

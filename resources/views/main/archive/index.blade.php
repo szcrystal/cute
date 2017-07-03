@@ -32,16 +32,6 @@
 
             <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
 
-                @if($atcl->thumb_path == '')
-                    <span class="no-img">No Image</span>
-                @else
-                    <div class="main-thumb"></div>
-                @endif
-
-                <?php
-                    $num = Ctm::isAgent('sp') ? 30 : 18;
-                ?>
-
                 <div class="meta">
                     <h3>{{ $atcl->title }}</h3>
                     <p>{{ User::find($atcl->model_id)->name }}</p>

@@ -465,18 +465,19 @@ a {
     margin-left: 0.1em;
 }
 
-.top-cont.feature {
+/* top feature */
+.top .top-cont.feature {
 	height: 1300px;
     //border: 1px solid red;
 }
-.top-cont.feature article {
+.top .top-cont.feature article {
 	height: 25%;
     width: 50%;
     background-size: 100% auto;
     border: none;
 }
 
-/* feature index */
+/* feature All */
 .feature-top .feature article {
 	width: 50%;
     height: 337px;
@@ -484,9 +485,8 @@ a {
 }
 
 
-.feature-index .top-cont.feature {
-	height: 800px;
-}
+
+/*
 .feature-index .feature:first-of-type article:first-of-type {
 	height: 100%;
     width: 40%;
@@ -518,6 +518,7 @@ a {
     background-size: 120% auto;
     background-position: center;
 }
+*/
 
 
 /* pickup */
@@ -779,22 +780,29 @@ a {
 .top-cont.archive {
 	height: auto;
 }
-.archive article {
+.feature-index .top-cont.feature {
+	height: auto;
+}
+.archive article,
+.feature article {
 	width: 50%;
     height: 300px;
     background-size: 100% auto;
     background-position: center;
     //border: 3px solid #fff;
 }
-.archive article .meta {
+.archive article .meta,
+.feature article .meta {
 	font-size: 1.5em;
     color: #fff;
     width: 92%;
 }
-.archive article a:hover .meta {
+.archive article a:hover .meta,
+.feature article a:hover .meta {
 	font-size: 1em;
 }
-.archive article .meta p {
+.archive article .meta p,
+.feature article .meta p {
 	width: 75%;
 	text-align: right;
 }

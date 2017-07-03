@@ -26,6 +26,7 @@
 
 
 	@if(count($features) > 0)
+
         @foreach($features as $feature)
 
 		@if($n == 1 || $n == 4 || $n == 7 || $n == 10)
@@ -39,16 +40,6 @@
         <article style="background-image:url({{Storage::url($feature->thumb_path)}})" class="float-left">
 
             <a href="{{ url(Ctm::getAtclUrl($feature->id)) }}">
-
-                @if($feature->thumb_path == '')
-                    <span class="no-img">No Image</span>
-                @else
-                    <div class="main-thumb"></div>
-                @endif
-
-                <?php
-                    $num = Ctm::isAgent('sp') ? 30 : 18;
-                ?>
 
                 <div class="meta">
                     <h3>{{ $feature->title }}</h3>
@@ -71,8 +62,6 @@
     </div>
 
 
-
-
 </div>
 
 <div class="pagination-wrap">
@@ -86,6 +75,7 @@
         </div>
 
 </div>
+
 
 @endsection
 
