@@ -718,8 +718,8 @@ a {
 .atcl:nth-of-type(3n+2) article .meta {
 	color: #fff/*blanchedalmond*/;
 }
-.atcl:nth-of-type(3n+2) article:first-of-type span .fa,
-.feature-index .feature:first-of-type article:first-of-type span .fa {
+.atcl:nth-of-type(3n+2) article:first-of-type span .fa
+/*.feature-index .feature:first-of-type article:first-of-type span .fa*/ {
 	-webkit-transform: translateX(5px);
 	transform: translateX(5px);
 }
