@@ -71,12 +71,21 @@ class ArticleController extends Controller
     {
         $atcl = $this->article->find($id);
         $cates = $this->category->all();
+        $states = $this->state->all();
+        $models = $this->user->all();
         
         $mvId = $atcl->movie_id;
-        $mv = $this->mvCombine->find($mvId);
-        $rel = $this->mvRel->find($mv->rel_id);
         
-        $states = $this->state->all();
+        if($mvId) {
+        	$mv = $this->mvCombine->find($mvId);
+        	$rel = $this->mvRel->find($mv->rel_id);
+        }
+        else {
+        	$mv = null;
+            $rel = null;
+        }
+        
+        
         
         //$mvPath = Storage::url($mv->movie_path);
         //$modelId = $mv->model_id;
@@ -108,7 +117,7 @@ class ArticleController extends Controller
 //        	echo $tag-> id."<br>";
 //        exit();
         
-    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'states'=>$states, 'rel'=>$rel, 'mvId'=>$mvId, 'id'=>$id, 'edit'=>1]);
+    	return view('dashboard.article.form', ['atcl'=>$atcl, 'mv'=>$mv, 'modelName'=>$modelName, 'tagNames'=>$tagNames, 'allTags'=>$allTags, 'cates'=>$cates, 'states'=>$states, 'rel'=>$rel, 'mvId'=>$mvId, 'models'=>$models, 'id'=>$id, 'edit'=>1]);
     }
 
 
@@ -119,24 +128,32 @@ class ArticleController extends Controller
      */
     public function create(Request $request)
     {
-    	$mvId = $request->input('mvId');
+    	$mvId = $request->has('mvId') ? $request->input('mvId') : 0;
         $cates = $this->category->all();
         $states = $this->state->all();
+        $models = $this->user->all();
         
-        $mv = $this->mvCombine->find($mvId);
-        $rel = $this->mvRel->find($mv->rel_id);
-//        $mvPath = Storage::url($mv->movie_path);
-//        $modelId = $mv->model_id;
-        $modelName = $this->user->find($mv->model_id)->name;
+        $mv = null;
+        $rel = null;
+        $modelName = '';
+        $preCate = null;
         
-        $preCate = $this->category->find($mv->cate_id);
+        if($mvId) {
+            $mv = $this->mvCombine->find($mvId);
+            $rel = $this->mvRel->find($mv->rel_id);
+    //        $mvPath = Storage::url($mv->movie_path);
+    //        $modelId = $mv->model_id;
+            $modelName = $this->user->find($mv->model_id)->name;
+            
+            $preCate = $this->category->find($mv->cate_id);
+        }
         
         $allTags = $this->tag->get()->map(function($item){
         	return $item->name;
         })->all();
         
         
-    	return view('dashboard.article.form', ['cates'=>$cates, 'states'=>$states, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags, 'rel'=>$rel]);
+    	return view('dashboard.article.form', ['cates'=>$cates, 'states'=>$states, 'mv'=>$mv, 'preCate'=>$preCate, 'mvId'=>$mvId, 'modelName'=>$modelName, 'allTags'=>$allTags, 'rel'=>$rel, 'models'=>$models]);
     }
 
     /**
@@ -154,11 +171,13 @@ class ArticleController extends Controller
         	'title' => 'required|max:255',
             'cate_id' => 'required',
         	'state_id' => 'required',
+            'model_id' => 'required',
             'post_movie' => 'filenaming',
             'post_thumb' => 'filenaming',
         ];
         
         $messages = [
+        	'model_id.required' => '「モデル」を選択して下さい。',
         	'cate_id.required' => '「カテゴリー」を選択して下さい。',
             'state_id.required' => '「都道府県名」を選択して下さい。',
             'post_thumb.filenaming' => '「サムネイル-ファイル名」は半角英数字、及びハイフンとアンダースコアのみにして下さい。',
@@ -248,10 +267,12 @@ class ArticleController extends Controller
         }
         else {
         	//mv combineにcateとatcl statusをセット
-            $mv = $this->mvCombine->find($data['movie_id']);
-            $mv->cate_id = $atcl->cate_id;
-            $mv->atcl_status = 1;
-            $mv->save();
+            if($data['movie_id']) {
+                $mv = $this->mvCombine->find($data['movie_id']);
+                $mv->cate_id = $atcl->cate_id;
+                $mv->atcl_status = 1;
+                $mv->save();
+            }
         }
         
         //Thumbnail upload

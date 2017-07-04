@@ -43,7 +43,7 @@
                 <source src="{{ Storage::url($mv->movie_path) }}">
             </video>
             @else
-            <span>No Video</span>
+            <span class="text-warning">No Video<br>この記事の投稿動画はありません</span>
             @endif
 
         </div>
@@ -165,31 +165,8 @@
                 </div>
             </div>
 
-			<div class="form-group">
-                <label for="group" class="col-md-4 control-label">モデル</label>
-
-                <div class="col-md-7">
-					<p style="margin-top: 0.4em;" class="">{{ $modelName }}</p>
-                    <input type="hidden" name="model_id" value="{{ $mv->model_id}}"
-
-                    @if ($errors->has('model_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('model_id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
             <div class="form-group">
-                <label for="group" class="col-md-4 control-label">動画メモ</label>
-
-                <div class="col-md-7">
-					<p style="margin-top: 0.4em;" class="">{{ $rel->memo }}</p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div style="margin-left: 1.5em;" class="col-md-10 text-left">
+                <div style="margin-left:1.5em; margin-bottom:3em;" class="col-md-10 text-left">
                     <div class="checkbox">
                         <label>
                         	<?php
@@ -209,6 +186,58 @@
                     </div>
                 </div>
             </div>
+
+			<div class="form-group">
+                <label for="group" class="col-md-3 control-label">モデル</label>
+
+                @if(isset($mv))
+                    <div class="col-md-6">
+                        <p style="margin-top: 0.4em;" class="">{{ $modelName }}</p>
+                        <input type="hidden" name="model_id" value="{{ $mv->model_id }}">
+                    </div>
+                @else
+                	<div class="col-md-6">
+                	<select class="form-control" name="model_id">
+						<option disabled selected>選択</option>
+                        @foreach($models as $model)
+
+                            <?php
+                            	$selected = '';
+                            	if(isset($atcl)) {
+                                	if($atcl->model_id == $model->id) {
+                                    	$selected = ' selected';
+                                    }
+                                }
+                            ?>
+
+                            @if(old('model_id') !== NULL)
+                                <option value="{{ $model->id }}"{{ old('model_id') == $model->id ? ' selected' : '' }}>{{ $model->name }}</option>
+                            @else
+                                <option value="{{ $model->id }}"{{ $selected }}>{{ $model->name }}</option>
+                            @endif
+                        @endforeach
+
+                    </select>
+                    @if ($errors->has('model_id'))
+                        <span class="help-block text-danger">
+                            <strong>{{ $errors->first('model_id') }}</strong>
+                        </span>
+                    @endif
+                    </div>
+                @endif
+
+            </div>
+
+            <div class="form-group">
+                <label for="group" class="col-md-3 control-label">動画メモ</label>
+				@if(isset($rel))
+                <div class="col-md-7">
+					<p style="margin-top: 0.4em;" class="">{{ $rel->memo }}</p>
+                </div>
+                @endif
+            </div>
+
+
 
 			<div class="clearfix thumb-wrap">
                 <div class="col-md-4 pull-left thumb-prev">

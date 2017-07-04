@@ -84,11 +84,13 @@
 
             <div style="margin-bottom:2em;" class="clearfix">
             	<p class="pull-left col-md-12"><b>YouTubeへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
-                @if($mvId)
-                	<a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                @if($atcl->feature)
+                    <?php $backUrl = url('/dashboard/features/'. $atclId); ?>
                 @else
-					<a href="{{ url('/dashboard/features/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
+                    <?php $backUrl = url('/dashboard/articles/'. $atclId); ?>
                 @endif
+
+                <a href="{{ $backUrl }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
 
                 <div class="btn-group-md pull-right col-md-7">
                         <div class="pull-right text-right">
@@ -97,8 +99,13 @@
 								<p class="text-warning text-small">YouTubeにUP済みです</p>
                             @endif
                             --}}
-                            <div class="col-md-10 pull-right">
-                                <input type="submit" id="ytUp" class="btn btn-danger" name="ytUp" value="YouTubeUP">
+                            <div class="col-md-12 pull-right">
+                            	@if(! $atcl->feature && ! $mvId)
+									<p class="text-warning text-small">この記事のYouTubeUPは出来ません。</p>
+                                    <input type="submit" id="ytUp" class="btn btn-danger" name="ytUp" value="YouTubeUP" disabled>
+                                @else
+                                	<input type="submit" id="ytUp" class="btn btn-danger" name="ytUp" value="YouTubeUP">
+                                @endif
                             </div>
                         </div>
             	</div>
@@ -161,11 +168,13 @@
 
 		<div style="margin-bottom: 2em;" class="clearfix">
             <p class="pull-left col-md-12"><b>Twitter/FBへの送信内容</b><br>訂正する場合は戻って更新し直して下さい。</p>
-            @if($mvId)
-                	<a href="{{ url('/dashboard/articles/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
-                @else
-					<a href="{{ url('/dashboard/features/'. $atclId) }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
-                @endif
+            @if($atcl->feature)
+            	<?php $backUrl = url('/dashboard/features/'. $atclId); ?>
+            @else
+            	<?php $backUrl = url('/dashboard/articles/'. $atclId); ?>
+            @endif
+
+            <a href="{{ $backUrl }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>編集へ戻る</a>
         </div>
 
 		<div class="clearfix">
