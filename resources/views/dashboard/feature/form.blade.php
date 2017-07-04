@@ -155,7 +155,7 @@
                 </div>
 
                 <div class="col-md-8 pull-left text-left form-group{{ $errors->has('post_movie') ? ' has-error' : '' }}">
-					<label for="post_movie" class="col-md-12">動画</label><br>
+					<label for="post_movie" class="col-md-12">動画（既にYouTubeに既存動画がある場合は不要）</label><br>
                     <div class="col-md-12">
                         <input id="post_movie" class="post_thumb post_movie video-file" type="file" name="post_movie">
 
