@@ -306,6 +306,19 @@
         height: auto;
         //border: 1px solid red;
     }
+    /* top feature */
+    .top .top-cont.feature {
+        height: auto;
+        //border: 1px solid red;
+    }
+    .top .top-cont.feature article {
+        height: 300px;
+        width: 100%;
+        background-size: 100% auto;
+        border: none;
+    }
+    
+    
     .top-cont.feature article {
     	width: 100%;
         height: 300px;
@@ -505,6 +518,12 @@
 }
 
 @media only screen and (max-width: 500px) {
+	
+    /* top feature */
+    .top .top-cont.feature article {
+        height: 200px;
+    }
+    
     /* Feature */
     .top-cont.feature article,
     .feature-top .top-cont article {
