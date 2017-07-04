@@ -426,7 +426,7 @@
                 <label for="yt_id" class="col-md-2 control-label">YouTube ID</label>
 
                 <div class="col-md-5">
-                    <input id="yt_id" type="text" class="form-control" name="yt_id" value="{{ Ctm::isOld() ? old('yt_id') : (isset($atcl) ? $atcl->yt_id : '') }}" placeholder="既にYouTubeUP済の場合そのIDを入力">
+                    <input id="yt_id" type="text" class="form-control" name="yt_id" value="{{ Ctm::isOld() ? old('yt_id') : (isset($atcl) ? $atcl->yt_id : '') }}" placeholder="YouTubeに既存動画がある場合そのIDを入力">
 
                     @if ($errors->has('yt_id'))
                         <span class="help-block">
