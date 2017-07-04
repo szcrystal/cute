@@ -7,9 +7,13 @@ body {
     //font-family: 'Quicksand', "Meiryo", sans-serif;
 }
 
-a {
+a,
+a > img {
 	-webkit-transition: all ease-in-out .15s;
     transition: all ease-in-out .15s;
+}
+a:hover > img {
+	opacity: 0.65;
 }
 .fixed-top {
 	z-index: 9999;

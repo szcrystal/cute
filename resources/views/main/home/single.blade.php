@@ -191,8 +191,16 @@ use App\User;
                 		</table>
                     </div>
 
+					@if(isset($feature) && isset($cateObj) && strpos($cateObj->slug, 'housemate') !== FALSE)
+                        <div class="col-md-12 text-center">
+                            <a href="https://www.housemate-navi.jp/search/matsuyama/"><img src="{{ url('images/housemate.png') }}"></a>
+                        </div>
+                    @endif
+
+
 
                 	</div>
+
 
 				</div><!-- panelbody -->
 
