@@ -342,6 +342,20 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('yt_id') ? ' has-error' : '' }}">
+                <label for="yt_id" class="col-md-2 control-label">YouTube ID</label>
+
+                <div class="col-md-5">
+                    <input id="yt_id" type="text" class="form-control" name="yt_id" value="{{ Ctm::isOld() ? old('yt_id') : (isset($feature) ? $feature->yt_id : '') }}" placeholder="既にYouTubeUP済の場合そのIDを入力">
+
+                    @if ($errors->has('yt_id'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('yt_id') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
 
             <div class="clearfix tag-wrap">
 

@@ -1337,6 +1337,10 @@ textarea {
 #colop .foot-wrap:last-of-type a {
 	color: #fff;
 }
+#colop .foot-wrap:last-of-type a:hover {
+    opacity: 0.6;
+    text-decoration: none;
+}
 
 #colop a.navbar-brand,
 #colop a.navbar-brand:visited {
@@ -1361,6 +1365,10 @@ textarea {
 #colop ul li a:visited {
 	color: #5a5a5a;
     font-size: 0.9em;
+}
+#colop ul li a:hover {
+	color: #bbb;
+    text-decoration: none;
 }
 #colop ul li a .fa {
 	margin-right: 0.15em;
