@@ -291,6 +291,9 @@ a:hover > img {
     height: 100%;
     background: rgba(151,147,130,0.45);
 }
+.carousel-inner a:hover img {
+	opacity: 0.9;
+}
 .carousel-indicators {
 	//z-index: 9999;
 }
