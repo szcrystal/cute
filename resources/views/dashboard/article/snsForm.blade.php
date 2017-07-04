@@ -14,11 +14,13 @@
 
     <div class="bs-component clearfix">
         <div class="pull-left">
-        	@if($mvId)
-            <a href="{{ url('/dashboard/articles') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+        	@if($atcl->feature)
+                <?php $backUrl = url('/dashboard/features'); ?>
             @else
-            <a href="{{ url('/dashboard/features') }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
+                <?php $backUrl = url('/dashboard/articles'); ?>
             @endif
+
+            <a href="{{ $backUrl }}" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i>一覧へ戻る</a>
         </div>
     </div>
 
@@ -232,15 +234,22 @@
             </div>
 
             <div style="padding-bottom:6em;" class="btn-group-md pull-right">
-                    <div class="col-md-6 pull-left">
+            	<div class="pull-right text-right">
+                    <div class="col-md-12 pull-right">
                     	{{--
                         @if($atcl->tw_up)
                             <p class="col-md-12 text-warning text-small">TwitterにUP済みです</p>
                         @endif
                         --}}
-                        <input type="submit" id="twFbUp" class="btn btn-success center-block w-btn" name="twFbUp" value="TW FB UP">
-                    </div>
 
+                        @if(! $atcl->feature && ! $mvId)
+                            <p class="text-warning text-small">この記事のTW FB UPは出来ません。</p>
+                            <input type="submit" id="twFbUp" class="btn btn-success" name="twFbUp" value="TW FB UP" disabled>
+                        @else
+                        	<input type="submit" id="twFbUp" class="btn btn-success" name="twFbUp" value="TW FB UP">
+                        @endif
+                    </div>
+				</div>
             </div>
 
         </div>
