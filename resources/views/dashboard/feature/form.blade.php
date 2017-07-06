@@ -155,7 +155,7 @@
                 </div>
 
                 <div class="col-md-8 pull-left text-left form-group{{ $errors->has('post_movie') ? ' has-error' : '' }}">
-					<label for="post_movie" class="col-md-12">動画（既にYouTubeに既存動画がある場合は不要）</label><br>
+					<label for="post_movie" class="col-md-12">動画（YouTubeに既存動画がある場合は不要）</label><br>
                     <div class="col-md-12">
                         <input id="post_movie" class="post_thumb post_movie video-file" type="file" name="post_movie">
 
@@ -227,7 +227,7 @@
                     </select>
 
                     @if ($errors->has('cate_id'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('cate_id') }}</strong>
                         </span>
                     @endif
@@ -260,7 +260,7 @@
                     </select>
 
                     @if ($errors->has('state_id'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('state_id') }}</strong>
                         </span>
                     @endif
@@ -277,7 +277,7 @@
                     <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($feature) ? $feature->title : '') }}" required>
 
                     @if ($errors->has('title'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('title') }}</strong>
                         </span>
                     @endif

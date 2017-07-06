@@ -187,7 +187,7 @@
                 </div>
             </div>
 
-			<div class="form-group">
+			<div class="form-group{{ $errors->has('model_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-3 control-label">モデル</label>
 
                 @if(isset($mv))
@@ -262,7 +262,7 @@
                         <input id="post_thumb" class="post_thumb thumb-file" type="file" name="post_thumb">
 
                         @if ($errors->has('post_thumb'))
-                            <span class="help-block">
+                            <span class="help-block text-danger">
                                 <strong>{{ $errors->first('post_thumb') }}</strong>
                             </span>
                         @endif
@@ -274,7 +274,7 @@
 
 
 
-            <div class="form-group{{ $errors->has('group_id') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('cate_id') ? ' has-error' : '' }}">
                 <label for="group" class="col-md-2 control-label">カテゴリー</label>
                 <div class="col-md-7">
                     <select class="form-control" name="cate_id" required>
@@ -305,7 +305,7 @@
                     </select>
 
                     @if ($errors->has('cate_id'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('cate_id') }}</strong>
                         </span>
                     @endif
@@ -367,10 +367,10 @@
                 <label for="title" class="col-md-2 control-label">タイトル</label>
 
                 <div class="col-md-9">
-                    <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($atcl) ? $atcl->title : '') }}" required>
+                    <input id="title" type="text" class="form-control" name="title" value="{{ Ctm::isOld() ? old('title') : (isset($atcl) ? $atcl->title : '') }}">
 
                     @if ($errors->has('title'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('title') }}</strong>
                         </span>
                     @endif

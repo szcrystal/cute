@@ -266,6 +266,7 @@ a:hover > img {
 #main.feature-index,
 #main.feature-top {
 	margin-top: 108px;
+    padding: 0 0 1.5em;
 }
 .single {
 	margin-top: 82px;

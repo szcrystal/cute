@@ -192,7 +192,7 @@ use App\User;
                     </div>
 
 					@if(isset($feature) && isset($cateObj) && strpos($cateObj->slug, 'housemate') !== FALSE)
-                        <div class="col-md-12 text-center">
+                        <div class="col-md-12 text-center housemate">
                             <a href="https://www.housemate-navi.jp/search/matsuyama/" target="_brank"><img src="{{ url('images/housemate.png') }}"></a>
                         </div>
                     @endif

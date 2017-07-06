@@ -108,6 +108,7 @@
     #main.feature-index,
     #main.feature-top {
         margin-top: 39px;
+        padding: 1em 0;
     }
     .single {
         margin-top: 35px;
@@ -289,17 +290,21 @@
     .top-cont article .meta,
     .top-cont article a:hover .meta {
     	font-size: 1em;
-        width: 90%;
+        width: 95%;
         top: auto;
         left: auto;
-        bottom: 1em !important;
+        bottom: 0.3em !important;
         right: 0.3em !important;
     }
     .top-cont article .meta h3 {
     	font-size: 1em;
+        margin: 0;
+        padding: 0;
     }
     .top-cont article .meta p {
     	font-size: 0.7em;
+        margin: 0;
+        padding: 0;
     }
 
     .top-cont.feature {
@@ -359,6 +364,9 @@
     .single .contents h4 {
     	margin-top: 1em;
     }
+    .housemate img {
+    	width: 100%;
+    }
     
     
     /* Feature */
@@ -378,7 +386,7 @@
     	display: block;
     	width: 100%;
         padding: 2px 0;
-        font-size: 0.9em;
+        font-size: 0.8em;
         margin: 0;
 /*        -webkit-transform: none;*/
 /*        transform: none;*/
@@ -411,6 +419,10 @@
         height: 150px;
         background-size: auto 115%;
     }
+    .model-index {
+    	padding-bottom: 1em;
+    }
+
     
     
     
