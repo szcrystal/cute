@@ -58,45 +58,49 @@
     @endforeach
 </section>
 
-@if(Ctm::isAgent('sp'))
-<section class="top-cont clear">
-@else
-<section class="top-cont pickup clear">
+
+@if($pickUps !== null)
+    @if(Ctm::isAgent('sp'))
+    <section class="top-cont clear">
+    @else
+    <section class="top-cont pickup clear">
+    @endif
+
+
+    <h2>Pick Up</h2>
+    <div>
+        @foreach($pickUps as $pickUp)
+        <article style="background-image:url({{Storage::url($pickUp->thumb_path)}})" class="float-left">
+
+                <a href="{{ url(Ctm::getAtclUrl($pickUp->id)) }}">
+
+                @if($pickUp->thumb_path == '')
+                    <span class="no-img">No Image</span>
+                @else
+                    <div class="main-thumb"></div>
+                @endif
+
+                <?php
+                    $num = Ctm::isAgent('sp') ? 30 : 18;
+                ?>
+
+                <div class="meta">
+                    <?php $model = User::find($pickUp->model_id); ?>
+                    <h3>{{ $pickUp->title }}</h3>
+                    <p>{{ $model->name }}
+                        @if($model->school != '')
+                            ＠{{ $model->school }}
+                        @endif
+                    </p>
+                </div>
+
+                <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+            </a>
+        </article>
+        @endforeach
+    </div>
+    </section>
 @endif
-
-<h2>Pick Up</h2>
-<div>
-	@foreach($pickUps as $pickUp)
-    <article style="background-image:url({{Storage::url($pickUp->thumb_path)}})" class="float-left">
-
-            <a href="{{ url(Ctm::getAtclUrl($pickUp->id)) }}">
-
-            @if($pickUp->thumb_path == '')
-                <span class="no-img">No Image</span>
-            @else
-                <div class="main-thumb"></div>
-            @endif
-
-            <?php
-                $num = Ctm::isAgent('sp') ? 30 : 18;
-            ?>
-
-            <div class="meta">
-            	<?php $model = User::find($pickUp->model_id); ?>
-            	<h3>{{ $pickUp->title }}</h3>
-                <p>{{ $model->name }}
-					@if($model->school != '')
-                    	＠{{ $model->school }}
-                    @endif
-                </p>
-            </div>
-
-            <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
-        </a>
-    </article>
-    @endforeach
-</div>
-</section>
 
 
 @foreach($atcls as $key => $obj)
