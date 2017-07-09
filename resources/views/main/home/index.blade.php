@@ -59,7 +59,7 @@
 </section>
 
 
-@if(isset($pickUps))
+@if(count($pickUps) > 0)
     @if(Ctm::isAgent('sp'))
     <section class="top-cont clear">
     @else
