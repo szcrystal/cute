@@ -543,6 +543,7 @@ a:hover > img {
 	position: relative;
 	width: 110%;
 	height: 55%;
+    background-size: 100% auto;
     -webkit-transform: rotateZ(3deg);
     transform: rotateZ(3deg);
 }
@@ -561,6 +562,10 @@ a:hover > img {
 }
 .pickup article .meta {
 	color: #fff;
+}
+.pickup article .meta p {
+	font-size: 1.2em;
+    text-align: right;
 }
 .pickup article:first-of-type .meta {
 	width: 45%;
@@ -905,8 +910,8 @@ a:hover > img {
     //color: dodgerblue;
 }
 .single .contents {
-	line-height: 1.8em;
-    font-size: 1.1em;
+	line-height: 1.6em;
+    font-size: 1.0em;
     margin-top: 3em;
 }
 .single .contents div {
