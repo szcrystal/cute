@@ -293,7 +293,7 @@ a:hover > img {
     background: rgba(151,147,130,0.45);
 }
 .carousel-inner a:hover img {
-	opacity: 0.9;
+	opacity: 1.0;
 }
 .carousel-indicators {
 	//z-index: 9999;
@@ -417,7 +417,7 @@ a:hover > img {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: rgba(151,147,130,0.1);
+    //background: rgba(151,147,130,0.1);
     -webkit-transition: all ease-in-out .15s;
     transition: all ease-in-out .15s;
     //border: 2px solid red;
