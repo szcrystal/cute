@@ -759,11 +759,15 @@ class ArticleController extends Controller
         //Video edit ======
         $cdCmd = 'cd ' . $path .' && ';
         
-        if(! Storage::exists($videoPath)) {
+        //if(! file_exists($videoPath)) {
             //exec($cdCmd . 'ffmpeg -i '. $fileName . ' -to 20 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
-            exec($cdCmd . 'ffmpeg -i '. $fileName . ' -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
-            echo 'twitter: '.$status;
-        }
+            //音声：stereoにしないとTwitterでエラーになる(-ac 2)
+            exec($cdCmd . 'ffmpeg -i '. $fileName . ' -ac 2 -s 480x270 -strict -2 '. 'tw_'.$fileName .' -y', $out, $status);
+            if($status) {
+                $out[] = 'make twitter movie error(1015): '. $status;
+                return back()->withInput()->withErrors(array($out));
+            }
+        //}
         // END ============
         
         //動画ファイルサイズ
@@ -813,7 +817,7 @@ class ArticleController extends Controller
             
             
             if($consumer_key == '' || $consumer_secret == '' || $access_token == '' || $access_token_secret == '') {
-            	$resultArr[] = 'Twitter Error ! '. $this->user->find($account->model_id)->name . 'の入力情報が不足です。';
+            	$resultArr[] = 'Twitter Error ! '. $this->user->find($account->model_id)->name . 'の入力情報が不足しています。';
             	continue;
             }
             
@@ -875,13 +879,13 @@ class ArticleController extends Controller
             //$result = $toa->OAuthRequest(self::$TWITTER_API, "POST", array("status"=>$postMsg));
      
             // レスポンス表示
-            //var_dump($result->errors[0]->message);
+            //var_dump($result);
             //exit;
             //$status[] = $result;
             
             
             if(isset($result->errors[0]->message)) {
-                $resultArr[] = 'Twitter Error ! '.$name;
+                $resultArr[] = 'Twitter Error ! '.$name .' : ' . $result->errors[0]->message;
             }
             else {
                 $atclModel = $this->article->find($atclId);
@@ -899,8 +903,9 @@ class ArticleController extends Controller
         
 
         // FB ========================================================
-        
         //https://developers.facebook.com/docs/php/howto/example_upload_video
+        
+        /*
         
         if(env('ENVIRONMENT') == 'dev') {
         	$fb = new \Facebook\Facebook([
@@ -972,7 +977,7 @@ class ArticleController extends Controller
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
 
-        
+        */
         
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $resultArr);
 
