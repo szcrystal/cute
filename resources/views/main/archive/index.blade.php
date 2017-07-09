@@ -31,10 +31,14 @@
     	<article style="background-image:url({{Storage::url($atcl->thumb_path)}})" class="float-left">
 
             <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
-
+				<?php $model = User::find($atcl->model_id); ?>
                 <div class="meta">
                     <h3>{{ $atcl->title }}</h3>
-                    <p>{{ User::find($atcl->model_id)->name }}</p>
+                    <p>{{ $model->name }}
+						@if($model->school != '')
+                            ＠{{ $model->school }}
+                        @endif
+                    </p>
                 </div>
 
                 <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
