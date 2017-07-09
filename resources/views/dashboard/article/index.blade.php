@@ -84,7 +84,7 @@
                 </td>
 
                 <td>
-					<ul style="list-style:none; padding-left:0;">
+					<ul style="list-style:none; padding-left:0; font-size:0.9em;">
                         @if(!$obj->yt_up)
                         <li>YT: <span class="text-danger">未UP</span>
                         @else
