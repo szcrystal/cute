@@ -193,8 +193,12 @@
                 <label for="group" class="col-md-3 control-label">コメント</label>
 
                 <div class="col-md-9">
-                	<?php $str = mb_substr($atcl->contents, 0, 30); ?>
-					<p style="margin-top: 0.4em;" class="">{{ $str }}...</p>
+                	<?php
+                    	$str = mb_substr($atcl->contents, 0, 100);
+                    	//$str = str_replace("\n", ' ', $str);
+                        $str = $str . '...';
+                    ?>
+					<p style="margin-top: 0.4em;" class="">{{ $str }}</p>
                     <input type="hidden" name="tw_comment" value="{{ $str }}">
 
                 </div>

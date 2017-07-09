@@ -905,7 +905,7 @@ class ArticleController extends Controller
         // FB ========================================================
         //https://developers.facebook.com/docs/php/howto/example_upload_video
         
-        /*
+        
         
         if(env('ENVIRONMENT') == 'dev') {
         	$fb = new \Facebook\Facebook([
@@ -977,7 +977,6 @@ class ArticleController extends Controller
         
         //return view('dashboard.sns.fbup', ['htmlBody'=>$htmlBody]);
 
-        */
         
         return redirect('dashboard/articles/snsup/'. $atclId)->with('twStatus', $resultArr);
 
