@@ -453,6 +453,9 @@ a:hover > img {
 	font-weight: bold;
     font-size: 1.5em;
 }
+.top-cont article .meta p {
+    font-size: 1.3em;
+}
 .top-cont article span {
 	width: 5em;
     height: 5em;
@@ -564,8 +567,7 @@ a:hover > img {
 	color: #fff;
 }
 .pickup article .meta p {
-	font-size: 1.2em;
-    text-align: right;
+
 }
 .pickup article:first-of-type .meta {
 	width: 45%;

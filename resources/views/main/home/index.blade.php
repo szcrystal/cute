@@ -82,8 +82,13 @@
             ?>
 
             <div class="meta">
+            	<?php $model = User::find($pickUp->model_id); ?>
             	<h3>{{ $pickUp->title }}</h3>
-                <p>{{ User::find($pickUp->model_id)->name }}</p>
+                <p>{{ $model->name }}
+					@if($model->school != '')
+                    	＠{{ $model->school }}
+                    @endif
+                </p>
             </div>
 
             <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
@@ -107,10 +112,14 @@
             <article style="background-image:url({{Storage::url($atcl->thumb_path)}})">
 
                 <a href="{{ url(Ctm::getAtclUrl($atcl->id)) }}">
-
+					<?php $model = User::find($atcl->model_id); ?>
                     <div class="meta">
                         <h3>{{ $atcl->title }}</h3>
-                        <p>{{ User::find($atcl->model_id)->name }}</p>
+                        <p>{{ $model->name }}
+							@if($model->school != '')
+                            	＠{{ $model->school }}
+                            @endif
+                        </p>
                     </div>
 
                     <span><i class="fa fa-caret-right" aria-hidden="true"></i></span>
