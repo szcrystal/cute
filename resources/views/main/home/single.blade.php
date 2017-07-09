@@ -144,7 +144,7 @@ use App\User;
                                         <td>
                                             <span class="rank-tag">
                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                            <a href="{{ Ctm::getModelUrl($atcl->model_id) }}">{{ User::find($atcl->model_id)->name }}</a></td>
+                                            <a href="{{ url(Ctm::getModelUrl($atcl->model_id)) }}">{{ User::find($atcl->model_id)->name }}</a></td>
                                             </span>
                                         @else
                                         <td>{{ User::find($atcl->model_id)->name }}</td>
