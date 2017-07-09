@@ -59,7 +59,7 @@
 </section>
 
 
-@if($pickUps !== null)
+@if(isset($pickUps))
     @if(Ctm::isAgent('sp'))
     <section class="top-cont clear">
     @else
@@ -73,16 +73,6 @@
         <article style="background-image:url({{Storage::url($pickUp->thumb_path)}})" class="float-left">
 
                 <a href="{{ url(Ctm::getAtclUrl($pickUp->id)) }}">
-
-                @if($pickUp->thumb_path == '')
-                    <span class="no-img">No Image</span>
-                @else
-                    <div class="main-thumb"></div>
-                @endif
-
-                <?php
-                    $num = Ctm::isAgent('sp') ? 30 : 18;
-                ?>
 
                 <div class="meta">
                     <?php $model = User::find($pickUp->model_id); ?>
