@@ -21,6 +21,12 @@
     .main-navigation {
     	min-width: 100%;
     }
+    .main-navigation > ul > li {
+        font-size: 0.85em;
+    }
+    .main-navigation > ul > li .fa {
+        margin-left: 1px;
+    }
     .single,
     .single .cont-wrap {
     	width: 100%;
@@ -59,13 +65,18 @@
     /* top feature */
     .top .top-cont.feature {
         height: 900px;
-        //border: 1px solid red;
     }
     .top .top-cont.feature article {
         height: 25%;
         width: 50%;
         background-size: 105% auto;
         border: none;
+    }
+    /* feature All */
+    .feature-top .feature article {
+        width: 50%;
+        height: 210px;
+        background-size: 100% auto;
     }
     
     
@@ -78,8 +89,10 @@
         height: 530px;
     }
     
-    .archive article {
-    	height: 250px;
+    .archive article,
+    .feature article {
+        width: 50%;
+        height: 210px;
     }
     .archive article .meta {
     	font-size: 1.5em;
@@ -88,6 +101,10 @@
 
     .thumb-prev .no-img {
         line-height: 170px;
+    }
+    
+    #colop .foot-wrap:first-of-type > div {
+        font-size: 0.9em;
     }
     
     
@@ -255,6 +272,7 @@
         border-bottom: 1px solid #fff;
         border-right: 0;
         padding: 0;
+        font-size: 1em;
     }
     .main-navigation > ul > li.nav-active {
 		background: #6DC7EB;
@@ -265,6 +283,9 @@
     	margin-left: 1.6em;
         font-size: 1.0em;
         padding: 0.4em 0;
+    }
+    .main-navigation > ul > li .fa {
+        margin-left: 2px;
     }
     .menu-dropdown {
     	width: 100%;
@@ -305,6 +326,10 @@
         left: auto;
         bottom: 0.3em !important;
         right: 0.3em !important;
+    }
+    .top .top-cont article .meta,
+    .top .top-cont article a:hover .meta {
+    	bottom: 1em !important;
     }
     .top-cont article .meta h3 {
     	font-size: 1em;
@@ -497,7 +522,7 @@
     #colop .foot-wrap:first-of-type {
         width: 70%;
         float: none;
-        font-size: 80%;
+        font-size: 95%;
         -webkit-transform: rotateZ(0);
     	transform: rotateZ(0);
     }
