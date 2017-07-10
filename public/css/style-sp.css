@@ -42,7 +42,7 @@
     }
     
     .carousel {
-    	height: 450px;
+    	height: 410px;
     }
     .top-cont {
 		height: 500px;
@@ -55,6 +55,19 @@
     	font-size: 2em;
         width: 90%;
     }
+    
+    /* top feature */
+    .top .top-cont.feature {
+        height: 900px;
+        //border: 1px solid red;
+    }
+    .top .top-cont.feature article {
+        height: 25%;
+        width: 50%;
+        background-size: 105% auto;
+        border: none;
+    }
+    
     
     .movie-frame {
     	width: 100%;
@@ -125,7 +138,6 @@
     .site-header h1 {
     	float: none;
         display: inline-block;
-    	//border: 1px solid blue;
         width: 60%;
         text-align: center;
         margin: 5px auto;
@@ -140,13 +152,11 @@
         display: inline-block;
     	margin: 0;
         padding: 0;
-        //border: 1px solid red;
     }
     .navbar-brand img {
     	width: 90px;
         margin: 0.2em 0 0;
         padding: 0;
-        //border: 1px solid orange;
     }
     
     .s-form {
@@ -260,7 +270,7 @@
     	width: 100%;
         border-bottom: 0;
         display: none;
-        //overflow-y: scroll;
+/*        overflow-y: scroll;*/
     }
 
     .dropdown-item {
@@ -309,12 +319,10 @@
 
     .top-cont.feature {
         height: auto;
-        //border: 1px solid red;
     }
     /* top feature */
     .top .top-cont.feature {
         height: auto;
-        //border: 1px solid red;
     }
     .top .top-cont.feature article {
         height: 300px;
@@ -334,7 +342,6 @@
     
     .h2 {
         font-size: 1.1em !important;
-        //line-height: 1.3em;
     }
     .h3 {
         font-size: 1.0em !important;
@@ -403,11 +410,9 @@
         position: static;
         background-position: 0;
         margin-bottom: 0.7em;
-        //border: 1px solid red;
     }
     .snap-wrap > div.snap-meta {
     	position: static;
-    	//position: relative;
         width: 100%;
         height: auto;
         overflow: auto;
@@ -432,7 +437,6 @@
 /*    }*/
     .contact .table {
     	border: none;
-        //width: 90%;
     }
     .contact .table tbody tr th {
     	width: 100%;
