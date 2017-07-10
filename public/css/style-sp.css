@@ -105,12 +105,9 @@
         margin-top: 100px;
     }
     #main.archive-index,
-    #main.feature-index {
-        margin-top: 39px;
-        padding: 1em 0;
-    }
+    #main.feature-index,
     #main.feature-top {
-        //margin-top: 39px;
+        margin-top: 39px;
         padding: 1em 0;
     }
     .single {
@@ -233,7 +230,7 @@
 /*    }*/
     
     .carousel {
-    	height: 250px;
+    	height: auto;
     }
     
     .main-navigation {
