@@ -105,9 +105,12 @@
         margin-top: 100px;
     }
     #main.archive-index,
-    #main.feature-index,
-    #main.feature-top {
+    #main.feature-index {
         margin-top: 39px;
+        padding: 1em 0;
+    }
+    #main.feature-top {
+        //margin-top: 39px;
         padding: 1em 0;
     }
     .single {
