@@ -104,7 +104,10 @@
         width: 50%;
         height: 210px;
     }
-    .archive article .meta {
+    .archive article .meta,
+    .feature article .meta,
+    .archive article a:hover .meta,
+    .feature article a:hover .meta {
     	font-size: 1.5em;
     }
 
