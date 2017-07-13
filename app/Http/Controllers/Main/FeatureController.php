@@ -106,12 +106,13 @@ class FeatureController extends Controller
     	$cateObj = $this->featureCate->find($atcl->cate_id);
         $stateObj = $this->state->find($atcl->state_id);
         
+        
         $tagRels = $this->tagRel->where('atcl_id', $atcl->id)->get()->map(function($obj){
-        	return $obj->id;
+        	return $obj->tag_id;
         })->all();
         
         $tags = $this->tag->find($tagRels);
-        
+
         $feature = 1;
         
         return view('main.home.single', ['atcl'=>$atcl, 'cateObj'=>$cateObj, 'tags'=>$tags, 'feature'=>$feature, 'stateObj'=>$stateObj]);

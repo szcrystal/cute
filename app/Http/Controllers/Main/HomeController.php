@@ -188,6 +188,7 @@ class HomeController extends Controller
         	return $obj->tag_id;
         })->all();
         
+        
         $tags = $this->tag->find($tagRels);
         
         
