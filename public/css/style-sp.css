@@ -591,6 +591,11 @@
 	body {
     	font-size: 0.95em;
     }
+    
+    .top .top-cont.feature article,
+    .feature-top .top-cont article {
+        height: 180px;
+    }
 	
 }
 
